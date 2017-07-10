@@ -1,0 +1,237 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>The Traveller</title>
+    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+    <style>
+      html,body,.full-image{
+        position:absolute;
+        left:0;right:0;top:0;bottom:0;
+      }
+      body{
+        background-color:black;
+        margin:0;
+        font-family:Rubik,sans-serif;
+      }
+      .text-bottom{
+        position:absolute;
+        bottom:40px;
+        left:0;
+        right:0;
+        min-height:100px;
+        margin-left:auto;
+        margin-right:auto;
+        max-width:650px;
+        padding:20px;
+        font-size:14pt;
+        background-color: rgba(0,0,0,0.2);
+        box-shadow:0 0 18px 10px rgba(0,0,0,0.2);
+        color:white;
+        line-height:1.4em;
+        letter-spacing:0.005em;
+      }
+      .full-image{
+        background-size:cover;
+        background-position:50%;
+        background-repeat:no-repeat;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="full-image" id="scene"></div>
+    <div class="full-image" id="character"></div>
+    <div class="text-bottom" id="text">
+    </div>
+    <script>
+      scriptText = "";
+      scriptLines = [];
+      imageDefs = {};
+      characterDefs = {};
+      state = {};
+      state.currentIndex = 0;
+      sceneElem = document.getElementById("scene");
+      characterElem = document.getElementById("character");
+      textElem = document.getElementById("text");
+      nextIndex = 0;
+      function scriptLoaded(response){
+        scriptText = response.target.response;
+        scriptLines = scriptText.replace(/\s*\n/g,"\n").split("\n");
+        loadDefines();
+        loadState();
+        go();
+      }
+
+      stopAtStart = false;
+      function loadDefines(){
+        stopAtStart = true;
+        go();
+      }
+
+      function loadState(){
+        state=localStorage.state?JSON.parse(localStorage.state):state;
+        showState();
+      }
+      function showState(){
+        localStorage.state = JSON.stringify(state);
+        if(state.scene !== undefined && state.scene != sceneElem.style.backgroundImage){
+          sceneElem.style.backgroundImage = "url('images/"+state.scene+"')";
+        }
+        if(state.text === undefined || state.text == ""){
+          textElem.style.opacity = 0;
+        }
+        if(state.text !== undefined && state.text != textElem.innerHTML){
+          textElem.style.opacity = 1;
+          textElem.innerHTML = state.text;
+        }
+      }
+      function go(){
+        nextIndex = 0;
+        var currentLine = scriptLines[state.currentIndex].trimLeft();
+        var splitLine = currentLine.split(" ");
+        // console.log(currentLine);
+        if(currentLine.startsWith("#")){
+          state.currentIndex++;
+          go();
+        }
+        else if(currentLine.startsWith("image")){
+          //Image declaration
+          var matches = /image (.*\S) *= *"(.*\S)"/.exec(currentLine);
+          var image = matches[1], url = matches[2];
+          // console.log(image,url);
+          imageDefs[image] = url;
+          state.currentIndex++;
+          go();
+        }
+        else if(currentLine.startsWith("define")){
+          var matches = /define (\S+) *= *Character\("(\S+)"\)/.exec(currentLine);
+          var shorthand = matches[1], name = matches[2];
+          characterDefs[shorthand] = name;
+          // console.log(matches)
+          //Character Definition
+          state.currentIndex++;
+          go();
+        }
+        else if(currentLine.startsWith("label")){
+          //Label
+          if(stopAtStart && splitLine[1] == "start:"){
+            stopAtStart = false;
+            return;
+          }
+          state.currentIndex++;
+          go();
+        }
+        else if(currentLine.startsWith("scene")){
+          //Show Scene
+          var image = splitLine.slice(1).join(" ");
+          console.log("%cShowing:"+"%c "+imageDefs[image], "color:cyan", "color:inherit");
+          state.scene = imageDefs[image];
+          state.text = "";
+          state.currentIndex++;
+          showState();
+          go();
+        }
+        else if(currentLine.startsWith("show")){
+          //Show character
+          state.currentIndex++;
+          go();
+        }
+        else if(currentLine.startsWith("with")){
+          //Scene Modifier
+          state.currentIndex++;
+          go();
+        }
+        else if(currentLine.startsWith("\"")){
+          //Full String line
+          var line = currentLine.slice(1,-1);
+          state.text = line;
+          showState();
+          console.log(line);
+          nextIndex = state.currentIndex + 1;
+          // state.currentIndex++;
+          // go();
+        }
+        else if(splitLine[0] in characterDefs){
+          // Character says line
+          var fromCharacter = characterDefs[splitLine[0]];
+          var line = splitLine.slice(1).join(" ").slice(1,-1);
+          console.log("%c" + fromCharacter + ":"+"%c " + line, "color:orange", "color:inherit")
+          state.text = fromCharacter + ": " + line;
+          showState();
+          nextIndex = state.currentIndex + 1;
+          // state.currentIndex++;
+          // go();
+        }
+        else if(currentLine.startsWith("pause")){
+          //Pause (seconds)
+          var matches = /pause *\( *(\S+) *\)/.exec(currentLine);
+          var pauseTime = parseFloat(matches[1]);
+          setTimeout(function(){
+            state.currentIndex++;
+            go();
+          }, pauseTime*1000);
+        }
+        else{
+          console.error("Unknown line: " + currentLine);
+        }
+      }
+
+      function hasParent(index){
+        return indentOf(index) > 0;
+      }
+      function getParent(index){
+        if(!hasParent(index)){
+          return index;
+        }
+        var currentIndent = indentOf(index);
+        while(inRange(index - 1)){
+          if(indentOf(index - 1) < currentIndent){
+            return index - 1;
+          }
+          index--;
+        }
+        return index;
+      }
+      function getNextLEIndent(index){
+        var currentIndent = indentOf(index);
+        while(inRange(index + 1)){
+          if(indentOf(index + 1) <= currentIndent){
+            return index + 1;
+          }
+          index++;
+        }
+        return index;
+      }
+      function inRange(index){
+        return index >=0 && index < scriptLines.length;
+      }
+      function indentOf(index){
+        return scriptLines[index].length - scriptLines[index].trimLeft().length;
+      }
+
+      window.onkeydown = function(event){
+        // console.log(event);
+        if(
+         !event.shiftKey &&
+         !event.ctrlKey &&
+         !event.altKey &&
+         !event.metaKey &&
+         event.keyCode == 39 || // ->
+         event.keyCode == 74 || // J
+         event.keyCode == 78 || // N
+         event.keyCode == 32    // Space
+         ){
+           if(nextIndex > 0){
+            state.currentIndex = nextIndex;
+            go();
+           }
+        }
+      }
+
+      var xhr=new XMLHttpRequest();
+      xhr.addEventListener("load", scriptLoaded);
+      xhr.open("GET","script.rpy");
+      xhr.send();
+    </script>
+  </body>
+</html>
