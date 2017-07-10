@@ -75,8 +75,12 @@
       function showState(){
         localStorage.state = JSON.stringify(state);
         if(state.scene !== undefined && state.scene != sceneElem.style.backgroundImage){
-          sceneElem.style.backgroundImage = "url('images/"+state.scene+"')";
+          sceneElem.style.backgroundImage = state.scene&&"url('images/"+state.scene+"')";
         }
+        if(state.show !== undefined && state.show != sceneElem.style.backgroundImage){
+          characterElem.style.backgroundImage = state.show&&"url('images/"+state.show+"')";
+        }
+
         if(state.text === undefined || state.text == ""){
           textElem.style.opacity = 0;
         }
@@ -124,16 +128,21 @@
         else if(currentLine.startsWith("scene")){
           //Show Scene
           var image = splitLine.slice(1).join(" ");
-          console.log("%cShowing:"+"%c "+imageDefs[image], "color:cyan", "color:inherit");
+          console.log("%Scene:"+"%c "+imageDefs[image], "color:cyan", "color:inherit");
           state.scene = imageDefs[image];
           state.text = "";
+          state.show = "";
           state.currentIndex++;
           showState();
           go();
         }
         else if(currentLine.startsWith("show")){
           //Show character
+          var image = splitLine.slice(1).join(" ");
+          console.log("%cShowing:"+"%c "+imageDefs[image], "color:cyan", "color:inherit");
+          state.show = imageDefs[image];
           state.currentIndex++;
+          showState();
           go();
         }
         else if(currentLine.startsWith("with")){
