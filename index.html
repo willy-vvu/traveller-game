@@ -209,6 +209,12 @@
         return scriptLines[index].length - scriptLines[index].trimLeft().length;
       }
 
+      function advance(){
+        if(nextIndex > 0){
+          state.currentIndex = nextIndex;
+          go();
+         }
+      }
       window.onkeydown = function(event){
         // console.log(event);
         if(
@@ -221,12 +227,15 @@
          event.keyCode == 78 || // N
          event.keyCode == 32    // Space
          ){
-           if(nextIndex > 0){
-            state.currentIndex = nextIndex;
-            go();
-           }
+           advance();
         }
       }
+      document.body.onmousedown = function(){
+        advance();
+      }
+      // document.body.ontouchstart = function(){
+      //   advance();
+      // }
 
       var xhr=new XMLHttpRequest();
       xhr.addEventListener("load", scriptLoaded);
