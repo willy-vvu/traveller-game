@@ -243,6 +243,7 @@ scene bg earth-night
 
 "The doors close a few minutes after we make it in."
 
+
 "The commander worries about the enemy forces."
 "We are making ourselves a target as long as we idle here. We can't sacrifice ourselves for a few stragglers."
 

@@ -13,6 +13,7 @@
         background-color:black;
         margin:0;
         font-family:Rubik,sans-serif;
+        cursor:default;
       }
       .text-bottom{
         position:absolute;
@@ -27,203 +28,913 @@
         font-size:14pt;
         background-color: rgba(0,0,0,0.2);
         box-shadow:0 0 18px 10px rgba(0,0,0,0.2);
+        text-shadow:0 2px 15px rgba(0,0,0,0.2);
         color:white;
         line-height:1.4em;
         letter-spacing:0.005em;
+      }
+      #text-indicator{
+        left:50%;
+        bottom:10px;
+        position:absolute;
+        border-radius:4px;
+        margin-left:-5px;
+        margin-top:-5px;
+        width:10px;
+        height:10px;
+        /*background-color:white;*/
+        border:2px solid white;
+        /*box-shadow:0 0 18px 10px rgba(0,0,0,0.1);*/
+        opacity:0;
+      }
+      @keyframes pulse{
+        0%  { opacity:0; }
+        25% { opacity:1; }
+        50% { opacity:1; }
+        75% { opacity:0; }
+        100%{ opacity:0; }
+      }
+      @keyframes borderpulse{
+        0%  { border:2px solid rgba(255,255,255,0); }
+        25% { border:2px solid rgba(255,255,255,1); }
+        50% { border:2px solid rgba(255,255,255,1); }
+        75% { border:2px solid rgba(255,255,255,0); }
+        100%{ border:2px solid rgba(255,255,255,0); }
+      }
+      @keyframes bloom{
+        0%  { opacity:1; }
+        30%  { opacity:1; transform:scale(1);}
+        100%{ opacity:0; transform: scale(1.5);}
+      }
+      @keyframes menubloom{
+        0%  { opacity:1; }
+        50%  { opacity:1; transform:scale(1);}
+        100%{ opacity:0; transform: scale(1.1);}
+      }
+      #text-indicator.showing{
+        animation:pulse 2s linear infinite;
+      }
+      #text-indicator.bloom{
+        background-color:white;
+        animation:bloom 0.4s cubic-bezier(0,0.9,1,1);
+        animation-fill-mode:both;
+      }
+      .menu-middle{
+        position:absolute;
+        top:50%;
+        left:0;
+        right:0;
+        margin-top:-140px;
+        min-height:100px;
+        margin-left:auto;
+        margin-right:auto;
+        max-width:650px;
+        font-size:14pt;
+        color:rgba(255,255,255,0.9);
+        text-align:center;
+      }
+      .menu-title{
+        margin-bottom:40px;
+      }
+      .menu-item{
+        max-width:450px;
+        margin-left:auto;
+        margin-right:auto;
+        padding:8px;
+        margin-bottom:30px;
+        background-color: rgba(0,0,0,0.2);
+        border-radius:4px;
+        border:2px solid transparent;
+        box-shadow:0 0 10px 10px rgba(0,0,0,0.2);
+        cursor:pointer;
+        user-select:none;
+      }
+      .menu-item.focus{
+        /*background-color: rgba(0,0,0,0.3);*/
+        animation:borderpulse 2s linear infinite;
+        border:2px solid white;
+        /*box-shadow:0 0 10px 10px rgba(0,0,0,0.2);*/
+      }
+      .menu-item.selected{
+        animation:menubloom 0.5s cubic-bezier(0,0.9,1,1);
+        animation-fill-mode:both;
+        background-color: white;
+        border:2px solid transparent;
+        color:#333;
+      }
+      .menu-item,.menu-title{
+        line-height:1.4em;
+        letter-spacing:0.005em;
+        text-shadow:0 2px 15px rgba(0,0,0,0.2);
       }
       .full-image{
         background-size:cover;
         background-position:50%;
         background-repeat:no-repeat;
       }
+      /*#devpanel{
+        position:absolute;
+        bottom:0;
+        left:0;
+        top:0;
+        width:50%;
+        background-color:rgba(20,20,20,0.7);
+        z-index:99;
+      }*/
     </style>
   </head>
   <body>
-    <div class="full-image" id="scene"></div>
-    <div class="full-image" id="character"></div>
-    <div class="text-bottom" id="text">
+    <div class="full-image" id="backdrop-bg-transition"></div>
+    <div class="full-image" id="backdrop-bg"></div>
+    <div class="full-image" id="backdrop-fg-transition"></div>
+    <div class="full-image" id="backdrop-fg"></div>
+    <div class="text-bottom" id="textbox" style="opacity:0">
+      <div id="text-container"></div>
+      <div id="text-indicator"></div>
+    </div>
+    <div class="menu-middle" id="menu"></div>
+    <!--<div id="devpanel"></div>-->
     </div>
     <script>
       scriptText = "";
       scriptLines = [];
       imageDefs = {};
       characterDefs = {};
-      state = {};
-      state.currentIndex = 0;
-      sceneElem = document.getElementById("scene");
-      characterElem = document.getElementById("character");
-      textElem = document.getElementById("text");
-      nextIndex = 0;
+      state = {
+        variables:{},
+        background:"",
+        foreground:"",
+        text:"",
+        // options:[0]
+      };
+      // sceneElem = document.getElementById("scene");
+      // characterElem = document.getElementById("character");
+      // textElem = document.getElementById("text");
       function scriptLoaded(response){
         scriptText = response.target.response;
-        scriptLines = scriptText.replace(/\s*\n/g,"\n").split("\n");
-        loadDefines();
-        loadState();
-        go();
+        scriptLines = scriptText./*replace(/\s*\n/g,"\n").*/split("\n");
+        ScriptFollower.autoIterate(ScriptFollower.initialState()); // Will run until defs are loaded
+      }
+      function defsLoaded(state){
+        window.globalDefs = state.defs;
+        window.startLine = ScriptFollower.getNextNonEmpty(state.line + 1);
+        // console.log(state)
+
+        window.s=ScriptFollower.autoIterate(fromSavable(JSON.parse(localStorage.state2||"{}")));
+      }
+      function fromSavable(save){
+        return ScriptFollower.foldState(Object.assign(ScriptFollower.initialState(), {line: save.line || startLine, defs:globalDefs}), save);
+      }
+      function toSavable(state){
+        return {
+          background:state.background,
+          midground:state.midground,
+          foreground:state.foreground,
+          line:state.line,
+          variables:state.variables
+        }
       }
 
-      stopAtStart = false;
-      function loadDefines(){
-        stopAtStart = true;
-        go();
+      function saveState(state){
+        localStorage.state2 = JSON.stringify(toSavable(state))
       }
 
-      function loadState(){
-        state=localStorage.state?JSON.parse(localStorage.state):state;
-        showState();
+      function globalAnim(x){
+        return x<0.5?x*x*2:(1-(1-x)*(1-x)*2)
       }
-      function showState(){
-        localStorage.state = JSON.stringify(state);
-        if(state.scene !== undefined && state.scene != sceneElem.style.backgroundImage){
-          sceneElem.style.backgroundImage = state.scene&&"url('images/"+state.scene+"')";
-        }
-        if(state.show !== undefined && state.show != sceneElem.style.backgroundImage){
-          characterElem.style.backgroundImage = state.show&&"url('images/"+state.show+"')";
-        }
 
-        if(state.text === undefined || state.text == ""){
-          textElem.style.opacity = 0;
-        }
-        if(state.text !== undefined && state.text != textElem.innerHTML){
-          textElem.style.opacity = 1;
-          textElem.innerHTML = state.text;
+      function transitionTimeHelper(func, from, to, duration, time, anim, callback){
+        time = Math.max(0, time);
+        func((to-from)*anim(1-time/duration)+from);
+        if(time > 0){
+          window.requestAnimationFrame(function(){
+            transitionTimeHelper(func, from, to, duration, time-1/60, anim, callback)
+          })
+        } else if(callback){
+          callback();
         }
       }
-      function go(){
-        nextIndex = 0;
-        var currentLine = scriptLines[state.currentIndex].trimLeft();
-        var splitLine = currentLine.split(" ");
-        // console.log(currentLine);
-        if(currentLine.startsWith("#")){
-          state.currentIndex++;
-          go();
+      function transitionTime(func, from, to, time, anim, callback){
+        transitionTimeHelper(func, from, to, time, time, anim, callback)
+      }
+
+
+      MainMenuFollower = {
+        transitionTo(time){
+
         }
-        else if(currentLine.startsWith("image")){
-          //Image declaration
-          var matches = /image (.*\S) *= *"(.*\S)"/.exec(currentLine);
-          var image = matches[1], url = matches[2];
-          // console.log(image,url);
-          imageDefs[image] = url;
-          state.currentIndex++;
-          go();
+      }
+
+      PauseMenuFollower = {
+        transitionTo(time){
+
         }
-        else if(currentLine.startsWith("define")){
-          var matches = /define (\S+) *= *Character\("(\S+)"\)/.exec(currentLine);
-          var shorthand = matches[1], name = matches[2];
-          characterDefs[shorthand] = name;
-          // console.log(matches)
-          //Character Definition
-          state.currentIndex++;
-          go();
+      }
+
+      StateManager = {
+        getState(){
+
+        },
+        setState(){
+
         }
-        else if(currentLine.startsWith("label")){
-          //Label
-          if(stopAtStart && splitLine[1] == "start:"){
-            stopAtStart = false;
-            return;
+      }
+
+
+      ScriptFollower = {
+        initialState(){
+          return {
+            defs:{
+              image:{},
+              character:{}
+            },
+            variables:{},
+            background:"",
+            midground:"",
+            foreground:"",
+            text:"",
+            line:0,
+            advance:{
+              type:"auto"
+            }
           }
-          state.currentIndex++;
-          go();
-        }
-        else if(currentLine.startsWith("scene")){
-          //Show Scene
-          var image = splitLine.slice(1).join(" ");
-          console.log("%Scene:"+"%c "+imageDefs[image], "color:cyan", "color:inherit");
-          state.scene = imageDefs[image];
-          state.text = "";
-          state.show = "";
-          state.currentIndex++;
-          showState();
-          go();
-        }
-        else if(currentLine.startsWith("show")){
-          //Show character
-          var image = splitLine.slice(1).join(" ");
-          console.log("%cShowing:"+"%c "+imageDefs[image], "color:cyan", "color:inherit");
-          state.show = imageDefs[image];
-          state.currentIndex++;
-          showState();
-          go();
-        }
-        else if(currentLine.startsWith("with")){
-          //Scene Modifier
-          state.currentIndex++;
-          go();
-        }
-        else if(currentLine.startsWith("\"")){
-          //Full String line
-          var line = currentLine.slice(1,-1);
-          state.text = line;
-          showState();
-          console.log(line);
-          nextIndex = state.currentIndex + 1;
-          // state.currentIndex++;
-          // go();
-        }
-        else if(splitLine[0] in characterDefs){
-          // Character says line
-          var fromCharacter = characterDefs[splitLine[0]];
-          var line = splitLine.slice(1).join(" ").slice(1,-1);
-          console.log("%c" + fromCharacter + ":"+"%c " + line, "color:orange", "color:inherit")
-          state.text = fromCharacter + ": " + line;
-          showState();
-          nextIndex = state.currentIndex + 1;
-          // state.currentIndex++;
-          // go();
-        }
-        else if(currentLine.startsWith("pause")){
-          //Pause (seconds)
-          var matches = /pause *\( *(\S+) *\)/.exec(currentLine);
-          var pauseTime = parseFloat(matches[1]);
-          setTimeout(function(){
-            state.currentIndex++;
-            go();
-          }, pauseTime*1000);
-        }
-        else{
-          console.error("Unknown line: " + currentLine);
-        }
-      }
-
-      function hasParent(index){
-        return indentOf(index) > 0;
-      }
-      function getParent(index){
-        if(!hasParent(index)){
+        },
+        getNextNonEmpty(index){
+          while(ScriptFollower.inRange(index)){
+            if(!scriptLines[index].trimLeft().length){index++;continue;} // Skip empty lines
+            return index;
+          }
           return index;
-        }
-        var currentIndent = indentOf(index);
-        while(inRange(index - 1)){
-          if(indentOf(index - 1) < currentIndent){
-            return index - 1;
+        },
+        getNextLEIndent(index){
+          var currentIndent = ScriptFollower.indentOf(index);
+          while(ScriptFollower.inRange(index + 1)){
+            if(!scriptLines[index+1].trimLeft().length){index++;continue;} // Skip empty lines
+            if(ScriptFollower.indentOf(index + 1) <= currentIndent){
+              return index + 1;
+            }
+            index++;
           }
-          index--;
-        }
-        return index;
-      }
-      function getNextLEIndent(index){
-        var currentIndent = indentOf(index);
-        while(inRange(index + 1)){
-          if(indentOf(index + 1) <= currentIndent){
-            return index + 1;
+          return index;
+        },
+        getChildIndents(index){
+          var childIndent = null;
+          var children = [];
+          var parentIndent = ScriptFollower.indentOf(index);
+          while(ScriptFollower.inRange(index + 1)){
+            if(!scriptLines[index+1].trimLeft().length){index++;continue;} // Skip empty lines
+            var currentIndent = ScriptFollower.indentOf(index + 1);
+            if(childIndent == null){
+              // Do you have what it takes to be a child?
+              childIndent = currentIndent;
+            }
+            if(currentIndent <= parentIndent){
+              return children;
+            }
+            if(currentIndent == childIndent){
+              children.push(index + 1)
+            }
+            index++;
           }
-          index++;
+          return children;
+        },
+        inRange(index){
+          return index >=0 && index < scriptLines.length;
+        },
+        indentOf(index){
+          return scriptLines[index].length - scriptLines[index].trimLeft().length;
+        },
+        advanceIterate(state){
+          state.line = ScriptFollower.getNextLEIndent(state.line);
+          ScriptFollower.autoIterate(state);
+        },
+        autoIterate(state){
+          var deltaState = ScriptFollower.stateChangeFromLine(state.line, state.defs, state.variables);
+          var state = ScriptFollower.foldState(state, deltaState);
+          if(state.advance.type == "auto"){
+            if(deltaState.background){
+              // Force background transition to finish
+              Scene.transitionTo(state, function(){
+                ScriptFollower.advanceIterate(state);
+              });
+            }
+            else{
+              ScriptFollower.advanceIterate(state);
+            }
+          }
+          else if(state.advance.type == "start"){
+            // Start of the game! Assume all defs are loaded
+            defsLoaded(state);
+          }
+          else if(state.advance.type == "jump"){
+            state.line = state.advance.line;
+            ScriptFollower.autoIterate(state);
+          }
+          else if(state.advance.type == "pause"){
+            Scene.transitionTo(state);
+            setTimeout(function(){
+              ScriptFollower.advanceIterate(state);
+            }, 1000 * state.advance.pause)
+          }
+          else if(state.advance.type == "text"){
+            // Display
+            saveState(state);
+            Scene.transitionTo(state, function(){
+              ScriptFollower.advanceIterate(state);
+            });
+          }
+          else if(state.advance.type == "menu"){
+            // Display
+            Scene.transitionTo(state, function(item){
+            saveState(state);
+              state.line = item.line;
+              ScriptFollower.autoIterate(state);
+            });
+          }
+          else{
+            throw "Unknown advance type: "+newState.advance.type;
+          }
+        },
+        foldState(state,stateChange){
+          // console.log(state,stateChange)
+
+          state.defs.image = Object.assign(state.defs.image, (stateChange.defs || {}).image || {})
+          state.defs.character = Object.assign(state.defs.character, (stateChange.defs || {}).character || {})
+          state.variables = Object.assign(state.variables, stateChange.variables || {});
+          state.background = stateChange.background!==undefined ? stateChange.background : state.background;
+          state.midground = stateChange.midground!==undefined ? stateChange.midground : state.midground;
+          state.foreground = stateChange.foreground!==undefined ? stateChange.foreground : state.foreground;
+          state.text = stateChange.text!==undefined ? stateChange.text : state.text,
+          state.advance = stateChange.advance;
+          return state;
+        },
+
+        stateChangeFromLine(number, defs, variables){
+          var currentLine = scriptLines[number].trimLeft();
+          var splitLine = currentLine.split(" ");
+          // console.log(currentLine);
+          state.line = number;
+
+          if(currentLine.startsWith("return") || number >= scriptLines.length-1){
+            // END OF GAME!
+            return {
+              advance: { type:"end" }
+            }
+          }
+          else if(currentLine.startsWith("#")){
+            return {
+              advance: { type:"auto" }
+            }
+          }
+          else if(currentLine.startsWith("image ")){
+            //Image declaration
+            var matches = /image (.*\S) *= *"(.*\S)"/.exec(currentLine);
+            var image = matches[1], url = matches[2];
+            // console.log(image,url);
+            var imagedef = {}
+            imagedef[image] = url;
+
+            return {
+              defs:{
+                image:imagedef
+              },
+              advance: { type:"auto" }
+            }
+          }
+          else if(currentLine.startsWith("define ")){
+            var matches = /define (\S+) *= *Character\("(\S+)"\)/.exec(currentLine);
+            var shorthand = matches[1], name = matches[2];
+            var characterdef = {};
+            characterdef[shorthand] = name;
+            return {
+              defs:{
+                character:characterdef
+              },
+              advance: { type:"auto" }
+            }
+          }
+          else if(currentLine.startsWith("label ")){
+            //Label
+            if(splitLine[1] == "start:"){
+              return {
+                advance: { type:"start" }
+              }
+            }
+            return {
+              advance: { type:"auto" }
+            }
+          }
+          else if(currentLine.startsWith("jump ")){
+            //Label
+            var label = splitLine[1];
+            // console.log(scriptLines.indexOf("label "+label+":"))
+            return {
+              advance: {
+                type:"jump",
+                line:scriptLines.indexOf("label "+label+":")
+              }
+            }
+          }
+          else if(currentLine.startsWith("scene ")){
+            //Show Scene
+            var image = splitLine.slice(1).join(" ");
+            /// console.log("%Scene:"+"%c "+image, "color:cyan", "color:inherit");
+            return {
+              background:image,
+              midground:"",
+              foreground:"",
+              text: "",
+              advance: { type:"auto" }
+            }
+          }
+          else if(currentLine.startsWith("show ")){
+            // Show character
+            var image = splitLine.slice(1).join(" ");
+            /// console.log("%cShowing:"+"%c "+image, "color:cyan", "color:inherit");
+            return {
+              foreground: image,
+              advance: { type:"auto" }
+            }
+          }
+          else if(currentLine.startsWith("hide ")){
+            // Hide character
+            // var image = splitLine.slice(1).join(" ");
+            // console.log("%cShowing:"+"%c "+imageDefs[image], "color:cyan", "color:inherit");
+            return {
+              foreground: "",
+              advance: { type:"auto" }
+            }
+          }
+          else if(currentLine.startsWith("$ ")){
+            // Variable
+            var key = splitLine[1], value = splitLine[3];
+            var newpair = {};
+            newpair[key] = value;
+            return {
+              variables: newpair,
+              advance: { type:"auto" }
+            }
+          }
+          else if(currentLine.startsWith("if ")){
+            // If statement
+            var key = splitLine[1].slice(0, -1);
+            if(variables[key] == "True"){
+              return {
+                advance: {
+                  type:"jump",
+                  line:ScriptFollower.getNextNonEmpty(number+1)
+                }
+              }
+            }
+            else{
+              // Try to find an else statement
+              var nextPossibleElse = ScriptFollower.getNextLEIndent(number);
+              if(ScriptFollower.indentOf(number) == ScriptFollower.indentOf(nextPossibleElse)
+              // else statement must be at the same indent level
+              && scriptLines[nextPossibleElse].trimLeft().startsWith("else:")){
+                // console.log("Else found to "+ScriptFollower.getNextNonEmpty(nextPossibleElse+1))
+                return {
+                  advance: {
+                    type:"jump",
+                    line:ScriptFollower.getNextNonEmpty(nextPossibleElse+1)
+                  }
+                }
+              } else{
+                // No else found
+                return {
+                  advance: {
+                    type:"auto"
+                  }
+                }
+              }
+            }
+          }
+          else if(currentLine.startsWith("else:")){
+            // Ignore this, elses are handled above
+            return {
+              advance: { type:"auto" }
+            }
+          }
+          else if(currentLine.startsWith("with ")){
+            // Scene Modifier, don't bother yet
+            return {
+              advance: { type:"auto" }
+            }
+          }
+          else if(currentLine.startsWith("menu ")||currentLine.startsWith("menu:")){
+            // Build a menu
+            var children = ScriptFollower.getChildIndents(number)
+            return {
+              text:"",
+              advance: {
+                type:"menu",
+                menu:{
+                  title:scriptLines[children[0]].trimLeft().slice(1,-1),
+                  options:children.slice(1).map((optionLineNumber)=>{
+                    return {
+                      text:scriptLines[optionLineNumber].trimLeft().slice(1,-2),
+                      line:ScriptFollower.getNextNonEmpty(optionLineNumber+1)
+                    }
+                  })
+                }
+              }
+            }
+          }
+          else if(currentLine.startsWith("\"")&&currentLine.endsWith("\":")){
+            // Menu item - you shouldn't be here normally - skip!
+            return {
+              advance: { type:"auto" }
+            }
+          }
+          else if(currentLine.startsWith("\"")&&currentLine.endsWith("\"")){
+            // Full String line
+            var lineText = currentLine.slice(1,-1);
+            /// console.log(lineText)
+            return {
+              text: lineText,
+              advance: { type:"text" }
+            }
+          }
+          else if(splitLine[0] in defs.character){
+            // Character says line
+            var fromCharacter = defs.character[splitLine[0]];
+            var lineText = splitLine.slice(1).join(" ").slice(1,-1);
+            /// console.log("%c" + fromCharacter + ":"+"%c " + lineText, "color:orange", "color:inherit")
+            return {
+              text: "<i>"+fromCharacter + ":</i> " + lineText,
+              advance: { type:"text" }
+            }
+          }
+          else if(currentLine.startsWith("pause")){
+            //Pause (seconds)
+            var matches = /pause *\( *(\S+) *\)/.exec(currentLine);
+            var pauseTime = parseFloat(matches[1]);
+            return {
+              advance: { type:"pause", pause:pauseTime }
+            }
+            // setTimeout(function(){
+            //   go(line+1);
+            // }, pauseTime*1000);
+          }
+          else{
+            throw "Unknown line "+number+": " + currentLine;
+          }
         }
-        return index;
-      }
-      function inRange(index){
-        return index >=0 && index < scriptLines.length;
-      }
-      function indentOf(index){
-        return scriptLines[index].length - scriptLines[index].trimLeft().length;
       }
 
-      function advance(){
-        if(nextIndex > 0){
-          state.currentIndex = nextIndex;
-          go();
-         }
+      Scene = {
+        transitionTo(state, callback){
+          var bringin = function(){
+            Backdrop.transitionTo(state.defs.image[state.background], "bg", Backdrop.BG_TRANSITION, function(){
+              Backdrop.transitionTo(state.defs.image[state.foreground], "fg", Backdrop.FG_TRANSITION, function(){
+                Menu.transitionTo(state.advance.menu, state.advance.type == "menu"?callback:null)
+                Textbox.transitionTo(state.text, state.advance.type == "text"?callback:null)
+                if(state.advance.type == "auto" && callback){
+                  callback();
+                }
+              })
+            })
+          }
+          if(Backdrop.lastbg && Backdrop.lastbg != state.defs.image[state.background]){
+            // Backdrop change, fade stuff out
+            Menu.transitionTo(null)
+            Textbox.transitionTo(null)
+            Backdrop.transitionTo(null, "fg", Backdrop.FG_TRANSITION, bringin);
+          }
+          else{
+            bringin();
+          }
+        }
       }
+
+      Backdrop = {
+        BG_TRANSITION:1,
+        FG_TRANSITION:0.5,
+        /*
+          layer can be "fg" or "bg", time in seconds
+        */
+        elem:{
+          bg:document.getElementById("backdrop-bg"),
+          bgtransition:document.getElementById("backdrop-bg-transition"),
+          fg:document.getElementById("backdrop-fg"),
+          fgtransition:document.getElementById("backdrop-fg-transition")
+        },
+        makeCSSBackground(url){
+          return url?"url('images/"+url+"')":"";
+        },
+        setBackground(elem, url){
+          elem.style.backgroundImage = url;
+        },
+        getBackground(elem){
+          return elem.style.backgroundImage;
+        },
+        setOpacity(elem, opacity){
+          elem.style.opacity = opacity;
+        },
+        lastbg:null,
+        transitionTo(url, layer, time, callback){
+          var main = Backdrop.elem[layer], transition = Backdrop.elem[layer+"transition"];
+          Backdrop.setBackground(transition, Backdrop.getBackground(main));
+          Backdrop.setBackground(main, Backdrop.makeCSSBackground(url));
+          if(layer=="bg"){
+            Backdrop.lastbg=url;
+          }
+          if(Backdrop.getBackground(main) == Backdrop.getBackground(transition)){
+            callback();
+          }
+          else{
+            transitionTime(Backdrop.setOpacity.bind(null, main),0,1,time,globalAnim,callback);
+            if(layer!="bg"){
+              transitionTime(Backdrop.setOpacity.bind(null, transition),1,0,time,globalAnim);
+            };
+          }
+        }
+      }
+
+      Textbox = {
+        elem:{
+          textbox:document.getElementById("textbox"),
+          textcontainer:document.getElementById("text-container"),
+          textindicator:document.getElementById("text-indicator")
+        },
+        APPEAR_TIME:0.3,
+        WAIT_TO_SKIP:0.2,
+        PRE_SKIP_WAIT:0.2,
+        QUICK_COUNT:20,
+        POST_SKIP_WAIT:0.4,
+        timeout:null,
+        transitionTo(text,callback){
+          if(text){
+            Textbox.quickly = AdvanceController.pressed ? 1 : 0;
+            Textbox.skippable = false;
+            Textbox.skipcallback = null;
+            if(callback){
+              Textbox.skipcallback = function(){
+                Textbox.skipcallback = null;
+                clearTimeout(Textbox.timeout);
+                callback();
+              }
+            }
+            Textbox.hideIndicator();
+            Textbox.elem.textcontainer.innerHTML = "";
+            Textbox.show(function(){
+              Textbox.displayText(text, 0, function(){
+                clearTimeout(Textbox.timeout);
+                Textbox.timeout = setTimeout(function(){
+                  Textbox.showIndicator();
+                  clearTimeout(Textbox.timeout);
+                  Textbox.timeout = setTimeout(function(){
+                    Textbox.skippable = true;
+                  }, 1000*Textbox.PRE_SKIP_WAIT)
+                }, 1000*Textbox.WAIT_TO_SKIP)
+              })
+            })
+          }
+          else{
+            Textbox.hide(callback);
+          }
+        },
+        show(callback){
+          if(!Textbox.showing){
+            transitionTime(Textbox.setAppear,0,1,Textbox.APPEAR_TIME,globalAnim,callback);
+            Textbox.showing = true;
+          }
+          else if(callback){
+            callback();
+          }
+        },
+        hide(callback){
+          if(Textbox.showing){
+            transitionTime(Textbox.setAppear,1,0,Textbox.APPEAR_TIME,globalAnim,callback);
+            Textbox.showing = false;
+          }
+          else if(callback){
+            callback();
+          }
+        },
+        showing:false,
+        quickly:0,
+        skippable:false,
+        skipcallback:null,
+        QUICK_SPEED:7,
+        SLOW_SPEED:30,
+        hideIndicator(){
+          if( Textbox.elem.textindicator.className != "bloom" ){
+            Textbox.elem.textindicator.className = "";
+          }
+        },
+        showIndicator(){
+          Textbox.elem.textindicator.className = "showing";
+        },
+        bloomIndicator(){
+          Textbox.elem.textindicator.className = "bloom";
+        },
+        displayText(text, index, callback){
+          if(text && index<text.length){
+            var elemborder = text.slice(index).match(/^<\/?[a-z]+>/i);
+            var textspeed = (elemborder?elemborder[0].length:0)+1;
+            index+=textspeed;
+            if(Textbox.quickly > 1) { index = text.length; }
+            Textbox.elem.textcontainer.innerHTML = text.slice(0,index);
+            clearTimeout(Textbox.timeout);
+            Textbox.timeout = setTimeout(function(){
+              Textbox.displayText(text, index, callback);
+            }, Textbox.quickly > 0 ?Textbox.QUICK_SPEED:Textbox.SLOW_SPEED)
+          } else if(callback){
+            callback();
+          }
+        },
+        setAppear(factor){
+          Textbox.elem.textbox.style.opacity = factor;
+          factor=Math.pow(factor,0.5);
+          Textbox.elem.textbox.style.transform = "translateY("+(factor-1)*30+"px) scale("+(0.8+0.2*factor)+")";
+        },
+        skip(){
+          Textbox.skippable = false;
+          Textbox.bloomIndicator()
+          clearTimeout(Textbox.timeout);
+          Textbox.timeout = setTimeout( Textbox.skipcallback, 1000*Textbox.POST_SKIP_WAIT);
+        }
+      }
+// I'll have it work like standard games - mash the button and it goes faster/appears all at once
+// Just to give some more time to read <-- make it hard to accidentally skip text
+
+      Menu = {
+        elem:{
+          menu:document.getElementById("menu")
+        },
+        transitionTo(menu, callback){
+          // console.log(menu)
+          Menu.elem.menu.innerHTML = "";
+          if(menu){
+            Menu.setOptions(menu, callback);
+            Menu.show();
+          }
+        },
+        callback:null,
+        selected:null,
+        length:null,
+        MENU_PRE_WAIT:0.5,
+        MENU_POST_WAIT:0.5,
+        setOptions(menu, callback){
+          Menu.callback = null;
+          Menu.selected = null;
+          Menu.length = menu.options.length;
+          setTimeout(function(){
+            Menu.callback = function(index){
+              Menu.callback = null;
+              Menu.length = null;
+              var selectedoption = menu.options[index];
+              setTimeout(function(){
+                Menu.hide(function(){
+                  callback(selectedoption);
+                });
+              },1000*Menu.MENU_POST_WAIT)
+            };
+          },1000*Menu.MENU_PRE_WAIT)
+
+          var html = "";
+          if(menu){
+            html += '<div class="menu-title">'+menu.title+'</div>';
+            menu.options.forEach((option,index)=>{
+              html += '<div class="menu-item" id="menuitem'+index+'" onmouseenter="Menu.callback&&Menu.optionFocus('+index+')" onmousedown="Menu.callback&&Menu.optionSelect('+index+')">'+option.text+'</div>'
+            })
+          }
+          Menu.elem.menu.innerHTML = html;
+        },
+        optionFocus(index){
+          Menu.selected = index;
+          Menu.indicatorStatus(index, "focus");
+        },
+        optionUp(){
+          if(!Menu.callback) { return; }
+          if(Menu.selected == null){
+            Menu.optionFocus(0);
+          }
+          else{
+            Menu.optionFocus(Math.max(0, Menu.selected-1));
+          }
+        },
+        optionDown(){
+          if(!Menu.callback) { return; }
+          if(Menu.selected == null){
+            Menu.optionFocus(0);
+          }
+          else{
+            Menu.optionFocus(Math.min(Menu.length-1, Menu.selected+1));
+          }
+        },
+        optionSelect(index){
+          if(!Menu.callback) { return; }
+          if(index !== undefined) {
+            Menu.selected = index;
+          }
+          if(Menu.selected != null){
+            Menu.indicatorStatus(Menu.selected, "focus");
+            Menu.indicatorStatus(Menu.selected, "selected");
+            if(Menu.callback){
+              Menu.callback(Menu.selected);
+            }
+          }
+        },
+        indicatorStatus(index,status){
+          for(var i = 0; i < Menu.length; i++){
+            var optionElem = document.getElementById("menuitem"+i);
+            if(i == index){
+              optionElem.classList.add(status)
+            }
+            else{
+              optionElem.classList.remove(status)
+            }
+          }
+        },
+        show(callback){
+          transitionTime(Menu.setAppear,0,1,Textbox.APPEAR_TIME,globalAnim,callback);
+        },
+        hide(callback){
+          transitionTime(Menu.setAppear,1,0,Textbox.APPEAR_TIME,globalAnim,callback);
+        },
+        setAppear(factor){
+          Menu.elem.menu.style.opacity = factor;
+          factor=Math.pow(factor,0.5);
+          Menu.elem.menu.style.transform = "scale("+(0.8+0.2*factor)+")";
+        }
+      }
+
+      AdvanceController = {
+        press(){
+          if(AdvanceController.pressed){ return; }
+          AdvanceController.pressed = true;
+          if(Textbox.skipcallback) {
+            if(Textbox.skippable){
+              Textbox.skip();
+            }
+            else{
+              Textbox.quickly = Math.min(2, Textbox.quickly + 1);
+            }
+          }
+
+          if(Menu.callback){
+            if(Menu.selected!=null){
+              Menu.optionSelect();
+            }
+          }
+        },
+        pressed:false,
+        release(){
+          if(!AdvanceController.pressed){ return; }
+          AdvanceController.pressed = false;
+        }
+      }
+      // Scene.transitionTo({
+      //   defs:{
+      //     image:{
+      //       "jungle-day":"jungle.png",
+      //       "neutral":"penelope_neutral.png"
+      //     }
+      //   },
+      //   variables:{},
+      //   background:"jungle-day",
+      //   foreground:"neutral",
+      //   text:"They want to ask me who I am, how I got here, how I saved them. But I will not tell them.",
+      //   line:102,
+      //   advance:{ // Advance is always rebuilt from 'line'
+      //     type:"menu",
+      //     menu:{
+      //       title:"This is a test",
+      //       options:[
+      //         {text:"Continue", value:{line:103}},
+      //         {text:"Hello world hello", value:{line:104}},
+      //         {text:"Hmm hmm hmm", value:{line:105}}
+      //       ]
+      //     }
+      //   }
+      // }, 0.5)
+
+      // setTimeout(function(){
+      // Scene.transitionTo({
+      //   imagedefs:{
+      //     "calypso-day":"calypso-day.png",
+      //     "happy":"penelope_happy.png"
+      //   },
+      //   variables:{},
+      //   background:"calypso-day",
+      //   foreground:"happy",
+      //   text:"Hello World",
+      //   line:102,
+      //   advance:{ // Advance is always rebuilt from 'line'
+      //     menu:{
+      //       title:"This is a test",
+      //       options:[
+      //         {text:"Continue", callback:function(){alert("noice")}},
+      //         {text:"Hello world hello", callback:function(){alert("noice1")}},
+      //         {text:"Hmm hmm hmm", callback:function(){alert("noice2")}}
+      //       ]
+      //     }
+      //   }
+      // }, 0.5)
+      // },1000)
+      /*
       window.onkeydown = function(event){
         // console.log(event);
         if(
@@ -242,9 +953,82 @@
       document.body.onmousedown = function(){
         advance();
       }
-      // document.body.ontouchstart = function(){
-      //   advance();
-      // }
+      */
+
+      window.onkeydown = function(event){
+        //console.log(event.keyCode);
+        if(
+          event.shiftKey ||
+          event.ctrlKey ||
+          event.altKey ||
+          event.metaKey
+          ){
+          return;
+        }
+        if(event.keyCode == 78){ // N
+          if(Textbox.skipcallback) {
+            Textbox.skipcallback();
+            Textbox.quickly = 2;
+          }
+        }
+        if(
+          event.keyCode == 39 || // Right
+          event.keyCode == 68 || // D
+          event.keyCode == 32 || // Space
+          event.keyCode == 13    // Enter
+          ){
+          AdvanceController.press();
+        }
+        else if(Menu.callback){
+          if(
+            event.keyCode == 38 || // Up
+            event.keyCode == 87    // W
+          ){
+            Menu.optionUp();
+          }
+          else if(
+            event.keyCode == 40 || // Down
+            event.keyCode == 83    // S
+          ){
+            Menu.optionDown();
+          }
+        }
+      }
+
+      window.onkeyup = function(event){
+        // console.log(event);
+        if(
+          event.shiftKey ||
+          event.ctrlKey ||
+          event.altKey ||
+          event.metaKey
+          ){
+          return;
+        }
+        if(
+          event.keyCode == 39 || // Right
+          event.keyCode == 68 || // D
+          event.keyCode == 32 || // Space
+          event.keyCode == 13    // Enter
+          ){
+           AdvanceController.release();
+        }
+      }
+
+      document.body.ontouchstart = function(){
+        AdvanceController.press();
+      }
+      document.body.ontouchend = function(){
+        AdvanceController.release();
+      }
+
+      document.body.onmousedown = function(){
+        AdvanceController.press();
+        // Textbox.skipcallback()
+      }
+      document.body.onmouseup = function(){
+        AdvanceController.release();
+      }
 
       var xhr=new XMLHttpRequest();
       xhr.addEventListener("load", scriptLoaded);
