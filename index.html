@@ -3,49 +3,16 @@
   <head>
     <meta charset="utf-8">
     <title>The Traveller</title>
-    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+    <!--<link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">-->
     <style>
-      html,body,.full-image{
-        position:absolute;
-        left:0;right:0;top:0;bottom:0;
+      @font-face{
+        font-family:Rubik;
+        src:url("fonts/Rubik/Rubik-Regular.ttf");
       }
-      body{
-        background-color:black;
-        margin:0;
-        font-family:Rubik,sans-serif;
-        cursor:default;
-      }
-      .text-bottom{
-        position:absolute;
-        bottom:40px;
-        left:0;
-        right:0;
-        min-height:100px;
-        margin-left:auto;
-        margin-right:auto;
-        max-width:650px;
-        padding:20px;
-        font-size:14pt;
-        background-color: rgba(0,0,0,0.2);
-        box-shadow:0 0 18px 10px rgba(0,0,0,0.2);
-        text-shadow:0 2px 15px rgba(0,0,0,0.2);
-        color:white;
-        line-height:1.4em;
-        letter-spacing:0.005em;
-      }
-      #text-indicator{
-        left:50%;
-        bottom:10px;
-        position:absolute;
-        border-radius:4px;
-        margin-left:-5px;
-        margin-top:-5px;
-        width:10px;
-        height:10px;
-        /*background-color:white;*/
-        border:2px solid white;
-        /*box-shadow:0 0 18px 10px rgba(0,0,0,0.1);*/
-        opacity:0;
+      @font-face{
+        font-family:Rubik;
+        font-weight:Bold
+        src:url("fonts/Rubik/Rubik-Bold.ttf");
       }
       @keyframes pulse{
         0%  { opacity:0; }
@@ -66,26 +33,130 @@
         30%  { opacity:1; transform:scale(1);}
         100%{ opacity:0; transform: scale(1.5);}
       }
+      @keyframes fadein{
+        0%  { opacity:0; }
+        100%{ opacity:1; }
+      }
+      @keyframes fadeout{
+        0%  { opacity:1; }
+        100%{ opacity:0; }
+      }
+      @keyframes menuin{
+        0%  { opacity:0; transform:scale(0.95);}
+        100%{ opacity:1; transform:scale(1);}
+      }
+      @keyframes menuout{
+        0%  { opacity:1; transform:scale(1);}
+        100%{ opacity:0; transform:scale(0.95);}
+      }
+      @keyframes textin{
+        0%  { opacity:0; transform:scale(0.95) translateY(-20px) scale(0.95);}
+        100%{ opacity:1; transform:scale(1);}
+      }
+      @keyframes textout{
+        0%  { opacity:1; transform:scale(1);}
+        100%{ opacity:0; transform:scale(0.95) translateY(-20px) scale(0.95);}
+      }
       @keyframes menubloom{
         0%  { opacity:1; }
         50%  { opacity:1; transform:scale(1);}
         100%{ opacity:0; transform: scale(1.1);}
       }
+      html,body,.full-image,.character-image{
+        position:absolute;
+        left:0;right:0;top:0;bottom:0;
+      }
+      body{
+        background-color:black;
+        margin:0;
+        font-family:Rubik,sans-serif;
+        cursor:default;
+      }
+      *{
+        animation-fill-mode:both !important;
+      }
+      .text-bottom{
+        position:absolute;
+        bottom:40px;
+        left:0;
+        right:0;
+        min-height:110px;
+        margin-left:auto;
+        margin-right:auto;
+        max-width:650px;
+        padding:16px 22px;
+        font-size:14pt;
+        border-radius:8px;
+        color:white;
+        line-height:1.4em;
+        letter-spacing:0.005em;
+        opacity:0;
+        cursor:pointer;
+      }
+      .text-bottom.gameplay-textbox{
+        background-color: rgba(0,0,0,0.2);
+        box-shadow:0 0 2px 2px rgba(0,0,0,0.2);
+        text-shadow:0 2px 15px rgba(0,0,0,0.2);
+      }
+      .text-bottom #text-indicator{
+        opacity:0;
+      }
+      .gameplay-textbox #text-indicator{
+        left:50%;
+        bottom:10px;
+        position:absolute;
+        border-radius:4px;
+        margin-left:-5px;
+        margin-top:-5px;
+        width:10px;
+        height:10px;
+        /*background-color:white;*/
+        border:2px solid white;
+        /*box-shadow:0 0 18px 10px rgba(0,0,0,0.1);*/
+      }
+      .text-bottom #text-indicator.bloom{
+        background-color:transparent;
+        animation:bloom 0.4s cubic-bezier(0,0.9,1,1);
+      }
       #text-indicator.showing{
         animation:pulse 2s linear infinite;
       }
-      #text-indicator.bloom{
+      .gameplay-textbox #text-indicator.bloom{
         background-color:white;
         animation:bloom 0.4s cubic-bezier(0,0.9,1,1);
-        animation-fill-mode:both;
+      }
+
+      .main-menu-helptext{
+        text-align: center;
+      }
+      .gameplay-textbox .main-menu-helptext{
+        display:none;
+      }
+
+      .text-bottom header{
+        font-weight: bold;
+        letter-spacing: 0.03em;
+        /*margin-top: -.5em;*/
+        /*position: absolute;
+          bottom: 100%;
+          margin-bottom: -0.6em;
+          text-shadow: 0 2px 25px rgba(0,0,0,0.2)*/
+      }
+      ::-webkit-scrollbar {
+          width: 0px;
+          background: transparent;
       }
       .menu-middle{
         position:absolute;
-        top:50%;
+        /*top:50%;*/
+        top:0;
+        bottom:0;
         left:0;
         right:0;
-        margin-top:-140px;
-        min-height:100px;
+        padding:20vh 0;
+        /*margin-top:-140px;*/
+        /*max-height:50%;*/
+        overflow-y:auto;
         margin-left:auto;
         margin-right:auto;
         max-width:650px;
@@ -96,18 +167,38 @@
       .menu-title{
         margin-bottom:40px;
       }
-      .menu-item{
+      .menu-item,.fake-menu-item{
+        position:relative;
         max-width:450px;
         margin-left:auto;
         margin-right:auto;
         padding:8px;
         margin-bottom:30px;
-        background-color: rgba(0,0,0,0.2);
         border-radius:4px;
         border:2px solid transparent;
-        box-shadow:0 0 10px 10px rgba(0,0,0,0.2);
-        cursor:pointer;
         user-select:none;
+        overflow:hidden;
+      }
+      .fake-menu-item{
+        margin-top:15px;
+        margin-bottom:15px;
+      }
+      .menu-item{
+        background-color: rgba(0,0,0,0.2);
+        box-shadow:0 0 2px 2px rgba(0,0,0,0.2);
+        cursor:pointer;
+      }
+      .thumb{
+        position:absolute;
+        left:0;
+        top:0;
+        bottom:0;
+        right:0;
+        z-index:-99;
+        opacity:0.6;
+        /*width: 4em;*/
+        /*height: 2em;*/
+        /*display: inline-block;*/
       }
       .menu-item.focus{
         /*background-color: rgba(0,0,0,0.3);*/
@@ -117,7 +208,7 @@
       }
       .menu-item.selected{
         animation:menubloom 0.5s cubic-bezier(0,0.9,1,1);
-        animation-fill-mode:both;
+        /*animation-fill-mode:both;*/
         background-color: white;
         border:2px solid transparent;
         color:#333;
@@ -127,10 +218,24 @@
         letter-spacing:0.005em;
         text-shadow:0 2px 15px rgba(0,0,0,0.2);
       }
-      .full-image{
+      .full-image,.thumb{
         background-size:cover;
         background-position:50%;
         background-repeat:no-repeat;
+      }
+      .full-image{
+        background-color:black;
+      }
+      .character-image{
+        background-size:contain;
+        background-position:50% 100%;
+        background-repeat:no-repeat;
+      }
+      #backdrop-mg-transition, #backdrop-fg-transition{
+        opacity:0;
+      }
+      .menu-scrim{
+        background-color:rgba(30,30,30,0.9);/*rgba(0,0,0,0.3);*/
       }
       /*#devpanel{
         position:absolute;
@@ -146,27 +251,26 @@
   <body>
     <div class="full-image" id="backdrop-bg-transition"></div>
     <div class="full-image" id="backdrop-bg"></div>
-    <div class="full-image" id="backdrop-fg-transition"></div>
-    <div class="full-image" id="backdrop-fg"></div>
-    <div class="text-bottom" id="textbox" style="opacity:0">
+    <div class="character-image" id="backdrop-mg-transition"></div>
+    <div class="character-image" id="backdrop-mg"></div>
+    <div class="character-image" id="backdrop-fg-transition"></div>
+    <div class="character-image" id="backdrop-fg"></div>
+    <div class="text-bottom" id="textbox">
       <div id="text-container"></div>
-      <div id="text-indicator"></div>
+      <div id="text-indicator">
+        <div class="main-menu-helptext">Click, Tap, or Press Space</div>
+      </div>
     </div>
-    <div class="menu-middle" id="menu"></div>
+    <div class="menu-middle" id="menu" style="display:none;"></div>
     <!--<div id="devpanel"></div>-->
+    </div>
+    <div class="menu-scrim full-image" id="scrim" style="display:none;"></div>
+    <div class="menu-middle" id="pausemenu" style="display:none;"></div>
     </div>
     <script>
       scriptText = "";
       scriptLines = [];
-      imageDefs = {};
-      characterDefs = {};
-      state = {
-        variables:{},
-        background:"",
-        foreground:"",
-        text:"",
-        // options:[0]
-      };
+      mainMenu = true;
       // sceneElem = document.getElementById("scene");
       // characterElem = document.getElementById("character");
       // textElem = document.getElementById("text");
@@ -175,71 +279,43 @@
         scriptLines = scriptText./*replace(/\s*\n/g,"\n").*/split("\n");
         ScriptFollower.autoIterate(ScriptFollower.initialState()); // Will run until defs are loaded
       }
+
       function defsLoaded(state){
-        window.globalDefs = state.defs;
-        window.startLine = ScriptFollower.getNextNonEmpty(state.line + 1);
+        globalDefs = state.defs;
+        startLine = ScriptFollower.getNextNonEmpty(state.line + 1);
         // console.log(state)
 
-        window.s=ScriptFollower.autoIterate(fromSavable(JSON.parse(localStorage.state2||"{}")));
-      }
-      function fromSavable(save){
-        return ScriptFollower.foldState(Object.assign(ScriptFollower.initialState(), {line: save.line || startLine, defs:globalDefs}), save);
-      }
-      function toSavable(state){
-        return {
-          background:state.background,
-          midground:state.midground,
-          foreground:state.foreground,
-          line:state.line,
-          variables:state.variables
-        }
+        SaveManager.fetchFromLocalstorage();
+
+        // ScriptFollower.fromSave(SaveManager.saves[0]||SaveManager.newGameSave());
+        Scene.transitionTo(Scene.MAIN_MENU, function(){
+          Scene.MAIN_MENU_2.advance.menu = SaveManager.makeLoadMenu();
+          Scene.transitionTo(Scene.MAIN_MENU_2, function(){
+            mainMenu = false;
+          });
+        })
+
       }
 
-      function saveState(state){
-        localStorage.state2 = JSON.stringify(toSavable(state))
-      }
+      // function globalAnim(x){
+      //   return x<0.5?x*x*2:(1-(1-x)*(1-x)*2)
+      // }
+      // globalAnimCSS = "";//"cubic-bezier(0,0,0.5,1)"
 
-      function globalAnim(x){
-        return x<0.5?x*x*2:(1-(1-x)*(1-x)*2)
-      }
-
-      function transitionTimeHelper(func, from, to, duration, time, anim, callback){
-        time = Math.max(0, time);
-        func((to-from)*anim(1-time/duration)+from);
-        if(time > 0){
-          window.requestAnimationFrame(function(){
-            transitionTimeHelper(func, from, to, duration, time-1/60, anim, callback)
-          })
-        } else if(callback){
-          callback();
-        }
-      }
-      function transitionTime(func, from, to, time, anim, callback){
-        transitionTimeHelper(func, from, to, time, time, anim, callback)
-      }
-
-
-      MainMenuFollower = {
-        transitionTo(time){
-
-        }
-      }
-
-      PauseMenuFollower = {
-        transitionTo(time){
-
-        }
-      }
-
-      StateManager = {
-        getState(){
-
-        },
-        setState(){
-
-        }
-      }
-
+      // function transitionTimeHelper(func, from, to, duration, time, anim, callback){
+      //   time = Math.max(0, time);
+      //   func((to-from)*anim(1-time/duration)+from);
+      //   if(time > 0){
+      //     requestAnimationFrame(function(){
+      //       transitionTimeHelper(func, from, to, duration, time-1/60, anim, callback)
+      //     })
+      //   } else if(callback){
+      //     callback();
+      //   }
+      // }
+      // function transitionTime(func, from, to, time, anim, callback){
+      //   transitionTimeHelper(func, from, to, time, time, anim, callback)
+      // }
 
       ScriptFollower = {
         initialState(){
@@ -275,7 +351,7 @@
             }
             index++;
           }
-          return index;
+          return index + 1;
         },
         getChildIndents(index){
           var childIndent = null;
@@ -304,22 +380,26 @@
         indentOf(index){
           return scriptLines[index].length - scriptLines[index].trimLeft().length;
         },
-        advanceIterate(state){
-          state.line = ScriptFollower.getNextLEIndent(state.line);
-          ScriptFollower.autoIterate(state);
+        parseFormatting(line){
+          return line.replace(/\{/g,"<").replace(/\}/g,">")
         },
-        autoIterate(state){
+        advanceIterate(state, suppresssave){
+          state.line = ScriptFollower.getNextLEIndent(state.line);
+          ScriptFollower.autoIterate(state, suppresssave);
+        },
+        autoIterate(state, suppresssave){
           var deltaState = ScriptFollower.stateChangeFromLine(state.line, state.defs, state.variables);
           var state = ScriptFollower.foldState(state, deltaState);
+          window.state = state;
           if(state.advance.type == "auto"){
             if(deltaState.background){
               // Force background transition to finish
               Scene.transitionTo(state, function(){
-                ScriptFollower.advanceIterate(state);
+                ScriptFollower.advanceIterate(state, suppresssave);
               });
             }
             else{
-              ScriptFollower.advanceIterate(state);
+              ScriptFollower.advanceIterate(state, suppresssave);
             }
           }
           else if(state.advance.type == "start"){
@@ -338,7 +418,9 @@
           }
           else if(state.advance.type == "text"){
             // Display
-            saveState(state);
+            if(!suppresssave){
+              SaveManager.autoSave(state);
+            }
             Scene.transitionTo(state, function(){
               ScriptFollower.advanceIterate(state);
             });
@@ -346,13 +428,13 @@
           else if(state.advance.type == "menu"){
             // Display
             Scene.transitionTo(state, function(item){
-            saveState(state);
+            // saveState(state);
               state.line = item.line;
               ScriptFollower.autoIterate(state);
             });
           }
           else{
-            throw "Unknown advance type: "+newState.advance.type;
+            throw "Unknown advance type: "+state.advance.type;
           }
         },
         foldState(state,stateChange){
@@ -373,15 +455,24 @@
           var currentLine = scriptLines[number].trimLeft();
           var splitLine = currentLine.split(" ");
           // console.log(currentLine);
-          state.line = number;
+          // state.line = number;
 
           if(currentLine.startsWith("return") || number >= scriptLines.length-1){
             // END OF GAME!
             return {
+              background:image,
+              midground:"",
+              foreground:"",
+              text: "",
               advance: { type:"end" }
             }
           }
           else if(currentLine.startsWith("#")){
+            return {
+              advance: { type:"auto" }
+            }
+          }
+          else if(currentLine.startsWith("pass")){
             return {
               advance: { type:"auto" }
             }
@@ -451,9 +542,17 @@
             // Show character
             var image = splitLine.slice(1).join(" ");
             /// console.log("%cShowing:"+"%c "+image, "color:cyan", "color:inherit");
-            return {
-              foreground: image,
-              advance: { type:"auto" }
+            if(image.startsWith("dad")){
+              return {
+                midground: image,
+                advance: { type:"auto" }
+              }
+            }
+            else{
+              return {
+                foreground: image,
+                advance: { type:"auto" }
+              }
             }
           }
           else if(currentLine.startsWith("hide ")){
@@ -475,42 +574,65 @@
               advance: { type:"auto" }
             }
           }
+          else if(currentLine.startsWith("log ")){
+            console.log(number, currentLine);
+            return {
+              advance: { type:"auto" }
+            }
+          }
           else if(currentLine.startsWith("if ")){
             // If statement
-            var key = splitLine[1].slice(0, -1);
-            if(variables[key] == "True"){
-              return {
-                advance: {
-                  type:"jump",
-                  line:ScriptFollower.getNextNonEmpty(number+1)
+            var nextPossibleElse = number;
+            // Look for ifs, elifs, and else statements
+            while(ScriptFollower.inRange(nextPossibleElse)){
+              var nextLine = scriptLines[nextPossibleElse].trimLeft();
+              var nextSplitLine = nextLine.split(" ");
+              if(nextLine.startsWith("if ") || nextLine.startsWith("elif ")){
+              // Check conditional
+                var key = nextSplitLine[1].slice(0, -1);
+                if(variables[key] == "True"){
+                  return {
+                    advance: {
+                      type:"jump",
+                      line:ScriptFollower.getNextNonEmpty(nextPossibleElse+1)
+                    }
+                  }
                 }
               }
-            }
-            else{
-              // Try to find an else statement
-              var nextPossibleElse = ScriptFollower.getNextLEIndent(number);
-              if(ScriptFollower.indentOf(number) == ScriptFollower.indentOf(nextPossibleElse)
-              // else statement must be at the same indent level
-              && scriptLines[nextPossibleElse].trimLeft().startsWith("else:")){
-                // console.log("Else found to "+ScriptFollower.getNextNonEmpty(nextPossibleElse+1))
+              else if(nextLine.startsWith("else:")){
+              // console.log("Else found to "+ScriptFollower.getNextNonEmpty(nextPossibleElse+1))
                 return {
                   advance: {
                     type:"jump",
                     line:ScriptFollower.getNextNonEmpty(nextPossibleElse+1)
                   }
-                }
-              } else{
-                // No else found
-                return {
-                  advance: {
-                    type:"auto"
-                  }
-                }
+                };
+              }
+              else {
+                // Not an if/elif/else anymore... left the closure.
+                break;
+              }
+              nextPossibleElse = ScriptFollower.getNextLEIndent(nextPossibleElse);
+              if(ScriptFollower.indentOf(number) != ScriptFollower.indentOf(nextPossibleElse)){
+                // We left the closure!
+                break;
+              }
+            }
+            // No else found
+            return {
+              advance: {
+                type:"auto"
               }
             }
           }
           else if(currentLine.startsWith("else:")){
             // Ignore this, elses are handled above
+            return {
+              advance: { type:"auto" }
+            }
+          }
+          else if(currentLine.startsWith("elif ")){
+            // Ignore this, elifs are handled above
             return {
               advance: { type:"auto" }
             }
@@ -524,13 +646,14 @@
           else if(currentLine.startsWith("menu ")||currentLine.startsWith("menu:")){
             // Build a menu
             var children = ScriptFollower.getChildIndents(number)
+            var notitle=scriptLines[children[0]].endsWith(":");
             return {
               text:"",
               advance: {
                 type:"menu",
                 menu:{
-                  title:scriptLines[children[0]].trimLeft().slice(1,-1),
-                  options:children.slice(1).map((optionLineNumber)=>{
+                  title:notitle?"":scriptLines[children[0]].trimLeft().slice(1,-1),
+                  options:(notitle?children:children.slice(1)).map((optionLineNumber)=>{
                     return {
                       text:scriptLines[optionLineNumber].trimLeft().slice(1,-2),
                       line:ScriptFollower.getNextNonEmpty(optionLineNumber+1)
@@ -551,7 +674,7 @@
             var lineText = currentLine.slice(1,-1);
             /// console.log(lineText)
             return {
-              text: lineText,
+              text: ScriptFollower.parseFormatting(lineText),
               advance: { type:"text" }
             }
           }
@@ -561,7 +684,7 @@
             var lineText = splitLine.slice(1).join(" ").slice(1,-1);
             /// console.log("%c" + fromCharacter + ":"+"%c " + lineText, "color:orange", "color:inherit")
             return {
-              text: "<i>"+fromCharacter + ":</i> " + lineText,
+              text: "<header>"+fromCharacter + "</header> " + ScriptFollower.parseFormatting(lineText),
               advance: { type:"text" }
             }
           }
@@ -579,27 +702,66 @@
           else{
             throw "Unknown line "+number+": " + currentLine;
           }
+        },
+
+        saveStateToPlayable(save){
+          return ScriptFollower.foldState(Object.assign(ScriptFollower.initialState(), {line: save.line || startLine, defs:globalDefs}), save);
+        },
+        fromSave(save){
+          ScriptFollower.autoIterate(ScriptFollower.saveStateToPlayable(save), true)
         }
       }
 
       Scene = {
+        BLACK:{
+          background:"",
+          midground:"",
+          foreground:"",
+          text:"",
+          advance:{
+            type:"auto"
+          }
+        },
+        MAIN_MENU:{
+          background:"bg title-page",
+          midground:"",
+          foreground:"",
+          text:"[MAIN_MENU]",
+          advance:{
+            type:"text"
+          }
+        },
+        MAIN_MENU_2:{
+          background:"bg space",
+          midground:"",
+          foreground:"",
+          text:"",
+          advance:{
+            type:"menu"
+          }
+        },
+
         transitionTo(state, callback){
           var bringin = function(){
-            Backdrop.transitionTo(state.defs.image[state.background], "bg", Backdrop.BG_TRANSITION, function(){
-              Backdrop.transitionTo(state.defs.image[state.foreground], "fg", Backdrop.FG_TRANSITION, function(){
-                Menu.transitionTo(state.advance.menu, state.advance.type == "menu"?callback:null)
-                Textbox.transitionTo(state.text, state.advance.type == "text"?callback:null)
-                if(state.advance.type == "auto" && callback){
-                  callback();
-                }
-              })
+            Backdrop.transitionTo(globalDefs.image[state.background], "bg", function(){
+              Backdrop.transitionTo(globalDefs.image[state.midground], "mg", function(){
+                Backdrop.transitionTo(globalDefs.image[state.foreground], "fg", function(){
+                  Menu.transitionTo(state.advance.menu, state.advance.type == "menu"?callback:null)
+                  Textbox.transitionTo(state.text, state.advance.type == "text"?callback:null)
+                  if(state.advance.type == "auto" && callback){
+                    callback();
+                  }
+                })
+              });
             })
           }
-          if(Backdrop.lastbg && Backdrop.lastbg != state.defs.image[state.background]){
+          if(Backdrop.lastbg && state.background != undefined && Backdrop.lastbg != globalDefs.image[state.background]){
             // Backdrop change, fade stuff out
             Menu.transitionTo(null)
             Textbox.transitionTo(null)
-            Backdrop.transitionTo(null, "fg", Backdrop.FG_TRANSITION, bringin);
+            Backdrop.transitionTo(null, "fg", function(){
+              Backdrop.transitionTo(null, "mg", bringin);
+            });
           }
           else{
             bringin();
@@ -609,13 +771,15 @@
 
       Backdrop = {
         BG_TRANSITION:1,
-        FG_TRANSITION:0.5,
+        FG_TRANSITION:0.2,
         /*
           layer can be "fg" or "bg", time in seconds
         */
         elem:{
           bg:document.getElementById("backdrop-bg"),
           bgtransition:document.getElementById("backdrop-bg-transition"),
+          mg:document.getElementById("backdrop-mg"),
+          mgtransition:document.getElementById("backdrop-mg-transition"),
           fg:document.getElementById("backdrop-fg"),
           fgtransition:document.getElementById("backdrop-fg-transition")
         },
@@ -631,22 +795,57 @@
         setOpacity(elem, opacity){
           elem.style.opacity = opacity;
         },
+        setAnim(elem, anim){
+          elem.style.animation = anim;
+        },
         lastbg:null,
-        transitionTo(url, layer, time, callback){
-          var main = Backdrop.elem[layer], transition = Backdrop.elem[layer+"transition"];
-          Backdrop.setBackground(transition, Backdrop.getBackground(main));
-          Backdrop.setBackground(main, Backdrop.makeCSSBackground(url));
+        lastmg:null,
+        lastfg:null,
+        transitionTo(url, layer, callback){
+          var time = 0, lastUrl;
           if(layer=="bg"){
-            Backdrop.lastbg=url;
+            lastUrl = Backdrop.lastbg;Backdrop.lastbg=url;
+            time = Backdrop.BG_TRANSITION;
           }
-          if(Backdrop.getBackground(main) == Backdrop.getBackground(transition)){
+          if(layer=="fg"){
+            time = Backdrop.FG_TRANSITION;
+            if(!Backdrop.lastfg || !url){
+              time = Backdrop.BG_TRANSITION;
+            }
+            lastUrl = Backdrop.lastfg;Backdrop.lastfg=url;
+          }
+          if(layer=="mg"){
+            time = Backdrop.FG_TRANSITION;
+            if(!Backdrop.lastfg || !url){
+              time = Backdrop.BG_TRANSITION/2;
+            }
+            lastUrl = Backdrop.lastmg;Backdrop.lastmg=url;
+          }
+          if(lastUrl == url){
             callback();
           }
-          else{
-            transitionTime(Backdrop.setOpacity.bind(null, main),0,1,time,globalAnim,callback);
+          else {
+            Backdrop.elem[layer].parentElement.insertBefore(Backdrop.elem[layer+"transition"], Backdrop.elem[layer].nextElementSibling);
+            var temp = Backdrop.elem[layer];
+            Backdrop.elem[layer] = Backdrop.elem[layer+"transition"];
+            Backdrop.elem[layer+"transition"] = temp;
+            var main = Backdrop.elem[layer], transition = Backdrop.elem[layer+"transition"];
+            var temp = main.id;
+            main.id= transition.id;
+            transition.id = temp;
+
+            // Backdrop.setBackground(transition, Backdrop.getBackground(main));
+            Backdrop.setBackground(main, Backdrop.makeCSSBackground(url));
+            Backdrop.setAnim(main, "fadein "+time+"s");
             if(layer!="bg"){
-              transitionTime(Backdrop.setOpacity.bind(null, transition),1,0,time,globalAnim);
+              Backdrop.setAnim(transition, "fadeout "+time+"s");
             };
+            setTimeout(function(){
+              callback()
+              // Backdrop.setAnim(main, "");
+              // Backdrop.setAnim(transition, "");
+              // setTimeout(callback,16);
+            }, 1000*time+16);
           }
         }
       }
@@ -657,7 +856,7 @@
           textcontainer:document.getElementById("text-container"),
           textindicator:document.getElementById("text-indicator")
         },
-        APPEAR_TIME:0.3,
+        APPEAR_TIME:0.4,
         WAIT_TO_SKIP:0.2,
         PRE_SKIP_WAIT:0.2,
         QUICK_COUNT:20,
@@ -665,6 +864,7 @@
         timeout:null,
         transitionTo(text,callback){
           if(text){
+            clearTimeout(Textbox.timeout);
             Textbox.quickly = AdvanceController.pressed ? 1 : 0;
             Textbox.skippable = false;
             Textbox.skipcallback = null;
@@ -677,6 +877,12 @@
             }
             Textbox.hideIndicator();
             Textbox.elem.textcontainer.innerHTML = "";
+            if(text == Scene.MAIN_MENU.text){
+              Textbox.elem.textbox.classList.remove("gameplay-textbox");
+            }
+            else{
+              Textbox.elem.textbox.classList.add("gameplay-textbox");
+            }
             Textbox.show(function(){
               Textbox.displayText(text, 0, function(){
                 clearTimeout(Textbox.timeout);
@@ -691,12 +897,17 @@
             })
           }
           else{
+            Textbox.skipcallback = null;
+            Textbox.skippable = false;
             Textbox.hide(callback);
           }
         },
         show(callback){
+          clearTimeout(Textbox.timeout);
           if(!Textbox.showing){
-            transitionTime(Textbox.setAppear,0,1,Textbox.APPEAR_TIME,globalAnim,callback);
+            Backdrop.setAnim(Textbox.elem.textbox, "textin "+Textbox.APPEAR_TIME+"s");
+            Textbox.timeout=setTimeout(callback, 1000*Textbox.APPEAR_TIME+16);
+            // transitionTime(Textbox.setAppear,0,1,Textbox.APPEAR_TIME,globalAnim,callback);
             Textbox.showing = true;
           }
           else if(callback){
@@ -704,8 +915,11 @@
           }
         },
         hide(callback){
+          clearTimeout(Textbox.timeout);
           if(Textbox.showing){
-            transitionTime(Textbox.setAppear,1,0,Textbox.APPEAR_TIME,globalAnim,callback);
+            Backdrop.setAnim(Textbox.elem.textbox, "textout "+Textbox.APPEAR_TIME+"s");
+            Textbox.timeout=setTimeout(callback, 1000*Textbox.APPEAR_TIME+16);
+            // transitionTime(Textbox.setAppear,1,0,Textbox.APPEAR_TIME,globalAnim,callback);
             Textbox.showing = false;
           }
           else if(callback){
@@ -730,25 +944,30 @@
           Textbox.elem.textindicator.className = "bloom";
         },
         displayText(text, index, callback){
-          if(text && index<text.length){
-            var elemborder = text.slice(index).match(/^<\/?[a-z]+>/i);
+          if(text && text != Scene.MAIN_MENU.text && index<text.length){
+            var elemborder = text.slice(index).match(/^<\/?[A-Za-z0-9]+>/i);
             var textspeed = (elemborder?elemborder[0].length:0)+1;
             index+=textspeed;
             if(Textbox.quickly > 1) { index = text.length; }
             Textbox.elem.textcontainer.innerHTML = text.slice(0,index);
-            clearTimeout(Textbox.timeout);
-            Textbox.timeout = setTimeout(function(){
+            var continueDisplaying = function(){
               Textbox.displayText(text, index, callback);
-            }, Textbox.quickly > 0 ?Textbox.QUICK_SPEED:Textbox.SLOW_SPEED)
+            }
+            var holdonthere;
+            holdonthere = function(){
+                clearTimeout(Textbox.timeout);
+                Textbox.timeout = setTimeout(PauseMenu.showing?holdonthere:continueDisplaying, Textbox.quickly > 0 ?Textbox.QUICK_SPEED:Textbox.SLOW_SPEED);
+            }
+            holdonthere();
           } else if(callback){
             callback();
           }
         },
-        setAppear(factor){
-          Textbox.elem.textbox.style.opacity = factor;
-          factor=Math.pow(factor,0.5);
-          Textbox.elem.textbox.style.transform = "translateY("+(factor-1)*30+"px) scale("+(0.8+0.2*factor)+")";
-        },
+        // setAppear(factor){
+        //   Textbox.elem.textbox.style.opacity = factor;
+        //   factor=Math.pow(factor,0.5);
+        //   Textbox.elem.textbox.style.transform = "translateY("+(factor-1)*30+"px) scale("+(0.8+0.2*factor)+")";
+        // },
         skip(){
           Textbox.skippable = false;
           Textbox.bloomIndicator()
@@ -756,6 +975,7 @@
           Textbox.timeout = setTimeout( Textbox.skipcallback, 1000*Textbox.POST_SKIP_WAIT);
         }
       }
+
 // I'll have it work like standard games - mash the button and it goes faster/appears all at once
 // Just to give some more time to read <-- make it hard to accidentally skip text
 
@@ -765,10 +985,11 @@
         },
         transitionTo(menu, callback){
           // console.log(menu)
-          Menu.elem.menu.innerHTML = "";
+          var elem = Menu.elem.menu;
+          elem.innerHTML = "";
           if(menu){
-            Menu.setOptions(menu, callback);
-            Menu.show();
+            Menu.setOptions(elem, menu, callback);
+            Menu.show(elem);
           }
         },
         callback:null,
@@ -776,7 +997,7 @@
         length:null,
         MENU_PRE_WAIT:0.5,
         MENU_POST_WAIT:0.5,
-        setOptions(menu, callback){
+        setOptions(elem, menu, callback){
           Menu.callback = null;
           Menu.selected = null;
           Menu.length = menu.options.length;
@@ -784,10 +1005,12 @@
             Menu.callback = function(index){
               Menu.callback = null;
               Menu.length = null;
-              var selectedoption = menu.options[index];
+              var selectedoption = index!=null&&menu.options[index];
               setTimeout(function(){
-                Menu.hide(function(){
-                  callback(selectedoption);
+                Menu.hide(elem, function(){
+                  Menu.elem.menu.innerHTML = "";
+                  selectedoption&&selectedoption.callback&&selectedoption.callback(menu);
+                  selectedoption&&callback&&callback(selectedoption);
                 });
               },1000*Menu.MENU_POST_WAIT)
             };
@@ -797,14 +1020,14 @@
           if(menu){
             html += '<div class="menu-title">'+menu.title+'</div>';
             menu.options.forEach((option,index)=>{
-              html += '<div class="menu-item" id="menuitem'+index+'" onmouseenter="Menu.callback&&Menu.optionFocus('+index+')" onmousedown="Menu.callback&&Menu.optionSelect('+index+')">'+option.text+'</div>'
+              html += '<div class="menu-item menuitem'+index+'" onmouseenter="Menu.callback&&Menu.optionFocus('+index+')" onmousedown="Menu.callback&&Menu.optionSelect('+index+')">'+option.text+'</div>'
             })
           }
-          Menu.elem.menu.innerHTML = html;
+          elem.innerHTML = html;
         },
         optionFocus(index){
           Menu.selected = index;
-          Menu.indicatorStatus(index, "focus");
+          Menu.indicatorStatus(Menu.elem.menu, index, "focus");
         },
         optionUp(){
           if(!Menu.callback) { return; }
@@ -830,53 +1053,280 @@
             Menu.selected = index;
           }
           if(Menu.selected != null){
-            Menu.indicatorStatus(Menu.selected, "focus");
-            Menu.indicatorStatus(Menu.selected, "selected");
+            Menu.indicatorStatus(Menu.elem.menu, Menu.selected, "focus");
+            Menu.indicatorStatus(Menu.elem.menu, Menu.selected, "selected");
             if(Menu.callback){
               Menu.callback(Menu.selected);
             }
           }
         },
-        indicatorStatus(index,status){
-          for(var i = 0; i < Menu.length; i++){
-            var optionElem = document.getElementById("menuitem"+i);
+        indicatorStatus(elem,index,status){
+          Array.from(elem.getElementsByClassName("menu-item")).forEach(function(optionElem, i){// for(var i = 0; i < Menu.length; i++){
+            // var optionElem = [0];
             if(i == index){
               optionElem.classList.add(status)
+              if(status=="focus"){
+                if(optionElem.scrollIntoViewIfNeeded){optionElem.scrollIntoViewIfNeeded();};
+              }
             }
             else{
               optionElem.classList.remove(status)
             }
+          })
+        },
+        show(elem, callback){
+          elem.style.display="";
+          Backdrop.setAnim(elem, "menuin "+Textbox.APPEAR_TIME+"s");
+          setTimeout(callback, 1000*Textbox.APPEAR_TIME+16);
+          // transitionTime(PauseMenu.setAppear,0,1,Textbox.APPEAR_TIME,globalAnim,callback);
+        },
+        hide(elem, callback){
+          Backdrop.setAnim(elem, "menuout "+Textbox.APPEAR_TIME+"s");
+          setTimeout(function(){
+            elem.style.display="none";
+            callback();
+          }, 1000*Textbox.APPEAR_TIME+16);
+          // transitionTime(PauseMenu.setAppear,1,0,Textbox.APPEAR_TIME,globalAnim,callback);
+        },
+        // setAppear(factor){
+        //   Menu.elem.menu.style.opacity = factor;
+        //   factor=Math.pow(factor,0.5);
+        //   Menu.elem.menu.style.transform = "scale("+(0.8+0.2*factor)+")";
+        // }
+      }
+
+
+      // The menu that PauseMenu uses has builtin callbacks
+      /* {
+        title: "</i>title html</i>",
+        options: [
+          {
+            text:"<b></b>",
+            callback:function(){
+              alert("hello")
+            }
+          }
+        ]
+      } */
+
+      PauseMenu = {
+        elem:{
+          pausemenu:document.getElementById("pausemenu"),
+          scrim:document.getElementById("scrim")
+        },
+        transitionTo(menu, callback){
+          // console.log(Pausemenu)
+          var elem = PauseMenu.elem.pausemenu;
+          elem.innerHTML = "";
+          if(menu){
+            PauseMenu.setOptions(elem, menu, callback);
+            Menu.show(elem);
           }
         },
-        show(callback){
-          transitionTime(Menu.setAppear,0,1,Textbox.APPEAR_TIME,globalAnim,callback);
+        callback:null,
+        selected:null,
+        length:null,
+        hidetimeout:null,
+        showing:false,
+        setOptions(elem, menu, callback){
+          PauseMenu.callback = null;
+          PauseMenu.selected = null;
+          PauseMenu.length = menu.options.length;
+          PauseMenu.showing = true;
+          PauseMenu.showScrim();
+          clearTimeout(PauseMenu.hidetimeout);
+          setTimeout(function(){
+            PauseMenu.callback = function(index){
+              PauseMenu.callback = null;
+              PauseMenu.length = null;
+              var selectedoption = index!=null&&menu.options[index];
+              setTimeout(function(){
+                Menu.hide(elem, function(){
+                  PauseMenu.elem.pausemenu.innerHTML = "";
+                  PauseMenu.hidetimeout = setTimeout(function(){
+                    PauseMenu.hideScrim();
+                    PauseMenu.showing = false;
+                  }, 16);
+                  selectedoption&&selectedoption.callback&&selectedoption.callback(menu);
+                });
+              },1000*Menu.MENU_POST_WAIT)
+            };
+          },1000*Menu.MENU_PRE_WAIT)
+
+          var html = "";
+          if(menu){
+            html += '<div class="menu-title">'+menu.title+'</div>';
+            menu.options.forEach((option,index)=>{
+              html += '<div class="menu-item menuitem'+index+'" onmouseenter="PauseMenu.callback&&PauseMenu.optionFocus('+index+')" onmousedown="PauseMenu.callback&&PauseMenu.optionSelect('+index+')">'+option.text+'</div>'
+            })
+          }
+          elem.innerHTML = html;
         },
-        hide(callback){
-          transitionTime(Menu.setAppear,1,0,Textbox.APPEAR_TIME,globalAnim,callback);
+        optionFocus(index){
+          PauseMenu.selected = index;
+          Menu.indicatorStatus(PauseMenu.elem.pausemenu, index, "focus");
         },
-        setAppear(factor){
-          Menu.elem.menu.style.opacity = factor;
-          factor=Math.pow(factor,0.5);
-          Menu.elem.menu.style.transform = "scale("+(0.8+0.2*factor)+")";
+        optionUp(){
+          if(!PauseMenu.callback) { return; }
+          if(PauseMenu.selected == null){
+            PauseMenu.optionFocus(0);
+          }
+          else{
+            PauseMenu.optionFocus(Math.max(0, PauseMenu.selected-1));
+          }
+        },
+        optionDown(){
+          if(!PauseMenu.callback) { return; }
+          if(PauseMenu.selected == null){
+            PauseMenu.optionFocus(0);
+          }
+          else{
+            PauseMenu.optionFocus(Math.min(PauseMenu.length-1, PauseMenu.selected+1));
+          }
+        },
+        optionSelect(index){
+          if(!PauseMenu.callback) { return; }
+          if(index !== undefined) {
+            PauseMenu.selected = index;
+          }
+          if(PauseMenu.selected != null){
+            Menu.indicatorStatus(PauseMenu.elem.pausemenu, PauseMenu.selected, "focus");
+            Menu.indicatorStatus(PauseMenu.elem.pausemenu, PauseMenu.selected, "selected");
+            if(PauseMenu.callback){
+              PauseMenu.callback(PauseMenu.selected);
+            }
+          }
+        },
+        timeout:null,
+        showScrim(callback){
+          PauseMenu.elem.scrim.style.display="";
+          // PauseMenu.showing = true;
+          clearTimeout(PauseMenu.timeout);
+          Backdrop.setAnim(PauseMenu.elem.scrim, "fadein "+Textbox.APPEAR_TIME+"s");
+          if(callback){
+            PauseMenu.timeout=setTimeout(callback, 1000*Textbox.APPEAR_TIME+16);
+          }
+          // transitionTime(PauseMenu.setAppear,0,1,Textbox.APPEAR_TIME,globalAnim,callback);
+        },
+        hideScrim(callback){
+          Backdrop.setAnim(PauseMenu.elem.scrim, "fadeout "+Textbox.APPEAR_TIME+"s");
+          clearTimeout(PauseMenu.timeout)
+          PauseMenu.timeout=setTimeout(function(){
+            PauseMenu.elem.scrim.style.display="none";
+            // PauseMenu.showing = false;
+            if(callback){callback()};
+          }, 1000*Textbox.APPEAR_TIME+16);
+          // transitionTime(PauseMenu.setAppear,1,0,Textbox.APPEAR_TIME,globalAnim,callback);
+        },
+        // setAppear(factor){
+        //   PauseMenu.elem.pausemenu.style.opacity = factor;
+        //   factor=Math.pow(factor,0.5);
+        //   PauseMenu.elem.pausemenu.style.transform = "scale("+(0.8+0.2*factor)+")";
+        // }
+        pauseUnpause(){
+          if(mainMenu){return;}
+          if(PauseMenu.showing){
+            if(PauseMenu.callback){
+              PauseMenu.callback(null);
+            }
+          }
+          else{
+            PauseMenu.transitionTo({
+              title: "Paused.",
+              options: [
+                {
+                  text: "Continue",
+                  callback: function(){}
+                },
+                {
+                  text: "Save",
+                  callback: function(lastmenu){
+                    var potentialsave = SaveManager.toSavable(state);
+                    PauseMenu.confirm('Save?<div class="fake-menu-item">'+SaveManager.makeEntry(potentialsave)+'</div><i>This will overwrite your oldest save.</i>', "Save",function(){
+                      SaveManager.manualSave(potentialsave, function(works){
+                        if(works){
+                          PauseMenu.toast("Successfully saved.", 1);
+                        }
+                        else{
+                          PauseMenu.alert("Could not save.<br>Try this page outside of private browsing, or use another browser.");
+                        }
+                      });
+                    },lastmenu);
+                  }
+                },
+                {
+                  text: "Load",
+                  callback: function(lastmenu){
+                    var loadMenu = SaveManager.makeLoadMenu();
+                    loadMenu.options.push({
+                      text:"Cancel",
+                      callback:function(){
+                        PauseMenu.transitionTo(lastmenu);
+                      }
+                    });
+                    PauseMenu.transitionTo(loadMenu);
+                  }
+                }
+              ]
+            });
+            // TODO: Pause menu
+            // PauseMenu.
+          }
+        },
+        toast(title,seconds){
+          PauseMenu.transitionTo({
+            title,
+            options: []
+          });
+          setTimeout(function(){
+            PauseMenu.callback(null);
+          }, 1000*seconds)
+        },
+        alert(title,previousmenu){
+          PauseMenu.transitionTo({
+            title,
+            options: [
+              {
+                text:"OK",
+                callback:function(){
+                  PauseMenu.transitionTo(previousmenu);
+                }
+              }
+            ]
+          });
+        },
+        confirm(title,oktext,callback,previousmenu){
+          PauseMenu.transitionTo({
+            title,
+            options: [
+              {
+                text:oktext,
+                callback:callback.bind(null, previousmenu)
+              },
+              {
+                text:"Cancel",
+                callback:function(){
+                  PauseMenu.transitionTo(previousmenu)
+                }
+              }
+            ]
+          });
         }
       }
 
+
       AdvanceController = {
         press(){
-          if(AdvanceController.pressed){ return; }
-          AdvanceController.pressed = true;
-          if(Textbox.skipcallback) {
-            if(Textbox.skippable){
-              Textbox.skip();
-            }
-            else{
-              Textbox.quickly = Math.min(2, Textbox.quickly + 1);
-            }
-          }
-
-          if(Menu.callback){
-            if(Menu.selected!=null){
-              Menu.optionSelect();
+          if(!PauseMenu.showing && !PauseMenu.callback && !Menu.callback) {
+            if(AdvanceController.pressed){ return; }
+            AdvanceController.pressed = true;
+            if(Textbox.skipcallback) {
+              if(Textbox.skippable){
+                Textbox.skip();
+              }
+              else{
+                Textbox.quickly = Math.min(2, Textbox.quickly + 1);
+              }
             }
           }
         },
@@ -886,6 +1336,208 @@
           AdvanceController.pressed = false;
         }
       }
+
+
+
+      SaveManager = {
+        saves:[],
+        fetchFromLocalstorage(){
+          if(localStorage!==undefined){
+            try{
+              if(typeof localStorage.TheTraveller == "string"){
+                  var parsed = JSON.parse(localStorage.TheTraveller);
+                  if(parsed instanceof Array){
+                    SaveManager.saves = parsed;
+                  }
+                  else{
+                    throw "";
+                  }
+                }
+              }
+            catch(e){
+              PauseMenu.alert("Could not read save file.<br>Starting a new game will overwrite existing saves.");
+            }
+          }
+          else{
+            PauseMenu.alert("Saving is not available.<br>Try this page outside of private browsing, or use another browser.");
+          }
+        },
+        sendToLocalstorage(callback){
+          var works = false;
+          if(localStorage!==undefined){
+            try{
+              var strigified = JSON.stringify(SaveManager.saves);
+              localStorage.TheTraveller = strigified;
+              if(localStorage.TheTraveller != strigified){
+                throw "";
+              }
+              works = true;
+              //return true;
+            }
+            catch(e){
+              //return false;
+            }
+          }
+          if(callback){callback(works);}
+          // else{
+          //   PauseMenu.alert("Saving is not available.<br>Try this page outside of private browsing, or use another browser.");
+          // }
+        },
+        makeLoadMenu(){
+          return {
+            title: "Select a save to load.",
+            options: SaveManager.saves.map(
+              SaveManager.makeMenuOption
+            ).concat([
+              {
+                text: "New Game",
+                callback: SaveManager.loadSave.bind(null,SaveManager.newGameSave())
+              }
+            ])
+          }
+        },
+        makeThumbnail(save){
+          return '<div class="thumb" style="background-image:'+Backdrop.makeCSSBackground(globalDefs.image[save.background])+'"></div>';
+        },
+        makeEntry(save){
+          return SaveManager.makeThumbnail(save)+(save.auto?"Autosave":"Save")+" at "+(new Date(save.date||Date.now()).toLocaleString());
+        },
+        makeMenuOption(save){
+          return {
+            text:SaveManager.makeEntry(save),
+            callback: SaveManager.loadSave.bind(null,save)
+          }
+        },
+        autoSave(state){
+          var save = SaveManager.toSavable(state);
+          save.auto = true;
+          if(SaveManager.addAndPruneSaves(save)){
+            console.log("Automatically saving...");
+          }
+          SaveManager.sendToLocalstorage();
+        },
+        manualSave(save, callback){
+          console.log("Manually saving...", save);
+          SaveManager.addAndPruneSaves(save);
+          SaveManager.sendToLocalstorage(callback);
+        },
+        MAX_AUTOSAVES:3,
+        MAX_MANUALSAVES:3,
+        AUTOSAVE_FREQUENCY_MINUTES:1,
+        AUTOSAVE_FREQUENCY_LINES:20,
+        shouldKeepAutosave(save1, save2){
+          return Math.abs(save1.date - save2.date) > SaveManager.AUTOSAVE_FREQUENCY_MINUTES*60*1000 && Math.abs(save1.line - save2.line) > SaveManager.AUTOSAVE_FREQUENCY_LINES;
+        },
+        addAndPruneSaves(save){
+          SaveManager.saves.unshift(save);
+          var numAutosave = 0, secondAutosave = null, numManualsave = 0, keptAutosave = true;
+          for(var i = 0; i < SaveManager.saves.length; i++){
+            var s = SaveManager.saves[i];
+            if(s.auto){
+              numAutosave++;
+              if(numAutosave == 2){
+                secondAutosave = i;
+              }
+              else if(numAutosave == 3){
+                if(!SaveManager.shouldKeepAutosave(s, SaveManager.saves[secondAutosave])){
+                  SaveManager.saves.splice(secondAutosave,1);
+                  numAutosave--;
+                  i--;
+                  keptAutosave = false;
+                }
+              }
+              else if(numAutosave > SaveManager.MAX_AUTOSAVES){
+                SaveManager.saves.splice(i,1);
+                numAutosave--;
+                i--;
+              }
+            }
+            else{
+              numManualsave++;
+              if(numManualsave > SaveManager.MAX_MANUALSAVES){
+                SaveManager.saves.splice(i,1);
+                numManualsave--;
+                i--;
+              }
+            }
+          }
+          return keptAutosave;
+        },
+        newGameSave(){
+          return {line:startLine};
+        },
+        loadSave(save){
+          Scene.transitionTo(Scene.BLACK, function(){
+            mainMenu = false;
+            ScriptFollower.fromSave(save);
+          });
+        },
+        toSavable(state){
+          return {
+            date:Date.now(),
+            background:state.background,
+            midground:state.midground,
+            foreground:state.foreground,
+            line:state.line,
+            variables:state.variables
+          }
+        }
+      }
+
+
+
+      // setTimeout(function(){
+      //   Menu.transitionTo({
+      //         title: "Select a save to load.",
+      //         options: [
+      //           SaveManager.makeMenuOption(state)
+      //         ]
+      //       });
+      //   //PauseMenu.pauseUnpause();
+      // },100);
+
+      // PauseMenu.transitionTo({
+      //   title: "</i>title html</i>",
+      //   options: [
+      //     {
+      //       text:"<b>Save this</b>",
+      //       callback:PauseMenu.confirm.bind(null,"Really Save?","Save",function(){})
+      //     },
+      //     {
+      //       text:"<b>Hmm</b>",
+      //       callback:PauseMenu.alert.bind(null,"Huh",null)
+      //     },
+      //     {
+      //       text:"<b>Hmm</b>",
+      //     },
+      //     {
+      //       text:"<b>Hmm</b>",
+      //     },
+      //     {
+      //       text:"<b>Hmm</b>",
+      //     },
+      //     {
+      //       text:"<b>Hmm</b>",
+      //     },
+      //     {
+      //       text:"<b>Hmm</b>",
+      //       callback:function(){
+      //         PauseMenu.transitionTo({
+      //         title: "</i>title 2 html</i>",
+      //         options: [
+      //           {
+      //             text:"<b>Hmm2 </b>",
+      //             callback:function(){
+
+      //             }
+      //           }
+      //         ]
+      //       },()=>{console.log("done")})
+      //       }
+      //     }
+      //   ]
+      // },()=>{console.log("done")})
+
       // Scene.transitionTo({
       //   defs:{
       //     image:{
@@ -935,7 +1587,7 @@
       // }, 0.5)
       // },1000)
       /*
-      window.onkeydown = function(event){
+      onkeydown = function(event){
         // console.log(event);
         if(
          !event.shiftKey &&
@@ -955,8 +1607,8 @@
       }
       */
 
-      window.onkeydown = function(event){
-        //console.log(event.keyCode);
+      onkeydown = function(event){
+        // console.log(event.code);
         if(
           event.shiftKey ||
           event.ctrlKey ||
@@ -965,37 +1617,65 @@
           ){
           return;
         }
-        if(event.keyCode == 78){ // N
+        if(event.code == "Escape" || event.keyCode == 27 || // ESC
+           event.code == "KeyP"   || event.keyCode == 80 ){ // P
+          // Pause Menu
+          PauseMenu.pauseUnpause();
+        }
+        if(event.code == "KeyN" || event.keyCode == 78){ // N
           if(Textbox.skipcallback) {
             Textbox.skipcallback();
             Textbox.quickly = 2;
           }
         }
         if(
-          event.keyCode == 39 || // Right
-          event.keyCode == 68 || // D
-          event.keyCode == 32 || // Space
-          event.keyCode == 13    // Enter
+          event.code == "ArrowRight" || event.keyCode == 39 || // Right
+          event.code == "KeyD"       || event.keyCode == 68 || // D
+          event.code == "Space"      || event.keyCode == 32 || // Space
+          event.code == "Enter"      || event.keyCode == 13    // Enter
           ){
           AdvanceController.press();
-        }
-        else if(Menu.callback){
-          if(
-            event.keyCode == 38 || // Up
-            event.keyCode == 87    // W
-          ){
-            Menu.optionUp();
+          if(PauseMenu.showing){
+            if(PauseMenu.callback){
+              if(PauseMenu.selected!=null){
+                PauseMenu.optionSelect();
+              }
+            }
           }
-          else if(
-            event.keyCode == 40 || // Down
-            event.keyCode == 83    // S
-          ){
-            Menu.optionDown();
+          else{
+            if(Menu.callback){
+              if(Menu.selected!=null){
+                Menu.optionSelect();
+              }
+            }
           }
         }
+        else if(
+          event.code == "ArrowDown" || event.keyCode == 40 || // Down
+          event.code == "KeyS"      || event.keyCode == 83    // S
+        ){
+          if(PauseMenu.showing){
+            if(PauseMenu.callback) { PauseMenu.optionDown(); }
+          }
+          else{
+            if(Menu.callback) { Menu.optionDown(); }
+          }
+        }
+        else if(
+          event.code == "ArrowUp" || event.keyCode == 38 || // Up
+          event.code == "KeyW"    || event.keyCode == 87    // W
+        ){
+          if(PauseMenu.showing){
+            if(PauseMenu.callback) { PauseMenu.optionUp(); }
+          }
+          else{
+            if(Menu.callback) { Menu.optionUp(); }
+          }
+        }
+
       }
 
-      window.onkeyup = function(event){
+      onkeyup = function(event){
         // console.log(event);
         if(
           event.shiftKey ||
@@ -1006,10 +1686,10 @@
           return;
         }
         if(
-          event.keyCode == 39 || // Right
-          event.keyCode == 68 || // D
-          event.keyCode == 32 || // Space
-          event.keyCode == 13    // Enter
+          event.code == "ArrowRight" || event.keyCode == 39 || // Right
+          event.code == "KeyD"       || event.keyCode == 68 || // D
+          event.code == "Space"      || event.keyCode == 32 || // Space
+          event.code == "Enter"      || event.keyCode == 13    // Enter
           ){
            AdvanceController.release();
         }

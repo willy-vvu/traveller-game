@@ -71,7 +71,7 @@ image dad worried = "dad_worried.png"
 image dad angry = "dad_angry.png"
 image dad neutral = "dad_neutral.png"
 
-image son neutral = "boy_neutral.png"
+image son neutral = "son_neutral.png"
 image son angry = "son_angry.png"
 
 # Declare characters used by this game. The color argument colorizes the
@@ -98,6 +98,9 @@ label start:
 
 scene bg earth-day
 with fade
+
+# show dad happy
+# show son neutral
 
 "I walk until I can no longer feel my feet."
 "My ankles swell with the strain of my belly."
@@ -962,7 +965,7 @@ hide calypso
 "It flickers with the sound. I adjust the frequency."
 "FZZZZZSSS IS THE LAST CALL. WE REPEAT, THIS IS THE LAST CALL."
 "I recognize that voice."
-"It's that solder on the bridge. I picture his face: his wide and round cheeks, his freckled face. He always looks so nervous around me."
+"It's that soldier on the bridge. I picture his face: his wide and round cheeks, his freckled face. He always looks so nervous around me."
 "It's the ark."
 "THIS IS THE LAST CALL FOR SCOUTS SENT THROUGH THE G848 ASTEROID CLUSTER."
 "IF YOU READ THIS MESSAGE, PLEASE RESPOND. WE WILL SEND ASSISTANCE. PLEASE RESPOND."
@@ -5076,22 +5079,22 @@ pause(3.0)
 "But she's all alone."
 "She's alone, and so am I."
 menu:
-   "I go to her.":
-     "I pick myself up."
-     "I put one foot forward..."
-     "And another."
-     "I reach her bedside."
-     "I reach out for her hand."
-     t "Penelope..."
-     t "Penelope, I'm back."
-     jump end
-   "I leave.":
-     "I pick myself up."
-     "I put one foot forward..."
-     "And another."
-     "I turn from her."
-     "I walk until I can no longer feel my feet."
-     jump end
+  "I go to her.":
+    "I pick myself up."
+    "I put one foot forward..."
+    "And another."
+    "I reach her bedside."
+    "I reach out for her hand."
+    t "Penelope..."
+    t "Penelope, I'm back."
+    jump end
+  "I leave.":
+    "I pick myself up."
+    "I put one foot forward..."
+    "And another."
+    "I turn from her."
+    "I walk until I can no longer feel my feet."
+    jump end
 
 label end:
 scene bg black
