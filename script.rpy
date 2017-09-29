@@ -2,22 +2,43 @@
 
 # declare images
 
-image bg jungle-day = "jungle.png"
-image bg ark = "ark.png"
-image bg calypso-day = "calypso-day.png"
-image bg calypso-night = "calypso-night.png"
-image bg earth-day = "earth-day.png"
-image bg earth-night = "earth-night.png"
-image bg cliffs = "cliffs.png"
-image bg space = "space.png"
-image bg mountains = "mountains.png"
-image bg shuttle = "shuttle.png"
-image bg calypso-island = "calypso-island.png"
-image bg title-page = "title-page.png"
-image bg jungle-night = "jungle-night.png"
-image bg black = "black.png"
-image bg field-day = "field-day.png"
-image bg field-night = "field-night.png"
+music theme1 = "Traveller Theme 1.mp3"
+music theme1g = "Traveller Theme 1 (just guitar).mp3"
+music arkdrone = "Ark Drone pt1.mp3"
+music arkdrone2 = "Ark Drone pt2.mp3"
+music gh1 = "Green Hill Zone Pt1.mp3"
+music gh2 = "Green Hill Zone Pt2.mp3"
+
+image bg credits1 = "credits1.jpg"
+image bg credits2 = "credits2.jpg"
+image bg credits3 = "credits3.jpg"
+image bg credits4 = "credits4.jpg"
+image bg jungle-day = "jungle.jpg"
+image bg ark = "ark.jpg"
+image bg calypso-day = "calypso-day.jpg"
+image bg calypso-night = "calypso-night.jpg"
+image bg earth-day = "earth-day.jpg"
+image bg earth-night = "earth-night.jpg"
+image bg cliffs = "cliffs.jpg"
+image bg space = "space.jpg"
+image bg mountains = "mountains.jpg"
+image bg shuttle = "shuttle.jpg"
+image bg calypso-island = "calypso-island.jpg"
+image bg title-page = "main-title.jpg"
+image bg jungle-night = "jungle-night.jpg"
+image bg black = "black.jpg"
+image bg field-day = "field-day.jpg"
+image bg field-night = "field-night.jpg"
+image bg cave = "cave.jpg"
+image bg greenplanet = "greenplanet.jpg"
+image bg blueplanet = "blueplanet.jpg"
+image bg orangeplanet = "orangeplanet.jpg"
+image bg finalplanet = "finalplanet.jpg"
+image bg finaltown = "finaltown.jpg"
+image bg memorial = "memorial.jpg"
+image bg grey = "grey.jpg"
+image bg map = "map.jpg"
+
 
 image penelope neutral = "penelope_neutral.png"
 image penelope sad = "penelope_sad.png"
@@ -25,6 +46,10 @@ image penelope angry = "penelope_angry.png"
 image penelope confused = "penelope_confused.png"
 image penelope happy = "penelope_happy.png"
 image penelope delighted = "penelope_delighted.png"
+image penelope neutral middle = "penelope_neutral-middle.png"
+image penelope adolescent = "penelope_adolescent.png"
+image penelope adult = "penelope_adult.png"
+image penelope elder = "penelope_elder.png"
 
 image calypso neutral = "calypso_neutral.png"
 image calypso sad = "calypso_sad.png"
@@ -45,18 +70,21 @@ image hector young happy = "hector_younghappy.png"
 image hector young sad = "hector_youngsad.png"
 image hector young angry = "hector_youngangry.png"
 image hector young surprised = "hector_youngsurprised.png"
+image hector young concerned = "hector_youngconcerned.png"
 
 image hector mid neutral = "hector_midneutral.png"
 image hector mid happy = "hector_midhappy.png"
 image hector mid sad = "hector_midsad.png"
 image hector mid angry = "hector_midangry.png"
 image hector mid surprised = "hector_midsurprised.png"
+image hector mid concerned = "hector_midconcerned.png"
 
 image hector old neutral = "hector_oldneutral.png"
 image hector old happy = "hector_oldhappy.png"
 image hector old sad = "hector_oldsad.png"
 image hector old angry = "hector_oldangry.png"
 image hector old surprised = "hector_oldsurprised.png"
+image hector old concerned = "hector_oldconcerned.png"
 
 image friend dark = "friend_dark.png"
 image friend light = "friend_light.png"
@@ -88,19 +116,19 @@ define h = Character("Hector")
 define l = Character("Leader")
 define w = Character("Warrior")
 define d = Character("Father")
-define b = Character("Son")
+define b = Character("Child")
 define g = Character("Girl")
+define i = Character("Interviewer")
 
 
 # The game starts here.
 
 label start:
 
+play theme1
+
 scene bg earth-day
 with fade
-
-# show dad happy
-# show son neutral
 
 "I walk until I can no longer feel my feet."
 "My ankles swell with the strain of my belly."
@@ -245,7 +273,6 @@ scene bg earth-night
 "I hold her tightly and run for the exit."
 
 "The doors close a few minutes after we make it in."
-
 
 "The commander worries about the enemy forces."
 "We are making ourselves a target as long as we idle here. We can't sacrifice ourselves for a few stragglers."
@@ -444,6 +471,8 @@ else:
 
 label post_truth1:
 
+scene bg bridge
+
 "Officers salute me as I pass through the doors into the bridge."
 "I nod to them. They look concerned about something."
 "The bridge is dome-shaped, the entire ceiling made of glass."
@@ -454,6 +483,7 @@ label post_truth1:
 "I had them bring a couch in here when we came aboard, and this is where I put her, with the promise I won't take long."
 "She's nervous at first, but when I set up a game to play on one of the screens while I'm gone, she settles down."
 "The commander stands at the center of the room, staring at some charts at her station. Before she notices me, I see concern clouding her face - but as soon as she sees me, she hides it."
+show commander
 com "Your clearance came through. Congratulations, Lieutenant."
 t "Thanks."
 com "I've got some news you'll want to hear."
@@ -472,18 +502,19 @@ com "Are you sure? We don't have many poeple, but there are others..."
 t "What are the readings on this planet?"
 "The commander looks around at the other officers, then leans in close to me."
 com "I don't want to get people's hopes up, but..."
-"they're good. Really good. We're reading fresh water, warm temperatures, oxygen... this could be home."
+com "they're good. Really good. We're reading fresh water, warm temperatures, oxygen... this could be home."
 t "Then of course I'll go."
 com "Thank you."
 com "Really."
 com "The first scouting party will be leaving this evening. I understand if you want to take more time..."
 t "It's alright."
-"I don't want to throw off the schedule."
+t "I don't want to throw off the schedule."
 com "Alright."
 com "I'll assign someone to take care of Penelope. If we're lucky you should only be a day or two. If you get caught up in the debris, come straight back."
 com "With at least six planets within our range, we can afford to wait a few months. We have the resources."
 t "I understand, commander. I'll be careful."
 com "Be safe, lieutenant. I'll have the scouting ship prepared for you."
+hide commander
 "I return to Penelope. It's good timing - she's almost defeated the boss."
 "She doesn't seem to notice me. Her fingers type out an angry rhythm of attacks, each of which causes the boss to flinch."
 "Finally, he dies in an explosion of blues and purples. Penelope pumps her fists in the air."
@@ -496,6 +527,7 @@ t "Really?"
 "She nods vigorously."
 "I haven't beaten that boss in hard mode."
 t "Guh... good job!"
+scene bg ark
 "She still has this ridiculous grin on her face as we walk down the hallway."
 "I want to tell her about my mission, but she's chattering on about the game."
 p "And then I used the rolling attack, only I jumped behind him so he couldn't get me."
@@ -1094,7 +1126,7 @@ if calypso1:
       "What kind of a mother am I?"
 else:
    "I'd be giving up on the ark... but on the mistakes, too. All the terrible things that have happened to me..."
-   "I could leave them behind."
+   "I could leave tehm behind."
    if truth:
       "And Penelope. I'd be leaving her, too."
       "But what place do I have in her life now, anyways? A mother who brought her into this, only to abandon her?"
@@ -1184,7 +1216,7 @@ menu calypso2_menu:
        "I never forget Penelope. I don't think she ever forgets me..."
        "But one night, I dream of a future when a ship falls from the sky, and when I open the stasis pod, the face inside carries traces of her, traces that echo across years or generations or millenia."
        "I can't be sure... now that I think of it, I don't really remember what time feels like."
-jump end
+jump endcredits
 
 label calypso_end:
 
@@ -1258,16 +1290,16 @@ label space1:
 
 menu:
    "The decision seems arbitrary, but I have to make it now. Where do I go first?"
-   "The green dot.":
-     $ green1 = True
-     $ orange1 = False
-     $ blue1 = False
-     jump green1
    "The orange dot.":
      $ orange1 = True
      $ blue1 = False
      $ green1 = False
      jump orange1
+   "The green dot.":
+     $ green1 = True
+     $ orange1 = False
+     $ blue1 = False
+     jump green1
    "The blue dot.":
      $ blue1 = True
      $ orange1 = False
@@ -1276,6 +1308,12 @@ menu:
 label after_menu4:
 
 label green1:
+
+$ saferoom = False
+$ playroom = False
+$ badspeech = False
+$ goodspeech = False
+
 
 "I type in the coordinates for the green planet."
 "It looks like it would harbor the most similar climate to Earth, given the distance to its sun..."
@@ -1292,56 +1330,11 @@ label green1:
 "Is that planet Earth? Is it Calypso? Or is it a place I'll never find?"
 "The thought haunts me as I drift away."
 
-scene bg black
-with Dissolve(2.0)
+jump calypsodream
 
-p "Mom?"
-p "Do you know who my father was?"
-p "Can you tell me about him?"
-if truth:
-   if calypso1:
-      t "Your father..."
-      t "I don't know they'd want you to call them that."
-      t "They told me to forget."
-      t "I have to forget."
-   else:
-      t "Your father..."
-      t "I don't know they'd want you to call them that."
-      t "They told me to forget..."
-      t "But I can't."
-      t "I'm so sorry, Penelope. But I can't."
+label green1_postdream:
 
-else:
-   if calypso1:
-      t "Your father..."
-      t "Your father is dead."
-      t "They told me to forget."
-      t "I have to forget."
-   else:
-      t "Your father..."
-      t "Your father is dead."
-      t "They told me to forget..."
-      t "But I can't."
-      t "I'm so sorry, Penelope. But I can't."
-p "Why do we have to forget?"
-p "Why can't we remember things, mom?"
-p "I forget the taste of coriander."
-p "I forget what the flowers smelled like."
-p "I forget what you looked like."
-p "Why do I have to forget?"
-p "Why did we never take a photo together?"
-p "Mom..."
-"I hold Penelope's face in my hands."
-if truth:
-   "To help her."
-else:
-   "To comfort her."
-"But she has no face."
-"She has no face because I have forgotten her face."
-"I have forgotten her and she has forgotten me, and she slips from my hands and becomes the waters of Calypso, and they pour over me and fill my ship until everything is dark."
-
-scene bg space
-with Dissolve(2.0)
+scene bg greenplanet
 
 "I wake up a little at a time, and then all at once. I gasp sharply and open my eyes with a start."
 "I feel as if I've almost drowned, but my body isn't starved for air."
@@ -1359,7 +1352,6 @@ with Dissolve(2.0)
 "But I'm low on food, and my energy core's readings are fluctuating dangerously."
 "It needs a rest. So I have to land."
 "I pick a spot that looks as clear as possible of the cities and structures that litter the planet's surface."
-"The ship makes a smooth landing just near what looks like a forest."
 
 scene bg field-day
 with Dissolve(2.0)
@@ -1542,7 +1534,7 @@ s "If you'd rather be alone for a few moments, you can use my tent."
 "The scout stops by the dining tent. I wait outside, and they emerge with two bowls of food."
 "They're reminiscent of rice bowls: meat roasted in a tangy sauce on some sort of grain, topped with what looks like grass but smells a little bit like garlic."
 "I take one and try to stop my stomach from rumbling - though come to think of it, they probably wouldn't understand the meaning."
-"We walk up the hill after that and find ourselves at the edge of the forest."
+"We walk up the hill after that and find ourselves at the edge of a forest of tall grass."
 "The scout sets their tent up here, far from the others."
 "It takes only a few minutes, and when it's done, it's larger than I expected, with enough room for us to sit comfortably away from the two makeshift beds they've set up."
 t "Is it considered rude to pitch your tent away from the others?"
@@ -1845,13 +1837,11 @@ jump escapeatdawn
 label escapeatdawn:
 
 scene bg black
-with Dissolve(2.0)
 
 "I wake up to someone shaking me."
 s "Come on! We have to go!"
 
 scene bg field-night
-with Dissolve(2.0)
 
 show scout suspicious
 
@@ -1945,6 +1935,11 @@ jump space2
 
 label orange1:
 
+$ simplicity = False
+$ danger = False
+$ badspeech = False
+$ goodspeech = False
+
 "I punch in the coordinates for the orange planet."
 "A warmer planet might be more promising for settlement..."
 "It's a slim chance, but I'll have to take it."
@@ -1959,56 +1954,11 @@ label orange1:
 "Even if we had to go it alone, I would have made sure we built our home somewhere she liked."
 "The thought lingers with me as I drift into stasis."
 
-scene bg black
-with Dissolve(2.0)
+jump calypsodream
 
-p "Mom?"
-p "Do you know who my father was?"
-p "Can you tell me about him?"
-if truth:
-   if calypso1:
-      t "Your father..."
-      t "I don't know they'd want you to call them that."
-      t "They told me to forget."
-      t "I have to forget."
-   else:
-      t "Your father..."
-      t "I don't know they'd want you to call them that."
-      t "They told me to forget..."
-      t "But I can't."
-      t "I'm so sorry, Penelope. But I can't."
+label orange1_postdream:
 
-else:
-   if calypso1:
-      t "Your father..."
-      t "Your father is dead."
-      t "They told me to forget."
-      t "I have to forget."
-   else:
-      t "Your father..."
-      t "Your father is dead."
-      t "They told me to forget..."
-      t "But I can't."
-      t "I'm so sorry, Penelope. But I can't."
-p "Why do we have to forget?"
-p "Why can't we remember things, mom?"
-p "I forget the taste of coriander."
-p "I forget what the flowers smelled like."
-p "I forget what you looked like."
-p "Why do I have to forget?"
-p "Why did we never take a photo together?"
-p "Mom..."
-"I hold Penelope's face in my hands."
-if truth:
-   "To help her."
-else:
-   "To comfort her."
-"But she has no face."
-"She has no face because I have forgotten her face."
-"I have forgotten her and she has forgotten me, and she slips from my hands and becomes the waters of Calypso, and they pour over me and fill my ship until everything is dark."
-
-scene bg space
-with Dissolve(2.0)
+scene bg orangeplanet
 
 "I wake up to a red glow."
 "Is it sunlight?"
@@ -2062,7 +2012,7 @@ t "Penelope!"
 "She turns to look at me..."
 "And she's not Penelope."
 
-show boy neutral
+show son neutral
 
 "The creature is as surprised to see me as I am to see it."
 "It lets out a shrill scream."
@@ -2072,7 +2022,7 @@ show boy neutral
 "It enters the cave and scuttles towards me. Its legs are covered by a long skirt, but I can see at least eight of them."
 "It strides past me and picks up the smaller one, placing it down by its feet."
 
-show dad angry behind boy
+show dad angry behind son
 
 u "We've claimed this cave for our own. Whatever you are, you're not welcome here."
 "Somehow, my translator manages to parse out what sound like whistles and trills into something I can understand."
@@ -2080,10 +2030,10 @@ t "I don't mean to claim it. I'm sorry."
 t "I was just looking for refuge from the shade."
 u "Are you a surfacer? Is that what you look like?"
 u "You don't look like you'd survive out there."
-t "Yes - I mean, no, I wouldn't. I'm not a surfacer. I'm a traveller."
+t "Yes - I mean, no, I wouldn't, not for long. I'm not a surfacer. I'm a traveller."
 t "I'm from space."
 t "I've come looking for my people. I was separated from them... I just want to know if they're here."
-u "Well, they're not."
+u "They're not."
 t "...Alright. I'm sorry for inconveniencing you."
 "I look at the smaller one again."
 t "Is that your child?"
@@ -2091,199 +2041,221 @@ t "My child is with the others of my people."
 t "I'm looking for her too."
 t "Are you its mother?"
 show dad neutral
-d "...I'm his father. His mother's the Queen."
-t "Oh, wow. Does that make him a prince?"
-"They stare blankly at me."
-"It takes me a moment to realize the confusion - they don't mean royalty."
-"The translator was thinking of ants."
-t "I'm sorry. I just... just nevermind."
-pause(1.0)
-show dad happy
-d "Hear that, son? You're a prince! Ha!"
-b "A prince."
-d "That would make your sister a princess. Would you get her for me? I think she's still outside."
-hide boy
-d "How long will you be staying?"
-d "I should have enough dinner for you for a week, if need be."
-t "What?"
-t "I mean - if I'm unwelcome I can leave. I can stay in my ship -"
-d "Not at all. Surfacers aren't welcome, but travellers are."
-d "Besides, we're just making a home out here. I could use the help."
-d "You can build the furniture, make our meals and get things in order."
-d "Do those sound like fair terms?"
-t "Terms?"
-d "Yes. For your stay."
-"Sometimes I wish the translator would do more work for me..."
-t "I should only stay a couple of nights. Once my shuttle's back in order, I should get back to space."
-d "Nonsense! You can stay the week. Fair terms for both parties - sounds like we've got ourselves a hospitality contract."
-"Fair terms... I frown, but my expression doesn't seem to translate well either."
-hide dad
-"Nonetheless, I follow the father's instructions and spend the rest of the day cleaning up the cave."
-"The father is courteous towards me, but not very talkative - he seems focused on a dining table he's building, with benches long and narrow enough to accommodate all their legs."
-"The chlidren stare at me from across the room, but they're shy. I catch the daughter telling the son that my nose is scary."
-"They agree to take on dinner duties for tonight - which is a relief, since I have no idea what is even edible on this planet."
-"They seem unbothered by nakedness - the father takes off his skirts when he's inside - so I take a quick break before dinner to soak in the water."
-"It's cool and clear. If all I had to do was sit here, this might even be a pleasant planet to live on."
-"I get dressed again - much to the son's confusion - when we're called for dinner."
-show dad neutral
-show son neutral behind dad
-d "This is our first night at our new table."
-d "What do we say at the table? Maybe our Prince knows something about that?"
-b "We stomp on the dirt for refusing us, and we taunt it for taking what we have."
-"In unison, they make a high-pitched buzzing noise. The daughter looks a bit mad that I don't partake in this part of the pre-dining ritual."
-"I feel like my translator is out of its depth here."
-d "Excellent. Now let's dig in."
-"I try to tell myself that the slabs of meat in front of me aren't giant worms, but the resemblance is truly uncanny."
-"When I take a bite, though, I find them rather tasty."
-"Sort of like fish, but with a deep, savory and salty flavor."
-"They serve it with what looks like a stick from a shrub. After a bite of that, I decide I've had enough and focus on finishing my worm."
-d "So why would anyone go to space?"
-d "It seems completely pointless. And uncomfortable."
-b "Uncomfortable!"
-t "Our planet was destroyed."
-t "We had to escape. We're looking for a new home."
-d "Huh."
-d "Well, you can stay here. You'd have to do a lot of work for a daughter as well, though."
-t "I'm not... I'm really - "
-t "I mean... we'll figure out the terms of the contract later."
-t "For now I just have to find her."
-d "Understood."
-d "And what do you think of our home?"
-t "It's cozy. Comfortable."
-show dad happy
-d "You think so?"
-d "Listen. You're our guest. If you're under contract with us, you have to contribute something to our home."
-d "What is your home like? Maybe we can build something like it."
-"My first instinct is to describe the ark, but the thought of that hurts for some reason."
-"And I don't want to admit that I don't have a home right now."
-menu:
-   "But there are other homes I could describe..."
-   "Like my childhood home.":
-      $ childhome = True
-      $ newhome = False
-      t "My home is in the countryside, just near the mountains."
-      t "There are farms and fields nearby, and a small town where I went to school."
-      t "We have a garden around back with fruits and vegetables."
-      t "The kitchen is really open, with a view of the outside. And there's a big fire pit where we have barbeques when it's warm."
-      t "The house always smells like food."
-      d "You eat your food outside?"
-      d "Doesn't it get too hot?"
-      t "Not really. We usually ate - er, {i}eat{/i} outside at night."
-      d "And it doesn't get too cold?"
-      t "It's not like here. It's very pleasant in the evenings."
-      d "I see."
-   "Like my dream home.":
-      $ newhome = True
-      $ childhome = False
-      t "My home is on a hill, overlooking a big valley."
-      t "It's not too big - just enough for Penelope and I - but there's a deck outside where we can have people over or just sit outside if we want to."
-      t "It's near the beach, too. But we have a little pool for hot days."
-      d "What's a deck? And what do you do with a pool?"
-      t "A pool is like this lake, but it's portable, so you can take it outside."
-      t "Usually you just sit in it, or put your feet in. When it's warm, anyways."
-      t "And a deck is like an outcropping made of wood that you keep outside."
-      d "It doesn't get too cold? Or too hot?"
-      d "Wouldn't the wood dry out?"
-      t "Not if you keep it in good shape."
-      t "And our planet... it's not this. It's not hot like this, and not too cold at night either."
-      d "Hmm... alright."
-"We finish our food."
-d "Was that good, kids?"
-b "Yeah!"
-"The kids kick the dirt in celebration. The dad does the same."
-"I poke at it with my foot, but it just doesn't have the same effect with only one leg."
-d "Now that dinner's out of the way, how about dessert?"
-b "YEAH!!!"
-"He brings out a big bowl of a sweet, viscous liquid."
-"All at once, they stick their feelers into it and start slurping it up, leaving me to use my fingers."
-"It looks a bit like honey, but it tastes creamy and tangy and a little spicy all at once."
-"It occurs to me that it's not this family's differences that are confusing me -"
-"It's how similar they are."
-if childhome:
-   "I think about eating ice cream on the porch with my grandparents when I was little."
-   "My parents never gave me extra dessert, but after I went to live with grandma and grandpa, they couldn't help spoiling me even though they were supposed to be my primary guardians."
-if newhome:
-   "I imagine Penelope sitting here, slurping up the honey along with these kids."
-   "She always did like sweet foods."
-   "When I see her again, wherever we end up, I'll find her something as delicious as this, and we'll eat it together."
-   "Maybe on a deck."
-"As soon as we finish the dessert, it's off to bed for the kids - and for me, unexpectedly."
-"The dessert had some sort of sedative in it."
-"I barely make it to my designated spot in the corner before I'm out like a light."
+d "...I'm her father. Her mother is gone."
+t "I'm sorry."
+"Another shrill sound echoes from further inside the cave."
 
-scene bg black
-with Dissolve(2.0)
+hide dad
+
+"The father scuttles off into the dark, leaving me with the child."
+"I look around the cave."
+"What I can see of it is sparse. A pile of what looks like food lies in a corner, but there's no refrigeration."
+"A scant few scraps of cloth are neatly folded in another corner."
+"Outside, the sun is so bright that I have to squint when I look out the entrance of the cave."
+t "Do you really live here? Your whole family?"
+b "..."
+"The child stares blankly at me."
+"The silence between us is palpably awkward."
+"Unable to find the words to cut through the tension, I walk to the mouth of the cave and crouch."
+"Gingerly, I reach out into the sun and lower my fingers to the ground."
+"The sand is white hot, like a stove. I recoil in pain."
+"I examine my fingers. They seem unburnt."
+"When I turn back to the cave, hoping to soothe my hand in the lake, the child has joined me at the cave's entrance."
+"She's still giving me that blank stare... but then, her eyes still firmly on me, she lifts one of her hands up and places it in mine."
+"It's cool, smooth and tough to the touch, like a soft exoskeleton. It has no wrinkles or imperfections - only tiny pores that look like they might secrete some sort of fluid."
+"I'm surprised at how human it looks. And it's so small."
+"The palm of the hand, though, is dappled with a deep orange, the pores swollen and bumpy. I'm completely unfamiliar with her physiology, but even I can tell that it's badly burned."
+"It must be so painful."
+t "Can I treat it? I have some first-aid supplies in my ship. Or I could bandage it..."
+"She slips her hand out of mine, gathers up her skirts and lifts them to reveal her legs: at least a dozen of them, their tiny, clawed feet clutching the sand under us."
+"It's hard to see in this light - and she only lifts her skirts up a little - but I can see from here the same deep orange bruises, the same swelling, and the sheen of some kind of fluid around the worst parts of it. Pus? It could be something else, of course, but..."
+"She fidgets with the feet that are the most badly burned, lifting them up one by one to get a moment away from the sun. One of the feet is almost brown."
+t "You're sensitive to the heat."
+t "And yet you still go out..."
+
+show dad neutral behind boy
+
+d "There's so little food here that we have to go out most days to forage."
+t "Couldn't you go out at night?"
+d "We could... but so do most of the surfacers that roam the mountains."
+d "We fare much better against the sun."
+t "How long have you been living out here?"
+d "Since we came up, it's been..."
+b "Twenty days."
+d "...Yes. This is our twenty-first."
+"I notice for the first time another creature behind the father. It's much smaller than its sister. Its head is so big that it looks like it should fall over from the weight of it."
+"It's cowering behind a rock right now, staring at me with the same big eyes as its father and sister."
+t "Where were you before?"
+d "Below."
+t "And are you alone here? Or..."
+d "The others are still below. We came up alone."
+t "So what happened?"
+
+show dad sad
+
+"He looks away. It's clear he doesn't want to answer."
+"I wonder what I would say if he asked me why I left Earth..."
+"I decide not to press the subject."
+"Instead, I look at the child next to him. She's still watching me, her eyes intent and unblinking... and somehow purposeful."
+"What I thought before was a blank stare is all of a sudden bursting with emotion. But not just that -"
+"In her eyes I see her memories. I remember them too. They come to me as easily as memories of Earth."
+"I see a vast underground city, the walls glowing with some sort of luminescent rock."
+"I see thousands of their people working in unison. Memories, emotions, orders, ideas... they move between them like glances in a crowded room. In the dark, children dream the same dreams."
+if calypso1:
+   "It's unsettling... but somehow powerful."
+if calypso2:
+   "It's incredible... but somehow unsettling."
+"I remember mother's nervousness, father's confusion. I remember thousands of glances conveying shame, and it becomes like a weight, heavier and heavier until I can't bear it."
+"There's no trial. There's no due process. I don't even know the crime. This system shouldn't be familiar to me. How do I know it so well?"
+"The family packs their things. The children leave the dream in the middle, leave the others to sleep as we climb through crevices and cracks in the caverns."
+"The shame fades as we near the surface... but so does the dream. Now we sleep alone, my little brother and I. Two against the terrible force of our unconscious minds."
+"We emerge from the cave and fall into the sand... and my flesh cooks inside my skin."
+"Nothing has ever hurt so badly or shone so brightly."
+
+"I close my eyes."
+"I think of Penelope, of the Ark, of our home on Earth. Of coriander and flower beds and damp soil between my fingers."
+"I'm me again..."
+"But that child's memories have settled into my head. The contradiction should be making my head spin, but somehow it doesn't."
+"I lift my head and look at the father."
+t "Let me help you."
+
+show dad concerned
+
+"The words come out of my mouth before I can fully think them over."
+"My ship won't be getting off the ground until tomorrow at least..."
+"And the memory of those burns still hurts, even if my skin has never felt the pain."
+
+d "We don't need your help."
+
+show son angry
+
+b "Yes we do."
+"The father looks surprised to hear his daughter speak... but her eyes don't leave me. I look at her, but I keep finding myself looking away, worried she'll take me away into another memory."
+b "I showed her."
+b "She sees us now."
+
+show dad angry
+
+d "You did what--?"
+t "It's alright. It's already done."
+t "I understand--I mean, I remember."
+menu room_menu:
+   t "And I know what it's like..."
+   "...to want to keep your family safe.":
+      $ saferoom = True
+      $ playroom = False
+      jump saferoom_resolve
+   "...to want a better future for your children.":
+      $ saferoom = False
+      $ playroom = True
+      jump playroom_resolve
+
+label saferoom_resolve:
+t "The things I've done to keep my daughter from harm... the things I would do..."
+t "I never would have thought I'd have the strength in me to do them."
+t "But I found it in me when the time came. As you did."
+t "You've been so strong for them... but you can't make this place safe without my help."
+t "Be vulnerable for them now, and let me lend you my strength."
+t "I promise I'll do everything I can to help you."
+jump room_resolve
+
+label playroom_resolve:
+t "All I want is to make a future where my daughter can be happier than I was."
+t "The things I'd do for that future... the things I have done... I never imagined I'd have the strength to do them."
+t "But I found that strength in the end. As you did."
+t "You've given up so much for that future..."
+t "Let me shoulder some of that burden for you. Let me lend you my strength."
+t "And I swear I'll do everything I can to help you."
+jump room_resolve
+
+label room_resolve:
+show dad sad
+d "...What can you do?"
+"His directness catches me off-guard, almost as much as the complexity I now understand in his expression."
+"He looks defeated... but also hopeful."
+t "Whatever you need me to."
 
 scene bg mountains
-with Dissolve(2.0)
-
-"I feel obligated to stay out the week. In the grander scheme of things, a few days shouldn't make a difference."
-"I don't know how homes are supposed to look for this family, but by the time my contract is up, I think this one looks pretty damn good."
-if childhome:
-   "I'm surprised when the dad remembers the fire pit from my story and asks for help building one the day before I leave."
-   "We dig out a hole and organize some stones around it."
-   "That night, before it gets too cold, I set up a fire and try my hand at roasting worms."
-   "They don't turn out half-bad, which is saying something - I was always a terrible cook."
-   "The kids dance around the fire and poke at it with sticks while the dad and I talk more about designing his home."
-   "This is nice - almost a little suburban."
-if newhome:
-   "I'm surprised when, a couple days before I'm scheduled to leave, the dad comes in carrying a huge, long tree, asking me to cut it into a deck for him."
-   "I consider explaining that it doesn't work like that, but I give up before I start."
-   "Instead, I help him cut the log into long, thin strips, and find the flattest piece of land nearby to lay them flat together."
-   "It's as good a deck as I'll make in a day."
-   "The next day, the father heads deeper into the cave and emerges with a few sheets of plastic."
-   "It takes almost the whole day, but we dig out a section of earth a couple feet deep, line it with the plastic, and fill it with water from the cave, bucket by bucket."
-   "By almost the end of the day, we have a deck and a pool."
-   "We eat dessert in the sun, my feet dipped in the water while the kids play in it."
-   "It's nice - almost a little suburban."
-"I wake up the next morning with the son curled up next to me. And when I get ready to leave, he throws a tantrum."
-
-show boy angry
-b "You're not leaving! You can't leave!"
-if childhome:
-   "He kicks in the fire pit until the hole we dug is almost gone."
-if newhome:
-   "He pulls the plastic sheet out, spilling water all over the deck."
-show dad angry behind boy
-d "She fulfilled her contract. It's time for her to go."
-b "You {i}never{/i} let me have nice things!"
-t "Hey, it's alright. You still have your dad."
-b "He's not enough!!"
-t "Well... maybe I'll be back someday. If I find Penelope, maybe I'll bring her too."
-pause(1.0)
-show boy neutral
-b "Really?"
-b "You'll bring her?"
-b "Is it a contract??"
-t "I, uh..."
-"I know how unflappable this family is. It's not worth the fight."
-t "Sure. It's a contract."
-"The boy jumps for joy, quite the feat with eight legs."
-"He scuttles back to his sister and father and hugs them."
+"Over the next several days, I spend the mornings and evenings - and as much of the midday sun as I can stand - scouring the hills for supplies and resources."
+"I bring everything I can carry, from small stones and plants to the dried-out trunks of giant, smooth cacti - back to the cave. I bring the things I have trouble carrying, like small boulders, in stages, pushing them a little bit at a time before returning with other things to the cave for breaks."
+"When we've gathered enough, we begin plans for construction."
+"The family won't stand a chance of survival without a reliable food source, so we plan to build one. Hollowed out and cut in half lengthwise, the cactus trunks make for excellent plant pots, and the tube-like structures that line the insides work as a kind of natural water distribution system."
+"We build a tube out of hollowed-out tree branches that travels from the mouth of the cave down to the plants, so that the plants can be watered without anyone needing to travel outside."
+"The daughter teaches me how to forage for seeds one early morning before the sand heats up, and I use her technique to find them enough seeds for a decently-sized garden."
+"Meanwhile, the family sharpens down the stones into sharp edges, which I use - along with ropes made from a long, spindly plant - to fashion rudimentary traps for any small animals enticed by the gardens. In the evenings and early mornings, the family can reset the traps and make breakfast from what they find inside."
+"We fall into an almost unsettlingly easy workflow. It takes me some time to notice that this is more than just friendly rapport: the family is sharing memories, thoughts and ideas with me, inspiring me to take certain paths and look for the most crucial supplies."
+"I'm not quite certain what connects our minds - pheromones, perhaps, or maybe electrical signals - but whatever it is, it doesn't allow me to communicate with them in the same way. I can only listen, and respond when I'm within earshot."
+"This frustrates the children, but their father seems resigned to it. Eventually he opens up to me, asking me questions about my people, the Ark, and my home on Earth."
+if saferoom:
+   "I tell him about the military base where Penelope spent the first few years of her life. Our room had such tiny windows that I had to stand on the tips of my toes to see outside. Sometimes I'd lift Penelope up so she could look out, and she'd start crying when I put her down."
+   "It was safe, of course, but it was no way to live. When I get back to the ark, I'll build her a house like a castle: safe but beautiful, and beautiful in its safety."
+   "I feel my heartbeat quicken. I need to get back to her."
+   "He hears my heartbeat, too - I can see his expression change as the anxiety washes over me."
+if playroom:
+   "I tell him about the walks Penelope and I used to take. She became quite the walker back on Earth - she had even more energy for it than I did. She'd insist on walking all day and as far away from the base as we were allowed. Even if we couldn't leave the base,
+she'd lead me in long, brisk circles around and around the perimeter, inspecting every crack in the walls and every flower in the flower beds."
+   "She barely had anything to do at the base, especially when I was gone on missions. It's no wonder walking excited her so much."
+   "I feel a pang of guilt. When I get back to the ark, I'll make a whole playground just for her, and I'll never go on another mission again."
+   "He feels my guilt, too. I can see his expression change as the guilt fills my head."
+"He gives me a wistful, sympathetic look, and my mind fills with pictures of his children, happy and playing. I feel his happiness, his strength, his pride for them. It's all he can do to help."
+"It hurts that those feelings are absent in me... but to feel them through him really does bring me comfort."
+"As I tell him about my life, I can feel him remembering his past life: his extended family underground, his partner, the glow of the cave walls. He remembers it in synchrony with my stories, and I am reminded of his memories."
+if saferoom:
+   "I use the remaining resources to build weapons for the family - spears, shields, and a large door they can fit over one section of the cave, making a sort of safe room for the children to hide in case of an emergency."
+   "It takes an extra half a day, but it's worth it for the relief that washes over the father - and then, a moment later, through me - as the door fits in its intended place."
+if playroom:
+   "I use the remaining resources to build toys for the children - spinning wheels, a chalkboard where they can draw and erase things, and a slide into their lake."
+   "It takes an extra half a day, but it's worth it for the excitement the children feel when they try the slide for the first time - which, a moment later, I feel as well."
+"Finally, the day comes when I'm confident enough in our work that I gather my things and prepare to leave."
+scene bg cave
+show dad neutral
+show son neutral behind dad
+d "What is it that your people say again? I've forgotten."
+t "Goodbye?"
+d "No... the other one."
+"His daughter gives him a furtive glance, and he remembers."
 show dad happy
-d "Thanks for all your help."
-t "Just fulfilling my contract."
-t "Thank you for welcoming me into your home."
-"When I take off in my shuttle, I make sure to circle around a couple of times, just to impress the kids."
-
+d "Thank you."
+"He extends his hand to me, and I take it."
+"What comes to my mind's eye, I find difficult at first to understand. The images are half-formed, like memories of childhood or of a dream from long ago - they're pieced together in a patchwork that doesn't quite fit."
+"I'm standing in a field that folds in on itself, the water flowing all around me... like a cave, but instead of the ceiling I see the open sky above me."
+"I'm building a home on a hilltop, and the home is a cave too, but it's a cave I have carved out of the fields."
+if saferoom:
+   "Inside, my bed is half-submerged in the water of an underground lake, and sturdy doors made of grey wood keep us safe from the outdoors."
+if playroom:
+   "Inside, my bed is half-submerged in the water of an underground lake, and the rest of the space is open and filled with drawings on slabs of stone."
+"Penelope is there. I know it's her because I can sense that this is supposed to be Penelope. But she doesn't look like Penelope. She has antenna - her eyes are big and round - and she's wearing a long dress to cover her many legs."
+"But her scales are the colour of my own, and her eyes are green, and when she looks at me I see the way she looked at me on Earth, on our walks."
+"She smiles."
+"When I come back to myself, I see the daughter looking at me. She's smiling, too - in her way."
+"And I'm crying. The tears drip into the sand below."
+show dad worried
+d "Your eyes are watering. Are you alright to fly?"
+t "Yes, I'm alright. I just..."
+t "Thank you."
+"I can't bring myself to say goodbye. I just look at the family for another moment, burn this memory of them into my mind."
+scene bg mountains
+"Then I turn from them and step out of the cave into the light."
+"Even when I start to get dizzy from the sun and the tears, I don't stop walking until I get to my ship."
+"The family's wishes for me swirl around in my head, but like a vivid and disturbing dream, they can't find a place to settle down. As the ship whirs to life and into the sky, I watch for their cave in the mess of colours beneath me..."
+"But I don't find it."
+"That bothers me too, though I can't pinpoint why."
 scene bg space
-with Dissolve(2.0)
-"But when I'm back in space, I find myself a little sad."
-if childhome:
-   "It's pointless to miss my childhood home. By now it's wiped off of the face of the earth, and everyone who knew it is dead."
-   "I wouldn't have joined the army in the first place if that weren't true."
-   "But I do miss it."
-   "Sometimes I wish I could go back to it, somehow."
-if newhome:
-   "I wonder if Penelope and I will ever have a home like that."
-   "Honey and splashing in the pool..."
-   "It seems impossibly far from where I am now."
-   "But maybe it doesn't have to be."
-"I stare up into the emptiness of space, and just for a moment, let myself think of home."
+"It's still bothering me when I look outside to find myself in space again. The planet is now an orange circle below me, becoming smaller and smaller."
+"Reluctantly, I try to put my discomfort out of my mind, and I bring up the map..."
+"But in the back of my mind it tugs at me, along with these new memories that I can't seem to settle."
 
 jump space2
 
 label blue1:
+
+$ blue2 = False
+$ blue3 = False
+
+$ simplicity = False
+$ danger = False
+$ saferoom = False
+$ playroom = False
 
 "I put in the coordinates for the blue planet."
 "The higher temperature variation could mean a higher likelihood for inhabitability."
@@ -2298,55 +2270,11 @@ label blue1:
 "I swear I can feel it lapping against my hair."
 "It occurs to me that I haven't been dry in a long time..."
 
-scene bg black
-with Dissolve(2.0)
+jump calypsodream
 
-p "Mom?"
-p "Do you know who my father was?"
-p "Can you tell me about him?"
-if truth:
-   if calypso1:
-      t "Your father..."
-      t "I don't know they'd want you to call them that."
-      t "They told me to forget."
-      t "I have to forget."
-   else:
-      t "Your father..."
-      t "I don't know they'd want you to call them that."
-      t "They told me to forget..."
-      t "But I can't."
-      t "I'm so sorry, Penelope. But I can't."
+label blue1_postdream:
 
-else:
-   if calypso1:
-      t "Your father..."
-      t "Your father is dead."
-      t "They told me to forget."
-      t "I have to forget."
-   else:
-      t "Your father..."
-      t "Your father is dead."
-      t "They told me to forget..."
-      t "But I can't."
-      t "I'm so sorry, Penelope. But I can't."
-p "Why do we have to forget?"
-p "Why can't we remember things, mom?"
-p "I forget the taste of coriander."
-p "I forget what the flowers smelled like."
-p "I forget what you looked like."
-p "Why do I have to forget?"
-p "Why did we never take a photo together?"
-p "Mom..."
-"I hold Penelope's face in my hands."
-if truth:
-   "To help her."
-else:
-   "To comfort her."
-"But she has no face."
-"She has no face because I have forgotten her face."
-"I have forgotten her and she has forgotten me, and she slips from my hands and becomes the waters of Calypso, and they pour over me and fill my ship until everything is dark."
-
-scene bg space
+scene bg blueplanet
 with Dissolve(2.0)
 
 "I feel a terrible weight on my chest."
@@ -2402,10 +2330,14 @@ with Dissolve(2.0)
 "A tree branch has been torn from a tree, leaving the spot open."
 if blue1:
    "It's fresh. This must have happened recently."
-if blue2:
+else:
+  if blue2:
    "The tree has started growing back. I don't know how fast anything grows here, so I don't know what that means, but it's not fresh."
-if blue3:
-   "I barely notice the break - a new branch has almost completely taken its place."
+  else:
+   if blue3:
+     "I barely notice the break - a new branch has almost completely taken its place."
+   else:
+     pass
 "It's too small to have been caused by the ark."
 "My heart sinks."
 "But it could still be something. I have to at least look for it."
@@ -2436,7 +2368,7 @@ show hector young surprised
 "This was the soldier who made the call over the radio."
 "He's awkward as ever. He doesn't know what to do with me."
 "He thinks I'm some illusion."
-"I put my hands on his shoulders. Only when they get there do I realize they're shaking."
+"I put my hands on his shoulders. Only when I can feel them do I realize they're shaking."
 t "Lieutenant Jensen. Hector Jensen. It's so good to see you."
 show hector young neutral
 h "Commander..."
@@ -2630,7 +2562,7 @@ jump space2
 
 label space2:
 
-"The quiet whirr of the energy core and the empty space all around me should make me feel lonely, but somehow I am calmed by it."
+"The quiet whir of the energy core and the empty space all around me should make me feel lonely, but somehow I am calmed by it."
 "I don't know what that says about me."
 "What positivity I have left fades when I return to the map."
 "I have two dots left to choose from."
@@ -2638,8 +2570,8 @@ label space2:
 if blue1:
     $ okbreak = False
     $ missyou = False
-    $ childhome = False
-    $ newhome = False
+    $ saferoom = False
+    $ playroom = False
     "There's a larger planet, almost the same distance from its sun as Earth was from ours. Its sun is a little smaller, so it should be just a little cooler. On the map, it looks like a green dot."
     "And there's a smaller planet closer to its sun. Calypso said that it's supposed to be warm and dry. It's an orange dot on the map."
     "Once again, I have no way of knowing where to go."
@@ -2680,8 +2612,8 @@ elif orange1:
           jump blue2
 
 else:
-    $ childhome = False
-    $ newhome = False
+    $ saferoom = False
+    $ playroom = False
     $ goodspeech = False
     $ badspeech = False
 
@@ -2723,73 +2655,14 @@ $ stayquiet = False
 "Even if we had to go it alone, I would have made sure we built our home somewhere she liked."
 "The thought lingers with me as I drift into stasis."
 
-scene bg black
-with Dissolve(2.0)
+if blue1:
+   jump blue1dream
+if green1:
+   jump green1dream
 
-p "You never talk about where you grew up."
-p "Did you live in a bunker too?"
-p "Did you have a garden?"
-p "What were you like before you had me?"
-if goodspeech:
-   t "I was a hero."
-   t "To the world, I was invincible..."
-   t "And I never let anyone in."
-   p "You're right..."
-   p "You don't let anyone in."
-   p "You never let me in."
-   p "You were my hero, but were you my mother?"
-if badspeech:
-   t "I was pragmatic."
-   t "I did what I had to do to survive."
-   p "What about me?"
-   p "To have a child in the middle of that..."
-   p "I wasn't what you had to do."
-   p "But you made me."
-   t "You were different."
-   p "Was I?"
-   p "Or was I just something you used to pull yourself out?"
-if simplicity:
-   t "I was a problem-solver."
-   t "I was happiest when I could solve the most."
-   t "I felt like I was doing something."
-   p "You mean you were a simple problem-solver."
-   p "You hate anything that's complicated."
-   p "You love me now that I'm a simple problem."
-   p "Find Penelope. Save Penelope."
-   p "But when I was right in front of you, I was too complicated."
-if danger:
-   t "I was a thrill-seeker."
-   t "People like to think of me as some solemn hero..."
-   t "But I liked the violence."
-   t "I liked being in danger."
-   p "And you hated safety."
-   p "You hated the ark."
-   p "You hated coming home to me every night."
-   p "You only had me because your pregnancy was so dangerous."
-if childhome:
-   t "I was a stupid kid from the country."
-   t "All I wanted was to protect my family..."
-   t "But my family died. My whole town died."
-   p "They had to die, didn't they?"
-   p "For you to live."
-   p "If it weren't for them, you would have died a stupid kid."
-   p "You're grateful they died. You wanted them to die."
-   p "It should have been you, not them."
-if newhome:
-   t "I was naive."
-   t "I thought I would live a quiet life..."
-   t "I thought I could make a new home."
-   t "A new home with you, Penelope."
-   p "That's never what you wanted and you know it."
-   p "You're still naive."
-   p "You're naive because you think you're any smarter than you were back then."
-p "I hate you, mom."
-p "No..."
-p "I don't even know you."
-p "You're not my mother."
+label orange2_postdream:
 
-scene bg space
-with Dissolve(2.0)
+scene bg orangeplanet
 
 "I wake up to a red glow."
 "Is it sunlight?"
@@ -2845,218 +2718,197 @@ t "Penelope!"
 "She turns to look at me..."
 "And she's not Penelope."
 
-show boy neutral
+show son neutral
 
-"The creature is as surprised to see me as I am to see it."
-"It lets out a shrill scream."
-"The sound is high-pitched and grating. My hands rush to my ears to shield them."
-"I step backwards and trip over my feet."
-"When I look up again there's another creature at the entrance of the cave. This one is larger."
-"It enters the cave and scuttles towards me. Its legs are covered by a long skirt, but I can see at least eight of them."
-"It strides past me and picks up the smaller one, placing it down by its feet."
+"The creature looks almost too tired to be surprised to see me."
+"I see shock in its large, glassy eyes - but then exhaustion, and hunger. Terrible hunger."
+"Its limbs are brittle, and when I look closely, I see that its skin is peeling."
+"Finally, I see fear... but this reaction comes last. It is so tired that it can hardly remember to be afraid."
+"I stand dumbfounded in the mouth of the cave. The creature lets out a high-pitched trill, which comes out in what sounds like a falsetto. After a moment, it loses the strength even to make that sound, and the noise dies out."
+t "It's alright. I'm not here to hurt you. I..."
+"The creature makes a feeble attempt to move away from me to the back of the cave."
+"I can see its shudders in the ripples of the water."
+"I move to reach out my hand, but I realize mid-way into the gesture that it might be seen as threatening."
+t "I'm sorry. It looks like you're hungry. I can help--"
 
-show dad angry behind boy
-
-"Then it rushes me."
-"It's smaller than me, but surprisingly strong. It pushes me up against the wall."
-"My ears ring with the impact."
-
-u "{i}Did you take her?{/i}"
-u "{i}Did you take my daughter, you surface freak?{/i}"
-t "What? No! I..."
-u "If you took her I am going to rip you into pieces and feed you to my worms!"
-t "I swear, I didn't! I swear!"
-t "I just got here! I'm not from the surface, I'm from space?"
-u "From space...?"
-
-show dad worried
-
-u "If it really wasn't you..."
-u "You trespassed in my home. By rights, I can kill you."
-d "But as a father, I don't want my children seeing something like that."
-show dad angry
-d "So I hereby place you under contract. You are not permitted to leave until one of us finds my daughter."
-d "If you try to leave I will shoot you out of the sky."
-t "And when we find your daughter I can go?"
-d "Yes."
-t "Alright."
-"It doesn't look like I have a choice."
-scene bg mountains
-with Dissolve(2.0)
-"He at least lets us wait until the sun's gone down a bit before we start our search."
-"He leaves his son at home and we split up."
-"He calls for her with a high-pitched buzzing that I can't imitate, and that my translator doesn't understand."
-"Instead, I search quietly, for the most part. When I'm near a cliff or a cave, I holler, and wait for a response."
-"All I find is echoes."
 scene bg cave
-with Dissolve(2.0)
-"When I start to have trouble seeing in front of me, I return to the cave."
-show boy angry
-b "You're not supposed to be back yet."
-t "I'm sorry, I..."
-b "You're under contract."
-b "You know what happens if you break the contract?"
-t "I physically can't look anymore! I'm not breaking any contract!"
-b "FIND MY SISTER!"
-"He pushes me out of the cave. He's strong like his father."
+with vpunch
+show son neutral
 
-scene bg black
-with Dissolve(2.0)
+"My vision blurs. My head aches."
+"My ears are ringing, but this time I feel whatever is behind me go in for another blow."
+"I reach my hands behind my head and grab onto the object - is it a club, a plank of wood?"
+"I pull it over my head, grip it in both hands, and swing around."
 
-"I walk a little ways off, but I don't want to get lost, so I stop and wait."
-"I'm contemplating what to do next when the father comes back."
-show dad worried
-t "Any sign of her?"
-d "Nothing."
-"He looks utterly defeated."
-"Tentatively, I reach out and touch his shoulder."
-"the touch surprises him, but he doesn't object."
-t "I'm sorry."
-t "I have a daughter too."
-t "I was separated from her... I'm looking for her now."
-t "That's why I'm alone."
-d "If you'd told me that a few days ago, I'd have asked how you could possibly have let her out of your sight."
+show dad angry behind son
+with Dissolve(0.2)
+
+"It surprises me that a creature so slight can hit so hard."
+"My ears are still ringing when it begins to hiss at me, a screaming, high-pitched sound that grates my ears like nails on chalkboard."
+"But it looks like it's in worse shape than the little one."
+"While the little one is shedding skin, this one's skin is covered in burns. It looks hollow, like an exoskeleton with the insides sucked out. Its legs are covered by a dress, but it's swaying slowly around, like it's having trouble standing."
+"And now that I have the weapon - a long, thick tree branch - it seems utterly at a loss for what to do."
+t "I'm not here to hurt you."
+"Slowly, and with my eyes still on the larger creature, I lower the branch to the ground with one hand while I hold the other up in a sign of peace."
+t "I'm just a traveller. I'm looking for my people."
+show dad concerned
+u "Are you from the surface?"
+t "No. I'm from space..."
+t "From the sky."
+u "But you walked there."
+u "And you're still alive."
+"I'm still holding my hands up when it begins to approach me in tiny, fearful, limping steps. I keep my eyes on it and position myself in front of the tree branch..."
+"But I don't step back, and I don't move my hand when it reaches for it."
+"At first I think it wants to see my skin, to see if it is burned like its own - but then its hand touches mine."
+"Its skin is hard like a carapace, and my palm tingles when its fingers make contact."
+"When I meet his eyes again, I see the emotion in them. I feel it. He is scared and confused and defeated... and he is in pain, so much pain."
+"He's been feeling this pain for so long now that he can barely sense what parts of him are hurting... but the worst hurt is all inside."
+"The pain takes me farther in, and I begin to remember all the places it came from. These are his memories: feet blistering in the white-hot sand, eyes blurry with burns from the light. Terror in the night. It's hard to sleep. He shakes every time he hears the monsters."
+"These are his memories, but I remember them too. I remember an underground city, thousands of his people working in unison, their memories and emotions and ideas a chorus in my head, passing between them in the air."
+"The memories of this place have become fuzzy with time... but the fear is in stark relief as I pack a bag and tie it across my chest. I feel my lover's anxiety, my children's confusion, the sheer height of the cliffs ahead of us and the distant promise of sunlight."
+"And when my lover slips and falls, it is my own body I feel break against the rocks. My children's cries reverberate in my stomach. I see the light become darker in her eyes, and it is all I can do to comfort her to keep looking at it with my own - to give her my hope, even as it slips away from me."
+"Finally, we reach the light... and nothing has ever hurt so badly or shone so brightly."
+"It feels as if it is hollowing me out and leaving me to dry. And our stomachs are empty... so empty."
+"When my son dies, he is so light I can barely feel him in my arms."
+"What weight he lost is a pit in my stomach now - a lump that weighs me down, makes me sick, makes me tired more than the hunger or the fear ever did."
+"I stumble backwards."
+"I'm a traveller... I have a daughter... just one daughter. She's still alive. I haven't lost a child. I left my home, but not like that... not like that."
+"I'm me again. But the memories are still in my head, as clear as memories of my own."
+"That should feel like a contradiction. Why doesn't it?"
+"And I can still feel the lump. It moves around in my gut and finds no place to settle."
+"It still hurts so terribly."
+"I look up at the family in front of me: father and daughter. In my mind's eye I can see the mother - her face blurring with time, but her smiling eyes still crystal clear somehow - and the son. But when I think of the son all I can remember is his mangled, hollow body. So light..."
+t "What did you..."
 show dad sad
-d "Now, I..."
-t "I know. You think you know exactly what you'd do, but then they're gone, and everything changes."
-if truth:
-   t "I like to think that Penelope can make it on her own."
-   t "I raised her to be strong."
-   t "It still hurts like hell, but that thought gets me through the days, if nothing else."
-   t "It's the same for you. Just remember how you raised her."
-else:
-   t "It makes me sick just to think of her now."
-   t "How terribly alone she must feel..."
-   t "All I can do is make sure I get back to her as soon as I can."
-   t "It's the same for you. Just do what you can."
-"It's hard to tell if my words helped him."
-"But he does straighten his back a little, and starts walking back to the cave."
-d "We should turn in for a few hours. We can start the search again just before sunrise."
-hide dad
-"We barely manage to sleep."
-scene bg cave
-with Dissolve(2.0)
-"When we wake up, the dad offers me a modest breakfast: some sort of dried meat, sour, pungent berries, and what looks like porridge but tastes like dragonfruit."
-"I'd forgotten how hungry I was. I wolf the meal down despite some small protests from my stomach."
-"While we eat, the boy goes out to look himself."
-"Meanwhile, the dad and I decide to split up again."
-scene bg mountains
-with Dissolve(2.0)
-"I climb across the hills and call out a few times, but I give up when I realize that I might be scaring the daughter away."
-"So I quiet down and soften my footfalls."
-"I come to a steep hill just out of sight of the cave."
-"I have to get on my hands and knees to climb all the way up."
-"I peek over the top."
-"The first thing I see is a leg."
-"The hillside is spattered with black blood that puddles around the leg and leads in a trail down the other side of the hill."
-"I climb over the hill and make my way down along the trail."
-"I turn a corner."
-"The girl's body is lying down between two trees."
-"Her eyes are swollen shut. She's missing a few of her legs."
-"The smell almost makes me throw up on the spot."
-"She smells like meat cooking in the sun."
-"She's been dead a while."
-"I'm so repulsed by the sight that I almost don't notice her brother hiding behind a rock."
-show boy neutral
-t "What are you doing here?"
-t "Did you just... did you just find her like this?"
-"The boy stares at me blankly."
-"He doesn't share my shock."
-t "What did you do...?"
-b "She broke our contract."
-b "I told her it was a contract. I told her what would happen."
-b "But she broke it."
-"I remember his strength and grab for my gun."
-t "We have to go talk to your dad now, okay? We have to..."
-show boy angry
-b "I'm not apologizing!"
-b "I'm not, I'm not, I'm not! She did this!"
-b "She broke the contract, and {i}we have to keep our contracts!!{/i}"
-b "Dad said so!"
-d "What did dad say?"
-show dad worried behind boy
-show boy neutral
-"I lock eyes with the boy for just a moment, and watch his expression change from anger to fear to sadness as his father approaches."
-"What I don't see is guilt."
-"But he's barely Penelope's age..."
-"Does he even understand she's dead?"
-d "Whose leg is that...? Where's my daughter?"
-d "What happened? Son? What happened?"
-"I take a couple of steps back and let him past me."
-"I can hardly watch the revulsion on his face when he discovers the body."
-"He lets out a trill that stings my ears."
-"His legs start to shake, and he falls into a clump on the floor."
-d "How did this - oh... ugh..."
-"All he can do is cry out in pain."
-"I've done what they asked. I don't feel welcome anymore."
-"But there remains the issue of the boy."
-"He's watching me now, wondering what I'll do. Carefully, I step to the side so his father is between us."
-"If I'm going to do something, I have to do it now."
-"But he looks nothing less than destroyed. What good would it do to tell him his son is a murderer...?"
-menu:
-   "I decide to..."
-   "Tell the father the truth.":
-      $ inform = True
-      $ keepsecret = False
-      t "I'm so sorry. I found her like this, and I found... I found him with her."
-      show dad angry
-      d "What...?"
-      t "He told me she broke the contract."
-      t "I don't know what that means. I'm so sorry."
-      "He looks up at his son."
-      d "Is this true?"
-      b "Dad, you told me about the contract. You {i}told{/i} me!"
-      b "I was just doing what you told me to!"
-      "All the life is gone from the father's eyes when he looks at me."
-      d "Your contract is done."
-      d "Just... just go."
-      t "I'm really -"
-      d "{i}Go.{/i}"
-      "Reluctantly, I back up and leave them alone."
-      "Just as I make it to the shuttle, I hear a sound so high-pitched and so painful that I have to cover my ears."
-      "When I fly over them in the shuttle, they haven't moved."
-      scene bg space
-      with Dissolve(2.0)
-      "I try to touch the controls, but my hands are shaking."
-      "I can still see the girl, but when I remember her, she looks like Penelope, and I have to stop myself from throwing up."
-      "But the boy is Penelope too, in my mind's eye."
-      "The boy is Penelope and it's me she's cutting into."
-      "I've broken the contract... I've broken the contract and this is what I get."
-      "I swear to never think of this again. I'll never have to; the planet's already gone from my field of view."
-      "But even as I return to the map, I can't get rid of the pit in my stomach."
-      jump space3
+d "Help. Please."
+"I think of Penelope. My own daughter, my real daughter. I have to find her..."
+t "Tell me what to do."
+"But I have to save this daughter, too. I can still save one of them."
 
-   "Cover for the son.":
-      $ inform = False
-      $ keepsecret = True
-      t "I am so so sorry. I found her like this..."
-      t "I have no idea what happened."
-      t "Your son got here just after I did."
-      t "I'm so terribly sorry..."
-      "He hides his head in his hands."
-      d "Son... come here..."
-      "The boy looks at me for a moment, but only a moment."
-      "Then he turns to his dad."
-      "Silently, he walks to him and hugs him."
-      d "I'm so sorry you had to see this."
-      d "I'm so, so sorry."
-      "His words become cries. The boy doesn't cry, but he holds his dad tighter."
-      "Gradually, they fall silent."
-      "I leave them alone and return to my shuttle."
-      "When I get there, I have to force myself not to throw up."
-      "The image of the girl's body creeps into the back of my eyelids, and even when the planet is a tiny red dot in the distance, I feel like I'm still standing there."
-      "I'm looking him in the eye and telling him I'll lie for him..."
-      "And I'm cutting the girl's throat myself."
-      "I ball my hands up into fists and scream as loudly as I can."
-      "Then I swear never to think of this again."
-      "My stomach is still turning, and my hands are shaking..."
-      "But I have to return to the map."
-      jump space3
+scene bg mountains
+with Fade(0.5)
+
+"My first task is to find enough food to keep what remains of the family alive. It takes me almost an entire evening wandering the side of the mountain, but I forage a large bag of roots. I also catch and kill several insectoid creatures, each about the size of a football."
+"As I bring them back to the cave, it occurs to me that I should have no idea whether these things are even edible for the family... but they are. I'm certain they are. And sure enough, as soon as I return, the father reaches for my bag and empties the contents into a large pot of water he has boiling over a fire in the corner of the cave."
+"I know they're edible because I remember it. Kneeling in the sand, the burning on almost all of my legs, plucking the root from the ground and dusting it off."
+"The memories keep coming to me as we sit down to eat. The father and daughter slurp the food up. They've ground the roots and bugs into a paste. This should be disgusting, but it's familiar to me - my parents made me something similar as a child. Comfort food when I was sick."
+"When I take my first sip, for a moment I feel like I'm starving too. It's the best thing I've eaten in a long time - since Earth - since I was a child."
+"I swallow my tears with more of the gruel, and when I look up, my bowl finished, father and daughter look like they could cry too."
+scene bg black
+"That night, my dreams are vague and indistinct. I feel myself in a huge cavern, bundled up with a thousand other children... but when I try to grasp the sensation, it escapes me and I find myself back in my body, staring up at the stalactites on the ceiling."
+"I can't remember the last time I felt so well-rested."
+"For a moment - just a moment - the thought comes to me that I could stay here. Building up the cave, eating gruel, and sleeping peacefully... They could be my family, and I could be theirs--"
+"The thought is snatched from my mind by a splash."
+"When I look up, the daughter has leapt into the water, and she's watching me, her head half-submerged."
+"I look away. It's not the kind of thought we should be having."
+"I'm not sure if the guilt I feel is mine or hers..."
+"But it stings, all the same."
+scene bg mountains
+"The next day, I head out early in the morning. At first foraging is my only goal, but soon I find myself drawn to certain tasks. The thought finally occurs to me: my ideas are not entirely my own."
+"I don't fight the feelings, though, and soon we fall into an easy rhythm: they share ideas, inspirations and thoughts with me, I find the tools to make those a reality, and I bring them back to the cave."
+
+scene bg cave
+with Fade(0.5)
+
+show dad neutral
+show son neutral behind dad
+
+"When I return with my next batch of things, father and daughter have already set about constructing the last batch. They make traps, doors, the beginnings of a greenhouse."
+"Our communication is one-way, of course - however they share these thoughts with me, there's no way for me to reply. This makes me uneasy... but they are as worried as I am. It takes a lot of faith to put your survival in the hands of a stranger, with only the echoes of an idea to guide them."
+"In fact, they are as unused to conversation as I am to their thought-sharing."
+"But they're curious... I can feel it."
+d "Your people..."
+b "You said you were searching for them."
+"The questions they mean to ask drift into my head: what happened? Where did you come from? Who are your people? How will you find them?"
+"I open my mouth to answer... but then I feel the father's suspicions."
+"I see myself, entering the mouth of the cave with a pile of wood. The daughter comes to greet me, reserved but genuinely happy. My face falls when I look at her."
+"Now I'm staring with my hand outstretched, my eyes wide with the shock of connecting with the family's minds. 'Tell me what to do,' I say, but as I say it, I look at the daughter. There is determination there... but recognition, too."
+show dad sad
+"And now, at the table, I see the same recognition on the father's face as he watches me react to his memories."
+"I hear the questions again now: did you have a daughter? No--do you have a daughter?"
+"The correction brings tears to my eyes, and I nod."
+d "How do you..."
+"Hearing his voice through the translator startles me. I blink the tears away."
+d "How do you live...?"
+"His voice trails off, but the endings to the sentence come to my mind."
+"How do you live without her? How do you live knowing you might never see her? How do you live in space, sleeping away years and decades and who knows how long? How do you live so alone?"
+"I don't know whether the questions in my head are mine or his..."
+menu howlive_menu:
+   "But I keep living..."
+   "... by remembering the past.":
+      $ memories = True
+      $ possibilities = False
+      jump memories_resolve
+   "... by imagining the future.":
+      $ possibilities = True
+      $ memories = False
+      jump possibilities_resolve
+
+label memories_resolve:
+t "I remember the people who need me."
+t "My soldiers on the ark... the civilians I saved..."
+t "Penelope. My daughter."
+t "I remember being with them, getting to know them, making a life together on Earth."
+t "I remember raising my daughter. She got so tall so fast..."
+t "She loved coriander, and she was always such an explorer."
+t "I know that somewhere out there, she remembers me too. They all do."
+t "I can't feel those thoughts like you can. I never could."
+t "But sometimes I think I can. Sometimes I look up and I can feel her in the things I'm remembering. I dream about our walks and I swear she's walking next to me."
+t "I know she's waiting for me. They all are. I am remembered, I am awaited, and I am missed."
+t "That's what keeps me going."
+show dad worried
+"Memories flicker in the back of my mind. Caverns lit by crystals, filled with crying people. Food I can barely remember the taste of anymore. Shame, and anger, and grief - grief I can barely handle."
+"But there are others, too. Smiling eyes that bring warmth to my heart. The touch of hard, cool fingers on my shoulder. Something warm and wet and sticky on my hands - my son's body, but full of life this time. Alive for the first time."
+"The memories blend with my own. Somehow, both are made clearer in the process."
+
+jump howlive_resolve
+label possibilities_resolve:
+t "I think of the future."
+t "I think of seeing the people I knew again. Of catching up with them, and telling them the stories of my travels."
+t "I think of meeting Penelope again. Of seeing how much she's grown..."
+t "I think of building her a house on a hilltop. Of growing flowers together outside, and walking all day together, with no destination in mind."
+t "That's it - that's exactly it. I think of not having a destination. Of resting, finally, with the people I love... and maybe making new destinations someday."
+t "Imagining thse things happen is what keeps me going. I'll build that house. I'll take that walk. I'll tell all of my stories..."
+show dad worried
+"A thought lingers at the back of my mind. It's the light at the end of a long tunnel."
+"I'm afraid, at first: the light has burned my fingers to the bone. The light has blinded me, has cooked me, has made me hungry and tired. Th light has taken my son."
+"But the light is more than that, now."
+"The light is a hope I could never have given my daughter under the ground - a hope that my son had a taste of as well, if ever so briefly. A hope that took my love from me, but also the hope that brought us together."
+"It was too bright when we first came to it, but it has dimmed, and now I can look at it sometimes for what it is: the chance at a new life, on our terms. Someday, a life that others may follow."
+"His hopes blend with my own, and the light brings my own possibilities into stark relief."
+
+jump howlive_resolve
+
+label howlive_resolve:
+show son angry
+"The father understands..."
+"But from his daughter I sense disappointment."
+"I return to the thought of remaining here... but it has lost its energy somehow. It hangs heavy between us."
+
+scene bg mountain
+"The weight remains as I leave the next day."
+"I remain for the morning and help them build their greenhouse..."
+"But for the first time, I feel that I'm unneeded."
+"The farther I get from the family, the more uneasy I feel about my time on the planet. Their memories float around my head like dust that won't settle... and the daughter's disappointment lodges in my stomach and refuses to leave."
+"I feel ashamed. Have I failed her?"
+"It's all I can do to get back to my shuttle as quickly as I can."
+"I saved one of them - now to save the other."
+if memories:
+   "But somehow, the thought of the family so affected by my presence doesn't comfort me, as it should."
+   "It worries me."
+if possibilities:
+   "But somehow, the thought of saving her doesn't comfort me, as it used to."
+   "It scares me."
+"The dust in my mind doesn't settle, even as I leave the atmosphere."
+"But then I'm in space again, and I have no time to wait for it."
+"I take one last look at the planet beneath me, put my memories of the place in the back of my mind, and turn my attention to the map."
+
+jump space3
 
 label green2:
 
-$ inform = False
-$ keepsecret = False
+$ memories = False
+$ possibilities = False
 $ speakup = False
 $ stayquiet = False
 
@@ -3075,73 +2927,14 @@ $ stayquiet = False
 "Is that planet Earth? Is it Calypso? Or is it a place I'll never find?"
 "The thought haunts me as I drift away."
 
-scene bg black
-with Dissolve(2.0)
+if blue1:
+   jump blue1dream
+if orange1:
+   jump orange1dream
 
-p "You never talk about where you grew up."
-p "Did you live in a bunker too?"
-p "Did you have a garden?"
-p "What were you like before you had me?"
-if goodspeech:
-   t "I was a hero."
-   t "To the world, I was invincible..."
-   t "And I never let anyone in."
-   p "You're right..."
-   p "You don't let anyone in."
-   p "You never let me in."
-   p "You were my hero, but were you my mother?"
-if badspeech:
-   t "I was pragmatic."
-   t "I did what I had to do to survive."
-   p "What about me?"
-   p "To have a child in the middle of that..."
-   p "I wasn't what you had to do."
-   p "But you made me."
-   t "You were different."
-   p "Was I?"
-   p "Or was I just something you used to pull yourself out?"
-if simplicity:
-   t "I was a problem-solver."
-   t "I was happiest when I could solve the most."
-   t "I felt like I was doing something."
-   p "You mean you were a simple problem-solver."
-   p "You hate anything that's complicated."
-   p "You love me now that I'm a simple problem."
-   p "Find Penelope. Save Penelope."
-   p "But when I was right in front of you, I was too complicated."
-if danger:
-   t "I was a thrill-seeker."
-   t "People like to think of me as some solemn hero..."
-   t "But I liked the violence."
-   t "I liked being in danger."
-   p "And you hated safety."
-   p "You hated the ark."
-   p "You hated coming home to me every night."
-   p "You only had me because your pregnancy was so dangerous."
-if childhome:
-   t "I was a stupid kid from the country."
-   t "All I wanted was to protect my family..."
-   t "But my family died. My whole town died."
-   p "They had to die, didn't they?"
-   p "For you to live."
-   p "If it weren't for them, you would have died a stupid kid."
-   p "You're grateful they died. You wanted them to die."
-   p "It should have been you, not them."
-if newhome:
-   t "I was naive."
-   t "I thought I would live a quiet life..."
-   t "I thought I could make a new home."
-   t "A new home with you, Penelope."
-   p "That's never what you wanted and you know it."
-   p "You're still naive."
-   p "You're naive because you think you're any smarter than you were back then."
-p "I hate you, mom."
-p "No..."
-p "I don't even know you."
-p "You're not my mother."
+label green2_postdream:
 
-scene bg space
-with Dissolve(2.0)
+scene bg greenplanet
 
 "I wake up a little at a time, and then all at once. I gasp sharply and open my eyes with a start."
 "I feel as if I've almost drowned, but my body isn't starved for air."
@@ -3159,7 +2952,6 @@ with Dissolve(2.0)
 "But I'm low on food, and my energy core's readings are fluctuating dangerously."
 "It needs a rest. So I have to land."
 "I pick a spot that looks as clear as possible of the cities and structures that litter the planet's surface."
-"The ship makes a smooth landing just near what looks like a forest."
 
 scene bg field-day
 with Dissolve(2.0)
@@ -3180,35 +2972,38 @@ with Dissolve(2.0)
 
 pause(1.0)
 
-"After a spot of cloudwatching I pick myself up and head to the forest to forage for some food."
+"After a spot of cloudwatching I pick myself up and walk up the hill."
+"At the top of the hill, blades of the grass grow taller than I am, with thick trunks that are sturdy like trees. It feels almost like a forest."
 "I'm lucky - I find some mushrooms that test negative for toxins, and I discover that the grass actually tastes delicious, kind of like garlic."
 "I even manage to hunt and catch a chubby little creature that looks a bit like a bird."
 "I make a fire and cook up my meal."
 "I've never been a great cook, but I'm proud of it, if I do say so myself."
 
 scene bg field-night
-with Dissove(2.0)
+with Dissolve(1.0)
 
 "By the time I finish up and snuff out the fire, it's nighttime."
 "I make sure I have all of my things and head back towards the ship."
 "Maybe I'll sleep on the grass tonight and head out tomorrow."
 "Just as I'm planning my day before I leave, I catch sight of something bright in the fields."
 "Fire."
-"I drop to the ground and crawl along it to a tree just near the clearing, but out of the way enough that I should be hidden from view."
+"I drop to the ground and crawl along it to a spot just near the clearing, but out of the way enough that I should be hidden from view."
 "There are at least three hundred figures."
 "They look like the animals I saw before on the field..."
 "But they're wearing clothes. Clearly they're not herding animals."
 "How did I not notice that before?"
 "They look like they're trying to decide what to do with the shuttle."
 "This is bad."
-"My translator won't work from here, so all I hear is hissing, clicking and a couple of growls."
+"My translator won't work from here, so all I hear is hissing, clicking and a long growl."
 "But it's obvious that the fight is getting heated."
 "Finally, they seem to come to some sort of agreement."
 "One of them, apparently the leader, gives a final, resounding click, and the group disperses."
-"A group of about twenty of them set about moving the shuttle. I don't at all believe that they'll do it, but to my surprise, they manage to pick it up and move it down the hill."
+"A group of about twenty of them set about moving the shuttle. I expect them to give up, but to my surprise, they manage to pick it up and move it down the hill."
 "With impressive efficiency, the others take to pitching tents and setting up a camp."
+scene tentcity-night
+with Dissolve(1.0)
 "In just a few minutes, the field transforms into a city before my eyes."
-"It's just dark enough now that I feel safe climbing up a tree a little ways back from the edge of the forest. From a safe and secluded spot about halfway up, I scan the tent city."
+"It's just dark enough now that I feel safe climbing up a grass-tree a little ways back from the edge of the forest. It bends a little under my weight, but it doesn't break. From a safe and secluded spot about halfway up, I scan the tent city."
 "There are smaller, interconnected tents that appear to be residential; the larger tents, for the most part, serve some sort of public purpose."
 "I see what looks like an infirmary, a dining tent, and a tent especially for children."
 "This really is a city."
@@ -3220,13 +3015,13 @@ with Dissove(2.0)
 "These ones are stockier than the others, with broad shoulders and angry faces."
 "The whole species looks like it was made to run, but these ones in particular look like they were built for fighting."
 "I drop from the tree and follow the edge of the forest away from the camp until I'm clear of it."
-"Then I climb another tree - one that looks solid enough to hold me for a while - and nestle into a spot between two branches."
+"Then I climb another tree - one that looks solid enough to hold me for a while - and nestle into a spot between two tall blades leaning on each other."
 "There, I watch over the camp as best I can, but my eyelids start to droop."
 "Sleep would be a better use of my time now."
 "I use a rope from my bag to tie myself to the tree. When I'm sure I'm secure, I drift off into anxious, restless half-sleep."
 
-scene bg field-day
-with Dissolve(2.0)
+scene bg tentcity-day
+with Dissolve(1.0)
 
 "I wake up early and untie myself from the tree."
 "First I look for the squadron from the previous night - but it seems like they've given up for now, or they're searching farther afield."
@@ -3234,60 +3029,104 @@ with Dissolve(2.0)
 "When I get to the top of it, I find the camp again in turmoil."
 "I can't hear them, but they're pointing at the other camp frantically. A couple of the children are crying."
 "One of the stockier ones pushes the leader, and two others push him back."
-"It's really getting heated."
+"It's getting heated down there."
 "I'm so focused on the drama in town that I don't hear the footsteps until they're almost right below me."
-"When I finally see them, I almost jump out of the tree."
-"I catch myself and crouch down behind some leaves."
-"Luckily, they didn't notice me."
+"When I finally hear them, I almost jump out of the tree."
+"I catch myself and lean behind a thicket of grass. I peer over to look at them."
+"Luckily, they haven't noticed me."
 "They're carrying a bag. They open it and empty its contents onto the ground."
 "I don't recognize any of the technology, but it looks like complicated stuff."
 "Maybe this is an engineer of sorts?"
-"I don't want to attract attention, so I have no choice but to watch this one with their strange tinkering for a while."
+"I don't want to attract attention, so I have no choice but to watch this one's tinkering for a while."
 "They're taller and more lithe than the others; their face is thinner, almost aerodynamic."
 "They look very angry and very focused."
-"Whatever their doing completely engrosses them..."
-"Until they finish the task a few hours later."
+"Whatever they're doing completely engrosses their attention. I can't see exactly what they're doing from where I am, but I can tell that their movements are methodical and careful."
 "They pack up the contents of their bag and get ready to leave."
 "And just as I think I'm safe, they look up straight at me."
 u "You can come down now."
 "Dammit."
 "I jump down from the tree and make a soft, clean landing nearby."
 show scout angry
-"This one hasn't called for the others, I realize. It's still just the two of us, and the fight in the town is still going on somehow."
+"They don't look exactly happy to see me, but they haven't called for the others - who I can hear in the distance, still fighting."
 u "You're the owner of that shuttle, am I right?"
 t "Yes."
 u "And you've got a translator... I'm betting whatever else you've got in that ship, my people are going to want."
 u "You'll have to get out of here soon if you want all your tech intact."
-t "I wasn't planning on staying long... but why are you telling me this? Who are you?"
+t "I was thinking the same thing... but I'm caught now, aren't I? I imagine this will make that more difficult."
+show scout suspicious
+u "You're right - I could walk back to camp and tell them about you..."
+u "But then you might tell them about what you saw me doing in the forest, and we'd both be in trouble."
+u "I'd like to think that puts us on the same side for the time being. What do you think?"
+"Their openness catches me off guard, and for a moment I'm not sure what to say."
+"They seem a little too eager to be friendly... but the camp down the hill, still in the midst of arguments, is far less safe than this individual."
+t "I think that makes a lot of sense. What's your name, then?"
+show scout curious
+u "I'm sorry?"
+t "What do I call you?"
 s "I'm a scout."
 t "Oh."
-s "You're a traveller. Now we know each other."
-show scout suspicious
-s "And you're right - I could walk back to camp and tell them about you."
-s "But then you'd just tell them about what you saw me doing in the forest. That's too much at stake just to rat you out."
-t "Thanks... I guess."
-s "Just because I'm being nice to you doesn't mean they'll be as nice."
-s "We've had others like you before. We used to be nicer..."
-s "But things are dire now. We're at war."
-s "Now my leader does whatever he thinks is necessary to keep his people safe. And he's desperate."
-t "I understand. And I believe you."
-t "So what now? Is this just mutually-assured destruction?"
-s "Ideally, I'd like something mroe than that."
-s "I need you to do me a favour, and I promise I'll do something for you in return."
-s "Tonight, you're going to make a run for your shuttle."
+show scout happy
+s "And you're a traveller. Well met, traveller."
+s "But why did you land here?"
+t "I'm searching for my people. We were looking for a new home... I was left behind. They had this planet tagged as potentially habitable, so I followed them here."
+t "I don't suppose you've seen them?"
+show scout neutral
+s "...No. You're the first traveller that's come here in some time."
+t "I see."
+"I sigh to myself. I shouldn't have hoped - I saw no signals from the ark in orbit - but still, I thought..."
+if blue1:
+   "I hoped at least I'd find another human ship. Some sort of clue as to where they went."
+else:
+   "I hoped I'd find some sort of clue as to where they went. Anything."
+show scout curious
+"They look at me, uncertain of what to say."
+s "I am so sorry."
+s "But... your ark is better for it, anyways.  We used to be kinder to travellers. But things are dire now. Apparently we can't afford the luxury of kindness anymore."
+t "Why not? What's happened?"
+show scout neutral
+s "Did you see the other camp in the distance before? The larger one?"
+s "We're at war with them."
+s "The other camp decided to settle down and till the land. For our leader - and for some of the other tribes, at first - that was unconscionable."
+s "They said it was a threat to our way of life, to who we are as a people."
+s "Now, so many years later, what do our people have to show for it, other than empty stomachs and corpses?"
+t "So that's what the fighting was about?"
+show scout sad
+s "Today was a peaceful day."
+s "Most days there's open fighting. Many of us want to leave, but the leader, the fighters and the other scouts won't allow it."
+s "So you can see why your ship arriving when it did would be important to them."
+s "Once they can get it open, they'll use the tech for weapons, food, and most of all for the political advantage."
+s "I'd hoped this war would end soon, but this could drag things on another decade or more..."
+s "Which is why I'd like to help you get off this planet as soon as possible."
+"They keep trying to bring the conversation back to practicalities, but I can tell from their expression that the war weighs heavily on their mind."
+"Now I'm the one uncertain of what to say."
+t "I'm... sorry too."
+t "For the war, and for having terrible timing."
+show scout happy
+"That seems to brighten them up a little - they straighten up, and make an expression rather like a smile."
+s "It really was bad timing, wasn't it...?"
+show scout curious
+s "But you know... it could be an opportunity as well."
+s "If I help you get back to your shuttle tonight, will you do something for me?"
+t "What do you want me to do?"
+s "Tonight, make a run down the hill to your shuttle."
 s "I'll make sure you don't meet any trouble on the way there."
 s "Once you get to it, will you be able to take off safely?"
 t "I should, yes."
 s "Good."
-"They take a small parcel from the bag and hand it to me."
+"They take a small parcel from their bag and hand it to me."
 s "I need you to unwrap this and place it on the ground just before you leave. That's all."
 t "Can I ask what this is for?"
-s "That's not part of our plan."
-s "This is what's on offer - you get out, your shuttle stays intact, you leave and don't look back."
+show scout angry
+s "I'd prefer you didn't."
+s "This is what's on offer - you get out, your shuttle stays intact, you leave and you don't look back."
 s "Is that a deal you can agree to, traveller?"
-"There's something about this plan that bothers me..."
 "But they're right. This is the best option I have if I want to make it away with my ship."
 t "...Yeah, alright. It's a deal."
+show scout sad
+"Almost immediately, they look relieved."
+s "You may have just saved my tribe."
+s "Thank you..."
+t "Don't thank me until we've pulled this off."
 "I step back and scan the area for another tree to climb."
 "But despite myself, before I can get away from the scout, my stomach grumbles."
 show scout curious
@@ -3310,19 +3149,34 @@ show scout curious
 s "I didn't think you'd shovel the whole thing down right in front of me."
 t "I'm sorry. Is that impolite?"
 "I neglect to mention that it's impolite for my own culture."
-s "It doesn't matter."
-s "What I'm more curious about is why you're here at all."
-t "I'm looking for my people."
-t "We were travelling, looking for a new home... I got left behind."
-show scout neutral
-s "I'm so sorry."
-"Their kindness catches me off-guard."
-s "I haven't been off this planet..."
-s "But I know what it's like to be left behind."
-t "Thanks."
+s "Not exactly."
+s "You know, traveller..."
+s "Your people could be dead."
+s "You have no way of knowing if they're still alive."
+s "You could always settle here, after the war is over."
+if calypso1:
+   t "Thank you for the offer..."
+   t "But I have to believe my people are alive."
+   t "I have to believe my daughter is alive..."
+   t "I have to cling to that hope. It's all I have left."
+if calypso2:
+   t "You're right... I have no idea whether my people are alive."
+   t "But I can't give up looking for them."
+   t "I can't give up on my daughter..."
+   t "I wouldn't be able to live with myself if I did."
+s "...I understand."
+s "If you'd asked me to leave with you, I'd have said the same thing."
+if calypso1:
+   s "I have to hope for a better future for my people, even though it seems impossible now."
+   s "And I have to do whatever I can to make that hope a reality..."
+if calypso2:
+   s "I have to try to change things for my people, even if it's impossible."
+   s "There's nothing else I {i}can{/i} do."
+   s "I've stood by for too long already..."
+s "I hope you find your daughter, traveller."
+s "Truly."
 
-scene bg field-night
-with Dissolve(2.0)
+scene bg tentcity-night
 
 "The camp is utterly silent."
 "When I descend from one of my trees, I find the scout waiting for me."
@@ -3333,7 +3187,13 @@ s "Excellent."
 s "I'm going to go down first. There's going to be a bit of noise... that's when you make a run for it."
 s "Get to the shuttle, unwrap the parcel, put it down, get in and get out."
 s "Sound good?"
-t "Sure. Let's do it."
+t "Sure. Good luck."
+show scout curious
+s "Luck?"
+t "I mean... I hope you... do well."
+show scout happy
+s "Ah."
+s "Swift feet to you too... traveller."
 hide scout
 "They take off in a sprint and bound down the hill to the left of the camp."
 "They must be going at least twice as fast as my top speed. It's incredible to watch."
@@ -3344,7 +3204,7 @@ hide scout
 "And then I hear screams."
 "That's when I see the smoke."
 "I want to help them, but I have no time now."
-"I take off running out of the forest and down the hill, past a couple of tents and straight to my shuttle."
+"I take off running out of the forest and down the hill, past a couple of tents and straight to my ship."
 "There's more smoke now. It stings my eyes as I tear the parcel open."
 "I take the object out and crouch down to set it on the ground, as the scout instructed."
 "But when I touch it with both hands, I realize how familiar this looks."
@@ -3353,7 +3213,7 @@ hide scout
 "The large tents are all near here: the infirmary, the nursery..."
 "I stop. The bomb freezes in my hands."
 s "Are you giving up on me now, traveller?"
-show scout suspicious
+scene bg scoutstandoff
 "They circled back to make sure I did the job."
 t "I know what this is. I know what you're planning to do."
 s "And what does it matter to you?"
@@ -3363,6 +3223,10 @@ s "You have no idea what they deserve."
 s "You know there used to be three thousand of us?"
 s "They all died in the war. A war that the leaders of this flock refuse to let end."
 s "So I'm ending it."
+if calypso1:
+   s "I'm making a terrible choice now so my people can have a better future."
+if calypso2:
+   s "I'm doing what I should have done years ago. I'm making a stand."
 t "I won't be a part of this."
 s "You don't have to."
 s "Just give it to me and I'll do the rest. You won't even see it. You'll be in space before it goes off."
@@ -3389,10 +3253,9 @@ label shoot_scout:
 "In a fluid motion, I grab my gun from my holster and flick it upwards."
 "The scout sees it at the last moment."
 "They lunge forward."
-"They make it almost right to me before I take the shot."
+"They almost make it to me before I take the shot."
 "I take another, and another."
 "They fall back and slump to the ground."
-hide scout
 "Carefully, I lay the bomb down on the ground. It's still unarmed."
 "I breathe a sigh of relief and open the hatch."
 "I'm about to climb in when I look up to find the leader staring at me."
@@ -3405,6 +3268,40 @@ t "I'm so sorry."
 
 scene bg space
 with Dissolve(2.0)
+
+jump space3
+
+label bomb_scout:
+
+t "I'll arm it."
+t "That'll give you enough time to escape the blast radius."
+s "...Thank you."
+"The scout steps back."
+s "I hope you find your people."
+if calypso1:
+   s "I hope our beliefs aren't misplaced."
+if calypso2:
+   s "I hope we both find some peace."
+"Taking a deep breath, I look down at the bomb."
+"I hope I'm making the right choice."
+"I press the button and it lights up."
+"I dash to the shuttle, open the hatch and dive inside."
+"As I close it, I see the leader of the camp emerge from one of the tents."
+"Our eyes meet."
+"They look at me, then at the bomb, and I see the realization dawn in their eyes just as the shuttle lifts off."
+"By the time the bomb goes off behind me, I'm safely in the air."
+"I circle around to look at the destruction. I let the image burn into my eyes."
+"But it's the leader's face that stays with me as I push through the atmosphere into space."
+scene bg greenplanet
+"I take a moment to hover in the silence and think about what I've just done."
+if killscout:
+   "Did I save dozens of innocent people?"
+   "Or did I allow a war to continue, one that might kill hundreds?"
+if detonate:
+   "Did I end a war?"
+   "Or did I allow the deaths of dozens of innocent people?"
+"The questions threaten to tear me apart... and for a moment, I let them."
+"Then, with everything I have, I push them out of my mind."
 
 jump space3
 
@@ -3435,8 +3332,11 @@ jump space3
 
 label blue2:
 
-$ inform = False
-$ keepsecret = False
+$ blue1 = False
+$ blue3 = False
+
+$ memories = False
+$ possibilities = False
 $ detonate = False
 $ killscout = False
 
@@ -3455,70 +3355,14 @@ $ killscout = False
 scene bg black
 with Dissolve(2.0)
 
-p "You never talk about where you grew up."
-p "Did you live in a bunker too?"
-p "Did you have a garden?"
-p "What were you like before you had me?"
-if goodspeech:
-   t "I was a hero."
-   t "To the world, I was invincible..."
-   t "And I never let anyone in."
-   p "You're right..."
-   p "You don't let anyone in."
-   p "You never let me in."
-   p "You were my hero, but were you my mother?"
-if badspeech:
-   t "I was pragmatic."
-   t "I did what I had to do to survive."
-   p "What about me?"
-   p "To have a child in the middle of that..."
-   p "I wasn't what you had to do."
-   p "But you made me."
-   t "You were different."
-   p "Was I?"
-   p "Or was I just something you used to pull yourself out?"
-if simplicity:
-   t "I was a problem-solver."
-   t "I was happiest when I could solve the most."
-   t "I felt like I was doing something."
-   p "You mean you were a simple problem-solver."
-   p "You hate anything that's complicated."
-   p "You love me now that I'm a simple problem."
-   p "Find Penelope. Save Penelope."
-   p "But when I was right in front of you, I was too complicated."
-if danger:
-   t "I was a thrill-seeker."
-   t "People like to think of me as some solemn hero..."
-   t "But I liked the violence."
-   t "I liked being in danger."
-   p "And you hated safety."
-   p "You hated the ark."
-   p "You hated coming home to me every night."
-   p "You only had me because your pregnancy was so dangerous."
-if childhome:
-   t "I was a stupid kid from the country."
-   t "All I wanted was to protect my family..."
-   t "But my family died. My whole town died."
-   p "They had to die, didn't they?"
-   p "For you to live."
-   p "If it weren't for them, you would have died a stupid kid."
-   p "You're grateful they died. You wanted them to die."
-   p "It should have been you, not them."
-if newhome:
-   t "I was naive."
-   t "I thought I would live a quiet life..."
-   t "I thought I could make a new home."
-   t "A new home with you, Penelope."
-   p "That's never what you wanted and you know it."
-   p "You're still naive."
-   p "You're naive because you think you're any smarter than you were back then."
-p "I hate you, mom."
-p "No..."
-p "I don't even know you."
-p "You're not my mother."
+if green1:
+   jump green1dream
+if orange1:
+   jump orange1dream
 
-scene bg space
-with Dissolve(2.0)
+label blue2_postdream:
+
+scene bg blueplanet
 
 "I feel a terrible weight on my chest."
 "The weight wakes me up, but my body refuses to move."
@@ -3573,11 +3417,14 @@ with Dissolve(2.0)
 "A tree branch has been torn from a tree, leaving the spot open."
 if blue1:
    "It's fresh. This must have happened recently."
-if blue2:
+else:
+  if blue2:
    "The tree has started growing back. I don't know how fast anything grows here, so I don't know what that means, but it's not fresh."
-if blue3:
-   "I barely notice the break - a new branch has almost completely taken its place."
-"It's too small to have been caused by the ark."
+  else:
+   if blue3:
+     "I barely notice the break - a new branch has almost completely taken its place."
+   else:
+     pass
 "My heart sinks."
 "But it could still be something. I have to at least look for it."
 "I squint up at the crack in the branch and follow the direction it points."
@@ -3642,6 +3489,7 @@ menu:
    "He pauses for a moment to catch his breath. I have a chance to speak."
    "Dress him down.":
       $ speakup = True
+      $ stayquiet = False
       t "You think you're the only one with fucking problems?"
       t "The ark abandoned me! After everything I did!"
       if calypso1:
@@ -3668,6 +3516,7 @@ menu:
       show hector mid sad
    "Apologize.":
       $ stayquiet = True
+      $ speakup = False
       "I swallow my pride."
       "I could tell him off now, but it would just make me look weak."
       "So instead, I lift my head and meet his eyes."
@@ -3815,8 +3664,8 @@ label green3:
 
 $ revolted = False
 $ understand = False
-$ burial = False
-$ leavebe = False
+$ shoothim = False
+$ savehim = False
 
 "I type in the coordinates for the green planet."
 "It looks like it would harbor the most similar climate to Earth, given the distance to its sun..."
@@ -3833,108 +3682,14 @@ $ leavebe = False
 "Is that planet Earth? Is it Calypso? Or is it a place I'll never find?"
 "The thought haunts me as I drift away."
 
-scene bg black
-with Dissolve(2.0)
+if blue2:
+   jump blue2dream
+if orange2:
+   jump orange2dream
 
-"My shuttle pulls into the ark."
-"I open the hatch and I'm in our room again."
-"Penelope is waiting for me."
-p "I've missed you, mom."
-p "So much."
-p "The ark's missed you too."
-p "They know what you did."
+label green3_postdream:
 
-if speakup:
-   p "They know you hate your men."
-   p "They know you hate all of us."
-   p "You've always hated us."
-   "She is holding a hammer."
-   "She swings it and it hits the window."
-   "The glass breaks into a spider's web of cracks."
-   "She hands the hammer to me."
-   p "They want you to take the final swing."
-   p "You've always wanted this, right?"
-   p "Go on."
-   p "You're so worried about time... so end it."
-   p "End it, now."
-   p "{i}End it!{/i}"
-
-if stayquiet:
-   p "They know your secrets."
-   p "They know how much you resent us."
-   p "They know you wish you weren't with us."
-   "She is holding a gun."
-   "She loads it, turns the safety off, and hands it to me."
-   p "They want you to do it yourself."
-   p "They know this is what you wanted."
-   p "They wanted me to watch, so I know too."
-   p "So do it, mom."
-   p "You're so sick of everyone on this ark... so end it."
-   p "End it, now."
-   p "{i}End it!{/i}"
-
-if detonate:
-   p "They know what you are."
-   p "They know what you would do to us if we became inconvenient."
-   p "You want us to think you make sacrifices..."
-   p "You want us to think that we're important to you..."
-   p "But how important are we, really?"
-   "She is holding a bomb."
-   p "This is how important we are."
-   p "They wanted you to show them."
-   p "They wanted you to show me."
-   p "So show me."
-   p "Show me how much you care."
-   p "Show me what you would do if we stopped believing in you."
-   p "Show me."
-   p "{i}Show me!{/i}"
-
-if killscout:
-   p "They know what you think of them."
-   p "They know what you think of yourself."
-   p "You call it heroism. You call it sacrifice..."
-   p "But the truth is, their opinions mean nothing to you."
-   p "You only care about yourself."
-   p "You only trust yourself."
-   "She is holding a switch... it's the switch that opens the hangar doors."
-   p "Get out."
-   "She pushes me from our room and into the hangar."
-   p "Get out!"
-   "She pulls the switch. The air drains from my lungs."
-   "Everything spins around me."
-   p "{i}Get out!{/i}"
-
-if inform:
-   p "They know how you are."
-   p "They know you'd betray anyone... even a child."
-   p "Even me."
-   p "As soon as we become a problem, you abandon us."
-   "She is holding a knife."
-   "She is the boy now, and I am his sister."
-   "I look down and I am bleeding and rotting and I am made of ash."
-   p "This is what you deserve."
-   p "Die, mother."
-   p "Die."
-   p "{i}Die!{/i}"
-
-if keepsecret:
-   p "They know what you'd do for me."
-   p "They know that you wouldn't stop me."
-   p "Even if I killed everyone on this ark..."
-   p "You wouldn't stop me."
-   p "You'd be proud of me."
-   "She is the boy now, and I am his father."
-   "She is holding a knife, and we are covered in black."
-   p "Come on, mom. Take the first hit."
-   "Penelope's body lies in front of me."
-   "Penelope hands me her knife."
-   p "Take the hit."
-   p "Do it..."
-   p "Kill her!"
-   p "{i}Kill her!{/i}"
-
-scene bg space
-with Dissolve(2.0)
+scene bg greenplanet
 
 "I wake up a little at a time, and then all at once. I gasp sharply and open my eyes with a start."
 "I feel as if I've almost drowned, but my body isn't starved for air."
@@ -3952,7 +3707,6 @@ with Dissolve(2.0)
 "But I'm low on food, and my energy core's readings are fluctuating dangerously."
 "It needs a rest. So I have to land."
 "I pick a spot that looks as clear as possible of the cities and structures that litter the planet's surface."
-"The ship makes a smooth landing just near what looks like a forest."
 
 scene bg field-day
 with Dissolve(2.0)
@@ -4025,7 +3779,7 @@ t "What happened to the scout?"
 l "They died in the explosion."
 t "But why did they do it in the first place?"
 t "What drove them to that point?"
-l "We'll likely never know."
+l "We'll probably never know."
 "I put down my food and walk down to the statue."
 "Its face is lithe and pointed, almost aerodynamic."
 "But its expression, at least to me, is indiscernable."
@@ -4072,14 +3826,14 @@ menu:
       $ desperate = True
       t "I assume they were working alone?"
       l "Yes, they were."
-      if childhome:
-         t "The pain of enduring a system that is actively hostile towards you..."
-      if newhome:
-         t "The pain of hoping for a better future, only to watch that future slip away as things got worse and worse..."
-      if keepsecret:
+      if playroom:
+         t "The pain of suppressing yourself to endure a system that is actively hostile towards you..."
+      if saferoom:
+         t "The pain of uncertainty - of hoping for a better future, only to watch that future slip away as things get worse and worse..."
+      if possibilities:
          t "The pain of uncertainty - of watching things get worse and not knowing how to stop it..."
-      if inform:
-         t "The pain of divided loyalties - of wanting to stay with their flock but being unable to stand the atrocities they were committing..."
+      if memories:
+         t "The pain of losing faith - of remembering how much better things used to be, and having to let go of those memories..."
       t "To be alone with all that pain must have been unbearable."
       t "If only they knew that their pain had a purpose."
 l "You're right..."
@@ -4129,10 +3883,10 @@ jump space4
 
 label orange3:
 
-$ understand = False
 $ revolted = False
+$ understand = False
 $ desperate = False
-$ lonely = False
+$ selfless = False
 
 "I punch in the coordinates for the orange planet."
 "A warmer planet might be more promising for settlement..."
@@ -4148,108 +3902,14 @@ $ lonely = False
 "Even if we had to go it alone, I would have made sure we built our home somewhere she liked."
 "The thought lingers with me as I drift into stasis."
 
-scene bg black
-with Dissolve(2.0)
+if blue2:
+   jump blue2dream
+if green2:
+   jump green2dream
 
-"My shuttle pulls into the ark."
-"I open the hatch and I'm in our room again."
-"Penelope is waiting for me."
-p "I've missed you, mom."
-p "So much."
-p "The ark's missed you too."
-p "They know what you did."
+label orange3_postdream:
 
-if speakup:
-   p "They know you hate your men."
-   p "They know you hate all of us."
-   p "You've always hated us."
-   "She is holding a hammer."
-   "She swings it and it hits the window."
-   "The glass breaks into a spider's web of cracks."
-   "She hands the hammer to me."
-   p "They want you to take the final swing."
-   p "You've always wanted this, right?"
-   p "Go on."
-   p "You're so worried about time... so end it."
-   p "End it, now."
-   p "{i}End it!{/i}"
-
-if stayquiet:
-   p "They know your secrets."
-   p "They know how much you resent us."
-   p "They know you wish you weren't with us."
-   "She is holding a gun."
-   "She loads it, turns the safety off, and hands it to me."
-   p "They want you to do it yourself."
-   p "They know this is what you wanted."
-   p "They wanted me to watch, so I know too."
-   p "So do it, mom."
-   p "You're so sick of everyone on this ark... so end it."
-   p "End it, now."
-   p "{i}End it!{/i}"
-
-if detonate:
-   p "They know what you are."
-   p "They know what you would do to us if we became inconvenient."
-   p "You want us to think you make sacrifices..."
-   p "You want us to think that we're important to you..."
-   p "But how important are we, really?"
-   "She is holding a bomb."
-   p "This is how important we are."
-   p "They wanted you to show them."
-   p "They wanted you to show me."
-   p "So show me."
-   p "Show me how much you care."
-   p "Show me what you would do if we stopped believing in you."
-   p "Show me."
-   p "{i}Show me!{/i}"
-
-if killscout:
-   p "They know what you think of them."
-   p "They know what you think of yourself."
-   p "You call it heroism. You call it sacrifice..."
-   p "But the truth is, their opinions mean nothing to you."
-   p "You only care about yourself."
-   p "You only trust yourself."
-   "She is holding a switch... it's the switch that opens the hangar doors."
-   p "Get out."
-   "She pushes me from our room and into the hangar."
-   p "Get out!"
-   "She pulls the switch. The air drains from my lungs."
-   "Everything spins around me."
-   p "{i}Get out!{/i}"
-
-if inform:
-   p "They know how you are."
-   p "They know you'd betray anyone... even a child."
-   p "Even me."
-   p "As soon as we become a problem, you abandon us."
-   "She is holding a knife."
-   "She is the boy now, and I am his sister."
-   "I look down and I am bleeding and rotting and I am made of ash."
-   p "This is what you deserve."
-   p "Die, mother."
-   p "Die."
-   p "{i}Die!{/i}"
-
-if keepsecret:
-   p "They know what you'd do for me."
-   p "They know that you wouldn't stop me."
-   p "Even if I killed everyone on this ark..."
-   p "You wouldn't stop me."
-   p "You'd be proud of me."
-   "She is the boy now, and I am his father."
-   "She is holding a knife, and we are covered in black."
-   p "Come on, mom. Take the first hit."
-   "Penelope's body lies in front of me."
-   "Penelope hands me her knife."
-   p "Take the hit."
-   p "Do it..."
-   p "Kill her!"
-   p "{i}Kill her!{/i}"
-
-scene bg space
-with Dissolve(2.0)
+scene bg orangeplanet
 
 "I wake up to a red glow."
 "Is it sunlight?"
@@ -4299,8 +3959,8 @@ with Dissolve(2.0)
 t "Penelope?"
 "I get to the water source. It's a tiny underground lake. Light from outside reflects off of the surface and paints patterns on the ceiling."
 "Faintly, I can see objects in the deeper caves. Furniture?"
-"The floors are stained with strips of black - some unfamiliar chemical, perhaps, though I see no residue of it on the ceiling."
-"But I don't have time for that--"
+"But there's something else there too, something by the wall. I squint to make out the shape--"
+"And hear another splash."
 "There's something in the water."
 "It looks up at me. It's a little like a lizard, but with long legs and fangs like a wolf."
 "It's got some sort of meat in its mouth."
@@ -4312,121 +3972,245 @@ t "Penelope?"
 "I take a long breath. I guess I just found dinner."
 "I step into the water to look at what the beast was eating, and find a tiny body floating there."
 "It looks a little like an ant, but about as large as a human child."
-"The beast didn't kill it, that much is clear - it looks gaunt and thin. I think it starved to death."
+"The beast didn't kill it, that much is clear - it looks gaunt and pallid. Was it illness, or starvation?"
 "Its face looks vulnerable - it has big, expressive eyes."
-"Gingerly, I lift it from the water and lay it on the ground."
-"I'm about to leave when I see another body, hidden from view in the darkness of the cave."
-"It looks like the same species, but this one is an adult, almost as tall as me."
-"Unlike its child, it looks like it died violently."
-"Was this the lizard's work?"
-"It could be... but the wounds on this one's body are precise."
-"It looks like it was stabbed in the stomach - probably with a weapon, not a tooth."
-"I recoil when I see the black liquid in a puddle around its body. It's blood."
-"So that was blood at the entrance as well..."
-"It was dragged here."
-"All of a sudden I feel sick to my stomach."
-"I look around the cave. Now that my eyes have adjusted, I can see the outline of the home this place once was."
-"At the far end of the lake, there's a dining table. Off to the side there are two small sleeping areas."
-"There's a desk. Arranged on top of it in a little pattern are tiny rocks and gems of all colours and shapes."
-"I notice what looks like a book. The paper feels coarse like sand. It's filled with drawings done in thick black charcoal lines."
-if goodspeech:
-   "I flip through to a picture of a family."
-   "They're splashing in playing in the water together: a parent and two children."
-   "Their eyes have a haunting quality to them - they're just a little too wide, looking more at me than they are at each other."
-if badspeech:
-   "I flip to a picture of the cave from outside."
-   "The cave looks peaceful and calm in the center of the frame, but encroaching in from the edges are the spindly branches and arms of shrubs."
-if simplicity:
-   "I flip to a picture of one of the aliens from close up. It looks younger than the body I found - it's smaller and rounder, and its eyes are big and hopeful."
-   "But it doesn't look happy. Its eyes are hard to read, but to me it looks like pain, or perhaps fear."
-if danger:
-   "I flip to a close-up picture of the adult alien. It's drawn looking down at the viewer."
-   "I'm not sure whether to read contempt or care into its face. Perhaps both."
-if speakup:
-   "Next, I turn to a picture drawn from farther away, looking down on the cave."
-   "The mountains in the distance and the sky are bright, but the cave itself is drawn with thick, dark strokes."
-   "It looks foreboding, like a warning: stay away."
-if stayquiet:
-   "Next, I turn to a picture drawn from farther away, looking down on the cave."
-   "The mountains in the distance and the sky are bright, but the cave itself is drawn with thick, dark strokes."
-   "It looks like a trap. Someone's trapped there and they can't get out."
-if detonate:
-   "Next, I turn to a picture of one of the aliens. It's from afar, but the alien takes up almost the entire page."
-   "It's larger than the others - they bow and kneel before it, bearing gifts for it."
-   "In its eyes I see anger and violence: a tyrant ruling over its subjects."
-if killscout:
-   "Next, I turn to a picture of one of the aliens. It's from afar, but the alien takes up almost the entire page."
-   "It's larger than the others - they bow and kneel before it, bearing gifts for it."
-   "In its eyes I see cold, quiet pride: the face of someone who's done terrible things to get where they are."
-"Finally, I turn to a portrait."
-"It's the spitting image of the dead child, staring straight ahead at me with a life the other pictures don't have."
-if calypso1:
-   "It looks tentative and fearful, but hopeful too."
-else:
-   "It looks tired. Weighed down by the world. And it looks so afraid."
-if truth:
-   "I feel like it's Penelope staring back at me, surviving all alone out there, waiting for me to find her."
-else:
-   "I feel like it's Penelope staring back at me, terrified and alone and confused, wondering where I am."
-"I put the book down."
-"Just next to the book is what looks like a pantry. Luckily, it's filled with canned foods."
-"I open one and eat it. It has the texture of porridge, but tastes more like dragonfruit."
-"My stomach seems to tolerate it, at least."
-"It will have to do for a meal. I eat another can."
-"When I'm finished eating, all that's left are the bodies."
-"I've intruded into their home, eaten their food."
-menu:
-   "I should..."
-   "Bury them.":
-      $ burial = True
-      $ leavebe = False
-      "I find what looks like a scoop for water and dig two holes side by side near the mouth of the cave."
-      "I dig until I hit the stone."
-      "Hoping it's deep enough to ward off scavengers, I lay the bodies carefully next to each other and cover them with dirt."
-      "I find a couple of large stones and place them over the graves."
-      "I feel like I should say something."
-      if calypso1:
-         t "I hope you find your way, wherever you've gone."
-      else:
-         t "I hope you find the peace you didn't find here."
-      jump after_burial
-   "Leave them be.":
-      $ burial = False
-      $ leavebe = True
-      "I've intruded enough. And I have no idea what this species does with their dead."
-      "All I know is this family. This looks tragic to me, but for all I know it could be normal in their world."
-      "I resign myself to the complete otherness of the situation."
-      "I lay the bodies next to each other in the sleeping area."
-      if calypso1:
-         t "I hope they find their way."
-      else:
-         t "I hope they find some peace."
-      jump after_burial
-label after_burial:
+"Gingerly, I lift it from the water and lay it on the ground. I can barely feel its weight in my arms."
+"I'm about to leave when the silhouette from before catches my eye again, deep in the darkness of the cave."
+"It looks like the same species, but this one is an adult, almost as tall as me. It's lying slumped against the wall."
+"It's got some sort of black liquid on its hands and torso... and its hands are so burned that their shape is almost warped."
+"I kneel in front of it. I should put it next to the young one."
+"My hand touches its shoulder--"
+"And the impact hits me like a truck."
+"I'm alone. I'm so profoundly alone. She's dead. She's dead..."
+"No one I have ever known will remember me. They're dead, or they hate me, or they're ashamed--even now, even so far away, I can feel it--"
+"Her body is so light in my arms. It weighs nothing. It weighs nothing!"
+"And I feel his body too."
+"My son. My baby boy..."
+"I want to see the surface, dad. To touch the light. All I wanted was--"
+"Forgive me, please, forgive me."
+"Take me back."
+"Take me with you. Take me to where you went. Where did you go--where did you all go?"
+"Wake up, sweetie. Wake up, Nel. Stay with me. Don't go."
+"But her body rolls over limp and mangled, and her eyes are open."
+"Don't go..."
+"No..."
+"Take me with you."
+"Please. Don't leave me alone."
+"Kill me. Please, kill me."
+"His hands are gripping mine now, and they're {i}my{/i} hands again - but my hands are shaking with the deaths of my children."
+d "Kill me. Don't make me go on. Don't make me go back.."
+"I feel my gun in its holster, and his fingers around mine."
+"But I feel my own fingers, too. I feel what he feels."
+"I see myself reflected in his eyes, and I see him reflected in my own."
+"My mother..."
+"My mother wants me back."
+"My mother's waiting for me. She made my favorite soup..."
+"If I can stand... then I can go home. I can go back."
+"I feel their shame and their hatred... but they miss me. I feel that too."
+"But the weight of their bodies and the burns on my hands and my feet... they're so light, so terribly light... how can I stand? How can I move?"
+"Take me with you... take me with you."
+menu suicide_menu:
+  "It would be like killing myself."
+  "Shoot him.":
+      $ savehim = False
+      $ shoothim = True
+      jump shootdad_resolve
+  "Save him.":
+      $ savehim = True
+      $ shoothim = False
+      jump savedad_resolve
 
+label shootdad_resolve:
+"I hold his fingers with one hand as I reach for my gun."
+"I try to speak, but I can't find my voice."
+"I hold my mouth open and I hold the gun to his head."
+"I look at my daughter's body. It was in the water. Where is it - where--"
+"The gunshot goes off. My ears ring. The pain registers for one horrible split second."
+"I feel my fingers go limp. My vision blurs until it's all black and orange and quiet and dark."
+"The burning in my fingers and the pain in my feet go numb."
+"My children. Where are my children? Where is my family?"
+"Where did you go?"
+"Let me find you."
+"I see light again."
+"Not the light, please, not the light."
+"It burned us all so terribly..."
+"..."
+"My body is my own again."
+"My hands are covered in his blood."
+"I lie down on the ground next to his body."
+"Finally, a sound escapes my lips - but it's not words. It's a sound so alien that for a second I worry it's the animal, come back to feast on the body."
+"It's a wail. It hardly feels like it's coming out of my mouth."
+"Finally when it runs out of breath it becomes a sob, and then I'm crying and holding myself."
+"I cry for my family... for the children I've lost. For their bodies, which felt so like Penelope, so warm and excited in life and so light and frail in the end."
+"I weep for my lover, for the people I left behind, for the hope I felt leaving them and the terror I felt when they were gone."
+"Most of all, I weep for my mother."
+"My mother died when I was young, but she's waiting for me still, waiting underground where I left her. I feel echoes of her on quiet, hungry nights, and I try to tell her how much of a mistake it was."
+"I'm so sorry, mother, I try to say. But she won't hear me. She won't hear me ever again."
+"I cry until my body can't take the strength of my sobs."
+"The sobs become whimpers, which become labored breaths, and then silence."
+"I'm not sure if I sleep, or if I lie here for a long time."
+"But when I open my eyes again, it's dark outside, and I feel as if I've awoken sobbing from a dream."
+"The sadness lingers in my throat, but it is unmoored - the thing that made it so sharp has drifted away."
+"I stand up."
+"My mind has failed me, but though I can barely think, my body moves, almost mechanically."
+"I lift the father's body and place it next to his daughter's."
+"I find something resembling a tool in the deeper rooms of the cave, and I dig a grave big enough for them both."
+"First, I lay him down. Then I return for her."
+"The weight of her body makes my hands shake. She weighs nothing - nothing at all."
+"For a second, I see Penelope again ... but even that vision doesn't hurt as much as the sight of my child now, dead in my arms."
+"The gun goes off again in my mind. The burns on my fingertips numb, and the light... the light..."
+"She is so light."
+"I lay her down next to him."
+"With every shovelful of dirt, the feeling becomes more indistinct - as if I'm burying it, too, in my mind."
+"But it lingers."
+"My daughter is dead."
+"My family is dead."
+"The tears come again as I smooth out the dirt."
+"I don't know how long I cry, or what else I do in the cave - time simply stops registering."
+"But I'm there, for a time. And then that time is up."
+
+scene mountains bg
+
+"The light hurts my eyes as I walk back to the shuttle. But every step reminds me: I am not burnt. I've survived the light."
+"My daughter is alive."
+"My daughter is alive..."
+"She's waiting for me."
+"Isn't she?"
+"Isn't she?"
+"I'm in space again."
+"The light is gone. Now I'm in the dark..."
+"And I have nowhere else to go."
+"In the silence, the memories of my dead family linger like dreams."
+"But dreams are all I have left, and so they hurt as terribly as the waking world."
+
+jump space4
+
+label savedad_resolve:
+
+t "...No. No, not today."
+"I take his hands with both of my own. I can feel his hands feeling mine... but he doesn't show me any more of his visions."
+"He stops himself."
+"I look up at him to find him staring at me, his eyes full of sorrow... but resigned."
+d "Please..."
+t "I can't kill you. I can't."
+"He wants to stop me. He wants to tear open the wound in his belly... but he doesn't have the strength."
+"His eyes close, and I feel him fall into sleep."
+"Once he's unconscious, I lie him down by the side of the water. From my pockets I get a handkerchief and some rubbing alcohol."
+"I dilute the alcohol with water from the cave, pour it over my handkerchief and rub it along the wound on his torso."
+"He flinches, but he barely wakes up. Either his species doesn't sting like I do when I disinfect a wound, or he's too exhausted to react."
+"Once I've cleaned the wound up, I grab my spare bandages from my other pocket and wrap it up, with a clean piece of the handkerchief over the wound."
+"He'll need food and water now, but from the looks of his feeler, he probably can't eat solid food. I frown at the lizard creature, still dead at the other end of the cave."
+"I rifle around the cave for supplies and find a large stone bowl and what looks almost like a potato masher, built as it is for this species's delicate hands."
+"First, I put a fire on by the mouth of the cave. By now, it's almost dark, and the fire's warmth is welcome."
+"My knife is small, but I manage to skin the lizard. I slice thin slices off of its belly and lay them in the stone bowl, then mash them as they cook into something almost akin to roast beef, though it smells sour and spicy, like pepper."
+"I squeeze a bit of its blood from its body and add it to the mixture."
+"The result - the sour undertones, the peppery notes in the smell, the thick, dark blood - should be revolting, but I find it somehow familiar."
+"I had this once, as a child."
+"My mother made it for me. She used spices I don't have, and it smelled a lot better. But the meat was so hard to find back then, so we could only have it on special occasions."
+"We had it after the ceremony, when I got my worker's tools and moved to the adults' den."
+"I didn't feel like an adult. I almost turned my nose up at the food. But she was so proud that she made it that I..."
+"The smell makes my mouth water now. It even wakes him up, though he can barely move."
+"I find a smaller bowl deeper in the cave and scoop the liquid up into it, then bring it to him. He finds it with his feeler and starts to slurp it up."
+"I feel the taste of the food in my mouth, and all at once I feel like I haven't eaten in days. The food almost makes me sick, it tastes so good."
+"He watches me as he eats. He barely has the energy to feel anything, and his exhaustion seeps into me. Does he feel my anxiety, I wonder? The fear that he might recover the strength to feel again, and pass the feeling on to me?"
+"If he senses it, he doesn't care - instead, he eats in silence. When he's finished his bowl, I get him some water, and when he's finished with that, I let him rest while I eat my own portion."
+"I find what looks like a blanket in the cave and put it over him, and while he drifts in and out of consciousness, I cook as much of the meat as I can and place it in the coolest part of the cave I can climb down to."
 scene bg black
-with Dissolve(2.0)
+"It's pitch black outside of the cave now. I take in what's left of the fire, and as it burns down to embers, I lie down next to it and try to get some rest."
+"I'm awoken in the night by a pain in my chest."
+"For a single, bleary second, contrasted with the timeless blankness of my dreams, it feels physical, and I grab at my chest to feel for wounds."
+"The second wave of it comes as I start to wake up, and finally it comes into focus: it's heartbreak."
+"That's when I hear the sound,"
+"A low, shuddering whistle, high-pitched to my ears, but baritone deep in my memories. The sound threatens to fade with every tiny movement of his body - movements that I feel, too - but it comes out sharper and more melodic and it cuts deeply, so deeply."
+"Something inside tells me to join the sound - but my body isn't made for it. Instead, it brings tears to my eyes, and before I can bring my lips together to whistle they're broken apart by a sob."
+"I lurch forward and grab my knees and heave my shoulders to support the cries, to contain them, to reduce their effects - but they keep coming."
+"The cave is filled with his piercing whistle and my choked gurgling. The sounds don't harmonize, but the rhythm of my crying aligns with the shudders in his notes, and soon we're shuddering in tandem across the cave."
+"I don't know how long we continue like that. At some point, it gets light outside, and we awake and eat more of the meat - but then it's dark again, and we're still in the grips of this sadness that comes in waves and alien noises."
+"Finally, exhaustion overtakes him, and he sleeps - and between my own cries, I drift off too."
+"In my dreams, I see my children: Penelope, but these two others as well. They're playing together. They're happy."
+"We're in a house on the hillside. Our mother's watching from the garden, and sunlight is streaming in the window."
+"My companion catches my eye from across the room, and our eyes meet. He nods slowly, lingers a moment... and steps outside."
+"I awake to the sounds of movement."
 
-"By the time I emerge from the cave, it's dark, but I manage to make my way to the shuttle."
-"I'm relieved to find the shuttle's energy core is charged. I want nothing more than to leave this planet right now."
+scene bg cave
 
-scene bg space
-with Dissolve(2.0)
+show dad neutral
 
-"I find myself still shaken by the scene, even when the planet is far behind me."
-"Is that what I'll find, when I find Penelope?"
-"Did she starve to death waiting for me to come back?"
-"I find myself almost in tears at the thought."
-"I have to put it out of my mind, though... so I push it to the back of my thoughts and turn to the screens."
+"He places a bowl of the meat next to me and returns to his seat."
+"His things are organized neatly on the table in front of him: clean bandages, food for the next two days, water, and first aid. But the rope. Where's the rope?"
+"It's near me. I pick it up and place it where he wants it, in the corner next to the bandages."
+"He glances upwards, but doesn't look at me."
+"I'm not sure whether it's him who realizes it or me, but the thought drifts to my mind and I say it aloud."
+t "We were dreaming together."
+"I didn't think it was possible - until now, I didn't think he could sense my emotions as I can feel his - but I remember the dream as he saw it. Even the house was the same."
+"He looks at me now. I feel another wave of the sadness coming on, but he holds it back - for both our sakes."
+"I sit down opposite him."
+show dad sad
+d "Why?"
+"The weight of the word means he has to say it aloud, but he can't finish his thought. His mind finishes it for him."
+"Why did you save me?"
+"Why didn't you let me go?"
+"Why can't I join them?"
+"Why can't I do it myself?"
+"There are other whys too, but they drift off into questions I can't answer, and questions I don't understand, and finally questions about myself, questions that must be my own mind thinking them."
+t "They miss you."
+t "You can go back. You can still go back."
+"I don't know whether these are my thoughts are his... but they bring tears to my eyes."
+t "I can't go back anymore. My home is gone. Sometimes it feels like everything is gone. I wander out into the dark and I'm so terribly alone that I can barely bear it."
+t "If I could go back... if I could go back to Earth, even if it meant losing the chance at seeing Penelope again..."
+if missyou:
+   "To Scout..."
+if calypso2:
+   "To Calypso..."
+"To the house on the hillside where I grew up..."
+"To my own bed, where I haven't slept in so many years..."
+t "I can't go back. But you can."
+t "Your mother's waiting for you."
+"We're both crying, in our own ways, by the time I finish speaking."
+"My hands are shaking on the table... and he reaches out and takes them."
+
+scene bg mountains
+with Fade(1.0)
+
+"The next day goes by in the same haze as before."
+"We barely talk - it seems like he's not used to it."
+"We walk around the cave, we eat food and we take turns bathing in the water, but mostly, we just sit, and think about what we've lost."
+"As the sun sets, he asks for my help burying his child."
+"We dig a deep, narrow hole, and when he places her inside, I can feel the lightness of her body in my arms."
+"I remember when she was alive, how much energy she had. How happy she was to see the sunlight for the first time."
+"I try to hold on to that memory for him."
+"We sit for a long time after that. Finally, when the cave is dark, I fall asleep."
+"When I wake up, he's gone."
+"I should be worried - but I know that he's started his way back underground."
+"Distantly, I can feel wet, cool rocks on my hands, and his careful movements as he makes his descent."
+"So I gather my own things and head out just as the sun is about to peak in the sky."
+"The farther I get from the cave, the more distantly I feel him - but his memories linger in me, alongside my own. His losses hurt as mine did."
+"I buried my child last night. I never knew her, but her loss makes my hands shake."
+"As the ship climbs into space, my heart jolts, reacting to something I can't see."
+"Did he fall?"
+"Did he see his mother again?"
+"I lose the feeling before I can find out its source - like waking up crying from a dream."
+"Should I have taken him to his family?"
+"Would I have gone back?"
+"The question lingers on my mind as I look out into the dark."
+"But I can't go back."
+"Even if there was something for me there... I don't have the coordinates."
+"I have nowhere to go."
+"And so, as we did in the cave... I sit."
+"Time moves in a haze."
 
 jump space4
 
 label blue3:
 
-$ burial = False
-$ leavebe = False
+$ blue3 = True
+$ blue1 = False
+$ blue2 = False
+
+$ savehim = False
+$ shoothim = False
 $ desperate = False
-$ lonely = False
+$ selfless = False
 
 "I put in the coordinates for the blue planet."
 "The higher temperature variation could mean a higher likelihood for inhabitability."
@@ -4440,108 +4224,14 @@ $ lonely = False
 "At the edge of sleep, I still feel like I'm in the water with Calypso."
 "I swear I can feel it lapping against my hair."
 
-scene bg black
-with Dissolve(2.0)
+if green2:
+   jump green2dream
+if orange2:
+   jump orange2dream
 
-"My shuttle pulls into the ark."
-"I open the hatch and I'm in our room again."
-"Penelope is waiting for me."
-p "I've missed you, mom."
-p "So much."
-p "The ark's missed you too."
-p "They know what you did."
+label blue3_postdream:
 
-if speakup:
-   p "They know you hate your men."
-   p "They know you hate all of us."
-   p "You've always hated us."
-   "She is holding a hammer."
-   "She swings it and it hits the window."
-   "The glass breaks into a spider's web of cracks."
-   "She hands the hammer to me."
-   p "They want you to take the final swing."
-   p "You've always wanted this, right?"
-   p "Go on."
-   p "You're so worried about time... so end it."
-   p "End it, now."
-   p "{i}End it!{/i}"
-
-if stayquiet:
-   p "They know your secrets."
-   p "They know how much you resent us."
-   p "They know you wish you weren't with us."
-   "She is holding a gun."
-   "She loads it, turns the safety off, and hands it to me."
-   p "They want you to do it yourself."
-   p "They know this is what you wanted."
-   p "They wanted me to watch, so I know too."
-   p "So do it, mom."
-   p "You're so sick of everyone on this ark... so end it."
-   p "End it, now."
-   p "{i}End it!{/i}"
-
-if detonate:
-   p "They know what you are."
-   p "They know what you would do to us if we became inconvenient."
-   p "You want us to think you make sacrifices..."
-   p "You want us to think that we're important to you..."
-   p "But how important are we, really?"
-   "She is holding a bomb."
-   p "This is how important we are."
-   p "They wanted you to show them."
-   p "They wanted you to show me."
-   p "So show me."
-   p "Show me how much you care."
-   p "Show me what you would do if we stopped believing in you."
-   p "Show me."
-   p "{i}Show me!{/i}"
-
-if killscout:
-   p "They know what you think of them."
-   p "They know what you think of yourself."
-   p "You call it heroism. You call it sacrifice..."
-   p "But the truth is, their opinions mean nothing to you."
-   p "You only care about yourself."
-   p "You only trust yourself."
-   "She is holding a switch... it's the switch that opens the hangar doors."
-   p "Get out."
-   "She pushes me from our room and into the hangar."
-   p "Get out!"
-   "She pulls the switch. The air drains from my lungs."
-   "Everything spins around me."
-   p "{i}Get out!{/i}"
-
-if inform:
-   p "They know how you are."
-   p "They know you'd betray anyone... even a child."
-   p "Even me."
-   p "As soon as we become a problem, you abandon us."
-   "She is holding a knife."
-   "She is the boy now, and I am his sister."
-   "I look down and I am bleeding and rotting and I am made of ash."
-   p "This is what you deserve."
-   p "Die, mother."
-   p "Die."
-   p "{i}Die!{/i}"
-
-if keepsecret:
-   p "They know what you'd do for me."
-   p "They know that you wouldn't stop me."
-   p "Even if I killed everyone on this ark..."
-   p "You wouldn't stop me."
-   p "You'd be proud of me."
-   "She is the boy now, and I am his father."
-   "She is holding a knife, and we are covered in black."
-   p "Come on, mom. Take the first hit."
-   "Penelope's body lies in front of me."
-   "Penelope hands me her knife."
-   p "Take the hit."
-   p "Do it..."
-   p "Kill her!"
-   p "{i}Kill her!{/i}"
-
-scene bg space
-with Dissolve(2.0)
+scene bg blueplanet
 
 "I feel a terrible weight on my chest."
 "The weight wakes me up, but my body refuses to move."
@@ -4596,11 +4286,14 @@ with Dissolve(2.0)
 "A tree branch has been torn from a tree, leaving the spot open."
 if blue1:
    "It's fresh. This must have happened recently."
-if blue2:
+else:
+  if blue2:
    "The tree has started growing back. I don't know how fast anything grows here, so I don't know what that means, but it's not fresh."
-if blue3:
-   "I barely notice the break - a new branch has almost completely taken its place."
-"It's too small to have been caused by the ark."
+  else:
+   if blue3:
+     "I barely notice the break - a new branch has almost completely taken its place."
+   else:
+     pass
 "My heart sinks."
 "But it could still be something. I have to at least look for it."
 "I squint up at the crack in the branch and follow the direction it points."
@@ -4694,12 +4387,12 @@ if green1:
    if missyou:
       t "I left part of my heart there."
       t "If I could, I'd go back. But I have to find Penelope."
-else:
+if orange1:
    t "I met a family there. Helped them build a home."
-   if childhome:
-      t "It reminded me of Earth. Of what we've lost."
-   else:
-      t "It reminded me of what I want to build with Penelope. Wherever we end up."
+   if saferoom:
+      t "It reminded me of the comfort we've lost, being so unmoored for so long."
+   if playroom:
+      t "It reminded me of the happiness we've lost, being so unmoored for so long."
 t "I left, and went to another planet marked by the ark..."
 if green2:
    t "There was a civil war going on among the species there, and I landed in the middle of it."
@@ -4708,16 +4401,15 @@ if green2:
       t "They were going to do something terrible."
       t "Maybe I didn't know enough about their culture..."
       t "But I couldn't just watch it happen. So I stopped them."
-   else:
-      t "I stumbled onto some political machinations. I had a hard choice to make."
+   if detonate:
+      t "I stumbled into a civil war. I had the chance to end the war - to make a terrible choice."
       t "I still don't know if I made the right one."
 else:
    t "I met a family there. They'd built a home, but it was crumbling."
-   if inform:
-      t "The son was deeply disturbed. I don't know what they did about it, but I told them."
-   else:
-      t "I think they were having trouble. I didn't want to intrude."
-      t "I hope they're alright..."
+   if memories:
+      t "They shared their memories with me...  painful memories, ones that still haunt me. But beautiful ones as well."
+   if possibilities:
+      t "They shared their hopes with me... their pain, too. But I have to bear that for their sake."
 t "Then I came here."
 t "It sounds kind of funny when I say it all in a row like that."
 "I can't help but smile, but Hector must see the pain in my expression, because he puts a hand on my shoulder."
@@ -4764,6 +4456,7 @@ menu:
    "My reaction is instant and instinctual."
    "I am revolted.":
       $ revolted = True
+      $ understand = False
       "The choice is not what bothers me..."
       "It's his expression that makes my stomach turn."
       t "How could you treat it that coldly?"
@@ -4778,6 +4471,7 @@ menu:
       h "I've done what I had to do."
    "I understand.":
       $ understand = True
+      $ revolted = False
       "I know that choice."
       "I've never told anyone, but I remember that choice."
       "I wonder if he sees that in my eyes when I look into his right now."
@@ -4873,10 +4567,10 @@ label space4:
 if calypso1:
    "I could always return to Calypso. But that feels like going backwards."
    "I can't go back now, not after so long."
-else:
+if calypso2:
    "I could always return to Calypso."
    "The thought lingers in the back of my mind."
-   "But I should consider other options first."
+   "But there must be somewhere else I can go."
 if missyou:
    "For a second, the thought of returning to Scout crosses my mind."
    "But that would be giving up on Penelope..."
@@ -4896,7 +4590,7 @@ if understand:
 "Is this really the end of it?"
 "To drift into nothingness in space?"
 "Penelope..."
-if $calypso1:
+if calypso1:
    "I wish I could see you just once more."
 else:
    "I'm so sorry I failed you."
@@ -4910,7 +4604,6 @@ with Dissolve(3.0)
 "COME TO THESE COORDINATES. WE HAVE LANDED."
 
 scene bg space
-with Dissolve(2.0)
 
 "I bolt upright."
 "I must have dozed off... but the message is coming through."
@@ -4930,65 +4623,34 @@ with Dissolve(2.0)
 "I'm coming."
 "I'm almost home."
 
-scene bg black
-with Dissolve(2.0)
+if green3:
+   jump green3dream
+if blue3:
+   jump blue3dream
+if orange3:
+   jump orange3dream
 
-t "I'm coming, Penelope."
-t "I'll be there soon."
-p "Are you, mom?"
-p "Do you really want to come back?"
+label final_postdream:
 
-if desperate:
-   p "Or do you just want to be loved?"
-   p "Even if you think nothing of the people around you..."
-   p "You'd rather be loved and miserable than forgotten and happy, wouldn't you?"
+scene bg finalplanet
 
-if lonely:
-   p "Or is it just that you don't want to be alone?"
-   p "Is it really better to hate everyone around you?"
-   p "Even your own daughter?"
-   p "Or is it better to be alone?"
-
-if burial:
-   p "Or do you just want to die?"
-   p "To be buried with other humans?"
-   p "Do you even want to live with us?"
-   p "Do you even want to see me?"
-
-if leavebe:
-   p "Or do you just want us to know you're still alive?"
-   p "Do you even care how we're doing?"
-   p "Do you even care what happens after you get back?"
-
-if revolted:
-   p "Or do you just want to be in control?"
-   p "You won't admit it to yourself..."
-   p "But you don't believe we're alive, do you?"
-   p "It's unthinkable that we would have lived without you, isn't it?"
-
-if understand:
-   p "Or do you just want to be validated?"
-   p "To feel like the choices you've made have been the right ones?"
-   p "To have someone tell you it's all going to be okay?"
-
-p "You don't want to come back, mom."
-p "You can still turn back now."
-p "Wake up. Go back."
-p "Find a new home."
-
-"I try to wake up... but stasis holds me in place."
-
-t "I'm sorry. I can't."
-
-"But Penelope is gone."
-"I am alone."
-"Stasis is excruciatingly empty and cold."
-
-scene bg space
-with Dissolve(2.0)
+if orange1:
+   if blue2:
+      $ ending1 = True
+   if green2:
+      $ ending2 = True
+if blue1:
+   if green2:
+      $ ending3 = True
+   if orange2:
+      $ ending4 = True
+if green1:
+   if orange2:
+      $ ending5 = True
+   if blue2:
+      $ ending6 = True
 
 "I wake up with a start."
-"I am immediately awake."
 "The ship is bright with the light of the planet above us."
 "It is a swirling mess of puffy white clouds and bright blue oceans."
 "I waste no time looking at it. I check the ship's readings, find the ark's coordinates and accelerate towards the planet's atmosphere."
@@ -5004,7 +4666,6 @@ with Dissolve(2.0)
 "Then I open the hatch."
 
 scene bg cliffs
-with Dissolve(2.0)
 
 "Green cliffs, carved as if by some intelligent hand, melt into white and blue."
 "A flock of birds passes above me - they must be at least ten feet long."
@@ -5022,8 +4683,12 @@ with Dissolve(2.0)
 "I walk."
 "The descent is difficult. My feet hurt from the blisters."
 "But I don't take my eyes off of the ark."
+
+scene bg finaltown
+
 "Finally it's right in front of me."
-"I stand just behind a tree, just out of sight."
+"I stand behind a rock, just out of sight."
+"Houses have been fashioned from the Ark's escape pods."
 "I see families. Happy people."
 "I can't even process their faces, my heart is beating so fast."
 "But one jumps out at me: one figure, smaller than the others, standing on her own."
@@ -5031,8 +4696,8 @@ with Dissolve(2.0)
 t "Penelope."
 t "Penelope..."
 t "Penelope!"
-"I run to her."
-"Spin her around."
+"I run to her..."
+"and spin her around."
 
 show penelope neutral
 
@@ -5041,62 +4706,1375 @@ t "Penelope!"
 pause(2.0)
 
 g "I'm not Penelope."
-"...What?"
-"But she looks just like her."
-"Was there another child on the ark?"
-"I wasn't aware -"
+"She stares at me blankly."
+"I don't remember another young girl on the Ark."
 t "Where's Penelope?"
-show penelope confused
-g "I think she's over there."
-show penelope sad
-g "I don't know if you should go, though."
-g "She doesn't want to see strangers right now."
-t "It's okay. I'm not a stranger. I'm..."
-"I follow the direction she's pointing."
-"About twenty people are gathered around something."
-"Is she in the crowd?"
-"There are children in the crowd, but they're all smaller than her."
-"I search their faces, but none of them are her."
-"They don't notice me as I walk around them, craning my neck to see what they're all looking at."
-"It's a bed. They're looking at a bed."
-"I barely see the person inside the bed at first."
-"There are so many people bent over her, holding her hands and crying."
-"It's those hands I see first."
-"They are old and wrinkled."
-"And then I see her face..."
+"The girl points to a larger pod sitting at the base of a cliff."
+t "Thank you."
+"I rush to the door..."
+"And as I'm turning the wheel to open it, I hear Penelope's voice."
+"Only... it's different. Older."
+p "I'm supposed to start at the beginning, right?"
+"I look around for the source, but I don't see anyone--"
+"That's when a screen catches my attention... and then I see the flowers."
+scene bg memorial
+"The screen is surrounded by flowers of every colour... some of them are clearly alien to this planet."
+"There are photos, too - of humans, aliens, landscapes. Children's drawings of an old woman. Letters."
+"They're addressed to Penelope."
+if ending1:
+   jump end1
+if ending2:
+   jump end2
+if ending3:
+   jump end3
+if ending4:
+   jump end4
+if ending5:
+   jump end5
+if ending6:
+   jump end6
+
+label end1:
+
+"The realization comes as a wave of pain through my body."
+"When it hits my chest, my heart lurches. I fall to my knees."
+"My eyes fill with tears. The colonists start to stare at me."
+"But I don't care about them."
+"The tears spill down my cheeks and to the ground. A drop hits the flowers. I don't bother covering my face."
+pause(1.0)
+"It wasn't supposed to be like this."
+if saferoom:
+   "I was supposed to rebuild... to make a safe place for Penelope."
+if playroom:
+   "I was supposed to rebuild... to make a place where Penelope could be happy again."
+"I was supposed to take care of her..."
+"Of all of them, but I..."
+
+scene bg grey
+
+p "Alright. I'll start from the beginning."
+show penelope neutral middle
+p "It's just hard to know when the beginning was."
+t "...Penelope?"
+"I know that it's not Penelope; it's a hologram, blank and unresponsive. It looks like a composite, developed from photos of her. It's a hollow likeness. It shouldn't remind me of her."
+"But I reach out to it, all the same. I almost convince myself it's her until I touch the glass."
+show penelope adolescent
+"She grows before my eyes. She's a teenager now. Her eyes are decisive and calm... but lonely, too."
+p "I felt so lonely at first. I was the only kid my age on the ark, you know, so I was left alone a lot as we settled in."
+p "I hated it here. I just wanted to go back to Earth."
+p "It took a long time for me to accept that this was my home now, like it or not."
+show penelope adult
+"She's my age, now... and steadier even than before. She knows who she is."
+p "Eventually, I realized that if this was going to be my home, I had to make the best of it. So I took to leadership."
+p "I don't think people took me seriously at first... I was pretty young. But I was always good at it."
+p "I made some tough decisions - some unpopular decisions. But what's important is that I made them."
+show penelope elder
+"I see my grandmother's face so clearly that it takes me a moment to realize that this is still Penelope."
+"But in her eyes I see the same calm - and the same loneliness - as when she was a child."
+p "After everything on Earth, I think people were afraid to step up like I did. The stakes are so high out here, and the burden for making the wrong choice weighs heavy."
+p "I knew I could bear that burden... so I did."
+p "At great personal cost, I might add."
+p "But in the end... I think people were thankful for the choices I made, and happy that the blame for everything that's happened rests with me."
+p "Will they be happier once I'm gone? Maybe. I just hope they remember the sacrifices I made to ensure that they could be."
+"I look down at the flowers again."
+"Oh, Nel... they will. I know they will."
+"I'm so proud of you."
+i "What about your mother?"
+i "She was the savior of Earth... and now you're the First Governor of Ithaca."
+i "Did you ever think of her?"
+p "My mother?"
+p "You know, I get this question a lot... but no, I never really think of her."
+p "She died when I was so young. I barely knew her."
+hide penelope
+with Fade
+"The hologram fades away."
+"But even as she disappears, her words cut deep."
+if saferoom:
+   "I should have kept her safe... I should have kept everyone safe."
+if playroom:
+   "I should have been there, to watch her grow and make sure she was happy."
+if speakup:
+   "I did so much for people who cared so little, because I thought she, of all people..."
+if stayquiet:
+   "I knew they didn't want me here. I knew it. But I hoped that even if they didn't, that she would - that she'd understand..."
+if desperate:
+   "I have gone through such pain to get here. Why am I too late?"
+   "What could I possibly have done differently?"
+if selfless:
+   "I have sacrificed so much to get here. What more could I have lost to make it here in time?"
+scene bg memorial
+"I sit here for some time."
+"I'm not sure whether I'm angry or sad or terrified."
+"Eventually, I feel their eyes on me - the other colonists."
+"Clearly, I'm not a strange presence - there must be other colonies on the planet, enough that not everyone is a familiar face."
+"But still, I sense their confusion and distrust."
+"They're asking themselves: am I here to stay, or just a traveller?"
+"When I landed here, I thought I'd be greeted with open arms - that Penelope and I would build the ark into something great."
+"Now I arrive here to find my work already done, and my daughter dead."
+"I've given so much to this place already - my great love, my youth, my life with my daughter."
+"I don't know if I have any more to give."
+"But what else is there for me to do?"
+"Where else can I go and feel like I'm making a difference?"
+menu stayorgo:
+   "Am I here to stay, or just a traveller?"
+   "I'm here to stay.":
+       jump stay_end1
+   "I'm just a traveller.":
+       jump go_end1
+
+label stay_end1:
+"Slowly at first, but then all at once... I find my footing."
+"I stop myself from crying any more."
+t "You've done so well for yourself, Penelope."
+t "I wish I could have been there to see it..."
+t "And I'm sorry I wasn't."
+t "But I'm here now. I can take up what you started."
+if saferoom:
+    t "I swear to you, I'll do everything in my power to keep this colony safe."
+if playroom:
+    t "I swear to you, I'll do everything in my power to make this colony happy."
+t "I love you endlessly."
+t "Goodbye, Penelope."
+"I take a deep breath, and banish the tears to the back of my mind..."
+"And I turn around."
+scene bg finaltown
+"A few passing colonists have turned to look at me, curious and a bit worried."
+"I go to them."
+t "Hello..."
+t "I've been looking for you for some time."
+
+jump endcredits
+
+label go_end1:
+"My legs are still shaky... but I find my footing."
+"I stop myself from crying any more."
+t "You've done so well for yourself, Penelope."
+t "I wish I could have been there to see it..."
+t "And I'm sorry I wasn't."
+t "But I've given too much of myself already to stay here."
+t "I have faith in what you've built and in what you left behind - and that's why I have to go."
+t "I love you endlessly."
+t "Goodbye, Penelope."
+"I take a deep breath, and banish the tears to the back of my mind..."
+"And I turn around."
+scene bg finaltown
+"A few passing colonists have turned to look at me, curious and a bit worried."
+"I lock eyes with them for just a moment."
+"Then I turn away and walk back past the rock where I hid, towards my ship."
+"I'll have to forage for food and water before the journey..."
+"But the journey where?"
+"To the family whose memories still lie unsettled in the back of my mind?"
+if speakup:
+   "To the soldiers who hated me despite all I've done for them?"
+if stayquiet:
+   "To the soldiers who hated me?"
+"To a society that welcomed me as a guest, but had no real place for me?"
 if calypso1:
-   "All this time, I was so hopeful..."
-else:
-   "All this time, I've been so stupid..."
-"My legs collapse under me."
-"Penelope."
+   "Or to Calypso, who was so confused by me?"
+if calypso2:
+   "Or to Calypso, who loved me, but would have me give up everything I am?"
+"I look up, past the cliffs, past the birds and the clouds, up at the stars."
+"Space and time stretch out before me, so incomprehensibly vast."
 
-pause(3.0)
+jump endcredits
 
-"The group starts to disperse."
-"They're crying, holding each other. None of them notice me."
-"From here, I can't tell if she's asleep or dead."
-"But she's all alone."
-"She's alone, and so am I."
-menu:
-  "I go to her.":
-    "I pick myself up."
-    "I put one foot forward..."
-    "And another."
-    "I reach her bedside."
-    "I reach out for her hand."
-    t "Penelope..."
-    t "Penelope, I'm back."
-    jump end
-  "I leave.":
-    "I pick myself up."
-    "I put one foot forward..."
-    "And another."
-    "I turn from her."
-    "I walk until I can no longer feel my feet."
-    jump end
+label end2:
 
-label end:
-scene bg black
-with Dissolve(3.0)
+"Has she read them yet? What does she think of this monument?"
+"I should ask her."
+"If it were me, I'd be embarrassed... and for her to get one like this at such a young age..."
+pause(1.0)
+"...I can't fool myself any longer."
+"My heart lurches in my chest, and I fall to my knees."
+"My eyes are filled with tears - but I'm in public. The others will see me..."
+"They fall silently down my cheeks and to the ground. A drop hits the flowers. I cover my face."
+"I don't understand. It wasn't supposed to be like this."
+"I've been through so much... travelled so far... only for her. Only for her."
+"I wanted nothing but to see her again."
+"It was all I wanted..."
+
+scene bg grey
+
+p "Alright. I'll start from the beginning."
+show penelope neutral middle
+p "It's just hard to know when the beginning was."
+t "...Penelope?"
+"I know that it's not Penelope; it's a hologram, blank and unresponsive. It looks like a composite, developed from photos of her. It's a hollow likeness. It shouldn't remind me of her."
+"But I reach out to it, all the same. I almost convince myself it's her until I touch the glass."
+show penelope adolescent
+"She grows before my eyes. She's a teenager now. Her eyes are uncertain, but hopeful, too."
+"She looks so much like my mother."
+p "I was so afraid at first. I was the only kid my age on the ark, you know, so I was left on my own a lot as we settled in."
+p "I hated it here. I just wanted to go back to Earth."
+p "It took a long time for me to accept that this was my home now, like it or not."
+show penelope adult
+"She's my age, now... but steadier. She knows who she is... and I..."
+p "And it took even longer to learn to trust the other colonists."
+p "I had so many questions I felt like no one could answer."
+p "But when I was the most uncertain about who I was, and my role here..."
+p "They were there for me. They believed in me."
+p "You know, I never really thought of myself as a leader. More like a facilitator."
+p "Everyone here has something to contribute. I just helped people find out what that was, and left them to it."
+p "And when we needed to make a difficult choice..."
+p "I stepped up so that no one else would have to bear that burden."
+show penelope elder
+"I see my grandmother's face so clearly that it takes me a moment to realize that this is still Penelope."
+"But in her eyes I see the same uncertainty - and the same hope - as when she was a child."
+p "I know I've become something of a mystery among the younger folks."
+p "Sure, I could have led a more glamorous life. There were a couple of times when I could have settled down, gotten married, had kids..."
+p "Maybe I could have been happier, under different circumstances..."
+p "But I just hope I was useful."
+"I look down at the flowers again."
+"Of course you were, Nel, of course."
+"I'm so proud of you."
+i "What about your mother?"
+i "She was the savior of Earth... and now you're the First Governor of Ithaca."
+i "Did you ever think of her?"
+p "My mother?"
+p "You know, I get this question a lot... but no, I never really think of her."
+p "She died when I was so young. I barely knew her."
+hide penelope
+with Fade
+"The hologram fades away."
+"But even as she disappears, her words cut deep."
+if saferoom:
+   "All I wanted was to keep her safe, to watch her grow."
+if playroom:
+   "All I wanted was to see her be happy, to let her be a child."
+"And I failed her."
+if detonate:
+   "I did awful things to get here. I killed innocent people. Was it all for this?"
+if killscout:
+   "I endured horrible things, made terrible choices, changed the histories of civilizations... all to get here. Was it all for this?"
+if understand:
+   "I know I'm not a good person. I know I made mistakes. I know I'd only be a burden on the ark. I just thought that maybe I could live out my years in peace, with my daughter."
+   "Was that too much to ask?"
+if revolted:
+   "I know I've made mistakes. I know the ark doesn't need me. I did the best that I could with what I had... isn't that enough? Isn't that enough to let me live out my years in peace with my daughter?"
+   "Was that too much to ask?"
+scene bg memorial
+"I sit here for some time."
+"I can barely find the strength to breathe, let alone to stand."
+"Eventually, I feel their eyes on me - the other colonists."
+"Clearly, I'm not a strange presence - there must be other colonies on the planet, enough that not everyone is a familiar face."
+"But still, I sense their confusion and distrust."
+"They're asking themselves: am I here to stay, or just a traveller?"
+"What could I possibly offer them?"
+"How could I possibly be wanted here, after everything that's happened?"
+"All I wanted was a quiet life. All I wanted was to see Penelope again."
+"But now... now..."
+menu stayorgo2:
+   "Am I here to stay, or just a traveller?"
+   "I'm here to stay.":
+        jump stay_end2
+   "I'm just a traveller.":
+        jump go_end2
+
+label stay_end2:
+
+"Slowly, reluctantly... I find my footing."
+"I wipe the tears from my face."
+t "You've built something beautiful, Penelope."
+t "I thought we'd build a house together, like the one I grew up in..."
+t "But instead, you've built a city."
+t "You always were smarter than me."
+t "I know I don't deserve it - but I want to stay here, to keep building what you started."
+t "I love you endlessly."
+t "I'm so sorry you never knew that."
+"I feel tears well up in my eyes, but I can't let them start again. I swallow them down..."
+"And I turn around."
+scene bg finaltown
+"A few passing colonists have turned to look at me, curious and a bit worried."
+"I go to them."
+t "Hello..."
+t "I've been looking for you for some time."
+
+jump end_credits
+
+label go_end2:
+
+"My legs are still shaky... but I find my footing."
+"I let the tears run down my cheeks."
+t "You've built something beautiful, Penelope."
+t "I thought we'd build a house together, like the one I grew up in..."
+t "But instead, you've built a city."
+t "But you know I can't be a part of it."
+t "The truth is, I was never meant for building things. I dreamed of being that kind of person. But it was a dream. Just a dream."
+t "I hope what you've built here lasts a thousand years."
+t "I love you endlessly."
+t "I'm so sorry you never knew that."
+"I don't know why, but the tears stop."
+"I turn around."
+scene bg cliffs
+"A few passing colonists have turned to look at me, curious and a bit worried."
+"I avoid their eyes and walk back past the rock where I hid, towards my ship."
+"I'll have to forage for food and water before the journey..."
+"But the journey where?"
+"To the family whose memories still lie unsettled in the back of my mind?"
+"To the scout whose society may by now have crumbled, because of me?"
+"To thhe soldiers who told me to pretend they were dead?"
+if calypso1:
+   "Or to Calypso, who was so confused by me?"
+if calypso2:
+   "Or to Calypso, who loved me so strangely?"
+"I look up, past the cliffs, past the birds and the clouds, up at the stars."
+"Space and time stretch out before me, so incomprehensibly vast."
+
+jump endcredits
+
+label end3:
+
+"Somehow, I knew this would happen."
+"I hoped otherwise, against all hope..."
+"But I knew."
+"I fall to my knees, but I can't bear to cry."
+"I've felt so alone for so long that it hardly feels any different, knowing she's dead."
+"What hurts is forcing myself to let go of the hope I've held onto for so long."
+"As it leaves my body, all that's left is exhaustion."
+
+scene bg grey
+
+p "Alright. I'll start from the beginning."
+show penelope neutral middle
+p "It's just hard to know when the beginning was."
+t "...Penelope?"
+"I know that it's not Penelope; it's a hologram, blank and unresponsive. It looks like a composite, developed from photos of her. It's a hollow likeness. It shouldn't remind me of her."
+"But I reach out to it, all the same. I almost convince myself it's her until I touch the glass."
+show penelope adolescent
+"She grows before my eyes. She's a teenager now. Her eyes are determined, but tired, too."
+"She looks so much like my mother."
+p "When we landed here, I was basically on my own. I was the only one on the ark my age."
+p "Maybe I should have felt lonely, but mostly, I just felt weak. Like there was nothing I could do to help."
+p "And I had so many questions that no one could answer. I felt worse every day..."
+show penelope adult
+"She's my age, now... but steadier."
+p "So one day, I asked someone how I could help them. And someone else after that."
+p "I started helping in every way I could."
+p "I still had questions... but the more I helped people, the less I thought about them."
+p "There was never really a moment when I became a leader. I just kept taking on tasks, and eventually those tasks involved delegating to others. Before I knew it, I was taking care of the whole colony."
+show penelope elder
+"I see my grandmother's face so clearly that it takes me a moment to realize that this is still Penelope."
+"But in her eyes I see the same determination - and the same exhaustion - as when she was a child."
+p "I never answered those questions. Sometimes, I wonder if I was ever really happy, or if I just made myself too busy to care."
+p "But, you know... I got a lot done, in all those years."
+p "Look how far the colony has come. Even if I'm not as happy as I'd like, I'm prouder than I ever thought I could be."
+p "I just hope things keep going on without me."
+p "When you work as long and as hard as I have, there's no way you die without any unfinished tasks."
+p "There's so much I'd still like to do..."
+"Oh, Nel. You've done so much already."
+"You deserve to rest now. You've deserved to rest for a long time."
+"I'm so proud of you..."
+i "What about your mother?"
+i "She was the savior of Earth... and now you're the First Governor of Ithaca."
+i "Did you ever think of her?"
+p "My mother?"
+p "You know, I get this question a lot... but no, I never really think of her."
+p "She died when I was so young. I barely knew her."
+hide penelope
+with Fade
+"The hologram fades away."
+"But even as she disappears, her words cut deep."
+if goodspeech:
+   "I was more than the stories. How could she have forgotten that?"
+if badspeech:
+   "None of the stories were true. How could she have forgotten that?"
+if detonate:
+   "I've done terrible things to get back here. I hate the person I became... but I thought she'd remember who I really was - who I could be again."
+if killscout:
+   "I've been through terrible things to get back here. I almost became someone I hate... perhaps I did. But I always thought she'd remember who I really was."
+if shoothim:
+   "I barely even feel alive anymore."
+   "I thought that if she remembered me, at least some part of me was still alive, somewhere... but she never even thought of me."
+if savehim:
+   "I feel so unmoored from everything I thought I knew."
+   "She was the last thing anchoring me to something real... but she never even thought of me."
+scene bg memorial
+"I sit here for some time."
+"I can barely find the energy to breathe, let alone to stand."
+"Eventually, I feel their eyes on me - the other colonists."
+"Clearly, I'm not a strange presence - there must be other colonies on the planet, enough that not everyone is a familiar face."
+"But still, I sense their confusion and distrust."
+"They're asking themselves: am I here to stay, or just a traveller?"
+"Even before the ark, I gave everything I had to humanity."
+"Now... I don't even know who I am anymore. I can't live like this."
+"What would I find if I stayed here? What's left for me with humans?"
+"But however bleak my prospects seem here... the idea of returning to space fills me with dread."
+"Part of me wants to fall asleep here and never wake up - but I can't do that."
+"I have to find a way to keep going."
+"I have to..."
+menu stayorgo:
+   "Am I here to stay, or just a traveller?"
+   "I'm here to stay.":
+        jump stay_end3
+   "I'm just a traveller.":
+        jump go_end3
+
+label stay_end3:
+"Somehow, I find my footing."
+"The effort of it brings tears to my eyes."
+t "You've built something incredible, Penelope."
+t "I was never very good at building things. Destroying things, I was good at. But I never had the patience for building."
+t "Now I don't even have the heart for that. To be honest, I have no idea what I can do anymore."
+t "I wish I could have helped you build this. You probably wouldn't have needed me, but..."
+t "But I'm here now. And I promise - I'll do whatever I can to protect what you started."
+t "I love you endlessly."
+t "I'm sorry I came so late..."
+"Tears spill down my cheeks. I make no effort to stop them."
+"Whether they're from despair or exhaustion or frustration, or some combination of all of these things, I can't tell."
+"I take a deep breath, and turn around."
+scene bg finaltown
+"A few passing colonists have turned to look at me, curious and a bit worried."
+"I go to them."
+t "Hello."
+t "I've been looking for you for some time..."
+
+jump endcredits
+
+label go_end3:
+"Somehow, I find my footing."
+"The effort of it brings tears to my eyes."
+t "You've built something incredible, Penelope."
+t "I was never very good at building things. Destroying things, I was good at. But I never had the patience for building."
+t "Now I don't even have the heart for that. To be honest, I have no idea what I can do anymore."
+t "I wish I could have helped you build this. You probably wouldn't have needed me, but..."
+t "But I'm proud of you. Of what you've made."
+t "That's why I have to go."
+t "I need to find out what else I'm good at... and I can't do that here."
+t "I love you endlessly."
+t "I'm sorry I came so late..."
+"Tears spill down my cheeks. I make no effort to stop them."
+"Whether they're from despair or exhaustion or frustration, or some combination of all of these things, I can't tell."
+"I take a deep breath, and turn around."
+scene bg finaltown
+"A few passing colonists have turned to look at me, curious and a bit worried."
+"I look past them and walk back past the rock where I hid, towards my ship."
+"I'll have to forage for food and water before the journey..."
+"But the journey where?"
+"To the soldiers who were so kind to me, who I left to die in a jungle full of hostile aliens?"
+if detonate:
+   "To the scout whose society I helped destroy?"
+if killscout:
+   "To the society I left to crumble? To the grave of the friend I murdered?"
+if shoothim:
+   "To the grave of a family whose memories haunt me even now?"
+if savehim:
+   "To a home I've never known?"
+   "To the graves of my children, whose memories haunt me even now?"
+if calypso1:
+   "Or to Calypso, who was so confused by me?"
+if calypso2:
+   "Or to Calypso, who loved me, but who would have me give up everything I am?"
+"I look up, past the cliffs, past the birds and the clouds, up at the stars."
+"Space and time stretch out before me, so incomprehesibly vast."
+
+jump endcredits
+
+label end4:
+
+"Two things hit me at once:"
+"First, how many people must have loved her to have made this for her."
+"And second, that she is gone."
+"Pain and joy curl around each other in my stomach and lurch up through my heart."
+"I fall to my knees, crying."
+"I was supposed to return to her. To my people."
+"We were supposed to make a life..."
+"It's all I wanted. More than anything I've ever wanted in my life."
+"I'm so sorry... I should have come sooner, I..."
+
+scene bg grey
+
+p "Alright. I'll start from the beginning."
+show penelope neutral middle
+p "It's just hard to know when the beginning was."
+t "...Penelope?"
+"I know that it's not Penelope; it's a hologram, blank and unresponsive. It looks like a composite, developed from photos of her. It's a hollow likeness. It shouldn't remind me of her."
+"But I reach out to it, all the same. I almost convince myself it's her until I touch the glass."
+show penelope adolescent
+"She grows before my eyes. She's a teenager now. Her eyes are distant, but warm, too."
+"She looks so much like my mother."
+p "I was so lonely at first. I was the only kid my age on the ark, you know, so I was on my own a lot as we settled in."
+p "We were all upset back then. Nobody knew how long we were going to stay here. We all missed Earth."
+"The adults were even worse off than I was."
+p "So I tried to help in any way I could."
+show penelope adult
+"She's my age now... but steadier. She looks comfortable with herself in a way I could never be."
+p "At first I took care of the younger children. As they got older, I became their advocate. They came to trust me with their lives, and when the time came for a leader to step up..."
+p "They trusted me with that, too."
+p "I was never an ambitious person, but I take that kind of trust very seriously."
+show penelope elder
+"I see my grandmother's face so clearly that it takes me a moment to realize that this is still Penelope."
+"But in her eyes I see the same distance - and the same warmth - as when she was a child."
+p "Of course, I never had children of my own. Some people were surprised when I chose not to."
+p "But to me, everyone in the colony was like my child. I had my hands full with them - how would I have found the time to raise one of my own?"
+p "I have always felt so thankful for the trust all of you have put in me..."
+p "I just hope that trust was well-placed."
+p "I hope I did you proud."
+"Oh, Nel... of course you did."
+"They trusted you because you deserved their trust."
+"I hope you saw that."
+"You've made me proud, Nel... you've made me so proud..."
+
+i "What about your mother?"
+i "She was the savior of Earth... and now you're the First Governor of Ithaca."
+i "Did you ever think of her?"
+p "My mother?"
+p "You know, I get this question a lot... but no, I never really think of her."
+p "She died when I was so young. I barely knew her."
+hide penelope
+with Fade
+"The hologram fades away."
+"But even as she disappears, her words cut deep."
+
+if goodspeech:
+   "I was more than the stories... I wanted so badly for her to know that. To remember me for all that I was."
+if badspeech:
+   "None of the stories were true... I wanted so badly for her to know that. To remember me for who I really was."
+if memories:
+   "I lived for the memory of her, and for the thought that she remembered me too."
+if possibilities:
+   "I lived for the hope of seeing her again, for making a life with her."
+if desperate:
+   "I was so excited to make a new home here. With her... with everyone."
+   "After living through so much on Earth... after sacrificing everything..."
+   "It's all I've ever wanted."
+if selfless:
+   "After living through so much on Earth... after losing everything so senselessly..."
+   "I thought this, at least, made sense: I'd get to make a new home here, with Penelope, with everyone."
+   "I wanted that more than I've ever wanted anything."
+   "I wanted it to make sense."
+
+scene bg memorial
+"I sit here for some time."
+"I look at the photographs one by one and imagine myself in them."
+"As I look at them, I cling to the memorial."
+"I can barely find the strength to tear myself away."
+"Eventually,I feel their eyes on me - the other colonists."
+"Clearly, I'm not a strange presence - there must be other colonies on the planet, enough that not everyone is a familiar face."
+"But still, I sense their confusion and distrust."
+"They're asking themselves: am I here to stay, or just a traveller?"
+"I have dreamed of coming back here for so long..."
+"But not like this. Not like this."
+"The thought of staying here with that broken dream seems unbearable..."
+"But when I think of leaving, my heart aches even more."
+"I've been alone for so long..."
+"...but I don't know if I can bear the company I would find here."
+
+menu stayorgo:
+   "Am I here to stay, or just a traveller?"
+   "I'm here to stay.":
+        jump stay_end4
+   "I'm just a traveller.":
+        jump go_end4
+
+label stay_end4:
+
+"I lean against the memorial at first, but finally, I find my own footing."
+"I wipe the tears and the snot from my face."
+t "The person you have been to these colonists is what I always wanted to be for you..."
+t "I can't express to you how sorry I am that I never got that chance."
+t "But you were always stronger than me, Nel. In my absence, you made the whole colony your family."
+t "You gave so much love to all of them when I could hardly bear loving you alone as much as I did."
+t "So if I can't be there for you... I want to be there for them."
+t "I want to be better. I want to take after you, Penelope."
+t "I love you endlessly."
+t "You have made me so proud."
+"Tears well up in my eyes again... but they're tears of joy."
+"My daughter had a good life."
+"She loved, and was loved in turn."
+"I turn around, smiling and crying all at once."
+scene bg finaltown
+"A few passing colonists have turned to look at me, curious and a bit worried."
+"I go to them."
+t "Hello..."
+t "I've been looking for you for some time."
+
+jump endcredits
+
+label go_end4:
+"I lean against the memorial at first. I can hardly find my own footing."
+"I wipe the tears and the snot from my face."
+t "The person you have been to these colonists is what I always wanted to be for you..."
+t "I can't express to you how sorry I am that I never got that chance."
+t "But you were always stronger than me, Nel. In my absence, you made the whole colony your family."
+t "You gave so much love to all of them when I could hardly bear loving you alone as much as I did."
+t "That's why I have to go."
+t "I can't bear how sad it makes me to see your grave, and the graves of all of my friends."
+t "I wish I could be a part of what you've made... but it hurts, Penelope, it hurts so much."
+t "I love you endlessly."
+t "And so I have to go..."
+"Tears well up in my eyes. I can hardly take the pain any longer."
+"My daughter is dead."
+"Everyone I have known is dead."
+"I'm all alone..."
+"I turn around."
+scene bg finaltown
+"A few passing colonists have turned to look at me, curious and a bit worried."
+"I try to smile at them, but I have to turn away before they see me cry."
+"I walk back past the rock where I hid, towards my ship."
+"I'll have to forage for food and water before the journey..."
+"But the journey where?"
+"To the soldiers waiting for me to bring them to the colony? They could be dead by now - but I promised them. I told them to hold out hope..."
+"To the family whose memories still float uneasily in the back of my mind? I remember that daughter's disappointment. How would she feel if I were to return? Is she even still alive?"
+"To the society that welcomed me as a guest, that honored and remembered those who sacrificed as much as I have?"
+if calypso1:
+   "Or to Calypso, who was so confused by me?"
+if calypso2:
+   "Or to Calypso, who loved me so much?"
+"I look up, past the cliffs, past the birds and the clouds, up at the stars."
+"Space and time stretch out before me, so incomprehensibly vast."
+
+jump endcredits
+
+label end5:
+
+"The realization moves through my body in a wave."
+"My heart lurches in my chest, and I fall to my knees."
+"I travelled so far... and left so much behind."
+"All I wanted for all of that was to see her again."
+"To make a life with her."
+"And it was all for nothing..."
+"I left all that promise behind, all for nothing."
+scene bg grey
+
+p "Alright. I'll start from the beginning."
+show penelope neutral middle
+p "It's just hard to know when the beginning was."
+t "...Penelope?"
+"I know that it's not Penelope; it's a hologram, blank and unresponsive. It looks like a composite, developed from photos of her. It's a hollow likeness. It shouldn't remind me of her."
+"But I reach out to it, all the same. I almost convince myself it's her until I touch the glass."
+show penelope adolescent
+"She grows before my eyes. She's a teenager now. Her eyes are bright, but thoughtful, too."
+"She looks so much like my mother."
+p "I was so lonely at first. I was the only kid on the ark my age, you know, and sometimes I felt like no one wanted me around."
+p "I used to get so attached to anyone who paid any attention to me."
+p "It took me a long time to get over that loneliness... but at a certain point I had to learn to stand on my own two feet."
+show penelope adult
+"She's my age, now... but she has a steadiness - and a presence - to her that I could never have."
+p "So I took what I knew, and I made it useful. I learned to see the loneliness in others. To make them feel welcome. To work with people I didn't like - or who didn't like me."
+p "I started to see a future for our people. I saw the colony as a place where we could bring people together and work through our differences. Where we could turn the pains of the past into something useful."
+p "They were more than skeptical, at first. Beckoning other aliens to settle on this planet? Making friends with those already here who could so easily destroy us?"
+p "But I didn't see a future in fear. So even when it was unpopular, even when people hated me - I pushed for hope."
+show penelope elder
+"I see my grandmother's face so clearly that it takes me a moment to realize that this is still Penelope."
+"But in her eyes I see the same light - and the same thoughtfulness - as when she was a child."
+p "They didn't approve of my personal choices, either."
+p "A human taking an alien lover? To some it must have seemed like treason."
+p "And to be honest, the isolation I felt when I came out... it hurt more than I thought it could."
+p "But I found happiness and companionship in another, however briefly. I found something I never would have had with a human."
+p "There's no way I would ever regret it."
+p "The only regret I do have is that I never left this planet."
+p "I've always dreamed of exploring. Seeing what was out there. Making first contact... and perhaps, someday, of making a network across planets, so we might come to rely on each other."
+p "I'll never see that dream become a reality."
+p "And with the colony still divided about my legacy, even now..."
+p "Maybe none of us will."
+p "{i}That's{/i} my greatest regret."
+"Oh, Nel... Your dream is beautiful."
+"I wish you could see these flowers. They all saw your vision... they all believed in you."
+"I believed in you, Nel. I always did."
+i "What about your mother?"
+i "She was the savior of Earth... and now you're the First Governor of Ithaca."
+i "Did you ever think of her?"
+p "My mother?"
+p "You know, I get this question a lot... but no, I never really think of her."
+p "She died when I was so young. I barely knew her."
+hide penelope
+with Fade
+"The hologram fades away."
+"But even as she disappears, her words cut deep."
+if danger:
+   "I threw myself into the unknown for this."
+if simplicity:
+   "I gave up on my own happiness for this."
+if memories:
+   "I survived on the memory of her, and on the thought that she remembered me, too."
+if possibilities:
+   "I survived on the hope that I'd see her again. On the promise of a future with her."
+if understand:
+   "I knew I wasn't needed here. I knew we'd all be happier if I kept my distance."
+if revolted:
+   "I knew I wasn't needed here. I knew it would be easier if I kept my distance."
+"But I came back for her sake... I did so much for her sake..."
+"And now she's gone, and she forgot me."
+"Everything keeping me here has gone."
+
+scene bg memorial
+"I sit here for some time."
+"I want to stand - to keep moving would be less painful right now than sitting still - but I can't muster up the strength."
+"Eventually, I feel their eyes on me - the other colonists."
+"Clearly, I'm not a strange presence - there must be other colonies on the planet, enough that not everyone is a familiar face."
+"But still, I sense their confusion and distrust."
+"They're asking themselves: am I here to stay, or just a traveller?"
+"I think of those I've met on my journeys..."
+"Calypso; Scout; my family; the soldiers."
+"They have changed who I am for the better."
+"Truth be told, those travels have been the best times of my life."
+"To settle here, with strangers - with the descendents of people who had me sacrifice so much..."
+"It's frightening."
+"But then I think of Penelope's vision, and of what I could do to make it a reality."
+"I think of how sad she was that she was never able to make it a reality."
+"If I stayed here... perhaps I could do what she couldn't."
+"Perhaps I could continue her work."
+"It would only be one more sacrifice for her sake... it is a choice I am woefully used to making."
+menu stayorgo:
+   "Am I here to stay, or just a traveller?"
+   "I'm here to stay.":
+        jump stay_end5
+   "I'm just a traveller.":
+        jump go_end5
+
+label stay_end5:
+"With all the strength I can find, I pull myself to my feet."
+"I let the tears fall down my face... but I refuse to let myself break down again."
+t "I'm so proud of you, Penelope."
+t "Of your vision. Of everything you built, and everything you set out to do."
+t "I'm so sorry you had to live your life ashamed of who you loved."
+t "I would never have allowed that, Penelope."
+t "I wish I'd been there to comfort you."
+t "And I'm sorry you died before seeing your dream become a reality..."
+t "But I swear to you that in your absence, I will make it happen."
+t "I love you endlessly."
+t "And I promise you, I'll carry on your dreams."
+"I'm on the edge of sobbing now, but I swallow down the feeling..."
+"and I turn around."
+scene bg finaltown
+"A few passing colonists have turned to look at me, curious and a bit worried."
+"I go to them."
+t "Hello..."
+t "I've been looking for you for some time."
+
+label go_end5:
+"With all the strength I can find, I pull myself to my feet."
+"I let the tears fall down my face... but I refuse to let myself break down again."
+t "I'm so proud of you, Penelope."
+t "Of your vision. Of everything you built, and everything you set out to build."
+t "And you weren't wrong, you know."
+t "There are people out there waiting for us. People who want to make contact - to work together to create something greater than we could have made on our own."
+t "I met them. And everywhere I went, I told them about you."
+t "So, you see, you did get to travel the galaxy. You were the first step to a network spanning as far as we can travel."
+t "I'll do everything I can to develop that network, I promise you that--"
+t "But I can't do that from here."
+t "Out there, though... out there, there's your network. Out there are our dreams."
+t "I love you endlessly."
+t "I have always loved you."
+"I'm on the edge of sobbing now, but I swallow down the feeling..."
+"and I turn around."
+scene bg cliffs
+"A few passing colonists have turned to look at me, curious and a bit worried."
+"I look at them and smile, and then I walk back past the rock where I hid, towards my ship."
+"I'll have to forage for food and water before the journey..."
+"But the journey where?"
+if okbreak:
+   "To the scout who I promised never to forget?"
+if missyou:
+   "To the scout, who I still miss so terribly?"
+"To the family whose memories still float in my head, who was so sad to part from me?"
+"To the soldiers, who found such happiness in such an unexpected place?"
+if calypso1:
+   "Or to Calypso, who was so confused by me?"
+if calypso2:
+   "Or to Calypso, who loved me?"
+"I look up, past the cliffs, past the birds and the clouds, up at the stars."
+"Space and time stretch out before me, so incomprehensibly vast."
+
+jump endcredits
+
+label end6:
+
+"...Of course."
+"I should have known."
+"I shouldn't have hoped against hope that--"
+"I fall to my knees."
+"I feel tears streaming down my face, but I don't feel myself crying."
+"Shouldn't I feel sad? Shouldn't I be in the throes of despair?"
+"I was too late. My daughter is gone. Everyone I know is gone."
+"And all I feel is bitterness and anger."
+"My hands shake with the strength of it."
+"I sacrificed so much of myself... and for this? To never see them again?"
+"To never see {i}her{/i} again?"
+"I did nothing to deserve this..."
+scene bg grey
+
+p "Alright. I'll start from the beginning."
+show penelope neutral middle
+p "It's just hard to know when the beginning was."
+t "...Penelope?"
+"I know that it's not Penelope; it's a hologram, blank and unresponsive. It looks like a composite, developed from photos of her. It's a hollow likeness. It shouldn't remind me of her."
+"But I reach out to it, all the same. I almost convince myself it's her until I touch the glass."
+show penelope adolescent
+"She grows before my eyes. She's a teenager now. Her eyes are steadfast... but sharp, too."
+"She looks so much like my mother."
+p "I was so lonely at first. I was the only kid on the ark my age, you know, and sometimes I felt like no one wanted me around."
+p "I used to get so attached to anyone who paid any attention to me."
+p "It took me a long time to get over that loneliness... but at a certain point I had to learn to stand on my own two feet."
+show penelope adult
+"She's my age, now... but she has a steadiness, and a presence, to her, that I could never have."
+p "I got used to being alone. I became dependable, responsible... but I never forgot how it felt to be ignored."
+p "I carried that with me. I know some people felt I took on too much. I should have delegated more."
+p "But the truth is, I was happier doing the work on my own."
+p "Sometimes I think I got too used to being alone."
+p "And even as I dedicated my life to opening up channels of communication with other species, even as I made our colony welcoming for all sorts of aliens passing through..."
+p "The more time I spent around others, the less certain I felt of our course."
+show penelope elder
+"I see my grandmother's face so clearly that it takes me a moment to realize that this is still Penelope."
+"But in her eyes I see the same steadfastness - and the same sharpness - as when she was a child."
+p "You'd think that I'd have felt even worse after the controversy."
+p "And don't get me wrong - it's not easy being a social pariah."
+p "But companionship is one hell of a drug. Even when it's with an alien."
+p "The years I spent with her were some of the best years of my life."
+p "There have been times when I've nearly left this planet and all the humans on it. There have been times when I've found my faith in my people stretched to its limit."
+p "But falling in love - however briefly - with an alien made me hope for a better future."
+p "I still hope things will get better someday, if not in my lifetime."
+p "Though I would have liked to see it..."
+"Oh, Nel, me too..."
+"I've been so unsure of so many things lately..."
+"But you were my hope."
+"And you {i}have{/i} made a better world."
+"I hope you knew that."
+i "What about your mother?"
+i "She was the savior of Earth... and now you're the First Governor of Ithaca."
+i "Did you ever think of her?"
+p "My mother?"
+p "You know, I get this question a lot... but no, I never really think of her."
+p "She died when I was so young. I barely knew her."
+hide penelope
+with Fade
+
+"The hologram fades away."
+"But even as she disappears, her words cut deep."
+if danger:
+   "I threw myself into the unknown for this."
+if simplicity:
+   "I gave up on my own happiness for this."
+if speakup:
+   "I gave up so much for humanity, even when they shunned me."
+   "I never imagined they would do the same to my daughter."
+if stayquiet:
+   "I gave up so much for humanity. They asked for more and more of me, and I obeyed..."
+   "I never imagined they would do the same to my daughter."
+if shoothim:
+   "I have destroyed myself in service of this:"
+   "A daughter who has forgotten me and an ark that disrepsects us both."
+if savehim:
+   "I have lost myself in service of this:"
+   "A daughter who has forgotten me and an ark that disrespects us both."
+scene bg memorial
+"I sit here for some time."
+"Sadness and anger wash over my body in turn. It is all I can do to hold myself still."
+"Eventually, I feel their eyes on me - the other colonists."
+"Clearly, I'm not a strange presence - there must be other colonies on the planet, enough that not everyone is a familiar face."
+"But still, I sense their confusion and distrust."
+"They're asking themselves: am I here to stay, or just a traveller?"
+"I want to be certain about this. I want to be okay with leaving the ark behind and never coming back."
+"But... Penelope had hope."
+"After everything. After so many years... she still struggled for something better."
+"Somehow, leaving feels like giving up on that."
+"But then again... how could anyone blame me for giving up, after what I've seen? After what I've done?"
+"Would Penelope blame me?"
+"Will I blame myself?"
+menu stayorgo:
+   "Am I here to stay, or just a traveller?"
+   "I'm here to stay.":
+        jump stay_end6
+   "I'm just a traveller.":
+        jump go_end6
+
+label stay_end6:
+
+"Slowly but steadily, I find my footing."
+"I wipe the tears from my eyes."
+t "I'm sorry for what you had to live through, Penelope."
+t "I lived through it too, in a way. I wish I'd had the chance to tell you."
+t "But you've done so much in spite of it. You've made something incredible."
+t "It's about time I do something too."
+t "I know I'd be happier if I left... but I just can't abandon what you spent your whole life working for."
+t "So... I'll make the world better, like you wanted."
+t "I promise you that."
+t "I love you endlessly."
+t "I'll do everything I can..."
+"I feel the tears coming back. I let them roll down my cheeks."
+"And I turn around."
+scene bg finaltown
+"A few passing colonists have turned to look at me, curious and a bit worried."
+"I go to them."
+t "Hello..."
+t "I've been looking for you for some time."
+
+jump endcredits
+
+label go_end6:
+
+"Slowly but steadily, I find my footing."
+"I wipe the tears from my eyes."
+t "I'm sorry for what you had to live through, Penelope."
+t "I lived through it too, in a way. I wish I'd had the chance to tell you."
+t "And you've done so much in spite of it. You've made something incredible."
+t "But... I can't do what you did."
+t "I can't give any more of myself to this."
+t "This ark has taken away my youth, my great love, my life with my daughter..."
+t "I have to believe that there's something else out there for me."
+t "But whatever it is, it's not here. It can't be here."
+t "I'm sorry I can't make the world better for you."
+t "I love you endlessly."
+t "I'll never forget you..."
+"I feel the tears coming back. I let them roll down my cheeks."
+"And I turn around."
+scene bg cliffs
+"A few passing colonists have turned to look at me, curious and a bit worried."
+"For a moment, I look at them... then I turn away and walk back past the rock where I hid, towards my ship."
+"I'll have to forage for food and water before the journey..."
+"But the journey where?"
+if okbreak:
+   "To the scout who I promised never to forget?"
+if missyou:
+   "To the scout, who I still miss so terribly?"
+"To the soldiers who hate me, but who might die without me?"
+if shoothim:
+   "To the graves of a family whose memories still haunt me?"
+if savehim:
+   "To a mother I've never known? To the graves of my children, whose memories still haunt me?"
+if calypso1:
+   "Or to Calypso, who was so confused by me?"
+if calypso2:
+   "Or to Calypso, who loved me?"
+"I look up, past the cliffs, past the birds and the clouds, up at the stars."
+"Space and time stretch out before me, so incomprehensibly vast."
+
+jump endcredits
+
+label endcredits:
+
 return
+
+label calypsodream:
+
+scene bg black
+
+"Calypso's waters lap up against me, warm and windless and quiet."
+"I'm almost at peace."
+"Almost..."
+p "Mom?"
+p "I miss you, mom..."
+p "Please talk to me."
+if truth:
+   "I can't, Nel, I'm so sorry."
+if lie:
+   "I'm right here, Nel, I'm right here."
+p "Please come find me."
+if calypso1:
+   "I'm coming. I'll be there so soon."
+if calypso2:
+   "I'm trying. But I don't know where to start."
+p "I'm sorry, mom."
+if truth:
+   p "I'm sorry I was upset about earth."
+   p "I'll forget about it, I promise."
+else:
+   p "I'm sorry I made you lie to make me feel better."
+   p "I'll be stronger, I promise."
+p "Just come back..."
+"Calypso sinks into the deep. I sink with it. The water washes over my face, and I breathe it in until Penelope's voice is too distant to hear..."
+
+if green1:
+   jump green1_postdream
+if blue1:
+   jump blue1_postdream
+if orange1:
+   jump orange1_postdream
+
+label green1dream:
+
+scene bg black
+
+"I lie in a bed of grass so soft that it threatens to swallow me whole."
+"The clouds pass over me, at once as slow as a moment and as fast as so many years."
+
+p "I've met someone..."
+p "I think I'm in love."
+p "But I don't know what that means."
+if truth:
+   "I guess we all find out on our own."
+else:
+   "I'm sorry I'm not there to help you."
+p "What was my father like?"
+if danger:
+   "Brave. Adventurous. Thoughtful, and deeply responsible, but relaxed when the time called for it."
+if simplicity:
+   "Level-headed. Calm. Very brave, of course, but methodical and patient when the time called for it."
+"So much like you. You two would have gotten along."
+"I miss you both so much..."
+p "I wish I'd known you both... I have so many questions, mom."
+p "Did you love anyone else? What was it like? What stories would you tell me, to help me now?"
+if okbreak:
+   "I don't know if love is the word for it. It was an encounter..."
+   if calypso2:
+     "...one I would have liked to see become something more."
+   if calypso1:
+     "...one that I won't forget. But nothing more."
+if missyou:
+   "Can you love someone after only a few days?"
+   if danger:
+      "Was it love? Or was it just the excitement of feeling someone else for the first time in so long?"
+   if simplicity:
+      "Was it love? Or was it just a temporary companionship after feeling alone for so long?"
+   "Whatever it is, the feeling lingers."
+   "I can't seem to let it go."
+p "I love you, mom..."
+"The grass grows over me as the clouds become wisps and the sky darkens."
+p "I wish we could go back."
+"I melt into the soil. Grass sprouts from my arms and legs and grows out of my mouth and my eyes."
+p "I want to go home..."
+"Winter comes, and the grass dies, and my body turns hard as stone with the frost."
+
+if blue2:
+   jump blue2_postdream
+if orange2:
+   jump orange2_postdream
+
+label blue1dream:
+
+scene bg black
+
+"The air is so thick in the jungle that I can barely breathe."
+"It pushes me down, and the trees and the stones pull me towards them, and below it all there is gravity, an ancient and terrible hum that beckons me towards immobility."
+p "Mom?"
+p "I know I need to be stronger..."
+p "But I'm so lonely."
+if calypso1:
+    "Oh, Nel... you're stronger than you know."
+if calypso2:
+    "Oh, Nel... I wish I could lend you my strength. But you're so far away..."
+p "There's no one here my age. I'm too young to help anyone, but I'm too old to stay with the babies."
+p "I have no one to talk to."
+"I'm so sorry, Nel."
+if goodspeech:
+   "I know it's hard now..."
+   "...but on the other end of it, you'll find yourself stronger, and happier, and ready to do great things."
+if badspeech:
+   "I wish there was something better on the other side..."
+   "But there isn't. There's just you and what you make of what you have."
+   "You can make a great deal from this, if you learn to live with it."
+"I promise you that."
+p "I wish I was strong like you."
+p "The hero of the ark! The liberator of the labour camps! The savior of humanity!"
+if goodspeech:
+   "I'm not just those things..."
+if badspeech:
+   "I'm none of those things..."
+p "And now you're just gone."
+"Gravity pulls me inwards until the breath leaves my lungs."
+p "Where did you go, mom? When will you come back?"
+
+if green2:
+   jump green2_postdream
+if orange2:
+   jump orange2_postdream
+
+label orange1dream:
+
+scene bg black
+
+"The sun beats down on me. It dries me out and burns me to a crisp..."
+"And now I'm in a cave lit with magic stones, sleeping with thousands of other children."
+"We look up at the ceiling and we see the light at the end of a long journey... and there's that sun again."
+"It warms me to my core."
+p "I'm so scared, mom."
+p "I know I'm not supposed to be afraid anymore... I'm sorry. I can't help it."
+if truth:
+   "We're all afraid sometimes."
+else:
+   "I wish I could protect you."
+p "I'm so scared here."
+p "Everything is so different from Earth."
+p "Do I really have to stay here for the rest of my life?"
+p "I don't want to stay on this stupid planet. I hate it."
+p "Why can't I go home?"
+if calypso1:
+   "This is your home now. You might even come to like it someday."
+if calypso2:
+   "This is your home now. There's no other choice."
+p "I just want our home back. I want our walks back, and our room and my blanket."
+"I know. I wish I could bring you back there."
+if playroom:
+   "To a place where you could relax, and play, and be a kid..."
+   "I hate that you've had to grow up so fast."
+if saferoom:
+   "To a place where you could feel safe."
+   "I hate that you've been forced out into the world so young."
+p "I want you back, mom."
+"But I'm at the bottom of a cave, and I can't move. I'm dying."
+p "Come back."
+"I see myself through her eyes - through Penelope's, through my daughter's, through my son's."
+"I see my legs twitch in the dark."
+p "Please..."
+"My family turns away from me, and as the dark encircles me, the last thing I see is the light..."
+"And how it burns..."
+
+if green2:
+   jump green2_postdream
+if blue2:
+   jump blue2_postdream
+
+label green2dream:
+
+scene bg black
+
+"I lie in a bed of grass so soft that it threatens to swallow me whole."
+"The clouds pass over me, at once as slow as a moment and as fast as so many years."
+
+p "I feel so childish coming back here..."
+p "But I can't help it. I have so many questions."
+p "Where did you end up? What were you like? What kinds of things did you think about, in the end?"
+"I haven't ended up anywhere. I'm still coming for you. I think about you every day."
+p "What happened to my father? How did my father die?"
+"Your father..."
+if detonate:
+   "I don't know how your father died."
+   "I left before it happened."
+   "We fought about it for days..."
+   "I didn't want to leave. I wanted to stay so we could raise you together."
+   "Sometimes I still wish I had. Would it really have been that much worse?"
+   "If I had to make that choice again..."
+if killscout:
+   "I killed your father."
+   "I killed your father because I left."
+   "We agreed that it would be better, that you'd live a better life."
+   "We both knew what would happen."
+   "We both knew, and it hurt like nothing I've ever felt... but I'd do it again a thousand times for you."
+p "I know all the stories about you by heart. But I have no idea who you were under them."
+if detonate:
+   if calypso1:
+      "I'm the kind of person who'd kill just for the sake of hope."
+   if calypso2:
+      "I'm the kind of person who'd kill because it's the only choice I can live with."
+if killscout:
+   if calypso1:
+      "I'm the kind of person who'd rather kill than face reality."
+   if calypso2:
+      "I'm the kind of person who'd rather kill than face what I truly am."
+p "I keep coming back here, hoping I'll find something..."
+"And what do you find? What do you say to your mother, the savior of humanity, the murderer of dozens?"
+p "...And I keep finding nothing."
+"That's truer than you know."
+p "I'm sorry."
+"The grass grows over me as the clouds become wisps and the sky darkens."
+p "This is pointless."
+"I melt into the soil. Grass sprouts from my arms and legs and grows out of my mouth and my eyes."
+p "I have to go."
+"Winter comes, and the grass dies, and my body turns hard as stone with the frost."
+
+if blue3:
+   jump blue3_postdream
+if orange3:
+   jump orange3_postdream
+
+label blue2dream:
+
+scene bg black
+
+"The air is so thick in the jungle that I can barely breathe."
+"It pushes me down, and the trees and the stones pull me towards them, and below it all there is gravity, an ancient and terrible hum that beckons me towards immobility."
+p "I know, I know."
+p "If you were here, you'd probably tell me to stop coming to you for advice and follow my own course."
+if truth:
+   "You're right... but I'm always happy to help."
+else:
+   "I would never say that... I'm always here for you."
+p "I have to be a leader now. It's something I've never had to do before..."
+p "But people won't follow me. They won't take me seriously. It's like my choices don't mean anything."
+"I know that feeling."
+if speakup:
+   "It always made me so angry."
+   "Why make me their leader if they couldn't put their faith in me?"
+if stayquiet:
+   "It always made me doubt myself."
+   "If they couldn't put their faith in me... why make me their leader?"
+p "Did they question you like they're questioning me?"
+p "What did you do?"
+if speakup:
+   "I told them the truth."
+   "I knew they were wrong, and I told them so."
+   "My feelings are just as important as theirs. They had no right to assume otherwise."
+if stayquiet:
+   "I tried to listen to them."
+   "Even though I thought they were wrong, I let them say what they had to say."
+   "In the end, I swore to protect them... so their feelings are more important than mine."
+p "How did it feel for you, leading so many people?"
+if speakup:
+   "Infuriating."
+if stayquiet:
+   "Lonely."
+p "...Look, I'm sorry."
+p "This won't happen again."
+"Gravity pulls me inwards until the breath leaves my lungs."
+p "I just wish I could imagine how you felt..."
+
+if green3:
+   jump green3_postdream
+if orange3:
+   jump orange3_postdream
+
+label orange2dream:
+
+scene bg black
+
+"The sun beats down on me. It dries me out and burns me to a crisp..."
+"And now I'm in a cave lit with magic stones, putting my children to bed."
+"We look up at the ceiling and we see the light at the end of a long journey... and there's that sun again."
+"It warms me to my core."
+p "I keep using you as a crutch."
+p "I put on this strong face outside, and people look up to me."
+p "But inside, I'm such a mess, mom."
+if calypso1:
+   "I think we all feel that way sometimes."
+   "You just have to push through."
+if calypso2:
+   "I feel that way too, Nel. All the time."
+p "Do you ever feel like giving up?"
+if truth:
+   "Yes, but..."
+else:
+   "No, because..."
+if memories:
+   "...I remember what things used to be like. I remember that people care about me."
+   "I remember that you love me."
+if possibilities:
+   "...I think about what things will be like when we're together again."
+   "I think of how happy we'll be."
+p "I dream so often of just leaving the colony - building a cabin, or..."
+"But I'm at the bottom of a cave, and I can't move. I'm dying."
+p "Or looking for you. For what happened to you."
+"I see myself through her eyes - through Penelope's, through my daughter's, through my son's."
+p "It's stupid, I know. There's nothing for me out there."
+"I see my legs twitch in the dark."
+p "But is there anything for me here?"
+"My family turns away from me, and as the dark encircles me, the last thing I see is the light..."
+p "What would you do, mom?"
+"And how it burns..."
+
+if green3:
+   jump green3_postdream
+if blue3:
+   jump blue3_postdream
+
+label green3dream:
+
+scene bg black
+
+"I lie in a bed of grass so soft that it threatens to swallow me whole."
+"The clouds pass over me, at once as slow as a moment and as fast as so many years."
+p "I need to talk to you."
+if truth:
+   "I wish you could."
+else:
+   "Always."
+p "I wish I'd known you, mom."
+p "I wish we could have had a conversation like this."
+p "I'd give anything just to speak to you once..."
+if calypso1:
+   "Just wait for me a little longer, Nel, and I promise I'll sit and listen for as long as you want."
+if calypso2:
+   "As would I, if only things worked that way..."
+p "But I don't know you. I've never known you."
+p "What were you like? What did you hope for?"
+if desperate:
+   "I just wanted it to end."
+if selfless:
+   "I just wanted to feel something."
+p "How did you feel, doing the things you did?"
+"You know what the terrible thing is?"
+if desperate:
+   "I felt nothing."
+if selfless:
+   "I felt good."
+p "Who were you underneath it all? Not the savior of earth, not my brave mother... but you. Who were you?"
+if desperate:
+   "I was just desperate."
+if selfless:
+   "I was a masochist."
+p "I'm sorry, mom..."
+"No..."
+p "But I have to go."
+"The grass grows over me as the clouds become wisps and the sky darkens."
+p "I can't keep doing this. It hurts too much."
+"I melt into the soil. Grass sprouts from my arms and legs and grows out of my mouth and my eyes."
+p "I have to move on."
+"Winter comes, and the grass dies, and my body turns hard as stone with the frost."
+
+jump final_postdream
+
+label blue3dream:
+
+scene bg black
+
+"The air is so thick in the jungle that I can barely breathe."
+"It pushes me down, and the trees and the stones pull me towards them, and below it all there is gravity, an ancient and terrible hum that beckons me towards immobility."
+p "Look... I need to talk to you."
+p "I still have so many questions... I keep wanting to ask you for advice. I keep asking myself what you would have said."
+if calypso1:
+   "I trust you, Nel. I know that whatever you've chosen, it's probably better than what I could have told you."
+if calypso2:
+   "There's so much I wish I could have told you, Nel. So much we could have shared."
+p "But I can't keep coming back here."
+p "I had to make a hard choice today."
+p "I knew what I had to do... but it felt wrong."
+if understand:
+   "Sometimes you have to make choices that feel wrong."
+if revolted:
+   "Listen to yourself, Nel. If something feels wrong, don't do it."
+p "What choice would you have made, if you were in my shoes?"
+p "I wanted you there so badly..."
+p "But I made my choice. I have to live with it now..."
+p "And thinking about what you would have done only makes it hurt more."
+"No..."
+p "I can't talk to you anymore, mom."
+"Gravity pulls me inwards until the breath leaves my lungs."
+p "I have to stand on my own."
+
+jump final_postdream
+
+label orange3dream:
+
+scene bg black
+
+"The sun beats down on me. It dries me out and burns me to a crisp..."
+"And now I'm in a cave lit with magic stones, putting my children to bed."
+"We look up at the ceiling and we see the light at the end of a long journey... and there's that sun again."
+"It warms me to my core."
+p "I have to talk to you, mom."
+p "Someone died today."
+p "It wasn't unexpected... but it hurt more than I thought it could."
+if calypso1:
+   "It won't stop hurting like that... but you'll get used to it."
+if calypso2:
+   "It still hasn't stopped hurting for me. If anything, it hurts more."
+p "But afterwards... for the first time, I thought about what happened to you."
+p "Where did you go? What did you see?"
+p "How did you die?"
+if shoothim:
+   "I died in a cave, alone, next to my dead children."
+   "I stepped into the light, and it burned me up."
+if savehim:
+   "I died at the bottom of a cave."
+   "I reached for the light, and I fell too far."
+p "What happens after you die?"
+p "Will I see you again? When I die, will you be there?"
+if shoothim:
+   "Nothing happens."
+   "After you die, there is nothing."
+if savehim:
+   "I have no idea."
+p "I can't keep talking to you like this."
+"No..."
+p "I keep coming back, hoping I'll hear something from you..."
+"I'm at the bottom of a cave, and I can't move. I'm dying."
+p "But every time I do, it makes me want to leave the colony, to go looking for you."
+"I see myself through her eyes - through Penelope's, through my daughter's, through my son's."
+p "Sometimes, I want to die, just so I'll see you one more time."
+"I see my legs twitch in the dark."
+p "I can't think like that anymore. Not with so much at stake."
+"My family turns away from me, and as the dark encircles me, the last thing I see is the light..."
+p "I have to leave, mom. I have to live..."
+"And how it burns..."
+
+jump final_postdream
+

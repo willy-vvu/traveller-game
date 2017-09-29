@@ -31,7 +31,8 @@
       @keyframes bloom{
         0%  { opacity:1; }
         30%  { opacity:1; transform:scale(1);}
-        100%{ opacity:0; transform: scale(1.5);}
+        99.999%{ opacity:0; transform: scale(1.5);}
+        100%{ opacity:0; transform: scale(1);}
       }
       @keyframes fadein{
         0%  { opacity:0; }
@@ -60,11 +61,15 @@
       @keyframes menubloom{
         0%  { opacity:1; }
         50%  { opacity:1; transform:scale(1);}
-        100%{ opacity:0; transform: scale(1.1);}
+        99.999%{ opacity:0; transform: scale(1.1);}
+        100%{ opacity:0; transform: scale(1);}
       }
       html,body,.full-image,.character-image{
         position:absolute;
         left:0;right:0;top:0;bottom:0;
+      }
+      body,html{
+        overflow:hidden;
       }
       body{
         background-color:black;
@@ -77,23 +82,24 @@
       }
       .text-bottom{
         position:absolute;
-        bottom:40px;
+        bottom:49px;
         left:0;
         right:0;
         min-height:110px;
         margin-left:auto;
         margin-right:auto;
-        max-width:650px;
+        max-width:655px;
         padding:16px 22px;
-        font-size:14pt;
         border-radius:8px;
         color:white;
         line-height:1.4em;
         letter-spacing:0.005em;
         opacity:0;
         cursor:pointer;
+        font-size:16pt;
       }
       .text-bottom.gameplay-textbox{
+        font-size:14pt;
         background-color: rgba(0,0,0,0.2);
         box-shadow:0 0 2px 2px rgba(0,0,0,0.2);
         text-shadow:0 2px 15px rgba(0,0,0,0.2);
@@ -120,6 +126,10 @@
       }
       #text-indicator.showing{
         animation:pulse 2s linear infinite;
+      }
+      .gameplay-textbox #text-indicator.active{
+        opacity:1;
+        background-color:white;
       }
       .gameplay-textbox #text-indicator.bloom{
         background-color:white;
@@ -159,10 +169,11 @@
         overflow-y:auto;
         margin-left:auto;
         margin-right:auto;
-        max-width:650px;
+        max-width:655px;
         font-size:14pt;
         color:rgba(255,255,255,0.9);
         text-align:center;
+        overflow:visible;
       }
       .menu-title{
         margin-bottom:40px;
@@ -187,6 +198,7 @@
         background-color: rgba(0,0,0,0.2);
         box-shadow:0 0 2px 2px rgba(0,0,0,0.2);
         cursor:pointer;
+        transition:transform 150ms;
       }
       .thumb{
         position:absolute;
@@ -206,6 +218,15 @@
         border:2px solid white;
         /*box-shadow:0 0 10px 10px rgba(0,0,0,0.2);*/
       }
+      .menu-item:active{
+        /*background-color: rgba(0,0,0,0.3);*/
+        transform:scale(0.95);
+        /*transition:none;*/
+        background-color: white;
+        border:2px solid transparent;
+        color:#333;
+        /*box-shadow:0 0 10px 10px rgba(0,0,0,0.2);*/
+      }
       .menu-item.selected{
         animation:menubloom 0.5s cubic-bezier(0,0.9,1,1);
         /*animation-fill-mode:both;*/
@@ -218,6 +239,53 @@
         letter-spacing:0.005em;
         text-shadow:0 2px 15px rgba(0,0,0,0.2);
       }
+      /*@media (min-width: 800px) {*/
+        .aspect-long .planet.menu-item,.aspect-medium .planet.menu-item{
+          font-size:0;
+          text-shadow: none;
+          position: absolute;
+          top:50%;
+          left:50%;
+        }
+        .aspect-medium .planet.orange{
+          width: 18vh;
+          height: 18vh;
+          margin-left: 34.5vh;
+          margin-top:-41vh;
+        }
+        .aspect-medium .planet.green{
+          width: 12.75vh;
+          height: 12.75vh;
+          margin-left: 14.25vh;
+          margin-top: 0vh;
+        }
+        .aspect-medium .planet.blue{
+          width: 21vh;
+          height: 21vh;
+          margin-left: -63vh;
+          margin-top: -9.75vh;
+        }
+      /*}*/
+      /*@media (min-width: 1000px) {*/
+        .aspect-long .planet.orange{
+          width: 12vw;
+          height: 12vw;
+          margin-left: 23vw;
+          margin-top: -27.333vw;
+        }
+        .aspect-long .planet.green{
+          width: 8.5vw;
+          height: 8.5vw;
+          margin-left: 9.5vw;
+          margin-top: 0vw;
+        }
+        .aspect-long .planet.blue{
+          width: 14vw;
+          height: 14vw;
+          margin-left: -42vw;
+          margin-top: -6.5vw;
+        }
+      /*}*/
       .full-image,.thumb{
         background-size:cover;
         background-position:50%;
@@ -226,16 +294,66 @@
       .full-image{
         background-color:black;
       }
-      .character-image{
+      .character-image, .menu-scrim{
         background-size:contain;
-        background-position:50% 100%;
+        background-position:100% 100%;
         background-repeat:no-repeat;
       }
       #backdrop-mg-transition, #backdrop-fg-transition{
         opacity:0;
       }
+      #pausemenu{
+        margin-left:0;
+      }
       .menu-scrim{
         background-color:rgba(30,30,30,0.9);/*rgba(0,0,0,0.3);*/
+        background-image:url("images/pause_menu.png");
+      }
+      #preload{
+        width:0;
+        height:0;
+        overflow:hidden;
+        opacity:0;
+        visibility:hidden;
+        display:none;
+        /*position:absolute;*/
+        /*z-index:999;*/
+      }
+      #preload img{
+        width:50px;
+      }
+      #pause{
+        position: absolute;
+        left:0;
+        bottom:0;
+        padding:13px;
+        color:white;
+        letter-spacing:0.01em;
+        font-size:14pt;
+        opacity:0;
+        transition:opacity 300ms;
+        text-shadow:0 2px 15px rgba(0,0,0,0.2);
+        cursor:pointer;
+        display:none;
+      }
+      #pause.pause-visible{
+        display:initial;
+        opacity:0.3;
+      }
+      #pause:hover{
+        opacity:0.5;
+        transition:none;
+      }
+      /*#pause:active{*/
+      /*  opacity:0.8;*/
+      /*}*/
+      #pause .pause-icon{
+        height:0.7em;
+        width:0.233em;
+        /*image-rendering:pixelated;*/
+        margin-right:0.233em;
+        display: inline-block;
+        background-color: white;
       }
       /*#devpanel{
         position:absolute;
@@ -246,15 +364,29 @@
         background-color:rgba(20,20,20,0.7);
         z-index:99;
       }*/
+      #loading{
+        position:absolute;
+        left:0;
+        right:0;
+        text-align:center;
+        top:50%;
+        font-family:Rubik,sans-serif;
+        font-size:16pt;
+        margin-top:-0.5em;
+        animation:pulse 4s linear infinite;
+        color:rgba(255,255,255,0.3);
+      }
     </style>
   </head>
   <body>
+    <div id="preload"></div>
     <div class="full-image" id="backdrop-bg-transition"></div>
     <div class="full-image" id="backdrop-bg"></div>
-    <div class="character-image" id="backdrop-mg-transition"></div>
-    <div class="character-image" id="backdrop-mg"></div>
+    <div id="loading">Loading...</div>
     <div class="character-image" id="backdrop-fg-transition"></div>
     <div class="character-image" id="backdrop-fg"></div>
+    <div class="character-image" id="backdrop-mg-transition"></div>
+    <div class="character-image" id="backdrop-mg"></div>
     <div class="text-bottom" id="textbox">
       <div id="text-container"></div>
       <div id="text-indicator">
@@ -267,10 +399,12 @@
     <div class="menu-scrim full-image" id="scrim" style="display:none;"></div>
     <div class="menu-middle" id="pausemenu" style="display:none;"></div>
     </div>
+    <div id="pause">
+      <div class="pause-icon"></div><div class="pause-icon"></div> Pause
+    </div>
     <script>
       scriptText = "";
       scriptLines = [];
-      mainMenu = true;
       // sceneElem = document.getElementById("scene");
       // characterElem = document.getElementById("character");
       // textElem = document.getElementById("text");
@@ -284,17 +418,43 @@
         globalDefs = state.defs;
         startLine = ScriptFollower.getNextNonEmpty(state.line + 1);
         // console.log(state)
+        document.getElementById("loading").innerHTML = "";
 
         SaveManager.fetchFromLocalstorage();
 
-        // ScriptFollower.fromSave(SaveManager.saves[0]||SaveManager.newGameSave());
-        Scene.transitionTo(Scene.MAIN_MENU, function(){
-          Scene.MAIN_MENU_2.advance.menu = SaveManager.makeLoadMenu();
-          Scene.transitionTo(Scene.MAIN_MENU_2, function(){
-            mainMenu = false;
-          });
-        })
+        // ScriptFollower.fromSave(SaveManager.saves[1]||SaveManager.newGameSave());
+        // MainMenu.hide()
+        // Start with the main menu
+        MainMenu.show();
 
+      }
+
+      MainMenu = {
+        showing:true,
+        show(){
+          MainMenu.showing=true;
+          MainMenu.hidePause();
+          Scene.transitionTo(Scene.MAIN_MENU, function(){
+            Scene.MAIN_MENU_2.advance.menu = SaveManager.makeLoadMenu();
+            Scene.transitionTo(Scene.MAIN_MENU_2);
+          });
+        },
+        pauseShowing:false,
+        hidePause(){
+          if(!MainMenu.pauseShowing){return};
+          MainMenu.pauseShowing = false;
+          PauseMenu.elem.pause.className="";
+          PauseMenu.hideScrim();
+        },
+        showPause(){
+          if(MainMenu.pauseShowing){return};
+          MainMenu.pauseShowing = true;
+          PauseMenu.elem.pause.className="pause-visible";
+        },
+        hide(){
+          MainMenu.showing=false;
+          MainMenu.showPause();
+        }
       }
 
       // function globalAnim(x){
@@ -322,6 +482,7 @@
           return {
             defs:{
               image:{},
+              music:{},
               character:{}
             },
             variables:{},
@@ -329,6 +490,7 @@
             midground:"",
             foreground:"",
             text:"",
+            music:[],
             line:0,
             advance:{
               type:"auto"
@@ -388,11 +550,11 @@
           ScriptFollower.autoIterate(state, suppresssave);
         },
         autoIterate(state, suppresssave){
-          var deltaState = ScriptFollower.stateChangeFromLine(state.line, state.defs, state.variables);
+          var deltaState = ScriptFollower.stateChangeFromLine(ScriptFollower.getNextNonEmpty(state.line), state.defs, state.variables);
           var state = ScriptFollower.foldState(state, deltaState);
           window.state = state;
           if(state.advance.type == "auto"){
-            if(deltaState.background){
+            if(deltaState.background!=null){
               // Force background transition to finish
               Scene.transitionTo(state, function(){
                 ScriptFollower.advanceIterate(state, suppresssave);
@@ -422,8 +584,10 @@
               SaveManager.autoSave(state);
             }
             Scene.transitionTo(state, function(){
+              state.text = "";
               ScriptFollower.advanceIterate(state);
             });
+            Preloader.preloadLookahead(state);
           }
           else if(state.advance.type == "menu"){
             // Display
@@ -433,6 +597,9 @@
               ScriptFollower.autoIterate(state);
             });
           }
+          else if(state.advance.type == "end"){
+            Credits.transitionTo();
+          }
           else{
             throw "Unknown advance type: "+state.advance.type;
           }
@@ -440,6 +607,7 @@
         foldState(state,stateChange){
           // console.log(state,stateChange)
 
+          state.defs.music = Object.assign(state.defs.music, (stateChange.defs || {}).music || {})
           state.defs.image = Object.assign(state.defs.image, (stateChange.defs || {}).image || {})
           state.defs.character = Object.assign(state.defs.character, (stateChange.defs || {}).character || {})
           state.variables = Object.assign(state.variables, stateChange.variables || {});
@@ -447,6 +615,7 @@
           state.midground = stateChange.midground!==undefined ? stateChange.midground : state.midground;
           state.foreground = stateChange.foreground!==undefined ? stateChange.foreground : state.foreground;
           state.text = stateChange.text!==undefined ? stateChange.text : state.text,
+          state.music = stateChange.music!==undefined ? stateChange.music : state.music;
           state.advance = stateChange.advance;
           return state;
         },
@@ -474,6 +643,20 @@
           }
           else if(currentLine.startsWith("pass")){
             return {
+              advance: { type:"auto" }
+            }
+          }
+          else if(currentLine.startsWith("music ")){
+            //Image declaration
+            var matches = /music (.*\S) *= *"(.*\S)"/.exec(currentLine);
+            var music = matches[1], url = matches[2];
+            var musicdef = {}
+            musicdef[music] = url;
+
+            return {
+              defs:{
+                music:musicdef
+              },
               advance: { type:"auto" }
             }
           }
@@ -529,6 +712,7 @@
           else if(currentLine.startsWith("scene ")){
             //Show Scene
             var image = splitLine.slice(1).join(" ");
+            if(image == "bg black"){ image = ""; }
             /// console.log("%Scene:"+"%c "+image, "color:cyan", "color:inherit");
             return {
               background:image,
@@ -538,11 +722,28 @@
               advance: { type:"auto" }
             }
           }
+          else if(currentLine.startsWith("play ")){
+            // Play music
+            var music = splitLine.slice(1);
+            // TODO
+            return {
+              music,
+              advance: { type:"auto" }
+            }
+          }
+          else if(currentLine.startsWith("stop")){
+            // Stop music
+            // TODO
+            return {
+              music:[],
+              advance: { type:"auto" }
+            }
+          }
           else if(currentLine.startsWith("show ")){
             // Show character
             var image = splitLine.slice(1).join(" ");
             /// console.log("%cShowing:"+"%c "+image, "color:cyan", "color:inherit");
-            if(image.startsWith("dad")){
+            if(ScriptFollower.isMidground(image)){
               return {
                 midground: image,
                 advance: { type:"auto" }
@@ -557,11 +758,19 @@
           }
           else if(currentLine.startsWith("hide ")){
             // Hide character
-            // var image = splitLine.slice(1).join(" ");
+            var image = splitLine.slice(1).join(" ");
             // console.log("%cShowing:"+"%c "+imageDefs[image], "color:cyan", "color:inherit");
-            return {
-              foreground: "",
-              advance: { type:"auto" }
+            if(ScriptFollower.isMidground(image)){
+              return {
+                midground: "",
+                advance: { type:"auto" }
+              }
+            }
+            else{
+              return {
+                foreground: "",
+                advance: { type:"auto" }
+              }
             }
           }
           else if(currentLine.startsWith("$ ")){
@@ -684,7 +893,7 @@
             var lineText = splitLine.slice(1).join(" ").slice(1,-1);
             /// console.log("%c" + fromCharacter + ":"+"%c " + lineText, "color:orange", "color:inherit")
             return {
-              text: "<header>"+fromCharacter + "</header> " + ScriptFollower.parseFormatting(lineText),
+              text: "<header>" + fromCharacter + "</header>" + ScriptFollower.parseFormatting(lineText),
               advance: { type:"text" }
             }
           }
@@ -703,12 +912,199 @@
             throw "Unknown line "+number+": " + currentLine;
           }
         },
-
+        isMidground(image){
+          return image.startsWith("son")||image.startsWith("friend");
+        },
         saveStateToPlayable(save){
           return ScriptFollower.foldState(Object.assign(ScriptFollower.initialState(), {line: save.line || startLine, defs:globalDefs}), save);
         },
         fromSave(save){
           ScriptFollower.autoIterate(ScriptFollower.saveStateToPlayable(save), true)
+        }
+      }
+
+      Sound = {
+        elem:{
+          preload:document.getElementById("preload")
+        },
+        makeAudioURL(url){
+          return "sound/"+url;
+        },
+        loadedTracks:{},
+        defs:{
+          "Select":"Select.mp3",
+          "SelectUp":"SelectUp.mp3",
+          "Hover":"Hover.mp3",
+          "Pause":"Pause.mp3",
+          "MenuSelect":"MenuSelect.mp3",
+          "MainMenuSelect":"MainMenuSelect.mp3",
+        },
+        preloadAll(){
+          for(var d in Sound.defs){
+            var track = new Audio();
+            track.src = Sound.makeAudioURL(Sound.defs[d]);
+            // track.controls = true;
+            Sound.loadedTracks[Sound.defs[d]] = track;
+            Sound.elem.preload.appendChild(track);
+          }
+        },
+        play(filename){
+          // console.error(filename)
+          Sound.loadedTracks[filename].currentTime = 0;
+          Sound.loadedTracks[filename].play();
+        }
+      }
+      Preloader = {
+        elem:{
+          preload:document.getElementById("preload")
+        },
+        INITIAL_LOAD:["main-title.jpg", "space.jpg", "earth-day.jpg"],
+        loadedImages:{},
+        LOOKAHEAD_AMOUNT:7,
+        preloadInitial(){
+          Preloader.INITIAL_LOAD.forEach(Preloader.preloadImage);
+        },
+        preloadImage(imageFile){
+          if(!(imageFile in Preloader.loadedImages)){
+            var image = new Image();
+            image.src = Backdrop.makeImageURL(imageFile);
+            Preloader.elem.preload.appendChild(image);
+            Preloader.loadedImages[imageFile] = image;
+          }
+        },
+        preloadState(state){
+          if(state.background){
+            Preloader.preloadImage(globalDefs.image[state.background]);
+          }
+          if(state.midground){
+            Preloader.preloadImage(globalDefs.image[state.midground]);
+          }
+          if(state.foreground){
+            Preloader.preloadImage(globalDefs.image[state.foreground]);
+          }
+        },
+        preloadLookahead(state){
+          var amount = Preloader.LOOKAHEAD_AMOUNT;
+          var lookahead = state.line;
+          while(lookahead < scriptLines.length && amount-- > 0){
+            var statechange = ScriptFollower.stateChangeFromLine(lookahead, state.defs, state.variables);
+            Preloader.preloadState(statechange)
+            lookahead = ScriptFollower.getNextLEIndent(lookahead);
+          }
+        }
+      }
+      Music = {
+        elem:{
+          preload:document.getElementById("preload")
+        },
+        makeAudioURL(url){
+          return "music/"+url;
+        },
+        loadedTracks:{},
+        trackVolumeTarget:{},
+        trackVolume:{},
+        CROSSFADE_TIME:3,
+        // crossfadeTime:0, // set to the above
+        transitionTo(urls){
+          Music.loadAndPlaySimultaneous(urls);
+          Music.resumeMusic = urls;
+          // urls.map(makeAudioURL)
+        },
+        loadAndPlaySimultaneous(urls){
+          for(var url in Music.loadedTracks){
+            // Start quiet
+            Music.fadeTrackTo(url, url == urls[0] ? 1 : urls.indexOf(url) != -1 ? 0 : null);
+          }
+          Promise.all(
+            // Load all new tracks
+            urls.filter(function(url){
+              return !(url in Music.loadedTracks)
+            }).map(function(url){
+              return new Promise(function(resolve){
+                var track = new Audio();
+                // track.preload = true;
+                track.addEventListener('canplaythrough', function(event){
+                  resolve(event);
+                });
+                track.src = Music.makeAudioURL(url);
+                // track.controls = true;
+                track.volume = 0;
+                track.loop = true;
+                Music.loadedTracks[url] = track;
+                Music.trackVolume[url] = 0;
+                Music.elem.preload.appendChild(track);
+                // console.log("preloaded",url)
+              })
+            })
+          ).then(function(){
+            // urls.forEach(function(url){
+            //   if(Music.loadedTracks[url].paused || Music.loadedTracks[url].volume < 0.01){
+            //     Music.loadedTracks[url].currentTime = Music.loadedTracks[urls[0]].currentTime;
+            //   }
+            // });
+            for(var url in Music.loadedTracks){
+              // Start quiet
+              Music.fadeTrackTo(url, url == urls[0] ? 1 : urls.indexOf(url) != -1 ? 0 : null);
+            }
+          })
+        },
+        fadeTrackTo(url, volume){
+          // console.log(url, volume)
+          // Music.crossfadeTime = Music.CROSSFADE_TIME;
+          var track = Music.loadedTracks[url];
+          if(track.paused && volume != null){
+            track.play();
+          }
+          Music.trackVolumeTarget[url] = volume;
+          if(!Music.musicLoopRunning){ Music.musicLoop(); }
+        },
+        equalPower(n){
+          return Math.cos(Math.min(Math.max(1-n,0),1)*0.5*Math.PI);
+        },
+        crossfadeCurve(x){
+          return x>0.5?1-Music.crossfadeCurve(1-x):x*x*x*4;
+        },
+        resumeMusic:[],
+        pauseAll(){
+          Music.loadAndPlaySimultaneous([]);
+        },
+        resumeAll(){
+          // if(Music.resumeMusic!=null){
+            Music.transitionTo(Music.resumeMusic);
+            // Music.resumeMusic = null;
+          // }
+        },
+        // equalPowerInv(n){
+        //   return 1-Math.acos(Math.min(Math.max(n,0),1))*2/Math.PI;
+        // },
+        musicLoopRunning:false,
+        musicLoop(){
+          // Always runs
+          // console.log("hmm")
+          Music.musicLoopRunning = true;
+          var runAgain = false;
+          for(var url in Music.trackVolumeTarget){
+            runAgain = true;
+            var targetVol = Music.trackVolumeTarget[url]||0;
+            var currentVol = Music.trackVolume[url];
+            var newVol = currentVol + Math.min(Math.max(targetVol - currentVol, -1/60/Music.CROSSFADE_TIME), 1/60/Music.CROSSFADE_TIME);
+            // console.log(newVol);
+            Music.trackVolume[url] = newVol;
+            Music.loadedTracks[url].volume = Music.equalPower(Music.crossfadeCurve(newVol));
+            if(newVol == targetVol){
+              if(!Music.loadedTracks[url].paused && Music.trackVolumeTarget[url] == null){
+                // Music.loadedTracks[url].pause();
+              }
+              delete Music.trackVolumeTarget[url];
+            }
+            // console.log(track.volume)
+          }
+          if(runAgain){
+            window.requestAnimationFrame(Music.musicLoop);
+          }
+          else{
+            Music.musicLoopRunning = false;
+          }
         }
       }
 
@@ -718,6 +1114,7 @@
           midground:"",
           foreground:"",
           text:"",
+          music:[],
           advance:{
             type:"auto"
           }
@@ -727,6 +1124,7 @@
           midground:"",
           foreground:"",
           text:"[MAIN_MENU]",
+          music:["theme1g", "theme1"],
           advance:{
             type:"text"
           }
@@ -736,6 +1134,7 @@
           midground:"",
           foreground:"",
           text:"",
+          music:["theme1", "theme1g"],
           advance:{
             type:"menu"
           }
@@ -743,9 +1142,16 @@
 
         transitionTo(state, callback){
           var bringin = function(){
-            Backdrop.transitionTo(globalDefs.image[state.background], "bg", function(){
-              Backdrop.transitionTo(globalDefs.image[state.midground], "mg", function(){
-                Backdrop.transitionTo(globalDefs.image[state.foreground], "fg", function(){
+            var newMusic = state.music.map(function(m){return globalDefs.music[m];});
+            if(!PauseMenu.showing){
+              Music.transitionTo(newMusic);
+            }
+            else{
+              Music.resumeMusic = newMusic;
+            }
+            Backdrop.transitionTo(globalDefs.image[state.background] || "", "bg", function(){
+              Backdrop.transitionTo(globalDefs.image[state.midground] || "", "mg", function(){
+                Backdrop.transitionTo(globalDefs.image[state.foreground] || "", "fg", function(){
                   Menu.transitionTo(state.advance.menu, state.advance.type == "menu"?callback:null)
                   Textbox.transitionTo(state.text, state.advance.type == "text"?callback:null)
                   if(state.advance.type == "auto" && callback){
@@ -755,12 +1161,12 @@
               });
             })
           }
-          if(Backdrop.lastbg && state.background != undefined && Backdrop.lastbg != globalDefs.image[state.background]){
+          if(Backdrop.lastbg != (globalDefs.image[state.background] || "")){
             // Backdrop change, fade stuff out
             Menu.transitionTo(null)
             Textbox.transitionTo(null)
-            Backdrop.transitionTo(null, "fg", function(){
-              Backdrop.transitionTo(null, "mg", bringin);
+            Backdrop.transitionTo("", "fg", function(){
+              Backdrop.transitionTo("", "mg", bringin);
             });
           }
           else{
@@ -771,7 +1177,7 @@
 
       Backdrop = {
         BG_TRANSITION:1,
-        FG_TRANSITION:0.2,
+        FG_TRANSITION:0,
         /*
           layer can be "fg" or "bg", time in seconds
         */
@@ -783,8 +1189,11 @@
           fg:document.getElementById("backdrop-fg"),
           fgtransition:document.getElementById("backdrop-fg-transition")
         },
+        makeImageURL(url){
+          return url?"images/"+url:"";
+        },
         makeCSSBackground(url){
-          return url?"url('images/"+url+"')":"";
+          return url?"url('"+Backdrop.makeImageURL(url)+"')":"";
         },
         setBackground(elem, url){
           elem.style.backgroundImage = url;
@@ -798,9 +1207,9 @@
         setAnim(elem, anim){
           elem.style.animation = anim;
         },
-        lastbg:null,
-        lastmg:null,
-        lastfg:null,
+        lastbg:"",
+        lastmg:"",
+        lastfg:"",
         transitionTo(url, layer, callback){
           var time = 0, lastUrl;
           if(layer=="bg"){
@@ -817,12 +1226,12 @@
           if(layer=="mg"){
             time = Backdrop.FG_TRANSITION;
             if(!Backdrop.lastfg || !url){
-              time = Backdrop.BG_TRANSITION/2;
+              time = Backdrop.BG_TRANSITION;
             }
             lastUrl = Backdrop.lastmg;Backdrop.lastmg=url;
           }
           if(lastUrl == url){
-            callback();
+            callback&&callback();
           }
           else {
             Backdrop.elem[layer].parentElement.insertBefore(Backdrop.elem[layer+"transition"], Backdrop.elem[layer].nextElementSibling);
@@ -841,7 +1250,7 @@
               Backdrop.setAnim(transition, "fadeout "+time+"s");
             };
             setTimeout(function(){
-              callback()
+              callback&&callback()
               // Backdrop.setAnim(main, "");
               // Backdrop.setAnim(transition, "");
               // setTimeout(callback,16);
@@ -856,11 +1265,14 @@
           textcontainer:document.getElementById("text-container"),
           textindicator:document.getElementById("text-indicator")
         },
-        APPEAR_TIME:0.4,
-        WAIT_TO_SKIP:0.2,
-        PRE_SKIP_WAIT:0.2,
+        APPEAR_TIME:0.3,
+        WAIT_TO_SKIP_MIN:0.05,
+        WAIT_TO_SKIP_MAX:0.6,
+        WAIT_TO_SKIP_MIN_CHAR_COUNT:60,
+        WAIT_TO_SKIP_MAX_CHAR_COUNT:180,
+        PRE_SKIP_WAIT:0.1,
         QUICK_COUNT:20,
-        POST_SKIP_WAIT:0.4,
+        POST_SKIP_WAIT:0.3,
         timeout:null,
         transitionTo(text,callback){
           if(text){
@@ -876,23 +1288,23 @@
               }
             }
             Textbox.hideIndicator();
-            Textbox.elem.textcontainer.innerHTML = "";
             if(text == Scene.MAIN_MENU.text){
               Textbox.elem.textbox.classList.remove("gameplay-textbox");
             }
             else{
               Textbox.elem.textbox.classList.add("gameplay-textbox");
             }
+            Textbox.elem.textcontainer.innerHTML = "";
             Textbox.show(function(){
               Textbox.displayText(text, 0, function(){
-                clearTimeout(Textbox.timeout);
-                Textbox.timeout = setTimeout(function(){
+                // clearTimeout(Textbox.timeout);
+                // Textbox.timeout = setTimeout(function(){
                   Textbox.showIndicator();
                   clearTimeout(Textbox.timeout);
                   Textbox.timeout = setTimeout(function(){
                     Textbox.skippable = true;
                   }, 1000*Textbox.PRE_SKIP_WAIT)
-                }, 1000*Textbox.WAIT_TO_SKIP)
+                // }, 1000*Textbox.WAIT_TO_SKIP)
               })
             })
           }
@@ -940,11 +1352,35 @@
         showIndicator(){
           Textbox.elem.textindicator.className = "showing";
         },
+        // activateIndicator(){
+        //   if(Textbox.elem.textindicator.className == "showing") {
+        //     Textbox.elem.textindicator.className = "active";
+        //   }
+        // },
+        // deactivateIndicator(){
+        //   if(Textbox.elem.textindicator.className == "active") {
+        //     Textbox.elem.textindicator.className = "showing";
+        //   }
+        // },
         bloomIndicator(){
           Textbox.elem.textindicator.className = "bloom";
         },
         displayText(text, index, callback){
-          if(text && text != Scene.MAIN_MENU.text && index<text.length){
+          if(text != Scene.MAIN_MENU.text){
+            Textbox.elem.textcontainer.style.animation = "fadein "+Textbox.APPEAR_TIME+"s";
+            Textbox.elem.textcontainer.innerHTML = text;
+            if(callback){
+              clearTimeout(Textbox.timeout);
+              Textbox.timeout = setTimeout(function(){
+                callback();
+              },1000*(Math.min(Math.max((text.replace(/\<header\>.+\<\/header\>/g,"").length-Textbox.WAIT_TO_SKIP_MIN_CHAR_COUNT)/Textbox.WAIT_TO_SKIP_MAX_CHAR_COUNT,0),1)*(Textbox.WAIT_TO_SKIP_MAX-Textbox.WAIT_TO_SKIP_MIN)+Textbox.WAIT_TO_SKIP_MIN))
+              // console.log((Math.min(Math.max(text.length/Textbox.WAIT_TO_SKIP_MAX_CHAR_COUNT,0),1)*(Textbox.WAIT_TO_SKIP_MAX-Textbox.WAIT_TO_SKIP_MIN)+Textbox.WAIT_TO_SKIP_MIN))
+            }
+          }
+          else if(callback){
+            callback();
+          }
+          /*if(text && text != Scene.MAIN_MENU.text && index<text.length){
             var elemborder = text.slice(index).match(/^<\/?[A-Za-z0-9]+>/i);
             var textspeed = (elemborder?elemborder[0].length:0)+1;
             index+=textspeed;
@@ -961,7 +1397,7 @@
             holdonthere();
           } else if(callback){
             callback();
-          }
+          }*/
         },
         // setAppear(factor){
         //   Textbox.elem.textbox.style.opacity = factor;
@@ -970,9 +1406,16 @@
         // },
         skip(){
           Textbox.skippable = false;
-          Textbox.bloomIndicator()
+          Textbox.bloomIndicator();
+          Textbox.elem.textcontainer.style.animation = "fadeout "+Textbox.APPEAR_TIME/2+"s "+Textbox.APPEAR_TIME/2+"s";
           clearTimeout(Textbox.timeout);
           Textbox.timeout = setTimeout( Textbox.skipcallback, 1000*Textbox.POST_SKIP_WAIT);
+          if(MainMenu.showing){
+            Sound.play(Sound.defs.MainMenuSelect);
+          }
+          else{
+            Sound.play(Sound.defs.Select);
+          }
         }
       }
 
@@ -995,8 +1438,10 @@
         callback:null,
         selected:null,
         length:null,
-        MENU_PRE_WAIT:0.5,
-        MENU_POST_WAIT:0.5,
+        APPEAR_TIME:0.3,
+        DISAPPEAR_TIME:0.4,
+        MENU_PRE_WAIT:0.4,
+        MENU_POST_WAIT:0.4,
         setOptions(elem, menu, callback){
           Menu.callback = null;
           Menu.selected = null;
@@ -1006,6 +1451,16 @@
               Menu.callback = null;
               Menu.length = null;
               var selectedoption = index!=null&&menu.options[index];
+
+              if(selectedoption){
+                Sound.play(Sound.defs.SelectUp);
+                if(selectedoption.flourish) {
+                  setTimeout(function(){
+                    Sound.play(Sound.defs.MenuSelect);
+                  }, 500*Menu.MENU_POST_WAIT);
+                }
+              }
+
               setTimeout(function(){
                 Menu.hide(elem, function(){
                   Menu.elem.menu.innerHTML = "";
@@ -1020,14 +1475,20 @@
           if(menu){
             html += '<div class="menu-title">'+menu.title+'</div>';
             menu.options.forEach((option,index)=>{
-              html += '<div class="menu-item menuitem'+index+'" onmouseenter="Menu.callback&&Menu.optionFocus('+index+')" onmousedown="Menu.callback&&Menu.optionSelect('+index+')">'+option.text+'</div>'
+              var dot=option.text.match(/The ([^ ]+) dot./);
+              html += '<div class="menu-item menuitem'+index+(dot?' planet '+dot[1]:'')+'" onmouseenter="Menu.callback&&Menu.optionFocus('+index+')" onmousedown="Sound.play(Sound.defs.Select);" onclick="Menu.callback&&Menu.optionSelect('+index+')">'+option.text+'</div>'
             })
           }
           elem.innerHTML = html;
+          if(menu.options.length){
+            Menu.selected = 0;
+            Menu.optionFocus(0);
+          }
         },
         optionFocus(index){
           Menu.selected = index;
           Menu.indicatorStatus(Menu.elem.menu, index, "focus");
+          Sound.play(Sound.defs.Hover);
         },
         optionUp(){
           if(!Menu.callback) { return; }
@@ -1076,17 +1537,18 @@
         },
         show(elem, callback){
           elem.style.display="";
-          Backdrop.setAnim(elem, "menuin "+Textbox.APPEAR_TIME+"s");
-          setTimeout(callback, 1000*Textbox.APPEAR_TIME+16);
-          // transitionTime(PauseMenu.setAppear,0,1,Textbox.APPEAR_TIME,globalAnim,callback);
+          Backdrop.setAnim(elem, "menuin "+Menu.APPEAR_TIME+"s");
+          callback&&setTimeout(callback, 1000*Menu.APPEAR_TIME+16);
+          // transitionTime(PauseMenu.setAppear,0,1,Menu.APPEAR_TIME,globalAnim,callback);
         },
         hide(elem, callback){
-          Backdrop.setAnim(elem, "menuout "+Textbox.APPEAR_TIME+"s");
+          Backdrop.setAnim(elem, "menuout "+Menu.DISAPPEAR_TIME+"s");
           setTimeout(function(){
             elem.style.display="none";
-            callback();
-          }, 1000*Textbox.APPEAR_TIME+16);
-          // transitionTime(PauseMenu.setAppear,1,0,Textbox.APPEAR_TIME,globalAnim,callback);
+            elem.innerHTML = "";
+            callback&&callback();
+          }, 1000*Menu.DISAPPEAR_TIME+16);
+          // transitionTime(PauseMenu.setAppear,1,0,Menu.APPEAR_TIME,globalAnim,callback);
         },
         // setAppear(factor){
         //   Menu.elem.menu.style.opacity = factor;
@@ -1112,7 +1574,8 @@
       PauseMenu = {
         elem:{
           pausemenu:document.getElementById("pausemenu"),
-          scrim:document.getElementById("scrim")
+          scrim:document.getElementById("scrim"),
+          pause:document.getElementById("pause")
         },
         transitionTo(menu, callback){
           // console.log(Pausemenu)
@@ -1126,26 +1589,35 @@
         callback:null,
         selected:null,
         length:null,
-        hidetimeout:null,
+        timeout:null,
         showing:false,
         setOptions(elem, menu, callback){
           PauseMenu.callback = null;
           PauseMenu.selected = null;
           PauseMenu.length = menu.options.length;
-          PauseMenu.showing = true;
+          // PauseMenu.showing = true;
           PauseMenu.showScrim();
-          clearTimeout(PauseMenu.hidetimeout);
-          setTimeout(function(){
+          clearTimeout(PauseMenu.timeout);
+          PauseMenu.timeout=setTimeout(function(){
             PauseMenu.callback = function(index){
               PauseMenu.callback = null;
               PauseMenu.length = null;
               var selectedoption = index!=null&&menu.options[index];
-              setTimeout(function(){
+
+              if(selectedoption){
+                Sound.play(Sound.defs.SelectUp);
+                if(selectedoption.flourish) {
+                  setTimeout(function(){
+                    Sound.play(Sound.defs.MenuSelect);
+                  }, 500*Menu.MENU_POST_WAIT);
+                }
+              }
+
+              PauseMenu.timeout=setTimeout(function(){
                 Menu.hide(elem, function(){
-                  PauseMenu.elem.pausemenu.innerHTML = "";
-                  PauseMenu.hidetimeout = setTimeout(function(){
+                  PauseMenu.timeout = setTimeout(function(){
                     PauseMenu.hideScrim();
-                    PauseMenu.showing = false;
+                    // PauseMenu.showing = false;
                   }, 16);
                   selectedoption&&selectedoption.callback&&selectedoption.callback(menu);
                 });
@@ -1157,12 +1629,19 @@
           if(menu){
             html += '<div class="menu-title">'+menu.title+'</div>';
             menu.options.forEach((option,index)=>{
-              html += '<div class="menu-item menuitem'+index+'" onmouseenter="PauseMenu.callback&&PauseMenu.optionFocus('+index+')" onmousedown="PauseMenu.callback&&PauseMenu.optionSelect('+index+')">'+option.text+'</div>'
+              html += '<div class="menu-item menuitem'+index+'" onmouseenter="PauseMenu.callback&&PauseMenu.optionFocus('+index+')" onmousedown="Sound.play(Sound.defs.Select);" onclick="PauseMenu.callback&&PauseMenu.optionSelect('+index+')">'+option.text+'</div>'
             })
           }
           elem.innerHTML = html;
+          if(menu.options.length){
+            PauseMenu.selected = 0;
+            PauseMenu.optionFocus(0);
+          }
         },
         optionFocus(index){
+          if(PauseMenu.selected != index){
+            Sound.play(Sound.defs.Hover);
+          }
           PauseMenu.selected = index;
           Menu.indicatorStatus(PauseMenu.elem.pausemenu, index, "focus");
         },
@@ -1197,26 +1676,32 @@
             }
           }
         },
-        timeout:null,
         showScrim(callback){
+          if(PauseMenu.showing){callback&&callback();return;}
+          PauseMenu.showing = true;
+          Music.pauseAll();
           PauseMenu.elem.scrim.style.display="";
-          // PauseMenu.showing = true;
           clearTimeout(PauseMenu.timeout);
-          Backdrop.setAnim(PauseMenu.elem.scrim, "fadein "+Textbox.APPEAR_TIME+"s");
+          Backdrop.setAnim(PauseMenu.elem.scrim, "fadein "+Menu.APPEAR_TIME+"s");
           if(callback){
-            PauseMenu.timeout=setTimeout(callback, 1000*Textbox.APPEAR_TIME+16);
+            PauseMenu.timeout=setTimeout(callback, 1000*Menu.APPEAR_TIME+16);
           }
-          // transitionTime(PauseMenu.setAppear,0,1,Textbox.APPEAR_TIME,globalAnim,callback);
+          // transitionTime(PauseMenu.setAppear,0,1,Menu.APPEAR_TIME,globalAnim,callback);
         },
         hideScrim(callback){
-          Backdrop.setAnim(PauseMenu.elem.scrim, "fadeout "+Textbox.APPEAR_TIME+"s");
+          if(!PauseMenu.showing){callback&&callback();return;}
+          clearTimeout(PauseMenu.timeout);
+          PauseMenu.callback = null;
+          Menu.hide(PauseMenu.elem.pausemenu);
+          Music.resumeAll();
+          Backdrop.setAnim(PauseMenu.elem.scrim, "fadeout "+Menu.DISAPPEAR_TIME+"s");
           clearTimeout(PauseMenu.timeout)
           PauseMenu.timeout=setTimeout(function(){
             PauseMenu.elem.scrim.style.display="none";
-            // PauseMenu.showing = false;
+            PauseMenu.showing = false;
             if(callback){callback()};
-          }, 1000*Textbox.APPEAR_TIME+16);
-          // transitionTime(PauseMenu.setAppear,1,0,Textbox.APPEAR_TIME,globalAnim,callback);
+          }, 1000*Menu.DISAPPEAR_TIME+16);
+          // transitionTime(PauseMenu.setAppear,1,0,Menu.APPEAR_TIME,globalAnim,callback);
         },
         // setAppear(factor){
         //   PauseMenu.elem.pausemenu.style.opacity = factor;
@@ -1224,13 +1709,15 @@
         //   PauseMenu.elem.pausemenu.style.transform = "scale("+(0.8+0.2*factor)+")";
         // }
         pauseUnpause(){
-          if(mainMenu){return;}
+          if(!MainMenu.pauseShowing){return;}
           if(PauseMenu.showing){
             if(PauseMenu.callback){
+              Sound.play(Sound.defs.Select);
               PauseMenu.callback(null);
             }
           }
           else{
+            Sound.play(Sound.defs.Pause);
             PauseMenu.transitionTo({
               title: "Paused.",
               options: [
@@ -1266,11 +1753,18 @@
                     });
                     PauseMenu.transitionTo(loadMenu);
                   }
+                },
+                {
+                  text: "Exit to Menu",
+                  callback: function(lastmenu){
+                    MainMenu.hidePause();
+                    Scene.transitionTo(Scene.BLACK, function(){
+                      MainMenu.show();
+                    });
+                  }
                 }
               ]
             });
-            // TODO: Pause menu
-            // PauseMenu.
           }
         },
         toast(title,seconds){
@@ -1288,6 +1782,7 @@
             options: [
               {
                 text:"OK",
+                flourish:true,
                 callback:function(){
                   PauseMenu.transitionTo(previousmenu);
                 }
@@ -1301,6 +1796,7 @@
             options: [
               {
                 text:oktext,
+                flourish:true,
                 callback:callback.bind(null, previousmenu)
               },
               {
@@ -1317,23 +1813,34 @@
 
       AdvanceController = {
         press(){
+          if(AdvanceController.pressed){ return false; }
+          AdvanceController.pressed = true;
           if(!PauseMenu.showing && !PauseMenu.callback && !Menu.callback) {
-            if(AdvanceController.pressed){ return; }
-            AdvanceController.pressed = true;
             if(Textbox.skipcallback) {
               if(Textbox.skippable){
                 Textbox.skip();
               }
-              else{
-                Textbox.quickly = Math.min(2, Textbox.quickly + 1);
-              }
+              // else{
+              //   Textbox.quickly = Math.min(2, Textbox.quickly + 1);
+              // }
             }
           }
+          return true;
         },
         pressed:false,
         release(){
           if(!AdvanceController.pressed){ return; }
           AdvanceController.pressed = false;
+        },
+        pressPause(){
+          if(AdvanceController.pausePressed){ return; }
+          AdvanceController.pausePressed = true;
+          PauseMenu.pauseUnpause();
+        },
+        pausePressed:false,
+        releasePause(){
+          if(!AdvanceController.pausePressed){ return; }
+          AdvanceController.pausePressed = false;
         }
       }
 
@@ -1391,6 +1898,7 @@
             ).concat([
               {
                 text: "New Game",
+                flourish: true,
                 callback: SaveManager.loadSave.bind(null,SaveManager.newGameSave())
               }
             ])
@@ -1405,6 +1913,7 @@
         makeMenuOption(save){
           return {
             text:SaveManager.makeEntry(save),
+            flourish: true,
             callback: SaveManager.loadSave.bind(null,save)
           }
         },
@@ -1412,12 +1921,12 @@
           var save = SaveManager.toSavable(state);
           save.auto = true;
           if(SaveManager.addAndPruneSaves(save)){
-            console.log("Automatically saving...");
+            // console.log("Automatically saving...");
           }
           SaveManager.sendToLocalstorage();
         },
         manualSave(save, callback){
-          console.log("Manually saving...", save);
+          // console.log("Manually saving...", save);
           SaveManager.addAndPruneSaves(save);
           SaveManager.sendToLocalstorage(callback);
         },
@@ -1468,7 +1977,7 @@
         },
         loadSave(save){
           Scene.transitionTo(Scene.BLACK, function(){
-            mainMenu = false;
+            MainMenu.hide();
             ScriptFollower.fromSave(save);
           });
         },
@@ -1479,12 +1988,62 @@
             midground:state.midground,
             foreground:state.foreground,
             line:state.line,
+            music:state.music,
             variables:state.variables
           }
         }
       }
 
-
+      Credits = {
+        ENTRY_WAIT:1,
+        SLIDE_WAIT:6,
+        EXIT_WAIT:2,
+        SEQUENCE:["credits1","credits2","credits3","credits4"].map(function(bg){
+          return {
+            background:"bg "+bg,
+            midground:"",
+            foreground:"",
+            text:"",
+            music:["theme1g", "theme1"],
+            advance:{
+              type:"auto"
+            }
+          }
+        }),
+        transitionTo(){
+          MainMenu.hidePause();
+          Credits.preloadAll();
+          Scene.transitionTo(Scene.BLACK, function(){
+            setTimeout(function(){
+              Credits.roll();
+            }, 1000*Credits.ENTRY_WAIT);
+          });
+        },
+        preloadAll(){
+          Credits.SEQUENCE.forEach(function(state){
+            Preloader.preloadState(state);
+          })
+        },
+        roll(index){
+          if(index == undefined){
+            index = 0;
+          }
+          if(index >= Credits.SEQUENCE.length){
+            Scene.transitionTo(Scene.BLACK, function(){
+              setTimeout(function(){
+                MainMenu.show();
+              },1000*Credits.EXIT_WAIT);
+            });
+          }
+          else {
+            Scene.transitionTo(Credits.SEQUENCE[index], function(){
+              setTimeout(function(){
+                Credits.roll(index+1);
+              },1000*Credits.SLIDE_WAIT);
+            });
+          }
+        }
+      }
 
       // setTimeout(function(){
       //   Menu.transitionTo({
@@ -1606,11 +2165,12 @@
         advance();
       }
       */
+      isskipping = false;
 
       onkeydown = function(event){
         // console.log(event.code);
         if(
-          event.shiftKey ||
+          event.shiftKey && !(event.code == "Tab" || event.keyCode == 9) ||
           event.ctrlKey ||
           event.altKey ||
           event.metaKey
@@ -1620,38 +2180,37 @@
         if(event.code == "Escape" || event.keyCode == 27 || // ESC
            event.code == "KeyP"   || event.keyCode == 80 ){ // P
           // Pause Menu
-          PauseMenu.pauseUnpause();
+          AdvanceController.pressPause();
         }
-        if(event.code == "KeyN" || event.keyCode == 78){ // N
-          if(Textbox.skipcallback) {
-            Textbox.skipcallback();
-            Textbox.quickly = 2;
-          }
-        }
-        if(
+        else if(
           event.code == "ArrowRight" || event.keyCode == 39 || // Right
           event.code == "KeyD"       || event.keyCode == 68 || // D
           event.code == "Space"      || event.keyCode == 32 || // Space
           event.code == "Enter"      || event.keyCode == 13    // Enter
           ){
-          AdvanceController.press();
-          if(PauseMenu.showing){
-            if(PauseMenu.callback){
-              if(PauseMenu.selected!=null){
-                PauseMenu.optionSelect();
+          if(AdvanceController.press()){
+            if(PauseMenu.showing){
+              if(PauseMenu.callback){
+                if(PauseMenu.selected!=null){
+                  PauseMenu.optionSelect();
+                  Sound.play(Sound.defs.Select);
+                }
               }
             }
-          }
-          else{
-            if(Menu.callback){
-              if(Menu.selected!=null){
-                Menu.optionSelect();
+            else{
+              if(Menu.callback){
+                if(Menu.selected!=null){
+                  Menu.optionSelect();
+                  Sound.play(Sound.defs.Select);
+                }
               }
             }
           }
         }
         else if(
           event.code == "ArrowDown" || event.keyCode == 40 || // Down
+          !event.shiftKey && (event.code == "Tab" || event.keyCode == 9)  || // Tab
+          event.code == "KeyJ"      || event.keyCode == 74 || // J
           event.code == "KeyS"      || event.keyCode == 83    // S
         ){
           if(PauseMenu.showing){
@@ -1663,6 +2222,8 @@
         }
         else if(
           event.code == "ArrowUp" || event.keyCode == 38 || // Up
+          event.shiftKey && (event.code == "Tab" || event.keyCode == 9)  || // Tab
+          event.code == "KeyK"    || event.keyCode == 75 || // K
           event.code == "KeyW"    || event.keyCode == 87    // W
         ){
           if(PauseMenu.showing){
@@ -1670,6 +2231,24 @@
           }
           else{
             if(Menu.callback) { Menu.optionUp(); }
+          }
+        }
+        else if(event.code == "KeyN" || event.keyCode == 78){ // N
+          if(Textbox.skipcallback) {
+            if(!isskipping){
+              isskipping = true;
+              var go;
+              go=function(){
+                if(isskipping){
+                  if(!PauseMenu.showing && state.advance.type == "text"){
+                    ScriptFollower.advanceIterate(state);
+                  }
+                  setTimeout(go,30);
+                }
+              };
+              go();
+            }
+            // Textbox.quickly = 2;
           }
         }
 
@@ -1691,24 +2270,69 @@
           event.code == "Space"      || event.keyCode == 32 || // Space
           event.code == "Enter"      || event.keyCode == 13    // Enter
           ){
-           AdvanceController.release();
+          AdvanceController.release();
+        }
+        else if(event.code == "Escape" || event.keyCode == 27 || // ESC
+                event.code == "KeyP"   || event.keyCode == 80 ){ // P
+          // Pause Menu
+          AdvanceController.releasePause();
+        }
+        else if(event.code == "KeyN" || event.keyCode == 78){ // N
+          isskipping = false;
         }
       }
 
-      document.body.ontouchstart = function(){
+      document.body.onclick = function(){
         AdvanceController.press();
-      }
-      document.body.ontouchend = function(){
         AdvanceController.release();
+      }
+      // document.body.onmousedown = function(event){
+      //   if(!PauseMenu.showing){
+      //     Textbox.activateIndicator();
+      //   }
+      // }
+      // document.body.onmouseup = function(event){
+      //   if(!PauseMenu.showing){
+      //     Textbox.deactivateIndicator();
+      //   }
+      // }
+      // document.body.ontouchend = function(){
+      //   AdvanceController.release();
+      // }
+
+      // document.body.onmousedown = function(){
+      //   AdvanceController.press();
+        // Textbox.skipcallback()
+      // }
+      // document.body.onmouseup = function(){
+      //   AdvanceController.release();
+      // }
+      PauseMenu.elem.pause.onmousedown = function(event){
+        event.stopPropagation();
       }
 
-      document.body.onmousedown = function(){
-        AdvanceController.press();
-        // Textbox.skipcallback()
+      PauseMenu.elem.pause.onclick = function(event){
+        PauseMenu.pauseUnpause();
+        event.stopPropagation();
+        event.preventDefault();
       }
-      document.body.onmouseup = function(){
-        AdvanceController.release();
+
+      Sound.preloadAll();
+      Preloader.preloadInitial();
+
+      // CSS aspect polyfill
+      window.onresize = function(){
+        if(window.innerWidth/window.innerHeight > 1.5){
+          document.body.className = "aspect-long";
+        }
+        else if(window.innerWidth/window.innerHeight > 1){
+          document.body.className = "aspect-medium";
+        }
+        else if(window.innerWidth/window.innerHeight <= 1){
+          document.body.className = "aspect-tall";
+        }
       }
+      window.onresize();
 
       var xhr=new XMLHttpRequest();
       xhr.addEventListener("load", scriptLoaded);
