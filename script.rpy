@@ -2274,8 +2274,7 @@ if saferoom:
    "I feel my heartbeat quicken. I need to get back to her."
    "He hears my heartbeat, too - I can see his expression change as the anxiety washes over me."
 if playroom:
-   "I tell him about the walks Penelope and I used to take. She became quite the walker back on Earth - she had even more energy for it than I did. She'd insist on walking all day and as far away from the base as we were allowed. Even if we couldn't leave the base,
-she'd lead me in long, brisk circles around and around the perimeter, inspecting every crack in the walls and every flower in the flower beds."
+   "I tell him about the walks Penelope and I used to take. She became quite the walker back on Earth - she had even more energy for it than I did. She'd insist on walking all day and as far away from the base as we were allowed. Even if we couldn't leave the base, she'd lead me in long, brisk circles around and around the perimeter, inspecting every crack in the walls and every flower in the flower beds."
    "She barely had anything to do at the base, especially when I was gone on missions. It's no wonder walking excited her so much."
    "I feel a pang of guilt. When I get back to the ark, I'll make a whole playground just for her, and I'll never go on another mission again."
    "He feels my guilt, too. I can see his expression change as the guilt fills my head."

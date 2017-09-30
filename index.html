@@ -691,6 +691,7 @@
           }
           else if(currentLine.startsWith("label ")){
             //Label
+            var label = splitLine[1].slice(0,-1);
             if(splitLine[1] == "start:"){
               return {
                 advance: { type:"start" }
