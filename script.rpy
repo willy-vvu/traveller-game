@@ -1,19 +1,30 @@
 # The script of the game goes in this file.
 
+music intro1 = "intro.mp3"
+music intro2 = "intro-2.mp3"
+music blue1 = "blue.mp3"
+music blue2 = "blue-2.mp3"
+music blue-sad1 = "blue-sad.mp3"
+music blue-sad2 = "blue-sad-2.mp3"
+music calypso1 = "calypso.mp3"
+music calypso2 = "calypso-2.mp3"
+music green1 = "green.mp3"
+music green2 = "green-2.mp3"
+music orange1 = "orange.mp3"
+music orange2 = "orange-2.mp3"
+music penelope1 = "penelope.mp3"
+music penelope2 = "penelope-2.mp3"
+music space = "space.mp3"
+music stasis1 = "stasis.mp3"
+music stasis2 = "stasis-2.mp3"
+music ending1 = "ending.mp3"
+music ending2 = "ending-2.mp3"
+music alarm = "alarm.mp3"
+
 # declare images
 
-music theme1 = "Traveller Theme 1.mp3"
-music theme1g = "Traveller Theme 1 (just guitar).mp3"
-music arkdrone = "Ark Drone pt1.mp3"
-music arkdrone2 = "Ark Drone pt2.mp3"
-music gh1 = "Green Hill Zone Pt1.mp3"
-music gh2 = "Green Hill Zone Pt2.mp3"
-
-image bg credits1 = "credits1.jpg"
-image bg credits2 = "credits2.jpg"
-image bg credits3 = "credits3.jpg"
-image bg credits4 = "credits4.jpg"
-image bg jungle-day = "jungle.jpg"
+# backgrounds
+image bg jungle-day = "jungle-day.jpg"
 image bg ark = "ark.jpg"
 image bg calypso-day = "calypso-day.jpg"
 image bg calypso-night = "calypso-night.jpg"
@@ -22,23 +33,79 @@ image bg earth-night = "earth-night.jpg"
 image bg cliffs = "cliffs.jpg"
 image bg space = "space.jpg"
 image bg mountains = "mountains.jpg"
-image bg shuttle = "shuttle.jpg"
-image bg calypso-island = "calypso-island.jpg"
-image bg title-page = "main-title.jpg"
+image bg title-page = "title-page.jpg"
 image bg jungle-night = "jungle-night.jpg"
 image bg black = "black.jpg"
 image bg field-day = "field-day.jpg"
 image bg field-night = "field-night.jpg"
 image bg cave = "cave.jpg"
+image bg cave-dark = "cave-dark.jpg"
+
+# earth
+image bg walking-desert = "walking-desert.jpg"
+image bg baby-penelope = "baby-penelope.jpg"
+image bg leaving-earth = "leaving-earth.jpg"
+image bg walking-hills = "walking-hills.jpg"
+image bg first-steps = "first-steps.jpg"
+image bg penelope-crying = "penelope-crying.jpg"
+
+# space and ark
 image bg greenplanet = "greenplanet.jpg"
 image bg blueplanet = "blueplanet.jpg"
 image bg orangeplanet = "orangeplanet.jpg"
+image bg calypsoplanet = "calypsoplanet.jpg"
 image bg finalplanet = "finalplanet.jpg"
+image bg map = "map.jpg"
+image bg bridge = "bridge.jpg"
+image bg shuttle = "shuttle.jpg"
+image bg penelope space = "penelope-space.jpg"
+
+# final planet
 image bg finaltown = "finaltown.jpg"
 image bg memorial = "memorial.jpg"
 image bg grey = "grey.jpg"
-image bg map = "map.jpg"
 
+# calypso
+image bg calypso-island = "calypso-island.jpg"
+image bg working-ship = "working-ship.jpg"
+image bg staring-sunset = "staring-sunset.jpg"
+image bg radio1 = "radio1.jpg"
+image bg radio2 = "radio2.jpg"
+image bg departing = "departing.jpg"
+image bg remaining = "remaining.jpg"
+image bg holding-hands = "holding-hands.jpg"
+
+# green
+image bg watching-fields = "watching-fields.jpg"
+image bg herd-encounter = "herd-encounter.jpg"
+image bg tent-city-day = "tent-city-day.jpg"
+image bg tent-city-night = "tent-city-night.jpg"
+image bg meeting-scout = "meeting-scout.jpg"
+image bg scout-friendship = "scout-friendship.jpg"
+image bg scout-intimate = "scout-intimate.jpg"
+image bg scout-standoff = "scout-standoff.jpg"
+image bg scout-monument = "scout-monument.jpg"
+image bg tent-city-day3 = "tent-city-day3.jpg"
+image bg tent-city-night3 = "tent-city-night3.jpg"
+image bg herd-encounter3 = "herd-encounter3.jpg"
+
+# orange
+image bg memory1 = "memory1.jpg"
+image bg memory2 = "memory2.jpg"
+image bg memory3 = "memory3.jpg"
+image bg memory-dark = "memory-dark.jpg"
+
+# blue
+image bg sitting-with-soldiers = "sitting-with-soldiers.jpg"
+image bg soldier-standoff = "soldier-standoff.jpg"
+image bg soldiers-garden = "soldiers-garden.jpg"
+image bg baby-friend = "baby-friend.jpg"
+
+#credits
+image bg credits1 = "credits1.jpg"
+image bg credits2 = "credits2.jpg"
+image bg credits3 = "credits3.jpg"
+image bg credits4 = "credits4.jpg"
 
 image penelope neutral = "penelope_neutral.png"
 image penelope sad = "penelope_sad.png"
@@ -50,6 +117,8 @@ image penelope neutral middle = "penelope_neutral-middle.png"
 image penelope adolescent = "penelope_adolescent.png"
 image penelope adult = "penelope_adult.png"
 image penelope elder = "penelope_elder.png"
+
+image commander neutral = "commander_neutral.png"
 
 image calypso neutral = "calypso_neutral.png"
 image calypso sad = "calypso_sad.png"
@@ -120,29 +189,32 @@ define b = Character("Child")
 define g = Character("Girl")
 define i = Character("Interviewer")
 
-
 # The game starts here.
 
 label start:
 
-play theme1
+play intro1 intro2
 
-scene bg earth-day
+scene bg walking-desert
 with fade
 
 "I walk until I can no longer feel my feet."
+scene bg walking-hills
 "My ankles swell with the strain of my belly."
 "I reach the camp."
 "My feet crunch against the thick ashes of bodies. The ashes are warm. They soothe my blisters."
 "I hear crying, distantly."
 "I should save them."
+scene bg black
+pause(1.0)
+scene bg walking-hills
 "The fight is not easy, but I save them."
 "The camp burns. Black smoke fills my lungs. My hair is heavy with soot."
 "I lead the survivors from the ruins."
 "They want to ask me who I am, how I got here, how I saved them. But I will not tell them."
 
 "Instead I will lead them to what remains of our army."
-
+scene bg earth-day
 "Families trip over themselves running to each other."
 "I have to convince my commanding officer that I'm not a mirage."
 
@@ -158,18 +230,19 @@ with fade
 "There is talk of using the ark. We don't know if anyone else is left."
 
 "My belly swells. I can feel her kicking, sometimes."
-
 "We decide to use the ark."
 
 "The commander makes the order to begin preparing to leave Earth."
 
 "My water breaks."
 
-scene bg earth-night
+scene bg baby-penelope
 
 "She is beautiful."
 
 "I name her Penelope."
+pause(1.0)
+scene bg earth-night
 
 "Preparations to leave the planet move slowly."
 "We can’t move too many people to the ark at once - it would attract too much attention."
@@ -183,7 +256,7 @@ scene bg earth-night
 "Just when I feel myself collapsing from exhaustion, she touches my nose and gurgles and I'm jolted awake with love for her."
 
 "I am enjoying a moment of quiet, reading over supply lists in the corner of our tiny room, when I hear something rustling on the floor."
-
+scene bg first-steps
 "She is on her feet, wobbling and teetering with the effort. Tentatively, she takes a step."
 
 "And another."
@@ -197,7 +270,7 @@ scene bg earth-night
 "The supply lists flutter to the floor as I take her up in my arms."
 
 "She is smiling, giggling, confident."
-
+scene bg earth-night
 "Her first words are more like a grumble, but then they come out all at once in a matter of weeks, and before I know it she is babbling non-stop."
 
 "I start to take her to meetings. She babbles through them as we discuss strategy."
@@ -212,7 +285,7 @@ scene bg earth-night
 "I hug Penelope more tightly than I ever have, and leave her with the commander."
 
 "When I return, she calls me mom."
-
+scene bg earth-day
 "Penelope has names for things now."
 "She wants to know what everything is called, why it is the way it is, how it works."
 "She asks these questions of me but also of the others."
@@ -224,9 +297,9 @@ scene bg earth-night
 "She comes up with her own names for things while I'm gone."
 "When I come back after a hard day to find that - in a complete coincidence - she has decided to call 'bees' 'cees', I find myself laughing so hard that my sides hurt."
 "She starts crying. She likes her name better. Why can't we just change it?"
-
+scene bg earth-night
 "She loves when the kitchen serves stew."
-"She likes to pick coriander from the garden and cover her portion in it until her bowl tastes overwhelmingly of coriander."
+"She likes to pick herbs from the garden and cover her portion in them until her bowl tastes overwhelmingly of coriander."
 "She cries when we run out of coriander and I can't find any more."
 
 "I don't want to tell her that she will never eat it again."
@@ -236,9 +309,9 @@ scene bg earth-night
 "I pick her up and run back to the base."
 
 "The commander looks at me as I enter the room, and I know."
-
+play intro2 intro1
 "It’s time to leave."
-
+scene bg penelope-crying
 "Penelope won't stop crying as I pack her things."
 "I go to zip up her bag but she stops me."
 "She stuffs it full with the flowers from our walk."
@@ -282,13 +355,10 @@ scene bg earth-night
 "The ark's halls are practically empty."
 "Those who remain are crying, gasping, searching for families who didn't make it in."
 
-"Penelope has stopped fighting in my arms. I get her to a chair and buckle her in next to me."
+"Penelope has stopped fighting in my arms. I get to a chair and buckle her in with me."
 
 "The ark comes to life with a rumble that feels like an earthquake."
-
-"As soon as the ground stops shaking I leap out of my chair and press my face against the glass."
-"Penelope struggles with her seatbelt but finds the clip and joins me."
-
+scene bg leaving-earth
 "We watch our home get smaller and smaller out the window."
 "We see cities blackened by bombs."
 "We see black specks on white fields and I know they are labour camps."
@@ -311,14 +381,14 @@ t "Yeah. It was."
 "Everything we have known is in that tiny circle in the window."
 
 "It gets smaller and smaller until it's smaller than the stars."
+stop
 
 scene bg title-page
-with Dissolve(2.0)
 
 pause(2.0)
 
 scene bg ark
-with Dissolve(2.0)
+play penelope1 penelope2
 
 "I am lost in the stars again."
 
@@ -334,8 +404,7 @@ with Dissolve(2.0)
 
 p "Mom!"
 
-show penelope neutral
-
+scene bg penelope space
 "Penelope tugs at my arm, pulling me back to the ark. I look down at her, straining to conceal my irritation."
 
 p "You're staring again."
@@ -348,6 +417,7 @@ t "I’m sorry, Nel. It's just..."
 
 t "You're probably used to the stars by now, but I haven't seen so many in my entire life. It still gets me sometimes."
 
+scene bg ark
 show penelope angry
 
 "She frowns. I can tell she sees through my words."
@@ -373,6 +443,7 @@ p "Oh."
 show penelope neutral
 
 p "Will we ever go back home? To the Sun and to... to our place?"
+play penelope2 penelope1
 
 menu truth_menu:
    "She looks back up at me again. Her eyes are wide, hopeful."
@@ -445,6 +516,7 @@ menu truth_menu:
 label after_menu:
 
 hide penelope
+play space
 
 "I’m still not used to how flat the ground is on the ark."
 "For something built so quickly, it’s impressively designed."
@@ -483,7 +555,7 @@ scene bg bridge
 "I had them bring a couch in here when we came aboard, and this is where I put her, with the promise I won't take long."
 "She's nervous at first, but when I set up a game to play on one of the screens while I'm gone, she settles down."
 "The commander stands at the center of the room, staring at some charts at her station. Before she notices me, I see concern clouding her face - but as soon as she sees me, she hides it."
-show commander
+show commander neutral
 com "Your clearance came through. Congratulations, Lieutenant."
 t "Thanks."
 com "I've got some news you'll want to hear."
@@ -515,6 +587,8 @@ com "With at least six planets within our range, we can afford to wait a few mon
 t "I understand, commander. I'll be careful."
 com "Be safe, lieutenant. I'll have the scouting ship prepared for you."
 hide commander
+scene bg ark
+play penelope
 "I return to Penelope. It's good timing - she's almost defeated the boss."
 "She doesn't seem to notice me. Her fingers type out an angry rhythm of attacks, each of which causes the boss to flinch."
 "Finally, he dies in an explosion of blues and purples. Penelope pumps her fists in the air."
@@ -527,7 +601,6 @@ t "Really?"
 "She nods vigorously."
 "I haven't beaten that boss in hard mode."
 t "Guh... good job!"
-scene bg ark
 "She still has this ridiculous grin on her face as we walk down the hallway."
 "I want to tell her about my mission, but she's chattering on about the game."
 p "And then I used the rolling attack, only I jumped behind him so he couldn't get me."
@@ -570,6 +643,7 @@ p "Promise?"
 t "I promise."
 "Regulations be damned."
 hide penelope
+play space
 
 scene bg shuttle
 
@@ -606,22 +680,21 @@ t "I'll try. Don't have too much fun without me."
 "I try to stare up out the window a moment longer, but sleep takes me before I realized that my eyes are already closed."
 
 scene bg black
-with Dissolve(2.0)
+stop
 
 pause(3.0)
 
 "Stasis is dreamless and timeless."
 
 scene bg shuttle
-with Dissolve(0.5)
 
 "I am awoken by a jolt."
-
+play alarm
 "A second later, the blaring, overwhelming sound of an alarm fills my ears."
 "Needles still in my arms, I press my hands down into the control panels and pull my seat back up."
 "The alarm makes my head hurt."
+stop
 "I press buttons until it turns off."
-
 "My ears still ringing, I check the screens."
 "The shields have taken a hit. They're dangerously low."
 "I ping the ark, but there's no answer."
@@ -641,6 +714,7 @@ with Dissolve(0.5)
 "I swerve to the right and downwards and then left again."
 "My shields are at 40 percent."
 "I look at the map, then frantically out the window..."
+scene bg calypsoplanet
 "And I see it: a small bluish circle."
 "The planet. Perhaps the debris will be lighter there, and I can send a signal--"
 "The shuttle shakes with another impact."
@@ -651,9 +725,9 @@ with Dissolve(0.5)
 "Something hits the bottom of the ship with a loud CLUNK."
 "I hear a groan, then a crack."
 "The next jolt knocks me unconscious."
+stop
 
 scene bg black
-with Dissolve(0.5)
 
 pause(3.0)
 
@@ -672,7 +746,7 @@ pause(3.0)
 "Where am I...?"
 
 scene bg calypso-day
-with Dissolve(3.0)
+play calypso1 calypso2
 
 "I must be on the planet."
 "Sitting up feels too difficult right now, so I turn my head."
@@ -804,7 +878,7 @@ scene bg calypso-island
 "The whole island is made of shipwrecks."
 "My ship floats ahead of us until it reaches the shore of this other island. It stops just next to it, and then out of the water, more membranous tentacles emerge, at least ten or twenty of them."
 "They gently push the ship until it washes up on the shore."
-"Meanwhile, we come ot a stop just off the edge of the island."
+"Meanwhile, we come to a stop just off the edge of the island."
 "From here, I can see the shipwrecks more clearly."
 "There are ships of all kinds here... most of them are in tatters, but a few are intact enough to almost be pilotable."
 "The bulk of this island is made up of one large ship. In its day it must have housed a crew of hundreds."
@@ -869,7 +943,7 @@ u "It can't fly anymore."
 t "Take me back to it. Take me to the shore."
 hide calypso
 "We drift back to the large island. When we approach the shore, I roll into the water and manage to swim the rest of the way."
-"My ribcage throbs along with my arms, and my legs are aching. I wouldn't be well enough to fly even if I could."
+"My ribcage throbs along with my arms, and my legs ache. I wouldn't be well enough to fly even if I could."
 "I clamber onto the metal of some old abandoned ship. It's steadier than I'd imagined."
 "The ache in my legs makes my steps slow and deliberate, but I make it to my ship."
 "My heart sinks when I reach it."
@@ -896,13 +970,11 @@ u "You should rest now. You're still hurt."
 u "I'll gather what we need."
 
 scene bg black
-with Dissolve(2.0)
 
 pause(1.0)
 
 scene bg calypso-night
-with Dissolve(2.0)
-
+play calypso2 calypso1
 "It takes some time just to recover from my injuries enough to work."
 "At first I survive on what little food we could salvage from my ship, but as that runs out, the creature starts to bring me its own food:"
 "Strange-smelling sludge from the ocean floor, something that resembles an eel cooked on engine fuel from a derelict ship, fungi that taste saccharine sweet."
@@ -919,12 +991,13 @@ with Dissolve(2.0)
 "After a while, though, it learns, and it starts to bring things I can use. A working propulsion system. An old but functional stasis pod, one that - to my amazement - allows for far longer sleeps than Earth technology."
 "When it brings a communicator that miraculously uses radio technology almost exactly like ours, I lunge for it so excitedly that Calypso fails to catch me and I fall into the water."
 "We decide to use my old ship as the shell, and in a day Calypso hollows it out."
+scene bg working-ship
 "Eventually we have all the parts neatly stacked on the island, and we get to work putting them together."
 "Calypso is better than I am at most tasks, but my hands are useful for more precise work. We divide the labour neatly."
 "Sometimes we chat - about the meanings of words, about our cultures, about what Calypso has learned from its collection of other aliens."
 "Mostly, though, we're just quiet."
+scene bg staring-sunset
 "It breaks the silence one night, while we're working on the radio communicator."
-show calypso neutral
 c "Tell me about your planet."
 t "What do you want to know?"
 c "Just tell me what you want to tell me."
@@ -949,7 +1022,7 @@ menu calypso1_menu:
      t "They said it was a miracle I had my daughter after being behind enemy lines for so long, and with the radiation in the area..."
 
 label after_menu2:
-show calypso thoughtful
+scene bg calypso-night
 c "Why did you have a daughter?"
 t "Why?"
 if calypso1:
@@ -986,6 +1059,7 @@ c "I forgot what time was like."
 c "And now there's you."
 c "You made me remember."
 c "I remember time and I feel like I've died. Like I've lost..."
+stop
 "FZZZZZZZZZ"
 "I bolt upright."
 t "The radio!"
@@ -1003,6 +1077,7 @@ hide calypso
 "IF YOU READ THIS MESSAGE, PLEASE RESPOND. WE WILL SEND ASSISTANCE. PLEASE RESPOND."
 "I fumble with the device. A section pulls apart from the contraption."
 "This must be the receiver."
+scene bg radio1
 "I hold it right up to my lips."
 t "Ark, I read you! I'm on the planet! Repeat, I made it to the planet!"
 t "It's habitable! Populated by a friendly life form! I'm repairing my ship, but I'll be on my way soon!"
@@ -1022,6 +1097,7 @@ t "No, please!"
 "I fumble with the radio, adjust the frequency, hit it as hard as I can."
 t "Please respond!"
 t "Please!"
+scene bg radio2
 "The radio goes silent for a full minute."
 "Then, quieter:"
 "This buoy is to commemorate those scouts killed in action at the G848 Asteroid Cluster."
@@ -1033,7 +1109,6 @@ pause(1.0)
 "I listen to it."
 "I wait for it to change."
 "It doesn't change."
-show calypso shy
 c "But you're not dead."
 t "They think I am. They gave up on me."
 t "They're gone."
@@ -1051,10 +1126,9 @@ c "I'm sorry."
 c "I know how you feel."
 
 scene bg black
-with Dissolve(2.0)
 
 scene bg calypso-day
-with Dissolve(2.0)
+play calypso1 calypso2
 
 "I find it hard to motivate myself after the ship leaves."
 "But Calypso busies itself around me with improvements to the shuttle."
@@ -1086,6 +1160,7 @@ show calypso shy
 c "And... one more thing."
 "This, it doesn't have to take from one of its islands."
 "Instead, it seems to come from underwater - I feel a faint bubbling from under us, and then a limb emerges with a small, blue stone."
+play calypso2 calypso1
 "It presses it into my hand."
 "It hums faintly, and when I touch it with my fingertips it glows faintly pink."
 "It looks like Calypso."
@@ -1099,7 +1174,7 @@ t "You couldn't have known..."
 c "I didn't."
 c "I had no idea that it would feel like this."
 c "You gave me that."
-pause(2.0)
+show calypso curious
 c "You don't have to leave."
 t "What do you mean?"
 c "You have children to pass yourselves on, because you die. But if you don't die, then..."
@@ -1126,7 +1201,7 @@ if calypso1:
       "What kind of a mother am I?"
 else:
    "I'd be giving up on the ark... but on the mistakes, too. All the terrible things that have happened to me..."
-   "I could leave tehm behind."
+   "I could leave them behind."
    if truth:
       "And Penelope. I'd be leaving her, too."
       "But what place do I have in her life now, anyways? A mother who brought her into this, only to abandon her?"
@@ -1182,7 +1257,7 @@ menu calypso2_menu:
               t "But even if she's alone, it's better than being raised by me."
               t "And I've already abandoned her. I've already left. She's already alone, no matter what I do."
               "I'm sorry, Penelope... I hope you're be okay without me."
-       show calypso happy
+       scene bg remaining
        c "Are you sure?"
        c "You can always change your mind."
        t "I know... but I won't."
@@ -1190,15 +1265,11 @@ menu calypso2_menu:
        t "To leave my people behind... and to meet you, Calypso."
        t "To stay with you. To join you, someday."
        t "I'm just sorry I couldn't say goodbye."
-       show calypso curious
        c "Maybe you will, someday."
        c "Maybe they'll find you."
        c "If they ever come back, I'll be waiting for them."
        c "No - we'll be waiting for them."
-
-
-       scene bg calypso-night
-       with Dissolve(2.0)
+       scene bg holding-hands
        "We don't join together immediately."
        "Calypso continues to collect ships, and I continue to help it."
        "It shows me its collections. It shares with me countless histories of peoples long dead."
@@ -1220,7 +1291,9 @@ jump endcredits
 
 label calypso_end:
 
-"This time I reach out. I touch its shoulder."
+scene bg departing
+
+"This time I reach out. I touch one of its limbs."
 "My hand is shaking a little. The shivers turn into ripples across its body."
 t "I will never forget you."
 c "Never?"
@@ -1229,9 +1302,9 @@ t "And I promise I'll find them."
 t "So yes. Never."
 c "Me too."
 c "I will never forget you either."
+play calypso1 calypso2
 
 scene bg calypso-night
-with Dissolve(2.0)
 
 "We finish constructing the ship together."
 "Calypso is still sad that I have to leave. If I'm being honest, I'm a little sad too."
@@ -1242,7 +1315,6 @@ with Dissolve(2.0)
 "But there's nothing I can do about the passage of time."
 
 scene bg calypso-day
-with Dissolve(2.0)
 
 "I climb into my ship."
 "It looks the same from the outside, but inside it's completely redone, a confused mish-mash of different alien technologies."
@@ -1252,6 +1324,7 @@ with Dissolve(2.0)
 "The ship seems confused as to how to communicate with its new components - it shows my stasis pod at 1577 percent power and my energy core as offline, even as the core buzzes to life and powers the screens."
 "But it seems like everything's working."
 "I poke my head back up out of the ship."
+play calypso2 calypso1
 show calypso shy
 c "Is everything okay?"
 t "Yes. It's working perfectly. Thank you."
@@ -1272,15 +1345,17 @@ if calypso1:
 else:
     t "I'm sorry."
 
-scene bg space
-with Dissolve(2.0)
+stop
 
 label space1:
+scene bg space
+play space
 
 "I'd wondered if Calypso's stone was meant as a metaphor, but when I emerge into space, the debris clears a path for me."
 "I make it safely out of the field."
 "And now I'm alone again."
 "I slow the ship and check the map."
+scene bg map
 "The commander mentioned five planets. One of them was Calypso, of course... but three others are nearby. The ark could have gone to any of them."
 "Calypso was kind enough as to give me what information it had on them, but it was very little."
 "There's a larger planet, almost the same distance from its sun as Earth was from ours. Its sun is a little smaller, so it should be just a little cooler. On the map, it looks like a green dot."
@@ -1305,7 +1380,6 @@ menu:
      $ orange1 = False
      $ green1 = False
      jump blue1
-label after_menu4:
 
 label green1:
 
@@ -1314,9 +1388,8 @@ $ playroom = False
 $ badspeech = False
 $ goodspeech = False
 
-
 "I type in the coordinates for the green planet."
-"It looks like it would harbor the most similar climate to Earth, given the distance to its sun..."
+"It looks like it would harbor a similar climate to Earth, given the distance to its sun..."
 "I'll take that small hope. It's better than nothing."
 "The ship lurches forward, and then the stars are a blur all around me."
 "I watch them go by for a while. I look at the screens one by one. I examine the control panels, trace out the alien lettering on my chair, and poke at the innoculation machine."
@@ -1353,8 +1426,8 @@ scene bg greenplanet
 "It needs a rest. So I have to land."
 "I pick a spot that looks as clear as possible of the cities and structures that litter the planet's surface."
 
-scene bg field-day
-with Dissolve(2.0)
+scene bg watching-fields
+play green1 green2
 
 "When I open the hatch, I find myself at the edge of a vast field."
 "Hills roll on as far as I can see."
@@ -1382,14 +1455,17 @@ pause(1.0)
 "Should I get back in the ship?"
 "But its engine is recharging - it'll take too long to--"
 "HSSSSSSSSSSSSS"
+play green2 green1
 "There's someone behind me."
 "I turn around slowly."
-show scout angry
+scene bg meeting-scout
 "This clearly isn't just a herding animal - it's wearing clothes."
 "How did I not see that from so far?"
 "The rest of its kind are far behind, running up a distant hill. This one must be faster than the others."
 "It studies me for a moment, then hisses again. This time I hear the complexity of the sound - it sounds like a language."
 "Keeping eye contact, I reach my hand up and flick my universal translator on in my ear."
+scene bg field-day
+show scout angry
 u "... you come from? Who are you?"
 t "I'm... I came from the sky. I'm a human. I was on a ship with others like me, but I lost them. I'm searching for them."
 u "Are you a builder?"
@@ -1401,6 +1477,7 @@ show scout curious
 "It turns towards the rest of the flock, then looks back at me."
 u "And your kind left you alone?"
 t "Yes."
+show scout sad
 u "I am so sorry."
 "The creature's candor is surprising."
 t "Thank you."
@@ -1422,7 +1499,7 @@ u "Surrender to me. You'll live, and I'll make a case for you keeping your ship.
 u "Or pull that trigger and see how far it gets you."
 t "...Why offer to help me?"
 show scout happy
-u "A short, squishy alien shows up on a hunt. I could kill it, but the trophy is far better looking alive."
+u "A short, squishy alien shows up on a hunt. I could kill it, but the trophy is far better-looking alive."
 u "And friendlier with me."
 "That sentence should unnerve me, but the stampede of aliens - who, now that they're closer, I can see are very heavily armed - unnerves me more."
 "I holster my weapon."
@@ -1444,6 +1521,7 @@ s "Now we know each other."
 "I can't tell whether they're being facetious or honest, but I don't have time to debate them -"
 "The rest of the flock arrives."
 "My captor takes a spear from a holster on their back and points it at my neck."
+scene bg herd-encounter
 "The first to reach us look completely different from the scout - they have broader faces and longer fringes on the tops of their heads. Their shoulders and legs are broader."
 "All of them are built for running, but these ones look like they're made to fight."
 "They surround me in a wide circle that encompasses the shuttle as well. Some of them jostle the scout, but the scout stands their ground."
@@ -1458,7 +1536,6 @@ l "Happy hunting!"
 "The flock repeats the phrase. I find myself flinching."
 l "It looks like our scout has found us something very special."
 "I look up at the scout, and dearly hope I haven't misplaced my faith."
-show scout neutral
 s "That's {i}someone,{/i} leader."
 s "This traveller has been separated from their flock."
 s "They landed on our planet looking for their kind."
@@ -1469,10 +1546,9 @@ t "Thank you."
 "Murmurs erupt among the flock."
 l "They have technology!"
 l "A translator at the very least! And we haven't even gotten into their ship."
-show scout angry
 s "No... we haven't. The traveller has agreed to give us the schematics for all of their technology. The knowledge of their people."
 s "We could have one energy core... but imagine what we could do with the knowledge of how to build more!"
-"I resolve to speak to the scout about making unfair deals without my consent later."
+"I decide to speak to the scout later about making unfair deals without my consent."
 "Meanwhile, the leader looks unconvinced."
 "They turn to me."
 l "And you say you can build an energy core like the one in your ship?"
@@ -1493,11 +1569,13 @@ l "But we can't afford to stay any longer. After that, we take apart the ship an
 l "That goes for your traveller, as well."
 "The flock stays in formation around us a little longer. They seem surprised by what has transpired."
 l "To your posts!"
+scene bg field-day
 "Finally, they disperse, moving into what looks like a pre-arranged formation of small groups."
 "One by one, they unhook cloth from packs on their backs, tying and pulling them until they form interwoven rows of tents."
 "I realize I've been holding my breath, and let it out all at once. My hands are shaking a little."
 "I'm surprised when a fair few of the flock approach me to offer their condolences..."
 "But it doesn't seem to garner me anything more than sympathy."
+show scout neutral
 s "I thought I could get you more..."
 s "I'm sorry."
 t "I've heard enough half-assed apologies for today, to be honest."
@@ -1505,7 +1583,7 @@ show scout sad
 s "They're not apologizing for your bad luck."
 s "They're apologizing for your life."
 s "For us, when you're separated from your flock, for all intents and purposes you're already dead."
-s "It amazes me you still want to live on."
+s "It amazes me you still want to live."
 "My legs are shaking a little too - but from hunger, anger or shock, I'm not sure. I prop myself up against my ship."
 t "I have to get back to them."
 t "I have a daughter."
@@ -1526,8 +1604,9 @@ s "Now, I can bring your food here, but half of the flock is going to be staring
 s "If you'd rather be alone for a few moments, you can use my tent."
 "They extend a hand to help me up."
 "I want to stay here... but they're right. If I'm going to find a way out of this, I need time alone first."
-"I take their hand and I get back up."
+"I take their hand and get back up."
 "They lead me down a makeshift lane."
+scene bg tent-city-day
 "In just a few minutes, the field has transformed into a city."
 "The smaller, interconnected tents I saw before are residential; now the larger tents are coming up too."
 "I see what looks like an infirmary, a dining tent, and a tent especially for children."
@@ -1545,8 +1624,8 @@ t "This is delicious."
 t "I don't think I've had home-cooked food in years."
 s "What do you mean, home-cooked?"
 "I eat a little too quickly, and my stomach starts to turn."
-"I push the bowl away in front of me."
-t "Back home, you could eat out, at restaurants. Or you could eat with your family at home. If you had a good cook in the family, home-cooked meals were considered a treat."
+"I push the bowl away."
+t "Back on Earth, you could eat out, at restaurants. Or you could eat with your family at home. If you had a good cook in the family, home-cooked meals were considered a treat."
 if calypso1:
    t "My grandmother's food was the best. She made this incredible pot roast..."
 else:
@@ -1608,13 +1687,11 @@ show scout happy
 s "It's refreshing."
 
 scene bg black
-with Dissolve(2.0)
 
 "My bed is small and the blankets are thin, but the grass is so soft that I sleep as if in a luxury bed."
 
 scene bg field-day
-with Dissolve(2.0)
-
+play green2 green1
 "I wake up early the next morning. I fold the blanket up and put it at my feet. The scout is still asleep."
 "Quietly, I slip out of the tent."
 "I walk along the hillside, keeping out of sight of the alleys and walkways in the makeshift town below."
@@ -1671,8 +1748,7 @@ menu:
 label after_simplicity:
 
 scene bg field-night
-with Dissolve(2.0)
-
+play green1 green2
 "Night falls, but the scout hasn't returned yet."
 "I listen for activity downhill, but most of the town has turned in for the night... I wonder where they could be."
 "It's even quieter around the shuttle."
@@ -1744,8 +1820,9 @@ s "I just..."
 s "Part of me just wants it to be over. No fighting, no war, just a clean end to it. You know?"
 "I reach over across the grass and take their hand."
 t "I know."
+scene bg scout-friendship
 "They pull their hand away from my touch, and I wonder if I've done something wrong."
-"But then they rest it on my shoulder instead, and slide closer to me."
+"But then they slide closer to me."
 "Our bodies are almost touching."
 s "Sorry to unload all of this on you."
 t "I'm a perfect stranger, right?"
@@ -1766,7 +1843,7 @@ jump escapeatdawn
 label try_escape:
 
 "I slide my bag over my shoulder and slip out of the tent."
-"Holding my breath and treading as lightly as possible, I make my way along the treeline where it's darker."
+"Holding my breath and treading as lightly as possible, I make my way near the taller grass, where it's darker."
 "Finally, I'm just up the hill from the shuttle."
 "If I make a run for it, I can have the hatch closed before anyone sees - I'm certain of that."
 "I take a couple of deep breaths, clench my hands into fists, and kick off to a sprint."
@@ -1791,15 +1868,17 @@ s "You're liking this, aren't you?"
 s "I could get in serious trouble for keeping your ridiculous escape attempts a secret, and you're having fun with it?"
 s "Do you have a deathwish or something?"
 "I smile at that."
+scene bg scout-intimate
 "They're still holding me."
 "We notice the touch at the same time."
-"I escape their hold easily enough, but this time, instead of running for the shuttle, I run into the darkness of the forest..."
+"I escape their hold easily enough, but this time, instead of running for the shuttle, I run into the darkness of the tall grass..."
 "And when they catch me, they push me to the ground and I pull them down after me."
 "We chase each other a few times, hidden from the town by the hill and the darkness of the trees."
 "When we finally get to the catching, our bodies fit together better than I'd imagined."
 "We explore and feel each other, try each other out, experiment."
 "It is a good hunt."
-"Afterwards, we lie in the grass. It's even softer here in the woods than on the field."
+scene bg tent-city-night
+"Afterwards, we lie in the grass. It's even softer here in the taller grass than on the field."
 t "When you said you've {i}had{/i} others like me before..."
 s "None quite like you."
 s "But I'd be lying if I said this was the first time I've been with a traveller."
@@ -1808,7 +1887,6 @@ s "Yesterday you looked like you were ready to kill all of us to get to your shu
 t "I still am, of course."
 t "I just remembered how much I enjoyed the thrill of it."
 "I sit up on my elbow and kiss them again. They're still not used to it, but they're not entirely repulsed by it either."
-show scout curious
 s "You know... you're right."
 s "When I walked back to the tent tonight, I was furious."
 s "I spoke to the leader about your situation and he just won't listen."
@@ -1817,8 +1895,8 @@ s "I feel like I'm watching a catastrophe in slow motion, and I can't do anythin
 s "But you're right."
 s "There's something incredible about breaking the rules..."
 s "...about being chased."
-show scout happy
-s "Maybe I'll become a spy."
+pause(1.0)
+s "...Maybe I'll become a spy."
 t "A spy? For the other flocks?"
 s "I don't know if they'd have me."
 s "But it's better than watching this all go to hell and doing nothing."
@@ -1835,7 +1913,7 @@ t "And I've found my way out of worse situations before."
 jump escapeatdawn
 
 label escapeatdawn:
-
+play green2 green1
 scene bg black
 
 "I wake up to someone shaking me."
@@ -1911,8 +1989,8 @@ hide scout
 "I give one last look to the field and then turn to the sky."
 "The energy core comes to life and then I'm rising up through the atmosphere and back into space."
 
-scene bg space
-with Dissolve(2.0)
+scene bg greenplanet
+stop
 
 "I take a deep breath."
 "Alone again."
@@ -1959,6 +2037,7 @@ jump calypsodream
 label orange1_postdream:
 
 scene bg orangeplanet
+play orange1 orange2
 
 "I wake up to a red glow."
 "Is it sunlight?"
@@ -1978,7 +2057,6 @@ scene bg orangeplanet
 "There's a small strip of flat land ahead. I slow the ship, bring it about, and make my landing."
 
 scene bg mountains
-with Dissolve(2.0)
 
 "I push open the hatch and climb out, once I'm sure I'm fully innoculated."
 "The sun beats down on me. I can feel myself sweating already. The air smells metallic and faintly of mud."
@@ -2002,7 +2080,6 @@ with Dissolve(2.0)
 "I climb down inside the burrow and follow the sound."
 
 scene bg cave
-with Dissolve(2.0)
 
 "The splashing stops."
 t "Penelope?"
@@ -2022,7 +2099,7 @@ show son neutral
 "It enters the cave and scuttles towards me. Its legs are covered by a long skirt, but I can see at least eight of them."
 "It strides past me and picks up the smaller one, placing it down by its feet."
 
-show dad angry behind son
+show dad angry
 
 u "We've claimed this cave for our own. Whatever you are, you're not welcome here."
 "Somehow, my translator manages to parse out what sound like whistles and trills into something I can understand."
@@ -2073,7 +2150,7 @@ t "Can I treat it? I have some first-aid supplies in my ship. Or I could bandage
 t "You're sensitive to the heat."
 t "And yet you still go out..."
 
-show dad neutral behind boy
+show dad neutral
 
 d "There's so little food here that we have to go out most days to forage."
 t "Couldn't you go out at night?"
@@ -2097,7 +2174,9 @@ show dad sad
 "I wonder what I would say if he asked me why I left Earth..."
 "I decide not to press the subject."
 "Instead, I look at the child next to him. She's still watching me, her eyes intent and unblinking... and somehow purposeful."
+play orange2 orange1
 "What I thought before was a blank stare is all of a sudden bursting with emotion. But not just that -"
+scene bg memory1
 "In her eyes I see her memories. I remember them too. They come to me as easily as memories of Earth."
 "I see a vast underground city, the walls glowing with some sort of luminescent rock."
 "I see thousands of their people working in unison. Memories, emotions, orders, ideas... they move between them like glances in a crowded room. In the dark, children dream the same dreams."
@@ -2111,9 +2190,12 @@ if calypso2:
 "The shame fades as we near the surface... but so does the dream. Now we sleep alone, my little brother and I. Two against the terrible force of our unconscious minds."
 "We emerge from the cave and fall into the sand... and my flesh cooks inside my skin."
 "Nothing has ever hurt so badly or shone so brightly."
-
+scene bg black
 "I close my eyes."
 "I think of Penelope, of the Ark, of our home on Earth. Of coriander and flower beds and damp soil between my fingers."
+scene bg cave
+show son neutral
+show dad neutral
 "I'm me again..."
 "But that child's memories have settled into my head. The contradiction should be making my head spin, but somehow it doesn't."
 "I lift my head and look at the father."
@@ -2174,8 +2256,8 @@ d "...What can you do?"
 "His directness catches me off-guard, almost as much as the complexity I now understand in his expression."
 "He looks defeated... but also hopeful."
 t "Whatever you need me to."
-
 scene bg mountains
+play orange1 orange2
 "Over the next several days, I spend the mornings and evenings - and as much of the midday sun as I can stand - scouring the hills for supplies and resources."
 "I bring everything I can carry, from small stones and plants to the dried-out trunks of giant, smooth cacti - back to the cave. I bring the things I have trouble carrying, like small boulders, in stages, pushing them a little bit at a time before returning with other things to the cave for breaks."
 "When we've gathered enough, we begin plans for construction."
@@ -2202,6 +2284,7 @@ she'd lead me in long, brisk circles around and around the perimeter, inspecting
 "As I tell him about my life, I can feel him remembering his past life: his extended family underground, his partner, the glow of the cave walls. He remembers it in synchrony with my stories, and I am reminded of his memories."
 if saferoom:
    "I use the remaining resources to build weapons for the family - spears, shields, and a large door they can fit over one section of the cave, making a sort of safe room for the children to hide in case of an emergency."
+play orange2 orange1
    "It takes an extra half a day, but it's worth it for the relief that washes over the father - and then, a moment later, through me - as the door fits in its intended place."
 if playroom:
    "I use the remaining resources to build toys for the children - spinning wheels, a chalkboard where they can draw and erase things, and a slide into their lake."
@@ -2209,7 +2292,7 @@ if playroom:
 "Finally, the day comes when I'm confident enough in our work that I gather my things and prepare to leave."
 scene bg cave
 show dad neutral
-show son neutral behind dad
+show son neutral
 d "What is it that your people say again? I've forgotten."
 t "Goodbye?"
 d "No... the other one."
@@ -2240,7 +2323,8 @@ scene bg mountains
 "The family's wishes for me swirl around in my head, but like a vivid and disturbing dream, they can't find a place to settle down. As the ship whirs to life and into the sky, I watch for their cave in the mess of colours beneath me..."
 "But I don't find it."
 "That bothers me too, though I can't pinpoint why."
-scene bg space
+scene bg orangeplanet
+stop
 "It's still bothering me when I look outside to find myself in space again. The planet is now an orange circle below me, becoming smaller and smaller."
 "Reluctantly, I try to put my discomfort out of my mind, and I bring up the map..."
 "But in the back of my mind it tugs at me, along with these new memories that I can't seem to settle."
@@ -2275,7 +2359,6 @@ jump calypsodream
 label blue1_postdream:
 
 scene bg blueplanet
-with Dissolve(2.0)
 
 "I feel a terrible weight on my chest."
 "The weight wakes me up, but my body refuses to move."
@@ -2306,7 +2389,6 @@ with Dissolve(2.0)
 "I manage to dodge the tree branches and find a soft landing spot on the forest floor."
 
 scene bg black
-with Dissolve(2.0)
 
 "Before I leave the ship, I innoculate myself and eat some preserved foods Calypso left for me."
 "I give myself a moment's rest - but I don't need more than that."
@@ -2315,7 +2397,7 @@ with Dissolve(2.0)
 "Finally, I open the hatch and emerge out into the jungle."
 
 scene bg jungle-day
-with Dissolve(2.0)
+play blue1 blue2
 
 "They looked smaller from the shuttle."
 "From the ground, the trees are as big and as wide as skyscrapers."
@@ -2330,21 +2412,16 @@ with Dissolve(2.0)
 "A tree branch has been torn from a tree, leaving the spot open."
 if blue1:
    "It's fresh. This must have happened recently."
-else:
-  if blue2:
+if blue2:
    "The tree has started growing back. I don't know how fast anything grows here, so I don't know what that means, but it's not fresh."
-  else:
-   if blue3:
+if blue3:
      "I barely notice the break - a new branch has almost completely taken its place."
-   else:
-     pass
 "It's too small to have been caused by the ark."
 "My heart sinks."
 "But it could still be something. I have to at least look for it."
 "I squint up at the crack in the branch and follow the direction it points."
 "I shimmy up a root of one of the trees and then climb up a vine until I have a good vantage point."
 "Then I look out."
-
 "The wreck of the shuttle is still smoking lightly."
 "This one is larger than mine. I recognize it as a fourth class shuttle; it should fit six people, maximum."
 "It has more fuel than mine, and even a rudimentary weapons system."
@@ -2360,6 +2437,7 @@ t "Please be alive... please--"
 "Behind them, they have a fire going, meat roasting on it."
 "There is a moment when none of us say anything..."
 "And then..."
+play blue2 blue1
 sol "Commander? Commander!"
 "They run to me."
 show hector young surprised
@@ -2420,8 +2498,8 @@ t "My death, I mean."
 "But I don't cry."
 "I won't cry. Not in front of my junior officers."
 
-pause(2.0)
-
+pause(1.0)
+play blue1 blue2
 "Finally, I gather my strength and sit up to eat some food."
 "When I look back up at the soldiers, they're glancing uneasily at each other."
 show hector young neutral
@@ -2444,7 +2522,7 @@ h "We've lost most of our supplies. We're poorly defended out here."
 h "They come from the treetops... they climb down and just take what they want."
 h "They're huge. If we fought them, they'd crush us."
 h "To be honest, we have no idea what to do."
-"When I look at the men again, it strikes me how afraid they all look. It looks like they've barely been sleeping."
+"When I look at the men again, it strikes me how afraid they all look. It looks like they've barely slept."
 "I step out away from the fire and survey their area again. Their fire pit is sitting just under an outcropping of rocks, so it's naturally shielded from one side."
 "The shuttle, their remaining supplies, and the outcropping sit just below a huge tree branch that cuts across the whole area."
 "The shuttle provides them a bit of a defense from the north, as well. But otherwise, they're very much out in the open..."
@@ -2499,34 +2577,36 @@ h "Thank you, Commander."
 h "Truly."
 
 scene bg jungle-night
-with Dissolve(2.0)
-
+play blue2 blue1
 "Now that they're prepared, I get to helping them fortify their camp."
 "There's no way we'll cut down the branch above us - not for a long time, anyways - but we manage to cut down a few of the smaller branches poking out from it. That should give the alien creatures less of an advantage in the canopy."
 "We dismantle the shuttle and use its hull to make walls around the supplies. By the time we're finished, the supply cache is practically a small house, with only a small hole in the ceiling for smoke to escape and a door."
 "We cut the logs from the branches into sharp sticks and make a fence around the camp."
+scene bg sitting-with-soldiers
 "We forage for more food and have another big fire that night."
 "We sing campfire songs I haven't heard since we left Earth."
 "And then, when night falls, we wait."
 "I offer to keep watch. I've slept a long time, I say, and soon I'll be sleeping again."
 "The jungle is deceptively quiet at night. All I hear for some time is the wind and the low, melodic purr of some distant animal - perhaps something like a frog, or a cricket."
 "Then I hear the rustling in the trees."
+scene bg jungle-night
 "I hold my breath and stand up against the doorway. I look up for any sign of the creature."
 "I hear it search - and its confusion as it finds the cut branches. It pauses to survey the fence."
 "Then, with slow, deliberate movements, it climbs across the branch until I can see it."
+show friend dark
 "Its eyes glow faintly in the dark."
 if goodspeech:
    "It glares at me for a long moment - suspiciously, sternly, but with no threat of violence. It knows it won't be so easy anymore."
 if badspeech:
    "Our eyes meet for one long moment. It seems confused, like it's studying me but hasn't drawn a conclusion yet."
 "Then, heaving a powerful sigh, it returns to the night."
+hide friend
 "I let myself breathe again and look at the soldiers."
-"Miraculously, the only one who was woken up was Hector; the others must have been so tired that the idea of me keeping watch alone gave them rest."
+"Miraculously, the only one who was woken up is Hector; the others must have been so tired that the idea of me keeping watch alone gave them rest."
 "Hector is still bleary-eyed, but he seems to understand that we're safe now."
 "He nods to me slowly, and drifts back to sleep."
 
 scene bg jungle-day
-with Dissolve(2.0)
 
 show hector young happy
 h "I don't know how we can thank you, Commander."
@@ -2555,12 +2635,16 @@ t "I promise."
 "The ship is in working order and ready to go when I return to it."
 "Carefully, I navigate through the branches and the canopy, and then I accelerate into the sky."
 "I look down one last time at the camp and remember my promise."
+scene bg blueplanet
+stop
 "I remember my promise to Penelope, too. In the envelope, pressed between the pages of letters, sits a tiny purple flower."
 "Soon the camp is lost beneath the canopy, and then beneath the clouds, and then once again I'm alone in space."
 
 jump space2
 
 label space2:
+scene bg map
+play space
 
 "The quiet whir of the energy core and the empty space all around me should make me feel lonely, but somehow I am calmed by it."
 "I don't know what that says about me."
@@ -2578,16 +2662,16 @@ if blue1:
 
     menu:
        "And yet, I must decide."
-       "The green dot.":
-          $ green2 = True
-          $ orange2 = False
-          $ blue2 = False
-          jump green2
        "The orange dot.":
           $ orange2 = True
           $ green2 = False
           $ blue2 = False
           jump orange2
+       "The green dot.":
+          $ green2 = True
+          $ orange2 = False
+          $ blue2 = False
+          jump green2
 
 elif orange1:
     $ okbreak = False
@@ -2622,16 +2706,16 @@ else:
     "Once again, I have no way of knowing where to go."
     menu:
        "And yet, I must decide."
-       "The blue dot.":
-          $ blue2 = True
-          $ orange2 = False
-          $ green2 = False
-          jump blue2
        "The orange dot.":
           $ orange2 = True
           $ blue2 = False
           $ green2 = False
           jump orange2
+       "The blue dot.":
+          $ blue2 = True
+          $ orange2 = False
+          $ green2 = False
+          jump blue2
 
 
 label orange2:
@@ -2663,6 +2747,7 @@ if green1:
 label orange2_postdream:
 
 scene bg orangeplanet
+play orange1 orange2
 
 "I wake up to a red glow."
 "Is it sunlight?"
@@ -2682,7 +2767,6 @@ scene bg orangeplanet
 "There's a small strip of flat land ahead. I slow the ship, bring it about, and make my landing."
 
 scene bg mountains
-with Dissolve(2.0)
 
 "I push open the hatch and climb out, once I'm sure I'm fully innoculated."
 "The sun beats down on me. I can feel myself sweating already. The air smells metallic and faintly of mud."
@@ -2706,7 +2790,6 @@ with Dissolve(2.0)
 "I climb down inside the burrow and follow the sound."
 
 scene bg cave
-with Dissolve(2.0)
 
 "The splashing stops."
 t "Penelope?"
@@ -2740,8 +2823,7 @@ show son neutral
 "I reach my hands behind my head and grab onto the object - is it a club, a plank of wood?"
 "I pull it over my head, grip it in both hands, and swing around."
 
-show dad angry behind son
-with Dissolve(0.2)
+show dad angry
 
 "It surprises me that a creature so slight can hit so hard."
 "My ears are still ringing when it begins to hiss at me, a screaming, high-pitched sound that grates my ears like nails on chalkboard."
@@ -2751,7 +2833,7 @@ with Dissolve(0.2)
 t "I'm not here to hurt you."
 "Slowly, and with my eyes still on the larger creature, I lower the branch to the ground with one hand while I hold the other up in a sign of peace."
 t "I'm just a traveller. I'm looking for my people."
-show dad concerned
+show dad worried
 u "Are you from the surface?"
 t "No. I'm from space..."
 t "From the sky."
@@ -2761,8 +2843,10 @@ u "And you're still alive."
 "But I don't step back, and I don't move my hand when it reaches for it."
 "At first I think it wants to see my skin, to see if it is burned like its own - but then its hand touches mine."
 "Its skin is hard like a carapace, and my palm tingles when its fingers make contact."
+play orange2 orange1
 "When I meet his eyes again, I see the emotion in them. I feel it. He is scared and confused and defeated... and he is in pain, so much pain."
 "He's been feeling this pain for so long now that he can barely sense what parts of him are hurting... but the worst hurt is all inside."
+scene bg memory2
 "The pain takes me farther in, and I begin to remember all the places it came from. These are his memories: feet blistering in the white-hot sand, eyes blurry with burns from the light. Terror in the night. It's hard to sleep. He shakes every time he hears the monsters."
 "These are his memories, but I remember them too. I remember an underground city, thousands of his people working in unison, their memories and emotions and ideas a chorus in my head, passing between them in the air."
 "The memories of this place have become fuzzy with time... but the fear is in stark relief as I pack a bag and tie it across my chest. I feel my lover's anxiety, my children's confusion, the sheer height of the cliffs ahead of us and the distant promise of sunlight."
@@ -2771,12 +2855,16 @@ u "And you're still alive."
 "It feels as if it is hollowing me out and leaving me to dry. And our stomachs are empty... so empty."
 "When my son dies, he is so light I can barely feel him in my arms."
 "What weight he lost is a pit in my stomach now - a lump that weighs me down, makes me sick, makes me tired more than the hunger or the fear ever did."
+scene bg black
 "I stumble backwards."
+scene bg cave
 "I'm a traveller... I have a daughter... just one daughter. She's still alive. I haven't lost a child. I left my home, but not like that... not like that."
 "I'm me again. But the memories are still in my head, as clear as memories of my own."
 "That should feel like a contradiction. Why doesn't it?"
 "And I can still feel the lump. It moves around in my gut and finds no place to settle."
 "It still hurts so terribly."
+show son neutral
+show dad concerned
 "I look up at the family in front of me: father and daughter. In my mind's eye I can see the mother - her face blurring with time, but her smiling eyes still crystal clear somehow - and the son. But when I think of the son all I can remember is his mangled, hollow body. So light..."
 t "What did you..."
 show dad sad
@@ -2786,15 +2874,15 @@ t "Tell me what to do."
 "But I have to save this daughter, too. I can still save one of them."
 
 scene bg mountains
-with Fade(0.5)
-
+play orange1 orange2
 "My first task is to find enough food to keep what remains of the family alive. It takes me almost an entire evening wandering the side of the mountain, but I forage a large bag of roots. I also catch and kill several insectoid creatures, each about the size of a football."
 "As I bring them back to the cave, it occurs to me that I should have no idea whether these things are even edible for the family... but they are. I'm certain they are. And sure enough, as soon as I return, the father reaches for my bag and empties the contents into a large pot of water he has boiling over a fire in the corner of the cave."
 "I know they're edible because I remember it. Kneeling in the sand, the burning on almost all of my legs, plucking the root from the ground and dusting it off."
 "The memories keep coming to me as we sit down to eat. The father and daughter slurp the food up. They've ground the roots and bugs into a paste. This should be disgusting, but it's familiar to me - my parents made me something similar as a child. Comfort food when I was sick."
 "When I take my first sip, for a moment I feel like I'm starving too. It's the best thing I've eaten in a long time - since Earth - since I was a child."
 "I swallow my tears with more of the gruel, and when I look up, my bowl finished, father and daughter look like they could cry too."
-scene bg black
+scene bg cave-dark
+play orange2 orange1
 "That night, my dreams are vague and indistinct. I feel myself in a huge cavern, bundled up with a thousand other children... but when I try to grasp the sensation, it escapes me and I find myself back in my body, staring up at the stalactites on the ceiling."
 "I can't remember the last time I felt so well-rested."
 "For a moment - just a moment - the thought comes to me that I could stay here. Building up the cave, eating gruel, and sleeping peacefully... They could be my family, and I could be theirs--"
@@ -2808,10 +2896,9 @@ scene bg mountains
 "I don't fight the feelings, though, and soon we fall into an easy rhythm: they share ideas, inspirations and thoughts with me, I find the tools to make those a reality, and I bring them back to the cave."
 
 scene bg cave
-with Fade(0.5)
 
 show dad neutral
-show son neutral behind dad
+show son neutral
 
 "When I return with my next batch of things, father and daughter have already set about constructing the last batch. They make traps, doors, the beginnings of a greenhouse."
 "Our communication is one-way, of course - however they share these thoughts with me, there's no way for me to reply. This makes me uneasy... but they are as worried as I am. It takes a lot of faith to put your survival in the hands of a stranger, with only the echoes of an idea to guide them."
@@ -2885,7 +2972,7 @@ show son angry
 "But from his daughter I sense disappointment."
 "I return to the thought of remaining here... but it has lost its energy somehow. It hangs heavy between us."
 
-scene bg mountain
+scene bg mountains
 "The weight remains as I leave the next day."
 "I remain for the morning and help them build their greenhouse..."
 "But for the first time, I feel that I'm unneeded."
@@ -2897,8 +2984,10 @@ if memories:
    "But somehow, the thought of the family so affected by my presence doesn't comfort me, as it should."
    "It worries me."
 if possibilities:
-   "But somehow, the thought of saving her doesn't comfort me, as it used to."
+   "But somehow, the thought of saving her doesn't comfort me as it used to."
    "It scares me."
+scene bg orangeplanet
+stop
 "The dust in my mind doesn't settle, even as I leave the atmosphere."
 "But then I'm in space again, and I have no time to wait for it."
 "I take one last look at the planet beneath me, put my memories of the place in the back of my mind, and turn my attention to the map."
@@ -2913,7 +3002,7 @@ $ speakup = False
 $ stayquiet = False
 
 "I type in the coordinates for the green planet."
-"It looks like it would harbor the most similar climate to Earth, given the distance to its sun..."
+"It looks like it would harbor a similar climate to Earth, given the distance to its sun..."
 "I'll take that small hope. It's better than nothing."
 "The ship lurches forward, and then the stars are a blur all around me."
 "I watch them go by for a while. I look at the screens one by one. I examine the control panels, trace out the alien lettering on my chair, and poke at the innoculation machine."
@@ -2953,8 +3042,8 @@ scene bg greenplanet
 "It needs a rest. So I have to land."
 "I pick a spot that looks as clear as possible of the cities and structures that litter the planet's surface."
 
-scene bg field-day
-with Dissolve(2.0)
+scene bg watching-fields
+play green1 green2
 
 "When I open the hatch, I find myself at the edge of a vast field."
 "Hills roll on as far as I can see."
@@ -2980,12 +3069,11 @@ pause(1.0)
 "I've never been a great cook, but I'm proud of it, if I do say so myself."
 
 scene bg field-night
-with Dissolve(1.0)
 
 "By the time I finish up and snuff out the fire, it's nighttime."
 "I make sure I have all of my things and head back towards the ship."
 "Maybe I'll sleep on the grass tonight and head out tomorrow."
-"Just as I'm planning my day before I leave, I catch sight of something bright in the fields."
+"Just as I'm making plans for the next day, I catch sight of something bright in the fields."
 "Fire."
 "I drop to the ground and crawl along it to a spot just near the clearing, but out of the way enough that I should be hidden from view."
 "There are at least three hundred figures."
@@ -2997,11 +3085,10 @@ with Dissolve(1.0)
 "My translator won't work from here, so all I hear is hissing, clicking and a long growl."
 "But it's obvious that the fight is getting heated."
 "Finally, they seem to come to some sort of agreement."
-"One of them, apparently the leader, gives a final, resounding click, and the group disperses."
+"One of them, apparently the leader, gives a final, resounding click, and the crowd disperses."
 "A group of about twenty of them set about moving the shuttle. I expect them to give up, but to my surprise, they manage to pick it up and move it down the hill."
 "With impressive efficiency, the others take to pitching tents and setting up a camp."
-scene tentcity-night
-with Dissolve(1.0)
+scene bg tent-city-night
 "In just a few minutes, the field transforms into a city before my eyes."
 "It's just dark enough now that I feel safe climbing up a grass-tree a little ways back from the edge of the forest. It bends a little under my weight, but it doesn't break. From a safe and secluded spot about halfway up, I scan the tent city."
 "There are smaller, interconnected tents that appear to be residential; the larger tents, for the most part, serve some sort of public purpose."
@@ -3020,8 +3107,7 @@ with Dissolve(1.0)
 "Sleep would be a better use of my time now."
 "I use a rope from my bag to tie myself to the tree. When I'm sure I'm secure, I drift off into anxious, restless half-sleep."
 
-scene bg tentcity-day
-with Dissolve(1.0)
+scene bg tent-city-day
 
 "I wake up early and untie myself from the tree."
 "First I look for the squadron from the previous night - but it seems like they've given up for now, or they're searching farther afield."
@@ -3045,6 +3131,7 @@ with Dissolve(1.0)
 "And just as I think I'm safe, they look up straight at me."
 u "You can come down now."
 "Dammit."
+play green2 green1
 "I jump down from the tree and make a soft, clean landing nearby."
 show scout angry
 "They don't look exactly happy to see me, but they haven't called for the others - who I can hear in the distance, still fighting."
@@ -3069,6 +3156,10 @@ show scout happy
 s "And you're a traveller. Well met, traveller."
 s "But why did you land here?"
 t "I'm searching for my people. We were looking for a new home... I was left behind. They had this planet tagged as potentially habitable, so I followed them here."
+show scout sad
+s "I am so sorry."
+"The honesty of their apology catches me off-guard."
+t "...Thank you."
 t "I don't suppose you've seen them?"
 show scout neutral
 s "...No. You're the first traveller that's come here in some time."
@@ -3079,9 +3170,7 @@ if blue1:
 else:
    "I hoped I'd find some sort of clue as to where they went. Anything."
 show scout curious
-"They look at me, uncertain of what to say."
-s "I am so sorry."
-s "But... your ark is better for it, anyways.  We used to be kinder to travellers. But things are dire now. Apparently we can't afford the luxury of kindness anymore."
+s "Well... your ark is better for it, anyways.  We used to be kinder to travellers. But things are dire now. Apparently we can't afford the luxury of kindness anymore."
 t "Why not? What's happened?"
 show scout neutral
 s "Did you see the other camp in the distance before? The larger one?"
@@ -3176,8 +3265,8 @@ if calypso2:
 s "I hope you find your daughter, traveller."
 s "Truly."
 
-scene bg tentcity-night
-
+scene bg tent-city-night
+play green1 green2
 "The camp is utterly silent."
 "When I descend from one of my trees, I find the scout waiting for me."
 show scout neutral
@@ -3193,7 +3282,7 @@ s "Luck?"
 t "I mean... I hope you... do well."
 show scout happy
 s "Ah."
-s "Swift feet to you too... traveller."
+s "Swift feet to you too, traveller."
 hide scout
 "They take off in a sprint and bound down the hill to the left of the camp."
 "They must be going at least twice as fast as my top speed. It's incredible to watch."
@@ -3208,17 +3297,17 @@ hide scout
 "There's more smoke now. It stings my eyes as I tear the parcel open."
 "I take the object out and crouch down to set it on the ground, as the scout instructed."
 "But when I touch it with both hands, I realize how familiar this looks."
+play green2 green1
 "This is a bomb."
 "It's large enough that it could take out at least ten of the tents."
 "The large tents are all near here: the infirmary, the nursery..."
 "I stop. The bomb freezes in my hands."
 s "Are you giving up on me now, traveller?"
-scene bg scoutstandoff
+scene bg scout-standoff
 "They circled back to make sure I did the job."
 t "I know what this is. I know what you're planning to do."
 s "And what does it matter to you?"
 t "It matters because - because these are lives we're talking about! They're not my people, but they don't deserve to die like this!"
-show scout angry
 s "You have no idea what they deserve."
 s "You know there used to be three thousand of us?"
 s "They all died in the war. A war that the leaders of this flock refuse to let end."
@@ -3264,10 +3353,8 @@ t "I'm so sorry."
 "They don't say anything, but they seem to understand."
 "I've seen all I want to see. I leap into the hatch, close it behind me and slam on the accelerator before I've even settled into my seat."
 "I grab onto the chair as we hover above the ground and launch into the sky."
+scene bg greenplanet
 "I don't even get the chance to look back."
-
-scene bg space
-with Dissolve(2.0)
 
 jump space3
 
@@ -3290,6 +3377,8 @@ if calypso2:
 "Our eyes meet."
 "They look at me, then at the bomb, and I see the realization dawn in their eyes just as the shuttle lifts off."
 "By the time the bomb goes off behind me, I'm safely in the air."
+scene bg greenplanet
+stop
 "I circle around to look at the destruction. I let the image burn into my eyes."
 "But it's the leader's face that stays with me as I push through the atmosphere into space."
 scene bg greenplanet
@@ -3305,35 +3394,7 @@ if detonate:
 
 jump space3
 
-label bomb_scout:
-
-t "I'll arm it."
-t "That'll give you enough time to escape the blast radius."
-show scout neutral
-s "Thank you."
-"The scout steps back."
-s "I hope you find your people."
-"Taking a deep breath, I look down at the bomb."
-"I hope I'm making the right choice."
-"I press the button and it lights up."
-"I dash to the shuttle, open the hatch and dive inside."
-"As I close it, I see the leader of the camp emerge from one of the tents."
-"Our eyes meet."
-"They look at me, then at the bomb, and I see the realization dawn in their eyes just as the shuttle lifts off."
-"By the time the bomb goes off behind me, I'm safely in the air."
-"I circle around to look at the destruction. I let the image burn into my eyes."
-"But it's the leader's face that stays with me as I push through the atmosphere into space."
-scene bg space
-with Dissolve(2.0)
-"I take a moment to hover in the silence and think about what I've just done."
-"Then, with everything I have, I push it out of my mind."
-
-jump space3
-
 label blue2:
-
-$ blue1 = False
-$ blue3 = False
 
 $ memories = False
 $ possibilities = False
@@ -3353,7 +3414,6 @@ $ killscout = False
 "I swear I can feel it lapping against my hair."
 
 scene bg black
-with Dissolve(2.0)
 
 if green1:
    jump green1dream
@@ -3372,7 +3432,7 @@ scene bg blueplanet
 "My body starts to feel lighter."
 "Finally I can move."
 "I open my eyes to find that we're about to begin our descent."
-"Above me floats the planet."
+"The planet looms in front of me."
 "The dot on my map was blue, but the surface of the planet is a blend of pinks and yellows, with deep green oceans and massive storms."
 "Entire swaths of it are desert yellow, and the poles are dotted with white."
 "Calypso was right about the temperature variation."
@@ -3393,7 +3453,6 @@ scene bg blueplanet
 "I manage to dodge the tree branches and find a soft landing spot on the forest floor."
 
 scene bg black
-with Dissolve(2.0)
 
 "Before I leave the ship, I innoculate myself and eat some preserved foods Calypso left for me."
 "I give myself a moment's rest - but I don't need more than that."
@@ -3402,8 +3461,7 @@ with Dissolve(2.0)
 "Finally, I open the hatch and emerge out into the jungle."
 
 scene bg jungle-night
-with Dissolve(2.0)
-
+play blue-sad1 blue-sad2
 "They looked smaller from the shuttle."
 "From the ground, the trees are as big and as wide as skyscrapers."
 "There are leaves as big as the ship - but most of the trees don't have leaves. Instead they have porous puffs like fungi."
@@ -3442,11 +3500,13 @@ else:
 "I hear something rustling behind me."
 "My weapon, where's my weapon? I reach for my holster, but before I can get to it I see a shadow from the trees..."
 "...And a creature landing on top of it."
+show friend dark
 "The creature turns to me for a moment. It's a little dark now, so I can't see it fully..."
 "But when it looks at me, its eyes glow."
 "It looks at me with something I can't quite comprehend."
 "Fear? Sadness? Pain? I open my mouth to say something, but it won't understand."
 "Before I think to turn on my translator, it leaps back into the trees and lumbers away."
+hide friend
 "I wait until I'm certain it's gone before stepping out from under the outcropping."
 "I'm sure now... those guns were human-made. Carefully, I climb up onto the outcropping and walk towards the origin of the shots."
 "I'm almost out of breath as I reach another clearing in the forest."
@@ -3470,7 +3530,8 @@ h "We go through so much, we have to do so many terrible things, and you show up
 "Behind them is a small mound of dirt."
 "Come to think of it, this is the only spot with soft enough soil to dig through that I've seen since I arrived."
 t "Oh. Oh, I... I'm so sorry."
-show hector mid angry
+scene bg soldier-standoff
+play blue-sad2 blue-sad1
 h "Of fucking course you're sorry! You show up in your ship like nothing's happened. We've been dying out here, killing ourselves just to eke out a few more months."
 h "Do you even have room for us? Do you even know where the ark is?"
 t "...No. I don't. My shuttle only has room for me."
@@ -3513,7 +3574,6 @@ menu:
       h "We'll get over ourselves and we'll survive in this hell."
       h "But I never want to see you again."
       h "I hope for your daughter's sake that you never make it back to the ark."
-      show hector mid sad
    "Apologize.":
       $ stayquiet = True
       $ speakup = False
@@ -3538,6 +3598,8 @@ menu:
       "They look defeated... but relieved."
       h "...We should get back to the camp."
 label after_speakup:
+scene bg jungle-night
+play blue-sad1 blue-sad2
 "We walk in silence back to the camp."
 "The soldiers are trying to keep their distance from me, so I walk a little behind them."
 if speakup:
@@ -3563,8 +3625,6 @@ t "Thank you."
 "It doesn't seem right to sleep inside of it, even though it's a cold night."
 
 scene bg black
-with Dissolve(2.0)
-
 "The cold keeps me awake as the others quietly curl up into their bags."
 "I don't think I'm the only person awake, though. It's too quiet."
 "I sit up on my elbows and scan the room, and I find Hector looking up at me."
@@ -3573,8 +3633,7 @@ with Dissolve(2.0)
 "I turn away and lie back down on my other side."
 "I manage to sleep a little, if lightly and uncomfortably."
 
-scene bg jungle-night
-with Dissolve(2.0)
+scene bg jungle-day
 
 "It's hardly light out, and the other soldiers are still asleep, but it's time for me to go."
 "I zip up my bag and slip out through a crack in the door."
@@ -3599,8 +3658,9 @@ if speakup:
    "I turn and make my way down the hill as quietly as I can. When I get to the bottom, I break into a run."
    "I listen for rustling behind me, but I don't hear anything. I'm safe."
    "I make it to my ship, run the engines and fly up into the sky as quickly as I can."
+   scene bg blueplanet
+   stop
    "The planet feels good behind me, and by the time I get back to space, I feel like a weight has been lifted from my shoulders."
-
 if stayquiet:
    "I am about to turn to leave when I hear a rustling in the trees above us."
    "I reach for my weapon, but Hector stops me."
@@ -3608,6 +3668,7 @@ if stayquiet:
    "I decide to trust him. For now."
    show friend dark
    "The creatures land in front of us. They barely make a sound."
+   show friend light
    "They are at least eight feet tall. They look like spiders, but they move more like monkeys, or maybe cats - with a grace and steadiness that makes them all the more intimidating."
    "One of them stares at me."
    "I remember it from before. I understand its expression now - the expression that felt so indecipherable before."
@@ -3630,16 +3691,17 @@ if stayquiet:
    "I sit in the ship for a long, quiet moment."
    "Then, as I bring the energy core to life, I find myself letting out a furious, growling scream."
    "I let myself feel it until I get to space."
+   scene bg blueplanet
+   stop
    "It's alright now. I'm alone again."
    "I'm always alone."
    "I sit back in my chair and breathe."
 
-scene bg space
-with Dissolve(2.0)
-
 jump space3
 
 label space3:
+scene bg map
+play space
 
 "The ship's navigation systems come back to life with a hum."
 "There's only one planet to choose now."
@@ -3668,7 +3730,7 @@ $ shoothim = False
 $ savehim = False
 
 "I type in the coordinates for the green planet."
-"It looks like it would harbor the most similar climate to Earth, given the distance to its sun..."
+"It looks like it would harbor a similar climate to Earth, given the distance to its sun..."
 "I'll take that small hope. It's better than nothing."
 "The ship lurches forward, and then the stars are a blur all around me."
 "I watch them go by for a while. I look at the screens one by one. I examine the control panels, trace out the alien lettering on my chair, and poke at the innoculation machine."
@@ -3709,7 +3771,7 @@ scene bg greenplanet
 "I pick a spot that looks as clear as possible of the cities and structures that litter the planet's surface."
 
 scene bg field-day
-with Dissolve(2.0)
+play green1 green2
 
 "When I emerge from the shuttle, I realize that this field is far from clear:"
 "I've landed at the edge of a huge city of tents."
@@ -3717,25 +3779,26 @@ with Dissolve(2.0)
 "I climb back into the shuttle and try to turn it on. I don't want any trouble."
 "But it's already gone to sleep. It will need to charge for at least a few hours before I can get it back in the air."
 "Resigned, I open the hatch again - only to find I'm surrounded by at least a hundred aliens."
+scene bg herd-encounter3
 "They're a little taller than me on average. Their legs bend backwards like an ostrich."
 "They all look built for running, but other than that they're remarkably diverse:"
 "I see groups with long arms, shorter and stockier groups, others who are tall and thin."
 "None of them look outright hostile, but they don't look surprised, either."
 "They're speaking in hushed hisses and clicks. From this distance, my translator doesn't recognize the sounds."
 "Finally, the circle parts at one end and an individual steps forward, taller and much older than the rest. This must be their leader."
-show leader happy
+scene bg tent-city-day3
+show leader neutral
 l "Welcome to our land, traveller."
 l "We hope you've come here safely and peacefully."
 "This is a warmer welcome than I anticipated."
 "And they seem utterly uninterested in either my translator or my shuttle."
 t "I have."
-show leader neutral
 l "Tell us, where are you from? What brings you here?"
 t "I was separated from my people. I'm looking for them."
 t "They were on a bigger ship. They might have passed through here. Have you seen them?"
 l "We haven't."
 show leader sad
-l "And for you... I am so sorry."
+l "I am so sorry."
 "The others repeat the words."
 t "Thank you."
 l "We can't offer much - we're still settling here - but we have a warm meal and a bed for you, if you'll take it."
@@ -3768,6 +3831,7 @@ l "Our jobs within the flock were arranged for us based on our biology. It's why
 l "It was a good life for some, but for others it was rigid. For many it was oppressive."
 l "Some of us wanted to settle down."
 show leader sad
+play green2 green1
 l "There was a war."
 l "It lasted a long time... but that scout ended it."
 t "With a {i}bomb?{/i}"
@@ -3780,6 +3844,7 @@ l "They died in the explosion."
 t "But why did they do it in the first place?"
 t "What drove them to that point?"
 l "We'll probably never know."
+scene bg scout-monument
 "I put down my food and walk down to the statue."
 "Its face is lithe and pointed, almost aerodynamic."
 "But its expression, at least to me, is indiscernable."
@@ -3791,7 +3856,6 @@ if badspeech:
    "I think of the things I've done to make things better for others."
    "Those great and terrible acts of violence..."
    "I wonder if those I've met feel lighter for them."
-
 if speakup:
    "I think of everything that I've sacrificed, and of how little people have noticed."
 if stayquiet:
@@ -3846,13 +3910,14 @@ else:
    t "And if it did, maybe they wouldn't have ended up accomplishing it in the first place."
 "We finish our food in silence."
 
-scene bg field-night
-with Dissolve(2.0)
+scene bg tent-city-night3
+play green1 green2
 
 "The leader has me sleep in a communal tent with a few others."
-"We make small talk and swap folk tales by the fire. When I see that they're trying to start a garden - and failing badly - I show them how I used to tend to mine."
-"The grass is soft and pillowy. I sleep as if I'm in a luxury bed."
+"We make small talk and swap folk tales by the fire. When I see that they're trying to start a garden - and failing - I show them how I used to tend mine."
+"The grass is soft and pillowy. I sleep as if in a luxury bed."
 "Before I leave the next day, I wake up early and go to the monument again."
+scene bg scout-monument
 "I wonder if there's a monument to me out there somewhere... and what's written on the bottom of it."
 if selfless:
     t "I understand what you've done..."
@@ -3863,6 +3928,7 @@ if desperate:
     t "And I'm sorry you had to do it alone."
     t "We heroes should stick together, when we can."
 "I touch the letters on the monument once more, and climb back up the crater."
+scene bg field-day
 "The flock sends me off with well-wishes and kind thoughts, but when I climb into my seat, I look back to find them holding each other."
 "Are they mourning?"
 "Are they mourning for me?"
@@ -3870,8 +3936,8 @@ if desperate:
 "But before I can, the shuttle whirrs to life and floats into the air."
 "I watch the tents disappear back into the fields, and settle back into my seat as the fields fade into the white of the clouds."
 
-scene bg space
-with Dissolve(2.0)
+scene bg greenplanet
+stop
 
 "Space feels a little less empty..."
 if selfless:
@@ -3910,6 +3976,7 @@ if green2:
 label orange3_postdream:
 
 scene bg orangeplanet
+play orange1 orange2
 
 "I wake up to a red glow."
 "Is it sunlight?"
@@ -3929,7 +3996,6 @@ scene bg orangeplanet
 "There's a small strip of flat land ahead. I slow the ship, bring it about, and make my landing."
 
 scene bg mountains
-with Dissolve(2.0)
 
 "I push open the hatch and climb out, once I'm sure I'm fully innoculated."
 "The sun beats down on me. I can feel myself sweating already. The air smells metallic and faintly of mud."
@@ -3953,7 +4019,6 @@ with Dissolve(2.0)
 "I climb down inside the burrow and follow the sound."
 
 scene bg cave
-with Dissolve(2.0)
 
 "The splashing stops."
 t "Penelope?"
@@ -3981,6 +4046,8 @@ t "Penelope?"
 "I kneel in front of it. I should put it next to the young one."
 "My hand touches its shoulder--"
 "And the impact hits me like a truck."
+scene bg memory3
+play orange2 orange1
 "I'm alone. I'm so profoundly alone. She's dead. She's dead..."
 "No one I have ever known will remember me. They're dead, or they hate me, or they're ashamed--even now, even so far away, I can feel it--"
 "Her body is so light in my arms. It weighs nothing. It weighs nothing!"
@@ -3997,6 +4064,7 @@ t "Penelope?"
 "Take me with you."
 "Please. Don't leave me alone."
 "Kill me. Please, kill me."
+scene bg memory-dark
 "His hands are gripping mine now, and they're {i}my{/i} hands again - but my hands are shaking with the deaths of my children."
 d "Kill me. Don't make me go on. Don't make me go back.."
 "I feel my gun in its holster, and his fingers around mine."
@@ -4035,6 +4103,7 @@ label shootdad_resolve:
 "Not the light, please, not the light."
 "It burned us all so terribly..."
 "..."
+scene bg cave-dark
 "My body is my own again."
 "My hands are covered in his blood."
 "I lie down on the ground next to his body."
@@ -4069,7 +4138,7 @@ label shootdad_resolve:
 "I don't know how long I cry, or what else I do in the cave - time simply stops registering."
 "But I'm there, for a time. And then that time is up."
 
-scene mountains bg
+scene bg mountains
 
 "The light hurts my eyes as I walk back to the shuttle. But every step reminds me: I am not burnt. I've survived the light."
 "My daughter is alive."
@@ -4077,6 +4146,8 @@ scene mountains bg
 "She's waiting for me."
 "Isn't she?"
 "Isn't she?"
+scene bg orangeplanet
+stop
 "I'm in space again."
 "The light is gone. Now I'm in the dark..."
 "And I have nowhere else to go."
@@ -4095,6 +4166,8 @@ d "Please..."
 t "I can't kill you. I can't."
 "He wants to stop me. He wants to tear open the wound in his belly... but he doesn't have the strength."
 "His eyes close, and I feel him fall into sleep."
+scene bg cave-dark
+play orange1 orange2
 "Once he's unconscious, I lie him down by the side of the water. From my pockets I get a handkerchief and some rubbing alcohol."
 "I dilute the alcohol with water from the cave, pour it over my handkerchief and rub it along the wound on his torso."
 "He flinches, but he barely wakes up. Either his species doesn't sting like I do when I disinfect a wound, or he's too exhausted to react."
@@ -4120,7 +4193,8 @@ scene bg black
 "I'm awoken in the night by a pain in my chest."
 "For a single, bleary second, contrasted with the timeless blankness of my dreams, it feels physical, and I grab at my chest to feel for wounds."
 "The second wave of it comes as I start to wake up, and finally it comes into focus: it's heartbreak."
-"That's when I hear the sound,"
+"That's when I hear the sound."
+play orange2 orange1
 "A low, shuddering whistle, high-pitched to my ears, but baritone deep in my memories. The sound threatens to fade with every tiny movement of his body - movements that I feel, too - but it comes out sharper and more melodic and it cuts deeply, so deeply."
 "Something inside tells me to join the sound - but my body isn't made for it. Instead, it brings tears to my eyes, and before I can bring my lips together to whistle they're broken apart by a sob."
 "I lurch forward and grab my knees and heave my shoulders to support the cries, to contain them, to reduce their effects - but they keep coming."
@@ -4133,7 +4207,6 @@ scene bg black
 "I awake to the sounds of movement."
 
 scene bg cave
-
 show dad neutral
 
 "He places a bowl of the meat next to me and returns to his seat."
@@ -4170,7 +4243,7 @@ t "Your mother's waiting for you."
 "My hands are shaking on the table... and he reaches out and takes them."
 
 scene bg mountains
-with Fade(1.0)
+play orange1 orange2
 
 "The next day goes by in the same haze as before."
 "We barely talk - it seems like he's not used to it."
@@ -4186,6 +4259,8 @@ with Fade(1.0)
 "So I gather my own things and head out just as the sun is about to peak in the sky."
 "The farther I get from the cave, the more distantly I feel him - but his memories linger in me, alongside my own. His losses hurt as mine did."
 "I buried my child last night. I never knew her, but her loss makes my hands shake."
+scene bg orangeplanet
+stop
 "As the ship climbs into space, my heart jolts, reacting to something I can't see."
 "Did he fall?"
 "Did he see his mother again?"
@@ -4262,7 +4337,6 @@ scene bg blueplanet
 "I manage to dodge the tree branches and find a soft landing spot on the forest floor."
 
 scene bg black
-with Dissolve(2.0)
 
 "Before I leave the ship, I innoculate myself and eat some preserved foods Calypso left for me."
 "I give myself a moment's rest - but I don't need more than that."
@@ -4271,7 +4345,7 @@ with Dissolve(2.0)
 "Finally, I open the hatch and emerge out into the jungle."
 
 scene bg jungle-day
-with Dissolve(2.0)
+play blue1 blue2
 
 "They looked smaller from the shuttle."
 "From the ground, the trees are as big and as wide as skyscrapers."
@@ -4286,14 +4360,10 @@ with Dissolve(2.0)
 "A tree branch has been torn from a tree, leaving the spot open."
 if blue1:
    "It's fresh. This must have happened recently."
-else:
-  if blue2:
+if blue2:
    "The tree has started growing back. I don't know how fast anything grows here, so I don't know what that means, but it's not fresh."
-  else:
-   if blue3:
+if blue3:
      "I barely notice the break - a new branch has almost completely taken its place."
-   else:
-     pass
 "My heart sinks."
 "But it could still be something. I have to at least look for it."
 "I squint up at the crack in the branch and follow the direction it points."
@@ -4320,13 +4390,14 @@ u "Did you come from the sky-house?"
 "...It must be glitching."
 t "I'm sorry? I--"
 h "It's alright! We know her. She was a friend."
-show hector old surprised behind friend
+show hector old surprised
+play blue2 blue1
 "A man emerges from the hut at the side of this creature."
 "A man! A human man!"
 "At first I'm so startled to see one of my own that I don't recognize him, but then it clicks--"
 "The freckles, round cheeks, big nose. I know this man."
 "He was the one who made the radio signal on Calypso."
-t "Hector...?"
+t "Hector...? Hector Jensen?"
 h "Commander! It's been so long."
 show hector old happy
 "Hector steps forward and pulls me into a hug."
@@ -4334,9 +4405,9 @@ show hector old happy
 "But my hands are shaking."
 "He used to be so awkward."
 "I'm being hugged... I haven't felt this in so long."
-"I have to stop tears from welling in my eyes."
-"Not in front of my soldiers. Please..."
-"When we finally part, I have to still hold on to his arm to believe he's real."
+"I have to stop myself from tearing up."
+"I won't cry now - not in front of my soldiers."
+"When we finally part, I still have to hold on to his arm to believe he's real."
 "The questions come flooding out before I can fully form them."
 t "How long have you... what happened to... how did this happen?"
 "Others emerge from the huts and the trees - humans and non. I see two other soldiers. I don't know them by name, but I recognize their faces."
@@ -4357,21 +4428,23 @@ h "They stole our supplies. We thought they were getting ready to kill us..."
 h "But it was a misunderstanding. It sounds weird, but stealing is their way of an introduction."
 "He laughs, but there's sadness in it."
 h "There were a lot of misunderstandings at first."
-h "But we resolved them."
-h "We started to learn about each other."
+h "But we resolved them. We started to learn about each other."
 h "When we realized the ark wasn't coming for us, they were all we had."
 h "We made this garden for them. They protect us and keep us healthy, and we help them with what they need."
 "The other soldiers have bundles on their back, I notice. When they see me staring quizzically at them, one of them turns around."
-"Eight tiny legs sprout out from the bundle - and a small head."
+scene bg baby-friend
+"Six tiny legs sprout out from the bundle - and a small head."
 "It's a baby. One of their babies."
 t "You raise their children?"
 h "It's dangerous to be a child for them. They grow quickly, but there's risk of theft by other clans. It can cause serious disputes."
 h "So they protect us, and we protect them."
+scene bg soldiers-garden
 "Everyone looks so calm here. Even the creatures - strong and elegant as they seem - look relieved."
 t "I'm happy for you, Hector."
+scene bg jungle-day
 show hector old neutral
 h "And what about you, commander? You look exhausted."
-t "Me? I guess it's a bit of a long story by now..."
+t "Me? It's such a long story..."
 if calypso1:
    t "I crash-landed on the planet in the debris field."
    t "I was lucky - the creature living there helped me rebuild my ship and leave."
@@ -4407,9 +4480,9 @@ if green2:
 else:
    t "I met a family there. They'd built a home, but it was crumbling."
    if memories:
-      t "They shared their memories with me...  painful memories, ones that still haunt me. But beautiful ones as well."
+      t "They shared their memories with me -  painful memories, ones that still haunt me. But beautiful ones as well."
    if possibilities:
-      t "They shared their hopes with me... their pain, too. But I have to bear that for their sake."
+      t "They shared their hopes with me, and their pain, too. But I have to bear that for their sake."
 t "Then I came here."
 t "It sounds kind of funny when I say it all in a row like that."
 "I can't help but smile, but Hector must see the pain in my expression, because he puts a hand on my shoulder."
@@ -4419,6 +4492,7 @@ h "She should be proud of you, Commander. If you'll permit me to say so."
 t "Thank you."
 "The other soldiers return to their work tending the garden, while the creature leaps back into the tree and climbs upward until I lose sight of it."
 hide friend light
+play blue-sad1 blue-sad2
 h "I understand, you know."
 show hector old concerned
 h "I understand making hard choices."
@@ -4484,6 +4558,7 @@ menu:
       h "I can't express how much that means to me, commander."
 label after_revoltmenu:
 show hector old sad
+play blue-sad2 blue-sad1
 h "Can you do something for me, commander? One last favor for a soldier?"
 t "What is it?"
 h "Can you tell the ark that we're dead?"
@@ -4510,8 +4585,8 @@ t "That's what I'll tell them."
 h "Thank you. Truly."
 
 scene bg jungle-night
-with Dissolve(2.0)
 
+play blue-sad1 blue-sad2
 "It's a little late for me to head out, so I spend the rest of the day with Hector's men tending to the garden."
 "We harvest and forage some local foods, and the soldiers show me how to cook it on the fire."
 "For dinner, we eat a long, chewy stalk that tastes remarkably like a hot dog, and a grilled mixture of spores, greens and mushrooms that is tangy, sweet and pungent all at once."
@@ -4529,7 +4604,6 @@ if understand:
 "He leaves the translator by my bag, and tucks into bed."
 
 scene bg jungle-day
-with Dissolve(2.0)
 
 "The next day, everyone - including at least ten of the creatures - comes out to say goodbye."
 "As I reach the top of the hill, I turn back to look at them."
@@ -4540,14 +4614,14 @@ if revolted:
 if understand:
    "They truly do look happy."
    "I'm proud of them."
-   "I don't know if I affected them at all as their superior officer - or even if that matters now, in a different world with none of the people we knew -"
+   "I don't know if I affected them at all as their superior officer - or even if that matters here, in a different world with none of the people we knew -"
    "But I let myself feel that pride for just a moment."
 "I make it back to the ship, and watch for the camp out the window as I fly up past the trees and back to the sky."
 "It's a tiny dot, a multicoloured shock among sheets of pink and yellow-green."
 "I watch it until it disappears beneath the clouds."
 
-scene bg space
-with Dissolve(2.0)
+scene bg blueplanet
+stop
 
 "And then I'm in space again."
 "The silence is oppressive."
@@ -4555,6 +4629,7 @@ with Dissolve(2.0)
 jump space4
 
 label space4:
+scene bg space
 
 "I have nowhere else to go."
 "The thought - cold, logical, factual - comes before the feeling of it."
@@ -4596,7 +4671,7 @@ else:
    "I'm so sorry I failed you."
 
 scene bg black
-with Dissolve(3.0)
+pause(1.0)
 
 "...REPEAT. THIS IS THE ARK."
 "WE HAVE LANDED. WE ARE DISTRIBUTING COORDINATES."
@@ -4650,6 +4725,8 @@ if green1:
    if blue2:
       $ ending6 = True
 
+play ending1 ending2
+
 "I wake up with a start."
 "The ship is bright with the light of the planet above us."
 "It is a swirling mess of puffy white clouds and bright blue oceans."
@@ -4702,8 +4779,9 @@ t "Penelope!"
 show penelope neutral
 
 t "Penelope!"
+play ending2 ending1
 
-pause(2.0)
+pause(1.0)
 
 g "I'm not Penelope."
 "She stares at me blankly."
@@ -4815,6 +4893,7 @@ scene bg memorial
 "I don't know if I have any more to give."
 "But what else is there for me to do?"
 "Where else can I go and feel like I'm making a difference?"
+stop
 menu stayorgo:
    "Am I here to stay, or just a traveller?"
    "I'm here to stay.":
@@ -4823,6 +4902,7 @@ menu stayorgo:
        jump go_end1
 
 label stay_end1:
+play calypso1 calypso2
 "Slowly at first, but then all at once... I find my footing."
 "I stop myself from crying any more."
 t "You've done so well for yourself, Penelope."
@@ -4846,6 +4926,7 @@ t "I've been looking for you for some time."
 jump endcredits
 
 label go_end1:
+play calypso1 calypso2
 "My legs are still shaky... but I find my footing."
 "I stop myself from crying any more."
 t "You've done so well for yourself, Penelope."
@@ -4963,6 +5044,7 @@ scene bg memorial
 "How could I possibly be wanted here, after everything that's happened?"
 "All I wanted was a quiet life. All I wanted was to see Penelope again."
 "But now... now..."
+stop
 menu stayorgo2:
    "Am I here to stay, or just a traveller?"
    "I'm here to stay.":
@@ -4971,7 +5053,7 @@ menu stayorgo2:
         jump go_end2
 
 label stay_end2:
-
+play calypso1 calypso2
 "Slowly, reluctantly... I find my footing."
 "I wipe the tears from my face."
 t "You've built something beautiful, Penelope."
@@ -4989,10 +5071,10 @@ scene bg finaltown
 t "Hello..."
 t "I've been looking for you for some time."
 
-jump end_credits
+jump endcredits
 
 label go_end2:
-
+play calypso1 calypso2
 "My legs are still shaky... but I find my footing."
 "I let the tears run down my cheeks."
 t "You've built something beautiful, Penelope."
@@ -5102,6 +5184,7 @@ scene bg memorial
 "Part of me wants to fall asleep here and never wake up - but I can't do that."
 "I have to find a way to keep going."
 "I have to..."
+stop
 menu stayorgo:
    "Am I here to stay, or just a traveller?"
    "I'm here to stay.":
@@ -5110,6 +5193,7 @@ menu stayorgo:
         jump go_end3
 
 label stay_end3:
+play calypso1 calypso2
 "Somehow, I find my footing."
 "The effort of it brings tears to my eyes."
 t "You've built something incredible, Penelope."
@@ -5131,6 +5215,7 @@ t "I've been looking for you for some time..."
 jump endcredits
 
 label go_end3:
+play calypso1 calypso2
 "Somehow, I find my footing."
 "The effort of it brings tears to my eyes."
 t "You've built something incredible, Penelope."
@@ -5258,8 +5343,8 @@ scene bg memorial
 "But when I think of leaving, my heart aches even more."
 "I've been alone for so long..."
 "...but I don't know if I can bear the company I would find here."
-
-menu stayorgo:
+stop
+menu stayorgo3:
    "Am I here to stay, or just a traveller?"
    "I'm here to stay.":
         jump stay_end4
@@ -5267,7 +5352,7 @@ menu stayorgo:
         jump go_end4
 
 label stay_end4:
-
+play calypso1 calypso2
 "I lean against the memorial at first, but finally, I find my own footing."
 "I wipe the tears and the snot from my face."
 t "The person you have been to these colonists is what I always wanted to be for you..."
@@ -5291,6 +5376,7 @@ t "I've been looking for you for some time."
 jump endcredits
 
 label go_end4:
+play calypso1 calypso2
 "I lean against the memorial at first. I can hardly find my own footing."
 "I wipe the tears and the snot from my face."
 t "The person you have been to these colonists is what I always wanted to be for you..."
@@ -5415,7 +5501,8 @@ scene bg memorial
 "If I stayed here... perhaps I could do what she couldn't."
 "Perhaps I could continue her work."
 "It would only be one more sacrifice for her sake... it is a choice I am woefully used to making."
-menu stayorgo:
+stop
+menu stayorgo4:
    "Am I here to stay, or just a traveller?"
    "I'm here to stay.":
         jump stay_end5
@@ -5423,6 +5510,7 @@ menu stayorgo:
         jump go_end5
 
 label stay_end5:
+play calypso1 calypso2
 "With all the strength I can find, I pull myself to my feet."
 "I let the tears fall down my face... but I refuse to let myself break down again."
 t "I'm so proud of you, Penelope."
@@ -5443,6 +5531,7 @@ t "Hello..."
 t "I've been looking for you for some time."
 
 label go_end5:
+play calypso1 calypso2
 "With all the strength I can find, I pull myself to my feet."
 "I let the tears fall down my face... but I refuse to let myself break down again."
 t "I'm so proud of you, Penelope."
@@ -5571,7 +5660,8 @@ scene bg memorial
 "But then again... how could anyone blame me for giving up, after what I've seen? After what I've done?"
 "Would Penelope blame me?"
 "Will I blame myself?"
-menu stayorgo:
+stop
+menu stayorgo5:
    "Am I here to stay, or just a traveller?"
    "I'm here to stay.":
         jump stay_end6
@@ -5579,7 +5669,7 @@ menu stayorgo:
         jump go_end6
 
 label stay_end6:
-
+play calypso1 calypso2
 "Slowly but steadily, I find my footing."
 "I wipe the tears from my eyes."
 t "I'm sorry for what you had to live through, Penelope."
@@ -5602,7 +5692,7 @@ t "I've been looking for you for some time."
 jump endcredits
 
 label go_end6:
-
+play calypso1 calypso2
 "Slowly but steadily, I find my footing."
 "I wipe the tears from my eyes."
 t "I'm sorry for what you had to live through, Penelope."
@@ -5648,6 +5738,7 @@ return
 label calypsodream:
 
 scene bg black
+play stasis1
 
 "Calypso's waters lap up against me, warm and windless and quiet."
 "I'm almost at peace."
@@ -5682,6 +5773,8 @@ if orange1:
    jump orange1_postdream
 
 label green1dream:
+
+play stasis1
 
 scene bg black
 
@@ -5724,6 +5817,7 @@ p "I wish we could go back."
 "I melt into the soil. Grass sprouts from my arms and legs and grows out of my mouth and my eyes."
 p "I want to go home..."
 "Winter comes, and the grass dies, and my body turns hard as stone with the frost."
+stop
 
 if blue2:
    jump blue2_postdream
@@ -5733,6 +5827,7 @@ if orange2:
 label blue1dream:
 
 scene bg black
+play stasis1
 
 "The air is so thick in the jungle that I can barely breathe."
 "It pushes me down, and the trees and the stones pull me towards them, and below it all there is gravity, an ancient and terrible hum that beckons me towards immobility."
@@ -5763,7 +5858,7 @@ if badspeech:
 p "And now you're just gone."
 "Gravity pulls me inwards until the breath leaves my lungs."
 p "Where did you go, mom? When will you come back?"
-
+stop
 if green2:
    jump green2_postdream
 if orange2:
@@ -5772,6 +5867,7 @@ if orange2:
 label orange1dream:
 
 scene bg black
+play stasis1
 
 "The sun beats down on me. It dries me out and burns me to a crisp..."
 "And now I'm in a cave lit with magic stones, sleeping with thousands of other children."
@@ -5808,6 +5904,7 @@ p "Come back."
 p "Please..."
 "My family turns away from me, and as the dark encircles me, the last thing I see is the light..."
 "And how it burns..."
+stop
 
 if green2:
    jump green2_postdream
@@ -5817,6 +5914,7 @@ if blue2:
 label green2dream:
 
 scene bg black
+play stasis1
 
 "I lie in a bed of grass so soft that it threatens to swallow me whole."
 "The clouds pass over me, at once as slow as a moment and as fast as so many years."
@@ -5861,7 +5959,7 @@ p "This is pointless."
 "I melt into the soil. Grass sprouts from my arms and legs and grows out of my mouth and my eyes."
 p "I have to go."
 "Winter comes, and the grass dies, and my body turns hard as stone with the frost."
-
+stop
 if blue3:
    jump blue3_postdream
 if orange3:
@@ -5870,7 +5968,7 @@ if orange3:
 label blue2dream:
 
 scene bg black
-
+play stasis1
 "The air is so thick in the jungle that I can barely breathe."
 "It pushes me down, and the trees and the stones pull me towards them, and below it all there is gravity, an ancient and terrible hum that beckons me towards immobility."
 p "I know, I know."
@@ -5912,11 +6010,11 @@ if green3:
    jump green3_postdream
 if orange3:
    jump orange3_postdream
-
+stop
 label orange2dream:
 
 scene bg black
-
+play stasis1
 "The sun beats down on me. It dries me out and burns me to a crisp..."
 "And now I'm in a cave lit with magic stones, putting my children to bed."
 "We look up at the ceiling and we see the light at the end of a long journey... and there's that sun again."
@@ -5950,7 +6048,7 @@ p "But is there anything for me here?"
 "My family turns away from me, and as the dark encircles me, the last thing I see is the light..."
 p "What would you do, mom?"
 "And how it burns..."
-
+stop
 if green3:
    jump green3_postdream
 if blue3:
@@ -5959,7 +6057,7 @@ if blue3:
 label green3dream:
 
 scene bg black
-
+play stasis2
 "I lie in a bed of grass so soft that it threatens to swallow me whole."
 "The clouds pass over me, at once as slow as a moment and as fast as so many years."
 p "I need to talk to you."
@@ -5999,13 +6097,13 @@ p "I can't keep doing this. It hurts too much."
 "I melt into the soil. Grass sprouts from my arms and legs and grows out of my mouth and my eyes."
 p "I have to move on."
 "Winter comes, and the grass dies, and my body turns hard as stone with the frost."
-
+stop
 jump final_postdream
 
 label blue3dream:
 
 scene bg black
-
+play stasis2
 "The air is so thick in the jungle that I can barely breathe."
 "It pushes me down, and the trees and the stones pull me towards them, and below it all there is gravity, an ancient and terrible hum that beckons me towards immobility."
 p "Look... I need to talk to you."
@@ -6029,13 +6127,13 @@ p "And thinking about what you would have done only makes it hurt more."
 p "I can't talk to you anymore, mom."
 "Gravity pulls me inwards until the breath leaves my lungs."
 p "I have to stand on my own."
-
+stop
 jump final_postdream
 
 label orange3dream:
 
 scene bg black
-
+play stasis1
 "The sun beats down on me. It dries me out and burns me to a crisp..."
 "And now I'm in a cave lit with magic stones, putting my children to bed."
 "We look up at the ceiling and we see the light at the end of a long journey... and there's that sun again."
@@ -6075,6 +6173,6 @@ p "I can't think like that anymore. Not with so much at stake."
 "My family turns away from me, and as the dark encircles me, the last thing I see is the light..."
 p "I have to leave, mom. I have to live..."
 "And how it burns..."
-
+stop
 jump final_postdream
 

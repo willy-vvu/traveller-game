@@ -174,6 +174,7 @@
         color:rgba(255,255,255,0.9);
         text-align:center;
         overflow:visible;
+        cursor:default;
       }
       .menu-title{
         margin-bottom:40px;
@@ -308,6 +309,7 @@
       .menu-scrim{
         background-color:rgba(30,30,30,0.9);/*rgba(0,0,0,0.3);*/
         background-image:url("images/pause_menu.png");
+        cursor:default;
       }
       #preload{
         width:0;
@@ -576,7 +578,7 @@
             Scene.transitionTo(state);
             setTimeout(function(){
               ScriptFollower.advanceIterate(state);
-            }, 1000 * state.advance.pause)
+            }, isskipping&&MainMenu.pauseShowing ? 0 : 1000 * state.advance.pause)
           }
           else if(state.advance.type == "text"){
             // Display
@@ -949,7 +951,6 @@
           }
         },
         play(filename){
-          // console.error(filename)
           Sound.loadedTracks[filename].currentTime = 0;
           Sound.loadedTracks[filename].play();
         }
@@ -958,7 +959,7 @@
         elem:{
           preload:document.getElementById("preload")
         },
-        INITIAL_LOAD:["main-title.jpg", "space.jpg", "earth-day.jpg"],
+        INITIAL_LOAD:["title-page.jpg", "space.jpg", "earth-day.jpg"],
         loadedImages:{},
         LOOKAHEAD_AMOUNT:7,
         preloadInitial(){
@@ -1018,7 +1019,7 @@
           Promise.all(
             // Load all new tracks
             urls.filter(function(url){
-              return !(url in Music.loadedTracks)
+              return url&&!(url in Music.loadedTracks)
             }).map(function(url){
               return new Promise(function(resolve){
                 var track = new Audio();
@@ -1124,7 +1125,7 @@
           midground:"",
           foreground:"",
           text:"[MAIN_MENU]",
-          music:["theme1g", "theme1"],
+          music:["calypso1", "calypso2"],
           advance:{
             type:"text"
           }
@@ -1134,7 +1135,7 @@
           midground:"",
           foreground:"",
           text:"",
-          music:["theme1", "theme1g"],
+          music:["calypso2", "calypso1"],
           advance:{
             type:"menu"
           }
@@ -1219,16 +1220,19 @@
           if(layer=="fg"){
             time = Backdrop.FG_TRANSITION;
             if(!Backdrop.lastfg || !url){
-              time = Backdrop.BG_TRANSITION;
+              time = Backdrop.BG_TRANSITION/2;
             }
             lastUrl = Backdrop.lastfg;Backdrop.lastfg=url;
           }
           if(layer=="mg"){
             time = Backdrop.FG_TRANSITION;
-            if(!Backdrop.lastfg || !url){
-              time = Backdrop.BG_TRANSITION;
+            if(!Backdrop.lastmg || !url){
+              time = Backdrop.BG_TRANSITION/2;
             }
             lastUrl = Backdrop.lastmg;Backdrop.lastmg=url;
+          }
+          if(isskipping&&MainMenu.pauseShowing){
+            time=0;
           }
           if(lastUrl == url){
             callback&&callback();
@@ -1316,9 +1320,12 @@
         },
         show(callback){
           clearTimeout(Textbox.timeout);
+          var time = isskipping&&MainMenu.pauseShowing?0:Textbox.APPEAR_TIME;
           if(!Textbox.showing){
-            Backdrop.setAnim(Textbox.elem.textbox, "textin "+Textbox.APPEAR_TIME+"s");
-            Textbox.timeout=setTimeout(callback, 1000*Textbox.APPEAR_TIME+16);
+            Backdrop.setAnim(Textbox.elem.textbox, "textin "+time+"s");
+            if(callback){
+              Textbox.timeout=setTimeout(callback, 1000*time+16);
+            }
             // transitionTime(Textbox.setAppear,0,1,Textbox.APPEAR_TIME,globalAnim,callback);
             Textbox.showing = true;
           }
@@ -1328,9 +1335,12 @@
         },
         hide(callback){
           clearTimeout(Textbox.timeout);
+          var time = isskipping&&MainMenu.pauseShowing?0:Textbox.APPEAR_TIME;
           if(Textbox.showing){
-            Backdrop.setAnim(Textbox.elem.textbox, "textout "+Textbox.APPEAR_TIME+"s");
-            Textbox.timeout=setTimeout(callback, 1000*Textbox.APPEAR_TIME+16);
+            Backdrop.setAnim(Textbox.elem.textbox, "textout "+time+"s");
+            if(callback){
+              Textbox.timeout=setTimeout(callback, 1000*time+16);
+            }
             // transitionTime(Textbox.setAppear,1,0,Textbox.APPEAR_TIME,globalAnim,callback);
             Textbox.showing = false;
           }
@@ -1427,7 +1437,6 @@
           menu:document.getElementById("menu")
         },
         transitionTo(menu, callback){
-          // console.log(menu)
           var elem = Menu.elem.menu;
           elem.innerHTML = "";
           if(menu){
@@ -1438,6 +1447,7 @@
         callback:null,
         selected:null,
         length:null,
+        timeout:null,
         APPEAR_TIME:0.3,
         DISAPPEAR_TIME:0.4,
         MENU_PRE_WAIT:0.4,
@@ -1446,7 +1456,8 @@
           Menu.callback = null;
           Menu.selected = null;
           Menu.length = menu.options.length;
-          setTimeout(function(){
+          clearTimeout(Menu.timeout);
+          Menu.timeout = setTimeout(function(){
             Menu.callback = function(index){
               Menu.callback = null;
               Menu.length = null;
@@ -1461,7 +1472,9 @@
                 }
               }
 
-              setTimeout(function(){
+
+              clearTimeout(Menu.timeout);
+              Menu.timeout = setTimeout(function(){
                 Menu.hide(elem, function(){
                   Menu.elem.menu.innerHTML = "";
                   selectedoption&&selectedoption.callback&&selectedoption.callback(menu);
@@ -1538,12 +1551,16 @@
         show(elem, callback){
           elem.style.display="";
           Backdrop.setAnim(elem, "menuin "+Menu.APPEAR_TIME+"s");
-          callback&&setTimeout(callback, 1000*Menu.APPEAR_TIME+16);
+          if(callback){
+            clearTimeout(Menu.timeout);
+            Menu.timeout = setTimeout(callback, 1000*Menu.APPEAR_TIME+16);
+          }
           // transitionTime(PauseMenu.setAppear,0,1,Menu.APPEAR_TIME,globalAnim,callback);
         },
         hide(elem, callback){
           Backdrop.setAnim(elem, "menuout "+Menu.DISAPPEAR_TIME+"s");
-          setTimeout(function(){
+          clearTimeout(Menu.timeout);
+          Menu.timeout = setTimeout(function(){
             elem.style.display="none";
             elem.innerHTML = "";
             callback&&callback();
@@ -2004,7 +2021,7 @@
             midground:"",
             foreground:"",
             text:"",
-            music:["theme1g", "theme1"],
+            music:["calypso2", "calypso1"],
             advance:{
               type:"auto"
             }
@@ -2180,7 +2197,7 @@
         if(event.code == "Escape" || event.keyCode == 27 || // ESC
            event.code == "KeyP"   || event.keyCode == 80 ){ // P
           // Pause Menu
-          AdvanceController.pressPause();
+          GamepadManager.pressPause();
         }
         else if(
           event.code == "ArrowRight" || event.keyCode == 39 || // Right
@@ -2188,24 +2205,7 @@
           event.code == "Space"      || event.keyCode == 32 || // Space
           event.code == "Enter"      || event.keyCode == 13    // Enter
           ){
-          if(AdvanceController.press()){
-            if(PauseMenu.showing){
-              if(PauseMenu.callback){
-                if(PauseMenu.selected!=null){
-                  PauseMenu.optionSelect();
-                  Sound.play(Sound.defs.Select);
-                }
-              }
-            }
-            else{
-              if(Menu.callback){
-                if(Menu.selected!=null){
-                  Menu.optionSelect();
-                  Sound.play(Sound.defs.Select);
-                }
-              }
-            }
-          }
+          GamepadManager.press();
         }
         else if(
           event.code == "ArrowDown" || event.keyCode == 40 || // Down
@@ -2213,12 +2213,7 @@
           event.code == "KeyJ"      || event.keyCode == 74 || // J
           event.code == "KeyS"      || event.keyCode == 83    // S
         ){
-          if(PauseMenu.showing){
-            if(PauseMenu.callback) { PauseMenu.optionDown(); }
-          }
-          else{
-            if(Menu.callback) { Menu.optionDown(); }
-          }
+          GamepadManager.down();
         }
         else if(
           event.code == "ArrowUp" || event.keyCode == 38 || // Up
@@ -2226,30 +2221,10 @@
           event.code == "KeyK"    || event.keyCode == 75 || // K
           event.code == "KeyW"    || event.keyCode == 87    // W
         ){
-          if(PauseMenu.showing){
-            if(PauseMenu.callback) { PauseMenu.optionUp(); }
-          }
-          else{
-            if(Menu.callback) { Menu.optionUp(); }
-          }
+          GamepadManager.up();
         }
         else if(event.code == "KeyN" || event.keyCode == 78){ // N
-          if(Textbox.skipcallback) {
-            if(!isskipping){
-              isskipping = true;
-              var go;
-              go=function(){
-                if(isskipping){
-                  if(!PauseMenu.showing && state.advance.type == "text"){
-                    ScriptFollower.advanceIterate(state);
-                  }
-                  setTimeout(go,30);
-                }
-              };
-              go();
-            }
-            // Textbox.quickly = 2;
-          }
+          GamepadManager.pressSkip();
         }
 
       }
@@ -2270,15 +2245,15 @@
           event.code == "Space"      || event.keyCode == 32 || // Space
           event.code == "Enter"      || event.keyCode == 13    // Enter
           ){
-          AdvanceController.release();
+          GamepadManager.release();
         }
         else if(event.code == "Escape" || event.keyCode == 27 || // ESC
                 event.code == "KeyP"   || event.keyCode == 80 ){ // P
           // Pause Menu
-          AdvanceController.releasePause();
+          GamepadManager.releasePause();
         }
         else if(event.code == "KeyN" || event.keyCode == 78){ // N
-          isskipping = false;
+          GamepadManager.releaseSkip();
         }
       }
 
@@ -2319,6 +2294,185 @@
 
       Sound.preloadAll();
       Preloader.preloadInitial();
+
+      GamepadManager = {
+        mainButton:false,
+        skipButton:false,
+        pauseButton:false,
+        upPressed:false,
+        downPressed:false,
+        upAxis:false,
+        downAxis:false,
+        poll(){
+          if(navigator.getGamepads){
+            var currentPads = navigator.getGamepads();
+            if(currentPads){
+              for(var index = 0; index < currentPads.length; index++){
+                var currentPad = currentPads[index];
+                if(currentPad){
+                  // console.log(currentPad.buttons.map((a)=>a.pressed))
+                  if(currentPad.buttons[0].pressed){
+                    if(!GamepadManager.mainButton){
+                      GamepadManager.press();
+                    }
+                    GamepadManager.mainButton = true;
+                  }
+                  else{
+                    if(GamepadManager.mainButton){
+                      GamepadManager.release();
+                    }
+                    GamepadManager.mainButton = false;
+                  }
+                  if(currentPad.buttons[3].pressed){
+                    if(!GamepadManager.skipButton){
+                      GamepadManager.pressSkip();
+                    }
+                    GamepadManager.skipButton = true;
+                  }
+                  else {
+                    if(GamepadManager.skipButton){
+                      GamepadManager.releaseSkip();
+                    }
+                    GamepadManager.skipButton = false;
+                  }
+                  if(currentPad.buttons[9].pressed){
+                    if(!GamepadManager.pauseButton){
+                      GamepadManager.pressPause();
+                    }
+                    GamepadManager.pauseButton = true;
+                  }
+                  else{
+                    if(GamepadManager.pauseButton){
+                      GamepadManager.releasePause();
+                    }
+                    GamepadManager.pauseButton = false;
+                  }
+                  if(currentPad.buttons[12].pressed){
+                    if(!GamepadManager.upPressed){
+                      GamepadManager.up();
+                    }
+                    GamepadManager.upPressed = true;
+                  }
+                  else{
+                    GamepadManager.upPressed = false;
+                  }
+                  if(currentPad.buttons[13].pressed){
+                    if(!GamepadManager.downPressed){
+                      GamepadManager.down();
+                    }
+                    GamepadManager.downPressed = true;
+                  }
+                  else{
+                    GamepadManager.downPressed = false;
+                  }
+                  if(currentPad.axes[1]<-0.9){
+                    if(!GamepadManager.upAxis){
+                      GamepadManager.up();
+                    }
+                    GamepadManager.upAxis = true;
+                  }
+                  else if(currentPad.axes[1]>-0.8){
+                    GamepadManager.upAxis = false;
+                  }
+                  if(currentPad.axes[1]>0.9){
+                    if(!GamepadManager.downAxis){
+                      GamepadManager.down();
+                    }
+                    GamepadManager.downAxis = true;
+                  }
+                  else if(currentPad.axes[1]<0.8){
+                    GamepadManager.downAxis = false;
+                  }
+                }
+                break;
+              }
+            }
+          }
+          window.requestAnimationFrame(GamepadManager.poll);
+        },
+        down(){
+          if(PauseMenu.showing){
+            if(PauseMenu.callback) { PauseMenu.optionDown(); }
+          }
+          else{
+            if(Menu.callback) { Menu.optionDown(); }
+          }
+        },
+        up(){
+          if(PauseMenu.showing){
+            if(PauseMenu.callback) { PauseMenu.optionUp(); }
+          }
+          else{
+            if(Menu.callback) { Menu.optionUp(); }
+          }
+        },
+        press(){
+          if(AdvanceController.press()){
+            if(PauseMenu.showing){
+              if(PauseMenu.callback){
+                if(PauseMenu.selected!=null){
+                  PauseMenu.optionSelect();
+                  Sound.play(Sound.defs.Select);
+                }
+              }
+            }
+            else{
+              if(Menu.callback){
+                if(Menu.selected!=null){
+                  Menu.optionSelect();
+                  Sound.play(Sound.defs.Select);
+                }
+              }
+            }
+          }
+        },
+        release(){
+          AdvanceController.release();
+        },
+        pressPause(){
+          AdvanceController.pressPause();
+        },
+        releasePause(){
+          AdvanceController.releasePause();
+        },
+        pressSkip(){
+          if(Textbox.skipcallback) {
+            if(!isskipping){
+              isskipping = true;
+              var go;
+              go=function(){
+                if(isskipping){
+                  if(!PauseMenu.showing && Textbox.skipcallback){
+                    Textbox.skipcallback();
+                  }
+                  setTimeout(go,30);
+                }
+              };
+              go();
+            }
+            // Textbox.quickly = 2;
+          }
+        },
+        releaseSkip(){
+          isskipping = false;
+        }
+      }
+
+      GamepadManager.poll()
+
+      // Cursor hide after 3 seconds
+      var cursorHideTimeout = null
+      window.onmousemove = function(){
+        if(cursorHideTimeout == null){
+          document.body.style.cursor="";
+        }
+        clearTimeout(cursorHideTimeout);
+        cursorHideTimeout = setTimeout(function(){
+          document.body.style.cursor="none";
+          cursorHideTimeout = null;
+        }, 3000);
+      }
+
 
       // CSS aspect polyfill
       window.onresize = function(){
