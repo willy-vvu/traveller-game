@@ -167,14 +167,16 @@
         /*margin-top:-140px;*/
         /*max-height:50%;*/
         overflow-y:auto;
-        margin-left:auto;
-        margin-right:auto;
-        max-width:655px;
         font-size:14pt;
         color:rgba(255,255,255,0.9);
         text-align:center;
-        overflow:visible;
+        /*overflow:visible;*/
         cursor:default;
+      }
+      .menu-middle>*{
+        margin-left:auto;
+        margin-right:auto;
+        max-width:655px;
       }
       .menu-title{
         margin-bottom:40px;
@@ -305,6 +307,7 @@
       }
       #pausemenu{
         margin-left:0;
+        max-width:800px;
       }
       .menu-scrim{
         background-color:rgba(30,30,30,0.9);/*rgba(0,0,0,0.3);*/
@@ -868,6 +871,7 @@
                   options:(notitle?children:children.slice(1)).map((optionLineNumber)=>{
                     return {
                       text:scriptLines[optionLineNumber].trimLeft().slice(1,-2),
+                      flourish:true,
                       line:ScriptFollower.getNextNonEmpty(optionLineNumber+1)
                     }
                   })
