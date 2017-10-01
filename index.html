@@ -384,8 +384,11 @@
         font-family:Rubik,sans-serif;
         font-size:16pt;
         margin-top:-0.5em;
+        color:rgba(255,255,255,0.5);
+        animation:fadein 500ms linear;
+      }
+      .loading-text{
         animation:pulse 4s linear infinite;
-        color:rgba(255,255,255,0.3);
       }
     </style>
   </head>
@@ -393,7 +396,7 @@
     <div id="preload"></div>
     <div class="full-image" id="backdrop-bg-transition"></div>
     <div class="full-image" id="backdrop-bg"></div>
-    <div id="loading">Loading...</div>
+    <div id="loading"><p>Headphones recommended.</p><p class="loading-text">Loading...</p></div>
     <div class="character-image" id="backdrop-mg-transition"></div>
     <div class="character-image" id="backdrop-mg"></div>
     <div class="character-image" id="backdrop-fg-transition"></div>
@@ -425,29 +428,57 @@
         ScriptFollower.autoIterate(ScriptFollower.initialState()); // Will run until defs are loaded
       }
 
+      beginLoadTime = Date.now();
+
       function defsLoaded(state){
         globalDefs = state.defs;
         startLine = ScriptFollower.getNextNonEmpty(state.line + 1);
         // console.log(state)
-        document.getElementById("loading").innerHTML = "";
 
-        SaveManager.fetchFromLocalstorage();
+        setTimeout(function(){
+          document.getElementById("loading").style.animation = "fadeout 0.5s";
+          setTimeout(function(){
+            document.getElementById("loading").innerHTML = "";
+            SaveManager.fetchFromLocalstorage();
+            // ScriptFollower.fromSave(SaveManager.saves[1]||SaveManager.newGameSave());
+            // MainMenu.hide()
+            // Start with the main menu
+            MainMenu.show();
+          },500);
+        },Math.max(0,2000-(Date.now()-beginLoadTime)))
 
-        // ScriptFollower.fromSave(SaveManager.saves[1]||SaveManager.newGameSave());
-        // MainMenu.hide()
-        // Start with the main menu
-        MainMenu.show();
 
       }
 
       MainMenu = {
+        MAIN_MENU:{
+          background:"bg title-page",
+          midground:"",
+          foreground:"",
+          text:"[MAIN_MENU]",
+          music:["calypso1", "calypso2"],
+          advance:{
+            type:"text"
+          }
+        },
+        MAIN_MENU_2:{
+          background:"bg space",
+          midground:"",
+          foreground:"",
+          text:"",
+          music:["calypso2", "calypso1"],
+          advance:{
+            type:"menu"
+          }
+        },
         showing:true,
         show(){
           MainMenu.showing=true;
           MainMenu.hidePause();
-          Scene.transitionTo(Scene.MAIN_MENU, function(){
-            Scene.MAIN_MENU_2.advance.menu = SaveManager.makeLoadMenu();
-            Scene.transitionTo(Scene.MAIN_MENU_2);
+          Scene.transitionTo(MainMenu.MAIN_MENU, function(){
+            MainMenu.MAIN_MENU_2.advance.menu = SaveManager.makeLoadMenu();
+            MainMenu.MAIN_MENU_2.advance.menu.title+="<p><i>Your progress is automatically saved.</i></p>"
+            Scene.transitionTo(MainMenu.MAIN_MENU_2);
           });
         },
         pauseShowing:false,
@@ -970,7 +1001,7 @@
         elem:{
           preload:document.getElementById("preload")
         },
-        INITIAL_LOAD:["title-page.jpg", "space.jpg", "earth-day.jpg"],
+        INITIAL_LOAD:["title-page.jpg", "space.jpg", "walking-desert.jpg"],
         loadedImages:{},
         LOOKAHEAD_AMOUNT:7,
         preloadInitial(){
@@ -1131,26 +1162,6 @@
             type:"auto"
           }
         },
-        MAIN_MENU:{
-          background:"bg title-page",
-          midground:"",
-          foreground:"",
-          text:"[MAIN_MENU]",
-          music:["calypso1", "calypso2"],
-          advance:{
-            type:"text"
-          }
-        },
-        MAIN_MENU_2:{
-          background:"bg space",
-          midground:"",
-          foreground:"",
-          text:"",
-          music:["calypso2", "calypso1"],
-          advance:{
-            type:"menu"
-          }
-        },
 
         transitionTo(state, callback){
           var bringin = function(){
@@ -1303,7 +1314,7 @@
               }
             }
             Textbox.hideIndicator();
-            if(text == Scene.MAIN_MENU.text){
+            if(text == MainMenu.MAIN_MENU.text){
               Textbox.elem.textbox.classList.remove("gameplay-textbox");
             }
             else{
@@ -1387,7 +1398,7 @@
           Textbox.elem.textindicator.className = "bloom";
         },
         displayText(text, index, callback){
-          if(text != Scene.MAIN_MENU.text){
+          if(text != MainMenu.MAIN_MENU.text){
             Textbox.elem.textcontainer.style.animation = "fadein "+Textbox.APPEAR_TIME+"s";
             Textbox.elem.textcontainer.innerHTML = text;
             if(callback){
@@ -1401,7 +1412,7 @@
           else if(callback){
             callback();
           }
-          /*if(text && text != Scene.MAIN_MENU.text && index<text.length){
+          /*if(text && text != MainMenu.MAIN_MENU.text && index<text.length){
             var elemborder = text.slice(index).match(/^<\/?[A-Za-z0-9]+>/i);
             var textspeed = (elemborder?elemborder[0].length:0)+1;
             index+=textspeed;
@@ -1767,7 +1778,7 @@
                   text: "Save",
                   callback: function(lastmenu){
                     var potentialsave = SaveManager.toSavable(state);
-                    PauseMenu.confirm('Save?<div class="fake-menu-item">'+SaveManager.makeEntry(potentialsave)+'</div><i>This will overwrite your oldest save.</i>', "Save",function(){
+                    PauseMenu.confirm('Save?<div class="fake-menu-item">'+SaveManager.makeEntry(potentialsave)+'</div>'+(SaveManager.willOverwriteManual()?'<i>This will overwrite your oldest save.</i>':''), "Save",function(){
                       SaveManager.manualSave(potentialsave, function(works){
                         if(works){
                           PauseMenu.toast("Successfully saved.", 1);
@@ -1974,6 +1985,9 @@
         AUTOSAVE_FREQUENCY_LINES:20,
         shouldKeepAutosave(save1, save2){
           return Math.abs(save1.date - save2.date) > SaveManager.AUTOSAVE_FREQUENCY_MINUTES*60*1000 && Math.abs(save1.line - save2.line) > SaveManager.AUTOSAVE_FREQUENCY_LINES;
+        },
+        willOverwriteManual(){
+          return SaveManager.saves.filter(function(save){return !save.auto}).length >= SaveManager.MAX_MANUALSAVES;
         },
         addAndPruneSaves(save){
           SaveManager.saves.unshift(save);
