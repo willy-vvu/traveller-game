@@ -749,7 +749,7 @@ play calypso1 calypso2
 "Sitting up feels too difficult right now, so I turn my head."
 "It looks like I'm in an ocean of some sort. It goes on as far as I can see in either direction."
 "The air is humid and warm - just like the water - but there's barely any wind, and no waves."
-"It's a good thing I didn't drink the water, I realize. Risk of bacteria outside, it must be extremely salty for me to float in it like this..."
+"It's a good thing I didn't drink the water, I realize. Risk of bacteria aside, it must be extremely salty for me to float in it like this..."
 "But I'm not exactly floating."
 "I push one hand down into the water and it pushes back up on me."
 "It's some sort of membrane."
@@ -1430,6 +1430,7 @@ play green1 green2
 "When I open the hatch, I find myself at the edge of a vast field."
 "Hills roll on as far as I can see."
 "The sky is dotted with tiny puffy clouds."
+scene bg field-day
 "In the distance, I can just barely see the tips of buildings."
 "They must have been magnificent once. But even from here I can see that they're dilapidated."
 "On a hill far away, there's a herd of some sort of animal - I can't really see them from here, but it looks like they're grazing. But besides them, I'm alone."
@@ -1506,9 +1507,9 @@ show scout suspicious
 u "Okay. Now get on the ground."
 "I get on my knees and put my hands in the air in surrender."
 "My captor gives me a confused look and swats at me."
-"When I don't move my arms, they take one in their own and pushes it downwards."
+"When I don't move my arms, they take one in their own and push it downwards."
 u "Why are you being hostile? Just put them on your knees."
-"I do as it says."
+"I do as they say."
 t "Do you have a name?"
 u "A what?"
 t "What should I call you?"
@@ -1871,7 +1872,7 @@ scene bg scout-intimate
 "We notice the touch at the same time."
 "I escape their hold easily enough, but this time, instead of running for the shuttle, I run into the darkness of the tall grass..."
 "And when they catch me, they push me to the ground and I pull them down after me."
-"We chase each other a few times, hidden from the town by the hill and the darkness of the trees."
+"We chase each other a few times, hidden from the town by the hill and the darkness of the grass-trees."
 "When we finally get to the catching, our bodies fit together better than I'd imagined."
 "We explore and feel each other, try each other out, experiment."
 "It is a good hunt."
@@ -2035,7 +2036,6 @@ jump calypsodream
 label orange1_postdream:
 
 scene bg orangeplanet
-play orange1 orange2
 
 "I wake up to a red glow."
 "Is it sunlight?"
@@ -2055,6 +2055,7 @@ play orange1 orange2
 "There's a small strip of flat land ahead. I slow the ship, bring it about, and make my landing."
 
 scene bg mountains
+play orange1 orange2
 
 "I push open the hatch and climb out, once I'm sure I'm fully inoculated."
 "The sun beats down on me. I can feel myself sweating already. The air smells metallic and faintly of mud."
@@ -2587,6 +2588,7 @@ scene bg sitting-with-soldiers
 "The jungle is deceptively quiet at night. All I hear for some time is the wind and the low, melodic purr of some distant animal - perhaps something like a frog, or a cricket."
 "Then I hear the rustling in the trees."
 scene bg jungle-night
+stop
 "I hold my breath and stand up against the doorway. I look up for any sign of the creature."
 "I hear it search - and its confusion as it finds the cut branches. It pauses to survey the fence."
 "Then, with slow, deliberate movements, it climbs across the branch until I can see it."
@@ -2604,7 +2606,7 @@ hide friend
 "He nods to me slowly, and drifts back to sleep."
 
 scene bg jungle-day
-
+play blue1 blue2
 show hector young happy
 h "I don't know how we can thank you, Commander."
 h "I don't know what we would have done."
@@ -2628,6 +2630,7 @@ t "I'll make sure they read them. And then I'll bring them back here to find you
 t "I promise."
 "I hug each of them in turn. It's harder for me to leave them than I'd like to admit."
 "But their letters give me hope that I can find my way - that I must find my way."
+hide hector
 "With that encouragement, I leave them behind."
 "The ship is in working order and ready to go when I return to it."
 "Carefully, I navigate through the branches and the canopy, and then I accelerate into the sky."
@@ -2744,7 +2747,6 @@ if green1:
 label orange2_postdream:
 
 scene bg orangeplanet
-play orange1 orange2
 
 "I wake up to a red glow."
 "Is it sunlight?"
@@ -2764,6 +2766,7 @@ play orange1 orange2
 "There's a small strip of flat land ahead. I slow the ship, bring it about, and make my landing."
 
 scene bg mountains
+play orange1 orange2
 
 "I push open the hatch and climb out, once I'm sure I'm fully inoculated."
 "The sun beats down on me. I can feel myself sweating already. The air smells metallic and faintly of mud."
@@ -2811,8 +2814,10 @@ t "It's alright. I'm not here to hurt you. I..."
 "I move to reach out my hand, but I realize mid-way into the gesture that it might be seen as threatening."
 t "I'm sorry. It looks like you're hungry. I can help--"
 
+scene bg black
+with Fade(0.25)
 scene bg cave
-with vpunch
+with Fade(0.25)
 show son neutral
 
 "My vision blurs. My head aches."
@@ -3046,6 +3051,7 @@ play green1 green2
 "When I open the hatch, I find myself at the edge of a vast field."
 "Hills roll on as far as I can see."
 "The sky is dotted with tiny puffy clouds."
+scene bg field-day
 "In the distance, I can just barely see the tips of buildings."
 "They must have been magnificent once. But even from here I can see that they're dilapidated."
 "On a hill far away, there's a herd of some sort of animal - I can't really see them from here, but it looks like they're grazing. But besides them, I'm alone."
@@ -3980,7 +3986,6 @@ if green2:
 label orange3_postdream:
 
 scene bg orangeplanet
-play orange1 orange2
 
 "I wake up to a red glow."
 "Is it sunlight?"
@@ -4000,6 +4005,7 @@ play orange1 orange2
 "There's a small strip of flat land ahead. I slow the ship, bring it about, and make my landing."
 
 scene bg mountains
+play orange1 orange2
 
 "I push open the hatch and climb out, once I'm sure I'm fully inoculated."
 "The sun beats down on me. I can feel myself sweating already. The air smells metallic and faintly of mud."
@@ -4149,7 +4155,7 @@ scene bg mountains
 "My daughter is alive..."
 "She's waiting for me."
 "Isn't she?"
-"Isn't she?"
+"{i}Isn't she?{/i}"
 scene bg orangeplanet
 stop
 "I'm in space again."
@@ -4676,12 +4682,13 @@ else:
 
 scene bg black
 pause(1.0)
+play alarm
 
 "...REPEAT. THIS IS THE ARK."
 "WE HAVE LANDED. WE ARE DISTRIBUTING COORDINATES."
 "THIS IS THE ARK. FOR ANYONE ON THIS FREQUENCY SEARCHING FOR THE REMAINS OF HUMANITY..."
 "COME TO THESE COORDINATES. WE HAVE LANDED."
-
+stop
 scene bg space
 
 "I bolt upright."
@@ -4729,8 +4736,6 @@ if green1:
    if blue2:
       $ ending6 = True
 
-play ending1 ending2
-
 "I wake up with a start."
 "The ship is bright with the light of the planet above us."
 "It is a swirling mess of puffy white clouds and bright blue oceans."
@@ -4747,7 +4752,7 @@ play ending1 ending2
 "Then I open the hatch."
 
 scene bg cliffs
-
+play ending1 ending2
 "Green cliffs, carved as if by some intelligent hand, melt into white and blue."
 "A flock of birds passes above me - they must be at least ten feet long."
 "They have long, silver tails."
@@ -4783,7 +4788,6 @@ t "Penelope!"
 show penelope neutral
 
 t "Penelope!"
-play ending2 ending1
 
 pause(1.0)
 
@@ -4800,6 +4804,7 @@ p "I'm supposed to start at the beginning, right?"
 "I look around for the source, but I don't see anyone--"
 "That's when a screen catches my attention... and then I see the flowers."
 scene bg memorial
+play ending2 ending1
 "The screen is surrounded by flowers of every colour... some of them are clearly alien to this planet."
 "There are photos, too - of humans, aliens, landscapes. Children's drawings of an old woman. Letters."
 "They're addressed to Penelope."
@@ -4906,9 +4911,9 @@ menu stayorgo:
        jump go_end1
 
 label stay_end1:
-play calypso1 calypso2
 "Slowly at first, but then all at once... I find my footing."
 "I stop myself from crying any more."
+play calypso1 calypso2
 t "You've done so well for yourself, Penelope."
 t "I wish I could have been there to see it..."
 t "And I'm sorry I wasn't."
@@ -5057,9 +5062,9 @@ menu stayorgo2:
         jump go_end2
 
 label stay_end2:
-play calypso1 calypso2
 "Slowly, reluctantly... I find my footing."
 "I wipe the tears from my face."
+play calypso1 calypso2
 t "You've built something beautiful, Penelope."
 t "I thought we'd build a house together, like the one I grew up in..."
 t "But instead, you've built a city."
@@ -5197,9 +5202,9 @@ menu stayorgo:
         jump go_end3
 
 label stay_end3:
-play calypso1 calypso2
 "Somehow, I find my footing."
 "The effort of it brings tears to my eyes."
+play calypso1 calypso2
 t "You've built something incredible, Penelope."
 t "I was never very good at building things. Destroying things, I was good at. But I never had the patience for building."
 t "Now I don't even have the heart for that. To be honest, I have no idea what I can do anymore."
@@ -5356,9 +5361,9 @@ menu stayorgo3:
         jump go_end4
 
 label stay_end4:
-play calypso1 calypso2
 "I lean against the memorial at first, but finally, I find my own footing."
 "I wipe the tears and the snot from my face."
+play calypso1 calypso2
 t "The person you have been to these colonists is what I always wanted to be for you..."
 t "I can't express to you how sorry I am that I never got that chance."
 t "But you were always stronger than me, Nel. In my absence, you made the whole colony your family."
@@ -5514,10 +5519,10 @@ menu stayorgo4:
         jump go_end5
 
 label stay_end5:
-play calypso1 calypso2
 "With all the strength I can find, I pull myself to my feet."
 "I let the tears fall down my face... but I refuse to let myself break down again."
 t "I'm so proud of you, Penelope."
+play calypso1 calypso2
 t "Of your vision. Of everything you built, and everything you set out to do."
 t "I'm so sorry you had to live your life ashamed of who you loved."
 t "I would never have allowed that, Penelope."
@@ -5673,9 +5678,9 @@ menu stayorgo5:
         jump go_end6
 
 label stay_end6:
-play calypso1 calypso2
 "Slowly but steadily, I find my footing."
 "I wipe the tears from my eyes."
+play calypso1 calypso2
 t "I'm sorry for what you had to live through, Penelope."
 t "I lived through it too, in a way. I wish I'd had the chance to tell you."
 t "But you've done so much in spite of it. You've made something incredible."
@@ -5768,6 +5773,7 @@ else:
    p "I'll be stronger, I promise."
 p "Just come back..."
 "Calypso sinks into the deep. I sink with it. The water washes over my face, and I breathe it in until Penelope's voice is too distant to hear..."
+stop
 
 if green1:
    jump green1_postdream

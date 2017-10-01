@@ -388,10 +388,10 @@
     <div class="full-image" id="backdrop-bg-transition"></div>
     <div class="full-image" id="backdrop-bg"></div>
     <div id="loading">Loading...</div>
-    <div class="character-image" id="backdrop-fg-transition"></div>
-    <div class="character-image" id="backdrop-fg"></div>
     <div class="character-image" id="backdrop-mg-transition"></div>
     <div class="character-image" id="backdrop-mg"></div>
+    <div class="character-image" id="backdrop-fg-transition"></div>
+    <div class="character-image" id="backdrop-fg"></div>
     <div class="text-bottom" id="textbox">
       <div id="text-container"></div>
       <div id="text-indicator">
@@ -1444,9 +1444,14 @@
         transitionTo(menu, callback){
           var elem = Menu.elem.menu;
           elem.innerHTML = "";
+          Menu.selected = null;
+          Menu.callback = null;
+          Menu.length = null;
           if(menu){
             Menu.setOptions(elem, menu, callback);
             Menu.show(elem);
+          } else {
+            Menu.hide(elem);
           }
         },
         callback:null,
@@ -1603,9 +1608,14 @@
           // console.log(Pausemenu)
           var elem = PauseMenu.elem.pausemenu;
           elem.innerHTML = "";
+          PauseMenu.selected = null;
+          PauseMenu.callback = null;
+          PauseMenu.length = null;
           if(menu){
             PauseMenu.setOptions(elem, menu, callback);
             Menu.show(elem);
+          } else {
+            Menu.hide(elem);
           }
         },
         callback:null,
@@ -2020,6 +2030,16 @@
         ENTRY_WAIT:1,
         SLIDE_WAIT:6,
         EXIT_WAIT:2,
+        BLACK_WITH_CREDITS_MUSIC:{
+          background:"",
+          midground:"",
+          foreground:"",
+          text:"",
+          music:["calypso1", "calypso2"],
+          advance:{
+            type:"auto"
+          }
+        },
         SEQUENCE:["credits1","credits2","credits3","credits4"].map(function(bg){
           return {
             background:"bg "+bg,
@@ -2035,7 +2055,7 @@
         transitionTo(){
           MainMenu.hidePause();
           Credits.preloadAll();
-          Scene.transitionTo(Scene.BLACK, function(){
+          Scene.transitionTo(Credits.BLACK_WITH_CREDITS_MUSIC, function(){
             setTimeout(function(){
               Credits.roll();
             }, 1000*Credits.ENTRY_WAIT);
@@ -2051,7 +2071,7 @@
             index = 0;
           }
           if(index >= Credits.SEQUENCE.length){
-            Scene.transitionTo(Scene.BLACK, function(){
+            Scene.transitionTo(Credits.BLACK_WITH_CREDITS_MUSIC, function(){
               setTimeout(function(){
                 MainMenu.show();
               },1000*Credits.EXIT_WAIT);
