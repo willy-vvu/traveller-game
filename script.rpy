@@ -2200,7 +2200,7 @@ show dad neutral
 "I lift my head and look at the father."
 t "Let me help you."
 
-show dad concerned
+show dad worried
 
 "The words come out of my mouth before I can fully think them over."
 "My ship won't be getting off the ground until tomorrow at least..."
@@ -2867,7 +2867,7 @@ scene bg cave
 "And I can still feel the lump. It moves around in my gut and finds no place to settle."
 "It still hurts so terribly."
 show son neutral
-show dad concerned
+show dad worried
 "I look up at the family in front of me: father and daughter. In my mind's eye I can see the mother - her face blurring with time, but her smiling eyes still crystal clear somehow - and the son. But when I think of the son all I can remember is his mangled, hollow body. So light..."
 t "What did you..."
 show dad sad
@@ -5538,7 +5538,7 @@ scene bg finaltown
 "I go to them."
 t "Hello..."
 t "I've been looking for you for some time."
-
+jump endcredits
 label go_end5:
 play calypso1 calypso2
 "With all the strength I can find, I pull myself to my feet."
