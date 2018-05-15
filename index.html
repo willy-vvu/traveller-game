@@ -433,7 +433,7 @@
       // textElem = document.getElementById("text");
       function scriptLoaded(response){
         scriptText = response.target.response;
-        scriptLines = scriptText./*replace(/\s*\n/g,"\n").*/split("\n");
+        scriptLines = scriptText./*replace(/\s*\n/g,"\n").*/split(/\r?\n/);
         ScriptFollower.autoIterate(ScriptFollower.initialState()); // Will run until defs are loaded
       }
 
@@ -447,6 +447,20 @@
         SaveManager.fetchFromLocalstorage();
         // ScriptFollower.fromSave(SaveManager.saves[1]||SaveManager.newGameSave());
         // MainMenu.hide()
+
+        try{
+            // TODO: Save with btoa(JSON.stringify(SaveManager.toSavable(state)))
+            var endodedSaveData = window.location.hash.slice(1);
+            if(endodedSaveData){
+                var decodedSaveData = JSON.parse(atob(endodedSaveData));
+                ScriptFollower.fromSave(decodedSaveData);
+                MainMenu.hide();
+                document.getElementById("loading").innerHTML = "";
+                window.location.hash = "";
+                return;
+            }
+        }
+        catch(e){}
 
         var beginGame = function(){
           // Start with the main menu
